@@ -1,0 +1,241 @@
+--------------------------------------------------------------------------------
+-- Company: <Name>
+--
+-- File: cal_phaser.vhd
+-- File history:
+--      <Revision number>: <Date>: <Comments>
+--      <Revision number>: <Date>: <Comments>
+--      <Revision number>: <Date>: <Comments>
+--
+-- Description: 
+--
+-- <Description here>
+--
+-- Targeted device: <Family::PolarFire> <Die::MPF300TS> <Package::FCG1152>
+-- Author: <Name>
+--
+--------------------------------------------------------------------------------
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+USE IEEE.numeric_std.ALL;
+
+ENTITY cal_phaser IS
+generic(
+  size : integer := 32
+  );
+  PORT( clk                               :   IN    std_logic;
+        reset                             :   IN    std_logic;
+        bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- ufix12
+        cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- ufix32_En46
+        readyin                           :   IN    std_logic;
+        calbin                            :   OUT   std_logic_vector(9 DOWNTO 0);  -- ufix10
+        phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
+        phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
+        kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- ufix16
+        readyout                          :   OUT   std_logic;
+        update_drift                      :   OUT   std_logic;
+        readycal                          :   OUT   std_logic
+        );
+END cal_phaser;
+
+architecture architecture_cal_phaser of cal_phaser is
+    SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
+    SIGNAL fifo_bin_out                    : std_logic_vector(11 DOWNTO 0);
+    SIGNAL fifo_bin_we                     : std_logic;
+    SIGNAL fifo_bin_re                     : std_logic;
+    SIGNAL fifo_full                       : std_logic;
+    SIGNAL fifo_empty                      : std_logic;
+    
+    --These are fixed point signed values, represented by two's complement
+    --The values range from -1 to +1
+    --The MSB is the signed bit, then the second bit is the whole number, then the rest is the fraction
+    SIGNAL phase_st_re                  : signed(31 DOWNTO 0);
+    SIGNAL phase_st_im                  : signed(31 DOWNTO 0);
+    SIGNAL phase_mult2_re               : signed(31 DOWNTO 0);
+    SIGNAL phase_mult2_im               : signed(31 DOWNTO 0);
+    
+    SIGNAL Nac                            : unsigned(6 DOWNTO 0);
+    SIGNAL kar_s                          : unsigned(15 DOWNTO 0);
+    SIGNAL multiplicand_re                : signed(31 DOWNTO 0);
+    SIGNAL multiplicand_im                : signed(31 DOWNTO 0);
+    SIGNAL product_re_re                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_re_im                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_re                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_im                  : std_logic_vector(63 DOWNTO 0);
+    
+    SIGNAL sum_re                         : signed(64 DOWNTO 0);
+    SIGNAL sum_im                         : signed(64 DOWNTO 0);
+    SIGNAL valid_in                       : std_logic;
+    SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
+    
+    SIGNAL error_fifo_full                : std_logic;
+    
+    type state_type is (S_IDLE,
+        S_INCOMING_BINS,
+        S_WAIT_FOR_RESULT,
+        S_ACT_ON_RESULT1,
+        S_ACT_ON_RESULT2);
+    signal state: state_type;
+begin
+    --Custom made 32 x 32 bit pipelined multipliers
+    --Inputs to this block just go straight in
+    --Valid out matches when o_m is valid
+    --We are multiplying 2 complex numbers, so that's 4 different multiplications
+    --Real of first * real of second
+    mult_re_re : entity work.Multiply_generic32
+        generic map(
+            size => size)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => std_logic_vector(phase_st_re),
+            i_mb => std_logic_vector(multiplicand_re),
+
+            --Valid
+            valid_in => valid_in,
+            valid_out => valid_out(0),
+
+            -- Outputs
+            o_m => product_re_re
+        );
+        
+    --Real of first * imaginary of second
+    mult_re_im : entity work.Multiply_generic32
+        generic map(
+            size => size)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => std_logic_vector(phase_st_re),
+            i_mb => std_logic_vector(multiplicand_im),
+
+            --Valid
+            valid_in => valid_in,
+            valid_out => valid_out(1),
+
+            -- Outputs
+            o_m => product_re_im
+        );
+        
+    --Imaginary of first * real of second
+    mult_im_re : entity work.Multiply_generic32
+        generic map(
+            size => size)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => std_logic_vector(phase_st_im),
+            i_mb => std_logic_vector(multiplicand_re),
+
+            --Valid
+            valid_in => valid_in,
+            valid_out => valid_out(2),
+
+            -- Outputs
+            o_m => product_im_re
+        );
+        
+    --Imaginary of first * imaginary of second
+    mult_im_im : entity work.Multiply_generic32
+        generic map(
+            size => size)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => std_logic_vector(phase_st_im),
+            i_mb => std_logic_vector(multiplicand_im),
+
+            --Valid
+            valid_in => valid_in,
+            valid_out => valid_out(3),
+
+            -- Outputs
+            o_m => product_im_im
+        );
+        
+    incoming_bins : entity work.CALFIFO_C0
+    PORT MAP( 
+        CLK      => clk,
+        RESET_N  => reset,
+        DATA     => calbin_s,
+        WE       => fifo_bin_we,
+        FULL     => fifo_full,
+        Q        => fifo_bin_out,
+        RE       => fifo_bin_re,
+        EMPTY    => fifo_empty
+        );
+        
+    process (clk) begin
+        if (rising_edge(clk)) then
+            if (reset = '1') then
+                calbin_s <= (others=>'0');
+                fifo_bin_we <= '0';
+                fifo_bin_re <= '0';
+                --Real defaults to +1.0, because it's cosine(0)
+                phase_st_re <= x"40000000";
+                phase_st_im <= (others=>'0');
+                phase_mult2_re <= (others=>'0');
+                phase_mult2_im <= (others=>'0');
+                multiplicand_re <= (others=>'0');
+                multiplicand_im <= (others=>'0');
+                sum_re          <= (others=>'0');
+                sum_im          <= (others=>'0');
+                Nac              <= to_unsigned(0,Nac'length);
+                kar_s          <= to_unsigned(0,kar_out'length);
+                valid_in         <= '0';
+                error_fifo_full  <= '0';
+                state            <= S_IDLE;
+            else
+                fifo_bin_we <= '0';
+                if (readyin = '1') then
+                    -- Only act on incoming bins where bins%4 = 2
+                    if (bin_in(1 downto 0) = "10") then
+                        if (fifo_full = '0') then
+                            --Add 2 and divide by 4 to get equivalent calibration bin
+                            calbin_s <= std_logic_vector(shift_right(unsigned(bin_in)+2, 2));
+                            fifo_bin_we <= '1';
+                        else
+                            error_fifo_full <= '1';
+                        end if;
+                    end if;
+                end if;
+                    
+                CASE state IS
+                when S_IDLE =>	
+                    -- Only act on incoming bins where bins%4 = 2
+                    if (fifo_empty = '0' and fifo_bin_out = x"001") then
+                        multiplicand_re <= phase_st_re;
+                        multiplicand_im <= phase_st_im;
+                        valid_in <= '1';
+                        kar_s <= Nac * (shift_left(unsigned(fifo_bin_out), 1)+1);
+                        state <= S_INCOMING_BINS;
+                    end if;
+                when S_WAIT_FOR_RESULT =>
+                    fifo_bin_re <= '0';
+                    valid_in <= '0';
+                    -- Multiplication is done!
+                    if (valid_out = "1111") then
+                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        sum_im <= resize(signed(product_re_im), 65) + resize(signed(product_im_re), 65);
+                        state <= S_ACT_ON_RESULT1;
+                    end if;
+                when S_ACT_ON_RESULT1 =>
+                    
+                    --Start next multiplication
+                    multiplicand_re <= phase_mult2_re;
+                    multiplicand_im <= phase_mult2_im;
+                    valid_in <= '1';
+                when S_ACT_ON_RESULT2 =>
+                when others =>		
+                    state <= S_IDLE;
+                end case;
+            end if;
+        end if;
+    end process;
+end architecture_cal_phaser;

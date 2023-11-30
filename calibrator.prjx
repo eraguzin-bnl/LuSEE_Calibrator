@@ -1,0 +1,630 @@
+KEY LIBERO "2022.3"
+KEY CAPTURE "2022.3.0.8"
+KEY DEFAULT_IMPORT_LOC "C:\Actelprj\A3P_Verilog_labs\lab2"
+KEY DEFAULT_OPEN_LOC ""
+KEY ProjectID "0"
+KEY HDLTechnology "VHDL"
+KEY VERILOGMODE "SYSTEMVERILOG"
+KEY VHDLMODE "VHDL2008"
+KEY SYSTEMVERILOGMFCU "FALSE"
+KEY UseConstraintFlowTechnology "TRUE"
+KEY VendorTechnology_Family "PolarFire"
+KEY VendorTechnology_Die "PA5M300TS"
+KEY VendorTechnology_Package "fcg1152"
+KEY VendorTechnology_Speed "-1"
+KEY VendorTechnology_DieVoltage "1.0"
+KEY VendorTechnology_PART_RANGE "IND"
+KEY VendorTechnology_DSW_VCCA_VOLTAGE_RAMP_RATE ""
+KEY VendorTechnology_IO_DEFT_STD "LVCMOS18"
+KEY VendorTechnology_OPCONR ""
+KEY VendorTechnology_PLL_SUPPLY ""
+KEY VendorTechnology_RAD_EXPOSURE ""
+KEY VendorTechnology_RESERVEMIGRATIONPINS "1"
+KEY VendorTechnology_RESTRICTPROBEPINS "1"
+KEY VendorTechnology_RESTRICTSPIPINS "0"
+KEY VendorTechnology_SYSTEM_CONTROLLER_SUSPEND_MODE "0"
+KEY VendorTechnology_TARGETDEVICESFORMIGRATION "PA5M300TS"
+KEY VendorTechnology_TEMPR "IND"
+KEY VendorTechnology_UNUSED_MSS_IO_RESISTOR_PULL "None"
+KEY VendorTechnology_VCCI_1.2_VOLTR "IND"
+KEY VendorTechnology_VCCI_1.5_VOLTR "IND"
+KEY VendorTechnology_VCCI_1.8_VOLTR "IND"
+KEY VendorTechnology_VCCI_2.5_VOLTR "IND"
+KEY VendorTechnology_VCCI_3.3_VOLTR "IND"
+KEY VendorTechnology_VOLTR "IND"
+KEY ProjectLocation "/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator"
+KEY ProjectDescription ""
+KEY UseRootLocationForLinkedFiles "FALSE"
+KEY RootLocationENVForLinkedFiles ""
+KEY RootLocationForLinkedFiles ""
+KEY GlobalIncludePaths ""
+KEY Pa4PeripheralNewSeq "GOOD"
+KEY MemoryMapDrcSeverity "FALSE"
+KEY LossOfDataDRCSeverity "TRUE"
+KEY IdWidthMismatchDRCSeverity "TRUE"
+KEY SimulationType "VHDL"
+KEY Vendor "Actel"
+KEY ActiveRoot "cal_phaser_alt_fixpt::work"
+LIST REVISIONS
+VALUE="Impl1",NUM=1
+CURREV=1
+ENDLIST
+LIST LIBRARIES
+COREFIFO_LIB
+ENDLIST
+LIST LIBRARY_COREFIFO_LIB
+ALIAS=COREFIFO_LIB
+COMPILE_OPTION=COMPILE
+CUSTOMPATH=false
+ENDLIST
+LIST GlobalIncludeFileList
+ENDLIST
+LIST FileManager
+VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf,actgen_cxf"
+STATE="utd"
+TIME="1701201606"
+SIZE="715"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0.cxf"
+ENDFILE
+VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="2242"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.cxf,actgen_cxf"
+STATE="utd"
+TIME="1701201607"
+SIZE="4494"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.vhd,hdl"
+STATE="utd"
+TIME="1701201607"
+SIZE="8554"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf,actgen_cxf"
+STATE="utd"
+TIME="1701201606"
+SIZE="3362"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0.cxf"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/coreparameters.vhd,tb_hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="1596"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/runall_vhdl.do,do"
+STATE="utd"
+TIME="1701201606"
+SIZE="22"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/wave_vhdl.do,do"
+STATE="utd"
+TIME="1701201606"
+SIZE="1259"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd,hdl"
+STATE="utd"
+TIME="1701201605"
+SIZE="2315"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="30098"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="77636"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="70725"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="16804"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="3070"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="3361"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="45675"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd,hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="35541"
+LIBRARY="COREFIFO_LIB"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd,tb_hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="7423"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/TB.vhd,tb_hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="22281"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_misc.vhd,tb_hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="3791"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_std_logic.vhd,tb_hdl"
+STATE="utd"
+TIME="1701201606"
+SIZE="17897"
+PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
+STATE="utd"
+TIME="1700683468"
+SIZE="65306"
+ENDFILE
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
+STATE="utd"
+TIME="1700683468"
+SIZE="607"
+ENDFILE
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
+STATE="utd"
+TIME="1700683575"
+SIZE="3348"
+ENDFILE
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
+STATE="utd"
+TIME="1701207922"
+SIZE="9260"
+ENDFILE
+VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+STATE="utd"
+TIME="1700683468"
+SIZE="88556"
+ENDFILE
+VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
+STATE="utd"
+TIME="1700683550"
+SIZE="3232"
+ENDFILE
+VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
+STATE="utd"
+TIME="1700683468"
+SIZE="76284"
+ENDFILE
+VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
+STATE="utd"
+TIME="1700683468"
+SIZE="879"
+ENDFILE
+VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
+STATE="utd"
+TIME="1700683597"
+SIZE="3264"
+ENDFILE
+VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
+STATE="utd"
+TIME="1701121050"
+SIZE="7970"
+ENDFILE
+VALUE "<project>/simulation/cal_phaser_alt_fixpt_tb_presynth_simulation.log,log"
+STATE="utd"
+TIME="1700684165"
+SIZE="26437"
+ENDFILE
+VALUE "<project>/simulation/run.do,do"
+STATE="utd"
+TIME="1700683784"
+SIZE="1613"
+ENDFILE
+VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
+STATE="utd"
+TIME="1700683582"
+SIZE="36303"
+ENDFILE
+VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
+STATE="utd"
+TIME="1701204125"
+SIZE="30285"
+ENDFILE
+VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
+STATE="utd"
+TIME="1700683602"
+SIZE="80913"
+ENDFILE
+VALUE "<project>/synthesis/cal_phaser_alt_fixpt_syn.prj,prj"
+STATE="utd"
+TIME="1701201857"
+SIZE="1294"
+ENDFILE
+ENDLIST
+LIST UsedFile
+ENDLIST
+LIST NewModulesInfo
+LIST "cal_phaser_alt_fixpt::work"
+FILE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+LIST UserCustomizedFileList
+LIST "ideSIMULATION"
+USE_LIST=TRUE
+FILELIST
+VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
+VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
+ENDFILELIST
+ENDLIST
+ENDLIST 
+LIST AssociatedStimulus
+VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
+VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
+VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
+ENDLIST
+LIST ProjectState5.1
+LIST Impl1
+ideSTIMULUS=StateSuccess
+ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
+ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::corefifo_lib"
+FILE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd,hdl"
+LIST Other_Association
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_std_logic.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_misc.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/TB.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/wave_vhdl.do,do"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/runall_vhdl.do,do"
+ENDLIST
+ENDLIST
+ENDLIST
+LIST AssociatedStimulus
+LIST cal_phaser_alt_fixpt
+VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
+VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
+VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
+ENDLIST
+ENDLIST
+LIST Other_Association
+LIST CALFIFO_C0_CALFIFO_C0_0_COREFIFO
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_std_logic.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_misc.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/TB.vhd,tb_hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/wave_vhdl.do,do"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/mti/scripts/runall_vhdl.do,do"
+ENDLIST
+ENDLIST
+LIST SimulationOptions
+UseAutomaticDoFile=true
+IncludeWaveDo=false
+Type=max
+RunTime=1000ns
+Resolution=1ps
+VsimOpt=
+EntityName=cal_phaser_alt_fixpt_tb
+TopInstanceName=<top>_0
+DoFileName=
+DoFileName2=wave.do
+DoFileParams=
+DisplayDUTWave=false
+LogAllSignals=false
+DisablePulseFiltering=false
+DumpVCD=false
+VCDFileName=power.vcd
+VHDL2008=false
+Verilog2001=false
+SystemVerilog=false
+TimeUnit=1
+TimeUnitBase=ns
+Precision=100
+PrecisionBase=ps
+SdfCorner=slow_lv_ht
+PliPath=/usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so
+UseCustomPliPath=false
+ENDLIST
+LIST ModelSimLibPath
+UseCustomPath=FALSE
+LibraryPath=
+ENDLIST
+LIST GlobalFlowOptions
+GenerateHDLAfterSynthesis=FALSE
+GenerateHDLAfterPhySynthesis=FALSE
+RunDRCAfterSynthesis=FALSE
+AutoCheckConstraints=TRUE
+UpdateModelSimIni=TRUE
+NoIOMode=FALSE
+PeriInitStandalone=FALSE
+OnDemandBuildDH=TRUE
+EnableViewDraw=FALSE
+UpdateViewDrawIni=TRUE
+GenerateHDLFromSchematic=TRUE
+VmNetlistFlowOn=TRUE
+EnableDesignSeparationOn=FALSE
+EnableSETMitigationOn=FALSE
+DisplayFanoutLimit=10
+AbortFlowOnPDCErrorsOn=TRUE
+AbortFlowOnSDCErrorsOn=TRUE
+AbortFlowOn3.3V_IO_ON=FALSE
+InstantiateInSmartDesign=TRUE
+FlashProInputFile=pdb
+SmartGenCompileReport=T
+ENDLIST
+LIST PhySynthesisOptions
+ENDLIST
+LIST Profiles
+NAME="SoftConsole"
+FUNCTION="SoftwareIDE"
+TOOL="SoftConsole"
+LOCATION="eclipse.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="Synplify Pro ME"
+FUNCTION="Synthesis"
+TOOL="Synplify Pro ME"
+LOCATION="/usr/local/microchip/Libero_SoC_v2022.3/SynplifyPro/bin/synplify_pro"
+PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
+BATCH=1
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="ModelSim ME Pro"
+FUNCTION="Simulation"
+TOOL="ModelSim Pro Edition"
+LOCATION="/usr/local/microchip/Libero_SoC_v2022.3/ModelSimPro/modeltech/linuxacoem/vsim"
+PARAM=" -l cal_phaser_alt_fixpt_tb_presynth_simulation.log "
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="Identify Debugger"
+FUNCTION="IdentifyDebugger"
+TOOL="Identify Debugger"
+LOCATION="/usr/local/microchip/Libero_SoC_v2022.3/Identify/bin/identify_debugger"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+ENDLIST
+LIST ProjectState5.1
+LIST "cal_phaser_alt_fixpt::work"
+LIST Impl1
+ideSTIMULUS=StateSuccess
+ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
+ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+ENDLIST
+LIST ExcludePackageForSimulation
+ENDLIST
+LIST ExcludePackageForSynthesis
+ENDLIST
+LIST IncludeModuleForSimulation
+ENDLIST
+LIST CDBOrder
+ENDLIST
+LIST UserCustomizedFileList
+LIST "cal_phaser_alt_fixpt"
+LIST "ideSIMULATION"
+USE_LIST=TRUE
+FILELIST
+VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
+VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
+ENDFILELIST
+ENDLIST
+ENDLIST
+ENDLIST
+LIST OpenedFileList
+ORIENTATION;HORIZONTAL
+HDL;hdl/cal_phaser_alt_fixpt.vhd;0
+HDL;hdl/cal_phaser.vhd;0
+HDL;hdl/Multiply_generic_32.vhd;0
+HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
+ACTIVEVIEW;hdl/cal_phaser.vhd
+ENDLIST
+LIST ModuleSubBlockList
+LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_average_instance_C1_fixpt_pkg::work","hdl/cal_average_instance_C1_fixpt_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_average_instance_C1_fixpt_tb_pkg::work","hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
+SUBBLOCK "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0::work","component/work/CALFIFO_C0/CALFIFO_C0.vhd","TRUE","FALSE"
+ENDLIST
+LIST "cal_phaser_alt_fixpt::work","hdl/cal_phaser_alt_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_phaser_alt_fixpt_tb_pkg::work","hdl/cal_phaser_alt_fixpt_tb_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_process_fixpt::work","hdl/cal_process_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_process_fixpt_pkg::work","hdl/cal_process_fixpt_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_process_fixpt_tb_pkg::work","hdl/cal_process_fixpt_tb_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0::work","component/work/CALFIFO_C0/CALFIFO_C0.vhd","TRUE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd","FALSE","FALSE"
+ENDLIST
+LIST "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_average_instance_C1_fixpt_tb::work","stimulus/cal_average_instance_C1_fixpt_tb.vhd","FALSE","TRUE"
+SUBBLOCK "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_phaser_alt_fixpt_tb::work","stimulus/cal_phaser_alt_fixpt_tb.vhd","FALSE","TRUE"
+SUBBLOCK "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
+SUBBLOCK "cal_phaser_alt_fixpt::work","hdl/cal_phaser_alt_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_process_fixpt_tb::work","stimulus/cal_process_fixpt_tb.vhd","FALSE","TRUE"
+SUBBLOCK "cal_process_fixpt::work","hdl/cal_process_fixpt.vhd","FALSE","FALSE"
+ENDLIST
+LIST "coreparameters::work","component/work/CALFIFO_C0/CALFIFO_C0_0/coreparameters.vhd","FALSE","TRUE"
+ENDLIST
+LIST "g4_dp_ext_mem::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd","FALSE","TRUE"
+ENDLIST
+LIST "testbench::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/TB.vhd","FALSE","TRUE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd","FALSE","FALSE"
+SUBBLOCK "g4_dp_ext_mem::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd","FALSE","TRUE"
+ENDLIST
+LIST "xhdl_misc::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_misc.vhd","FALSE","TRUE"
+ENDLIST
+LIST "xhdl_std_logic::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/test/user/XHDL_std_logic.vhd","FALSE","TRUE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_async::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_fwft::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_sync::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_sync_scntr::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_ram_wrapper::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_ram_wrapper::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_async::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_NstagesSync::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_corefifo_grayToBinConv::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_fwft::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_grayToBinConv::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_NstagesSync::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_sync::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_sync_scntr::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_ram_wrapper::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd","FALSE","FALSE"
+ENDLIST
+LIST "fifo_pkg::corefifo_lib","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_ram_wrapper::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd","FALSE","FALSE"
+SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::corefifo_lib","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd","FALSE","FALSE"
+ENDLIST
+ENDLIST
+LIST ActiveTestBenchList
+ENDLIST
+LIST IOTabList
+ENDLIST
+LIST FPTabList
+ENDLIST
+LIST TimingTabList
+ENDLIST
+LIST FDCTabList
+ENDLIST
