@@ -43,6 +43,10 @@ END cal_phaser;
 architecture architecture_cal_phaser of cal_phaser is
     SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
     SIGNAL fifo_bin_out                    : std_logic_vector(11 DOWNTO 0);
+    SIGNAL calbin_out                      : std_logic_vector(12 DOWNTO 0);
+    SIGNAL kk                              : unsigned(12 DOWNTO 0);
+    SIGNAL kk_shift                        : unsigned(12 DOWNTO 0);
+    
     SIGNAL fifo_bin_we                     : std_logic;
     SIGNAL fifo_bin_re                     : std_logic;
     SIGNAL fifo_full                       : std_logic;
@@ -57,7 +61,7 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL phase_mult2_im               : signed(31 DOWNTO 0);
     
     SIGNAL Nac                            : unsigned(6 DOWNTO 0);
-    SIGNAL kar_s                          : unsigned(15 DOWNTO 0);
+    SIGNAL kar_s                          : std_logic_vector(19 DOWNTO 0);
     SIGNAL multiplicand_re                : signed(31 DOWNTO 0);
     SIGNAL multiplicand_im                : signed(31 DOWNTO 0);
     SIGNAL product_re_re                  : std_logic_vector(63 DOWNTO 0);
@@ -71,10 +75,16 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
     
     SIGNAL error_fifo_full                : std_logic;
+    SIGNAL error_fifo_order               : std_logic;
+    SIGNAL error_multiplication           : std_logic;
     
     type state_type is (S_IDLE,
-        S_INCOMING_BINS,
-        S_WAIT_FOR_RESULT,
+        S_WAIT_FOR_RESULT1,
+        S_WAIT_FOR_RESULT2,
+        S_WAIT_FOR_RESULT3,
+        S_WAIT_FOR_RESULT4,
+        S_WAIT_FOR_RESULT5,
+        S_WAIT_FOR_RESULT6,
         S_ACT_ON_RESULT1,
         S_ACT_ON_RESULT2);
     signal state: state_type;
@@ -162,7 +172,7 @@ begin
     incoming_bins : entity work.CALFIFO_C0
     PORT MAP( 
         CLK      => clk,
-        RESET_N  => reset,
+        RESET_N  => not reset,
         DATA     => calbin_s,
         WE       => fifo_bin_we,
         FULL     => fifo_full,
@@ -175,6 +185,9 @@ begin
         if (rising_edge(clk)) then
             if (reset = '1') then
                 calbin_s <= (others=>'0');
+                calbin_out <= (others=>'0');
+                kk <= (others=>'0');
+                
                 fifo_bin_we <= '0';
                 fifo_bin_re <= '0';
                 --Real defaults to +1.0, because it's cosine(0)
@@ -187,9 +200,18 @@ begin
                 sum_re          <= (others=>'0');
                 sum_im          <= (others=>'0');
                 Nac              <= to_unsigned(0,Nac'length);
-                kar_s          <= to_unsigned(0,kar_out'length);
+                kar_s          <= (others=>'0');
                 valid_in         <= '0';
                 error_fifo_full  <= '0';
+                
+                readycal <= '0';
+                update_drift <= '0';
+                calbin       <= (others=> '0');
+                phase_cor_re  <= (others=> '0');
+                phase_cor_im  <= (others=> '0');
+                kar_out       <= (others=> '0');
+                readyout    <= '0';
+        
                 state            <= S_IDLE;
             else
                 fifo_bin_we <= '0';
@@ -209,29 +231,68 @@ begin
                 CASE state IS
                 when S_IDLE =>	
                     -- Only act on incoming bins where bins%4 = 2
-                    if (fifo_empty = '0' and fifo_bin_out = x"001") then
-                        multiplicand_re <= phase_st_re;
-                        multiplicand_im <= phase_st_im;
-                        valid_in <= '1';
-                        kar_s <= Nac * (shift_left(unsigned(fifo_bin_out), 1)+1);
-                        state <= S_INCOMING_BINS;
+                    if (fifo_empty = '0') then
+                        if (fifo_bin_out = x"001") then
+                            multiplicand_re <= phase_st_re;
+                            multiplicand_im <= phase_st_im;
+                            valid_in <= '1';
+                            calbin_out <= '0' & fifo_bin_out;
+                            state <= S_WAIT_FOR_RESULT1;
+                        else
+                            -- Takes 2 cycles for result to come out, so give it one extra off cycle before trying again
+                            fifo_bin_re <= not fifo_bin_re;
+                        end if;
+                    else
+                        fifo_bin_re <= '0';
                     end if;
-                when S_WAIT_FOR_RESULT =>
-                    fifo_bin_re <= '0';
+                when S_WAIT_FOR_RESULT1 =>
                     valid_in <= '0';
+                    fifo_bin_re <= '0';
+                    kk_shift <= shift_left(unsigned(calbin_out), 1);
+                    if (fifo_empty = '0') then
+                        fifo_bin_re <= '1';
+                    end if;
+                    state <= S_WAIT_FOR_RESULT2;
+                when S_WAIT_FOR_RESULT2 =>
+                    kk <= kk_shift - 1;
+                    fifo_bin_re <= '0';
+                    state <= S_WAIT_FOR_RESULT3;
+                when S_WAIT_FOR_RESULT3 =>
+                    kar_s <= std_logic_vector(kk * Nac);
+                    if (unsigned('0' & fifo_bin_out) /= (unsigned(calbin_out) + 1)) then
+                        error_fifo_order <= '1';
+                    end if;
+                    calbin_out <= '0' & fifo_bin_out;
+                    state <= S_WAIT_FOR_RESULT4;
+                when S_WAIT_FOR_RESULT4 =>
+                    kar_out <= kar_s(15 downto 0);
+                    state <= S_WAIT_FOR_RESULT5;
+                when S_WAIT_FOR_RESULT5 =>
+                    state <= S_WAIT_FOR_RESULT6;
+                when S_WAIT_FOR_RESULT6 =>
+                    state <= S_ACT_ON_RESULT1;
+                when S_ACT_ON_RESULT1 =>
                     -- Multiplication is done!
                     if (valid_out = "1111") then
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         sum_im <= resize(signed(product_re_im), 65) + resize(signed(product_im_re), 65);
-                        state <= S_ACT_ON_RESULT1;
+                        state <= S_ACT_ON_RESULT2;
+                    else
+                        error_multiplication <= '1';
                     end if;
-                when S_ACT_ON_RESULT1 =>
-                    
-                    --Start next multiplication
-                    multiplicand_re <= phase_mult2_re;
-                    multiplicand_im <= phase_mult2_im;
-                    valid_in <= '1';
                 when S_ACT_ON_RESULT2 =>
+                    if ((unsigned(calbin_out) - 1) = 1) then
+                        phase_mult2_re <= sum_re(64 downto 33);
+                        phase_mult2_im <= sum_im(64 downto 33);
+                        multiplicand_re <= sum_re(64 downto 33);
+                        multiplicand_im <= sum_im(64 downto 33);
+                    else
+                        phase_st_re <= sum_re(64 downto 33);
+                        phase_st_im <= sum_im(64 downto 33);
+                    end if;
+                    --Start next multiplication
+                    valid_in <= '1';
+                    state <= S_WAIT_FOR_RESULT1;
                 when others =>		
                     state <= S_IDLE;
                 end case;

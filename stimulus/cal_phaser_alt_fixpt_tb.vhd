@@ -211,13 +211,13 @@ BEGIN
               bin_in => bin_in_2,  -- ufix12
               cal_drift => cal_drift_1,  -- ufix32_En46
               readyin => readyin,
-              calbin => calbin,  -- ufix10
-              phase_cor_re => phase_cor_re,  -- sfix32_En30
-              phase_cor_im => phase_cor_im,  -- sfix32_En30
-              kar_out => kar_out,  -- uint16
-              readyout => readyout,
-              update_drift => update_drift,
-              readycal => readycal
+              calbin => open,  -- ufix10
+              phase_cor_re => open,  -- sfix32_En30
+              phase_cor_im => open,  -- sfix32_En30
+              kar_out => open,  -- uint16
+              readyout => open,
+              update_drift => open,
+              readycal => open
               );
 
   readycal_done_enb <= readycal_done AND rdEnb;
