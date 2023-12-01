@@ -1,0 +1,874 @@
+# do run.do
+# Model Technology ModelSim Microsemi Pro vmap 2022.2 Lib Mapping Utility 2022.04 Apr 26 2022
+# vmap presynth presynth 
+# Copying /usr/local/microchip/Libero_SoC_v2022.3/ModelSimPro/modeltech/linuxacoem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# Model Technology ModelSim Microsemi Pro vmap 2022.2 Lib Mapping Utility 2022.04 Apr 26 2022
+# vmap PolarFire /usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/precompiled/vlog/polarfire 
+# Modifying modelsim.ini
+# Model Technology ModelSim Microsemi Pro vmap 2022.2 Lib Mapping Utility 2022.04 Apr 26 2022
+# vmap COREFIFO_LIB COREFIFO_LIB 
+# Modifying modelsim.ini
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_phaser_alt_fixpt.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity cal_phaser_alt_fixpt
+# -- Compiling architecture rtl of cal_phaser_alt_fixpt
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_average_instance_C1_fixpt_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package cal_average_instance_C1_fixpt_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package std_logic_textio
+# -- Loading package cal_average_instance_C1_fixpt_pkg
+# -- Compiling package cal_average_instance_C1_fixpt_tb_pkg
+# -- Compiling package body cal_average_instance_C1_fixpt_tb_pkg
+# -- Loading package cal_average_instance_C1_fixpt_tb_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package std_logic_textio
+# -- Compiling package cal_phaser_alt_fixpt_tb_pkg
+# -- Compiling package body cal_phaser_alt_fixpt_tb_pkg
+# -- Loading package cal_phaser_alt_fixpt_tb_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_process_fixpt_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package cal_process_fixpt_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_process_fixpt_tb_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package std_logic_textio
+# -- Loading package cal_process_fixpt_pkg
+# -- Compiling package cal_process_fixpt_tb_pkg
+# -- Compiling package body cal_process_fixpt_tb_pkg
+# -- Loading package cal_process_fixpt_tb_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_average_instance_C1_fixpt.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package cal_average_instance_C1_fixpt_pkg
+# -- Compiling entity cal_average_instance_C1_fixpt
+# -- Compiling architecture rtl of cal_average_instance_C1_fixpt
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_process_fixpt.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package cal_process_fixpt_pkg
+# -- Compiling entity cal_process_fixpt
+# -- Compiling architecture rtl of cal_process_fixpt
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/Multiply_generic_32.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Multiply_generic32
+# -- Compiling architecture rtl of Multiply_generic32
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling package fifo_pkg
+# -- Compiling package body fifo_pkg
+# -- Loading package fifo_pkg
+# End time: 15:44:07 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:07 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity CALFIFO_C0
+# -- Compiling architecture RTL of CALFIFO_C0
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_USRAM_top
+# -- Compiling architecture DEF_ARCH of CALFIFO_C0_CALFIFO_C0_0_USRAM_top
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_ram_wrapper
+# -- Compiling architecture generated of CALFIFO_C0_CALFIFO_C0_0_ram_wrapper
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/COREFIFO.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Loading package fifo_pkg
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_COREFIFO
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_COREFIFO
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_NstagesSync.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_NstagesSync
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_NstagesSync
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_async.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Loading package fifo_pkg
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_async
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_async
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_fwft.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_fwft
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_fwft
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_grayToBinConv
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_grayToBinConv
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Loading package fifo_pkg
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_sync
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_sync
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work COREFIFO_LIB /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package ATTRIBUTES
+# -- Loading package std_logic_misc
+# -- Loading package fifo_pkg
+# -- Compiling entity CALFIFO_C0_CALFIFO_C0_0_corefifo_sync_scntr
+# -- Compiling architecture translated of CALFIFO_C0_CALFIFO_C0_0_corefifo_sync_scntr
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_phaser.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity cal_phaser
+# -- Compiling architecture architecture_cal_phaser of cal_phaser
+# -- Loading entity Multiply_generic32
+# -- Loading entity CALFIFO_C0
+# ** Warning: /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/hdl/cal_phaser.vhd(216): (vcom-1272) Length of expected is 16; length of actual is 19.
+# End time: 15:44:08 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:08 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_textio
+# -- Loading package NUMERIC_STD
+# -- Loading package cal_average_instance_C1_fixpt_pkg
+# -- Loading package cal_average_instance_C1_fixpt_tb_pkg
+# -- Compiling entity cal_average_instance_C1_fixpt_tb
+# -- Compiling architecture rtl of cal_average_instance_C1_fixpt_tb
+# -- Loading entity cal_average_instance_C1_fixpt
+# End time: 15:44:09 on Dec 01,2023, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:09 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_textio
+# -- Loading package NUMERIC_STD
+# -- Loading package cal_phaser_alt_fixpt_tb_pkg
+# -- Compiling entity cal_phaser_alt_fixpt_tb
+# -- Compiling architecture rtl of cal_phaser_alt_fixpt_tb
+# -- Loading entity cal_phaser_alt_fixpt
+# -- Loading entity cal_phaser
+# End time: 15:44:09 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim Microsemi Pro vcom 2022.2 Compiler 2022.04 Apr 26 2022
+# Start time: 15:44:09 on Dec 01,2023
+# vcom -reportprogress 300 -2008 -explicit -work presynth /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_process_fixpt_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_textio
+# -- Loading package NUMERIC_STD
+# -- Loading package cal_process_fixpt_pkg
+# -- Loading package cal_process_fixpt_tb_pkg
+# -- Compiling entity cal_process_fixpt_tb
+# -- Compiling architecture rtl of cal_process_fixpt_tb
+# -- Loading entity cal_process_fixpt
+# End time: 15:44:09 on Dec 01,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -L PolarFire -L presynth -L COREFIFO_LIB -t 1ps -pli "/usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so" presynth.cal_phaser_alt_fixpt_tb 
+# Start time: 15:44:09 on Dec 01,2023
+# //  ModelSim Microsemi Pro 2022.2 Apr 26 2022 Linux 6.1.62-1-MANJARO
+# //
+# //  Copyright 1991-2022 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim Microsemi Pro and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading presynth.cal_phaser_alt_fixpt_tb_pkg(body)
+# Loading presynth.cal_phaser_alt_fixpt_tb(rtl)
+# Loading presynth.cal_phaser_alt_fixpt(rtl)
+# Loading presynth.cal_phaser(architecture_cal_phaser)
+# Loading presynth.multiply_generic32(rtl)
+# Loading presynth.calfifo_c0(rtl)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading synopsys.attributes
+# Loading ieee.std_logic_misc(body)
+# Loading COREFIFO_LIB.fifo_pkg(body)
+# Loading COREFIFO_LIB.calfifo_c0_calfifo_c0_0_corefifo(translated)
+# Loading COREFIFO_LIB.calfifo_c0_calfifo_c0_0_corefifo_sync_scntr(translated)
+# Loading COREFIFO_LIB.calfifo_c0_calfifo_c0_0_ram_wrapper(generated)
+# Loading COREFIFO_LIB.calfifo_c0_calfifo_c0_0_usram_top(def_arch)
+# Loading PolarFire.OR4
+# Loading PolarFire.CFG4
+# Loading PolarFire.CFG3
+# Loading PolarFire.CFG2
+# Loading PolarFire.OR2
+# Loading PolarFire.RAM64x12
+# Loading PolarFire.PIPE_REG
+# Loading PolarFire.RAM64x12_IP
+# Loading PolarFire.OUTPUT_PMOS
+# Loading PolarFire.INPUT_BUF
+# Loading PolarFire.SLE_Prim
+# Loading PolarFire.GND
+# Loading PolarFire.VCC
+# ** Warning: (vsim-7) Failed to open VHDL file "readyin.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "cal_drift.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "bin_in.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "calbin_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "phase_cor_re_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "phase_cor_im_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "kar_out_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "tick_out_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "readyout_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "update_drift_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: (vsim-7) Failed to open VHDL file "readycal_expected.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# Loading PolarFire.UDP_MUX2
+# Loading PolarFire.UDP_DFF
+# Loading PolarFire.UDP_DL
+# Loading /usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/RW1/UI_ram_wrapper_1/A_SB_CORRECT has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/RW1/UI_ram_wrapper_1/B_SB_CORRECT has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/RW1/UI_ram_wrapper_1/A_DB_DETECT has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/RW1/UI_ram_wrapper_1/B_DB_DETECT has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/calbin(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(31) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(30) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(29) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(28) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(27) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(26) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(25) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(24) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(23) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(22) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(21) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(20) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(19) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(18) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(17) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(16) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_re(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(31) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(30) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(29) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(28) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(27) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(26) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(25) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(24) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(23) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(22) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(21) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(20) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(19) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(18) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(17) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(16) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/phase_cor_im(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/kar_out(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/readyout has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/update_drift has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/readycal has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD."/=": metavalue detected, returning TRUE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD."/=": metavalue detected, returning TRUE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 6  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 6  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_alt_fixpt
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 5  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 ns  Iteration: 6  Region: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr/T3
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R2C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R7C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R0C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R4C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R5C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R6C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R1C0.u0
+# Warning : BLK_EN went unknown at time 20000.0ps. Instance: cal_phaser_alt_fixpt_tb.u_cal_phaser_lusee.incoming_bins.CALFIFO_C0_0.RW1.UI_ram_wrapper_1.U6_syncpipe.CALFIFO_C0_CALFIFO_C0_0_USRAM_top_R3C0.u0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 20 ns  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 20 ns  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 20 ns  Iteration: 4  Instance: /cal_phaser_alt_fixpt_tb/u_cal_phaser_lusee/incoming_bins/CALFIFO_C0_0/L1/fifo_corefifo_sync_scntr
+# ** Fatal: (vsim-7) Failed to open VHDL file "readyin.dat" in r mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 22 ns  Iteration: 4  Process: /cal_phaser_alt_fixpt_tb/readyin_fileread File: /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd
+# Fatal error in Process readyin_fileread at /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd line 359
+# 
+# HDL call sequence:
+# Stopped at /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd 359 Process readyin_fileread
+# 
