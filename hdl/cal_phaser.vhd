@@ -43,7 +43,8 @@ END cal_phaser;
 architecture architecture_cal_phaser of cal_phaser is
     SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
     SIGNAL fifo_bin_out                    : std_logic_vector(11 DOWNTO 0);
-    SIGNAL calbin_out                      : std_logic_vector(12 DOWNTO 0);
+    SIGNAL fifo_check_count                : unsigned (1 downto 0);
+    SIGNAL calbin_out                      : unsigned(12 DOWNTO 0);
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
     SIGNAL kk_shift                        : unsigned(12 DOWNTO 0);
     
@@ -186,6 +187,7 @@ begin
             if (reset = '1') then
                 calbin_s <= (others=>'0');
                 calbin_out <= (others=>'0');
+                fifo_check_count <= (others=>'0');
                 kk <= (others=>'0');
                 
                 fifo_bin_we <= '0';
@@ -201,8 +203,11 @@ begin
                 sum_im          <= (others=>'0');
                 Nac              <= to_unsigned(0,Nac'length);
                 kar_s          <= (others=>'0');
+                kk_shift       <= (others=>'0');
                 valid_in         <= '0';
                 error_fifo_full  <= '0';
+                error_fifo_order  <= '0';
+                error_multiplication  <= '0';
                 
                 readycal <= '0';
                 update_drift <= '0';
@@ -229,26 +234,41 @@ begin
                 end if;
                     
                 CASE state IS
-                when S_IDLE =>	
+                when S_IDLE =>
+                    readycal <= '0';
                     -- Only act on incoming bins where bins%4 = 2
                     if (fifo_empty = '0') then
                         if (fifo_bin_out = x"001") then
                             multiplicand_re <= phase_st_re;
                             multiplicand_im <= phase_st_im;
                             valid_in <= '1';
-                            calbin_out <= '0' & fifo_bin_out;
+                            calbin_out <= unsigned('0' & fifo_bin_out);
+                            fifo_bin_re <= '0';
                             state <= S_WAIT_FOR_RESULT1;
                         else
-                            -- Takes 2 cycles for result to come out, so give it one extra off cycle before trying again
-                            fifo_bin_re <= not fifo_bin_re;
+                            -- Takes 2 cycles for result to come out, so give it one cycle to come out and one to act on it
+                            if (fifo_check_count = 0) then
+                                fifo_bin_re <= '1';
+                                fifo_check_count <= fifo_check_count + 1;
+                            elsif (fifo_check_count = 1) then
+                                fifo_bin_re <= '0';
+                                fifo_check_count <= fifo_check_count + 1;
+                            elsif (fifo_check_count = 2) then
+                                fifo_bin_re <= '0';
+                                fifo_check_count <= (others=>'0');
+                            else
+                                fifo_check_count <= (others=>'0');
+                            end if;
                         end if;
                     else
                         fifo_bin_re <= '0';
                     end if;
                 when S_WAIT_FOR_RESULT1 =>
                     valid_in <= '0';
+                    readycal <= '0';
                     fifo_bin_re <= '0';
-                    kk_shift <= shift_left(unsigned(calbin_out), 1);
+                    kk_shift <= shift_left(calbin_out, 1);
+                    calbin <= std_logic_vector(calbin_out(9 downto 0));
                     if (fifo_empty = '0') then
                         fifo_bin_re <= '1';
                     end if;
@@ -259,13 +279,16 @@ begin
                     state <= S_WAIT_FOR_RESULT3;
                 when S_WAIT_FOR_RESULT3 =>
                     kar_s <= std_logic_vector(kk * Nac);
-                    if (unsigned('0' & fifo_bin_out) /= (unsigned(calbin_out) + 1)) then
-                        error_fifo_order <= '1';
-                    end if;
-                    calbin_out <= '0' & fifo_bin_out;
                     state <= S_WAIT_FOR_RESULT4;
                 when S_WAIT_FOR_RESULT4 =>
                     kar_out <= kar_s(15 downto 0);
+                    if (calbin_out /= 512) then
+                        if (unsigned('0' & fifo_bin_out) /= (calbin_out + 1)) then
+                            error_fifo_order <= '1';
+                        end if;
+                    else
+                        Nac <= Nac + 1;
+                    end if;
                     state <= S_WAIT_FOR_RESULT5;
                 when S_WAIT_FOR_RESULT5 =>
                     state <= S_WAIT_FOR_RESULT6;
@@ -281,7 +304,7 @@ begin
                         error_multiplication <= '1';
                     end if;
                 when S_ACT_ON_RESULT2 =>
-                    if ((unsigned(calbin_out) - 1) = 1) then
+                    if (calbin_out = 1) then
                         phase_mult2_re <= sum_re(64 downto 33);
                         phase_mult2_im <= sum_im(64 downto 33);
                         multiplicand_re <= sum_re(64 downto 33);
@@ -289,10 +312,21 @@ begin
                     else
                         phase_st_re <= sum_re(64 downto 33);
                         phase_st_im <= sum_im(64 downto 33);
+                        phase_cor_re <= std_logic_vector(sum_re(64 downto 33));
+                        phase_cor_im <= std_logic_vector(sum_im(64 downto 33));
                     end if;
                     --Start next multiplication
                     valid_in <= '1';
-                    state <= S_WAIT_FOR_RESULT1;
+                    
+                    readycal <= '1';
+                    
+                    if (calbin_out /= 512) then
+                        calbin_out <= unsigned('0' & fifo_bin_out);
+                        state <= S_WAIT_FOR_RESULT1;
+                    else
+                        calbin_out <= (others=>'0');
+                        state <= S_IDLE;
+                    end if;
                 when others =>		
                     state <= S_IDLE;
                 end case;

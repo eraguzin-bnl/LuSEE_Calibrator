@@ -230,8 +230,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1701469730"
-SIZE="12060"
+TIME="1701711766"
+SIZE="13677"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -529,6 +529,8 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
+HDL;component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vhdl/core/corefifo_sync_scntr.vhd;0
+HDL;component/work/CALFIFO_C0/CALFIFO_C0.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 ACTIVEVIEW;hdl/cal_phaser.vhd
 ENDLIST
