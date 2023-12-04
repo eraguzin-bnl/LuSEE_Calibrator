@@ -89,6 +89,12 @@ architecture architecture_cal_phaser of cal_phaser is
         S_ACT_ON_RESULT1,
         S_ACT_ON_RESULT2);
     signal state: state_type;
+    
+    type state_type2 is (S_CORDIC_IDLE,
+        S_CORDIC_INPUT,
+        S_CORDIC_WAIT,
+        S_CORDIC_OUTPUT);
+    signal state2: state_type2;
 begin
     --Custom made 32 x 32 bit pipelined multipliers
     --Inputs to this block just go straight in
@@ -236,6 +242,8 @@ begin
                 CASE state IS
                 when S_IDLE =>
                     readycal <= '0';
+                    readyout <= '0';
+                    update_drift <= '0';
                     -- Only act on incoming bins where bins%4 = 2
                     if (fifo_empty = '0') then
                         if (fifo_bin_out = x"001") then
@@ -266,6 +274,7 @@ begin
                 when S_WAIT_FOR_RESULT1 =>
                     valid_in <= '0';
                     readycal <= '0';
+                    readyout <= '0';
                     fifo_bin_re <= '0';
                     kk_shift <= shift_left(calbin_out, 1);
                     calbin <= std_logic_vector(calbin_out(9 downto 0));
@@ -319,12 +328,20 @@ begin
                     valid_in <= '1';
                     
                     readycal <= '1';
+                    if (Nac = 63) then
+                        readyout <= '1';
+                    end if;
+                    
                     
                     if (calbin_out /= 512) then
                         calbin_out <= unsigned('0' & fifo_bin_out);
                         state <= S_WAIT_FOR_RESULT1;
                     else
                         calbin_out <= (others=>'0');
+                        if (Nac > 63) then
+                            update_drift <= '1';
+                            Nac <= to_unsigned(0, Nac'length);
+                        end if;
                         state <= S_IDLE;
                     end if;
                 when others =>		
