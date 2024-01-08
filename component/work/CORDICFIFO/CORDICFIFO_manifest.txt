@@ -1,0 +1,33 @@
+Microchip Technology Inc. - Microchip Libero Software Release v2022.3 (Version 2022.3.0.8)
+
+Date      :  Tue Dec  5 11:54:21 2023
+Project   :  /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator
+Component :  CORDICFIFO
+Family    :  PolarFire
+
+
+HDL source files for all Synthesis and Simulation tools:
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/COREFIFO.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_sync.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_sync_scntr.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_async.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_NstagesSync.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_grayToBinConv.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/core/corefifo_fwft.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vhdl/core/fifo_pkg.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO.vhd
+
+Stimulus files for all Simulation tools:
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/mti/scripts/wave_vhdl.do
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/mti/scripts/runall_vhdl.do
+
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/coreparameters.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/test/user/XHDL_std_logic.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/test/user/XHDL_misc.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/test/user/g4_dp_ext_mem.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vhdl/test/user/TB.vhd
+
+Constraint files:
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORDICFIFO/CORDICFIFO_0/CORDICFIFO_CORDICFIFO_0_COREFIFO.sdc

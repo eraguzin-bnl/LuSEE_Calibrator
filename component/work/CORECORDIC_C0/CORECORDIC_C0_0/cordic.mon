@@ -1,0 +1,295 @@
+----------------------------------------
+Output of cordic_functions.c/cordicConst
+----------------------------------------
+Word-serial Datapath dpBits=48
+CORDIC constants: arctan's and gain to be used by C and HDL.
+Float to fix conversion (fl * 2^dpBits-2) scales for:
+ - data:          fl 1.0      => 70368744177664;
+ - angle(arctan): fl PI/2 rad => 35184372088832;
+
+Increment tangent by 1/(2^iter) 
+      --- Angle (arctan) in degrees ---    ------------- Gain ------------
+Iter  Float     Fix2Fl            Fixed     Float   Fix2Fl         Fixed
+  0 45.000000  45.000000	%15I64d 1.414214 1.414214 %15I64d
+  1 26.565051  26.565051	%15I64d 1.581139 1.581139 %15I64d
+  2 14.036243  14.036243	%15I64d 1.629801 1.629801 %15I64d
+  3  7.125016   7.125016	%15I64d 1.642484 1.642484 %15I64d
+  4  3.576334   3.576334	%15I64d 1.645689 1.645689 %15I64d
+  5  1.789911   1.789911	%15I64d 1.646492 1.646492 %15I64d
+  6  0.895174   0.895174	%15I64d 1.646693 1.646693 %15I64d
+  7  0.447614   0.447614	%15I64d 1.646744 1.646744 %15I64d
+  8  0.223811   0.223811	%15I64d 1.646756 1.646756 %15I64d
+  9  0.111906   0.111906	%15I64d 1.646759 1.646759 %15I64d
+ 10  0.055953   0.055953	%15I64d 1.646760 1.646760 %15I64d
+ 11  0.027976   0.027976	%15I64d 1.646760 1.646760 %15I64d
+ 12  0.013988   0.013988	%15I64d 1.646760 1.646760 %15I64d
+ 13  0.006994   0.006994	%15I64d 1.646760 1.646760 %15I64d
+ 14  0.003497   0.003497	%15I64d 1.646760 1.646760 %15I64d
+ 15  0.001749   0.001749	%15I64d 1.646760 1.646760 %15I64d
+ 16  0.000874   0.000874	%15I64d 1.646760 1.646760 %15I64d
+ 17  0.000437   0.000437	%15I64d 1.646760 1.646760 %15I64d
+ 18  0.000219   0.000219	%15I64d 1.646760 1.646760 %15I64d
+ 19  0.000109   0.000109	%15I64d 1.646760 1.646760 %15I64d
+ 20  0.000055   0.000055	%15I64d 1.646760 1.646760 %15I64d
+ 21  0.000027   0.000027	%15I64d 1.646760 1.646760 %15I64d
+ 22  0.000014   0.000014	%15I64d 1.646760 1.646760 %15I64d
+ 23  0.000007   0.000007	%15I64d 1.646760 1.646760 %15I64d
+ 24  0.000003   0.000003	%15I64d 1.646760 1.646760 %15I64d
+ 25  0.000002   0.000002	%15I64d 1.646760 1.646760 %15I64d
+ 26  0.000001   0.000001	%15I64d 1.646760 1.646760 %15I64d
+ 27  0.000000   0.000000	%15I64d 1.646760 1.646760 %15I64d
+ 28  0.000000   0.000000	%15I64d 1.646760 1.646760 %15I64d
+ 29  0.000000   0.000000	%15I64d 1.646760 1.646760 %15I64d
+ 30  0.000000   0.000000	%15I64d 1.646760 1.646760 %15I64d
+ 31  0.000000   0.000000	%15I64d 1.646760 1.646760 %15I64d
+
+To compute SIN/COS, initialize magnitude with a fix-pt value of 1/gain:
+ 1/1.646760 = 652032874
+------------------- cordicConst Ends ----------------
+
+---------------------------------------------------------------------------------
+cordic_functions.c/cKernelFl displays every fl-pt iteration in Rotation mode
+Inp data: X=+0.000000; Y=+0.000000; A=+0.000000 rad =  +0.00 deg
+Coarse rotator is on!  Float uRotator input after Coarse:
+X=+0.000000; Y=+0.000000; A=+0.000000 rad =  +0.00 deg
+---------------------------------------------------------------------------------
+Itr phAcc(deg)  d    x         y      phAccCorrection
+ 1    -45.00	 -1 +0.000000 +0.000000   +26.565051
+ 2    -18.43	 -1 +0.000000 +0.000000   +14.036243
+ 3     -4.40	 -1 +0.000000 +0.000000    +7.125016
+ 4     +2.73	 +1 +0.000000 +0.000000    -3.576334
+ 5     -0.85	 -1 +0.000000 +0.000000    +1.789911
+ 6     +0.94	 +1 +0.000000 +0.000000    -0.895174
+ 7     +0.04	 +1 +0.000000 +0.000000    -0.447614
+ 8     -0.40	 -1 +0.000000 +0.000000    +0.223811
+ 9     -0.18	 -1 +0.000000 +0.000000    +0.111906
+10     -0.07	 -1 +0.000000 +0.000000    +0.055953
+11     -0.01	 -1 +0.000000 +0.000000    +0.027976
+12     +0.02	 +1 +0.000000 +0.000000    -0.013988
+13     +0.00	 +1 +0.000000 +0.000000    -0.006994
+14     -0.00	 -1 +0.000000 +0.000000    +0.003497
+15     -0.00	 -1 +0.000000 +0.000000    +0.001749
+16     +0.00	 +1 +0.000000 +0.000000    -0.000874
+17     +0.00	 +1 +0.000000 +0.000000    -0.000437
+18     -0.00	 -1 +0.000000 +0.000000    +0.000219
+19     -0.00	 -1 +0.000000 +0.000000    +0.000109
+20     +0.00	 +1 +0.000000 +0.000000    -0.000055
+21     -0.00	 -1 +0.000000 +0.000000    +0.000027
+22     -0.00	 -1 +0.000000 +0.000000    +0.000014
+23     +0.00	 +1 +0.000000 +0.000000    -0.000007
+24     +0.00	 +1 +0.000000 +0.000000    -0.000003
+25     +0.00	 +1 +0.000000 +0.000000    -0.000002
+26     -0.00	 -1 +0.000000 +0.000000    +0.000001
+27     -0.00	 -1 +0.000000 +0.000000    +0.000000
+28     +0.00	 +1 +0.000000 +0.000000    -0.000000
+29     +0.00	 +1 +0.000000 +0.000000    -0.000000
+30     -0.00	 -1 +0.000000 +0.000000    +0.000000
+31     -0.00	 -1 +0.000000 +0.000000    +0.000000
+-------------- Final Result --------------
+32     -0.00	 -1 +0.000000 +0.000000
+Resulting vector: 
+  Actual*1/gain: x=+0.000000, y=+0.000000
+  Givens       : x=+0.000000, y=+0.000000
+  Errors       : x=+0.000000, y=+0.000000
+
+---------------------------------------------------------------------------------
+cordic_functions.c/uRotatorFx runs Fx-pt CORDIC in rotation mode.
+Every iteration is displayed (cordic_functions.c/uRotatorFx)
+Inp data of 32 bits:x0=21365813215232, y0=0, a0=0
+---------------------------------------------------------------------------------
+Iter   an(angleAcc)  d          xn                     yn
+ 1  %8I64d   -nan	+0 %+8I64d +0.000000   %+8I64d +0.607253
+ 2  %8I64d   -nan	-832970528 %+8I64d +0.000000   %+8I64d +0.910879
+ 3  %8I64d   -nan	+930201856 %+8I64d +0.000000   %+8I64d +0.986786
+ 4  %8I64d  +0.00	+594313088 %+8I64d +0.000000   %+8I64d +0.996274
+ 5  %8I64d   -nan	+1003715072 %+8I64d +0.000000   %+8I64d +0.999239
+ 6  %8I64d  +0.00	+1624390143 %+8I64d +0.000000   %+8I64d +0.999703
+ 7  %8I64d  +0.00	-1443684352 %+8I64d +0.000000   %+8I64d +0.999959
+ 8  %8I64d   -nan	-754572288 %+8I64d +0.000000   %+8I64d +0.999965
+ 9  %8I64d   -nan	+406980608 %+8I64d +0.000000   %+8I64d +0.999993
+10  %8I64d   -nan	+2034798592 %+8I64d +0.000000   %+8I64d +0.999999
+11  %8I64d   -nan	-1009123328 %+8I64d +0.000000   %+8I64d +1.000000
+12  %8I64d  +0.00	+306446336 %+8I64d +0.000000   %+8I64d +1.000000
+13  %8I64d  +0.00	+1321205760 %+8I64d +0.000000   %+8I64d +1.000000
+14  %8I64d   -nan	-257097728 %+8I64d +0.000000   %+8I64d +1.000000
+15  %8I64d   -nan	+517996544 %+8I64d +0.000000   %+8I64d +1.000000
+16  %8I64d  +0.00	-1970536448 %+8I64d +0.000000   %+8I64d +1.000000
+17  %8I64d  +0.00	-375390208 %+8I64d +0.000000   %+8I64d +1.000000
+18  %8I64d   -nan	+635437056 %+8I64d +0.000000   %+8I64d +1.000000
+19  %8I64d   -nan	+1740636160 %+8I64d +0.000000   %+8I64d +1.000000
+20  %8I64d  +0.00	-687865856 %+8I64d +0.000000   %+8I64d +1.000000
+21  %8I64d   -nan	+1677721600 %+8I64d +0.000000   %+8I64d +1.000000
+22  %8I64d   -nan	-402653184 %+8I64d +0.000000   %+8I64d +1.000000
+23  %8I64d  +0.00	+2046820352 %+8I64d +0.000000   %+8I64d +1.000000
+24  %8I64d  +0.00	-1073741824 %+8I64d +0.000000   %+8I64d +1.000000
+25  %8I64d  +0.00	+0 %+8I64d +0.000000   %+8I64d +1.000000
+26  %8I64d   -nan	-2147483648 %+8I64d +0.000000   %+8I64d +1.000000
+27  %8I64d   -nan	+0 %+8I64d +0.000000   %+8I64d +1.000000
+28  %8I64d  +0.00	+0 %+8I64d +0.000000   %+8I64d +1.000000
+29  %8I64d  +0.00	+0 %+8I64d +0.000000   %+8I64d +1.000000
+30  %8I64d   -nan	+0 %+8I64d +0.000000   %+8I64d +1.000000
+31  %8I64d   -nan	+0 %+8I64d +0.000000   %+8I64d +1.000000
+-------------- Final Result --------------
+32  %8I64d   -nan	+1 %+8I64d +0.000000   %+8I64d +1.000000
+
+uRotator Datapath width=48 bits, Effective output width=32
+
+Errors for the above SINGLE POINT fx-pt CORDIC
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=0, din.y=0, din.a=0
+Fx-pt Outputs: dout.x=536870912, dout.y=0
+Float CORDIC Inputs: din.x=+0.000000, din.y=+0.000000, din.a=+0.000000
+Float Outputs (gain removed): dout.x=+0.607253,  dout.y=+0.000000
+Ideal Outputs      : ideal.x=0.000000, ideal.y=+0.000000
+Absolute Errors    :   err.x=+0.607253,   err.y=+0.000000
+
+
+--------  Fx-pt CORDIC errors for the input test vector  --------
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-1073741824
+Fx-pt Outputs: dout.x=-536870912, dout.y=0
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-3.141593
+Float Outputs (gain removed): dout.x=-0.607253,  dout.y=+0.000000
+Ideal Outputs      : ideal.x=-0.607253, ideal.y=-0.000000
+Absolute Errors    :   err.x=+0.000000,   err.y=+0.000000
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-939524096
+Fx-pt Outputs: dout.x=-496004047, dout.y=-205451603
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-2.748894
+Float Outputs (gain removed): dout.x=-0.561029,  dout.y=-0.232386
+Ideal Outputs      : ideal.x=-0.561029, ideal.y=-0.232386
+Relative Errors    :   err.x=-0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-805306368
+Fx-pt Outputs: dout.x=-379625062, dout.y=-379625062
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-2.356194
+Float Outputs (gain removed): dout.x=-0.429393,  dout.y=-0.429393
+Ideal Outputs      : ideal.x=-0.429393, ideal.y=-0.429393
+Relative Errors    :   err.x=-0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-671088640
+Fx-pt Outputs: dout.x=-205451603, dout.y=-496004047
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-1.963495
+Float Outputs (gain removed): dout.x=-0.232386,  dout.y=-0.561029
+Ideal Outputs      : ideal.x=-0.232386, ideal.y=-0.561029
+Relative Errors    :   err.x=-0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-536870912
+Fx-pt Outputs: dout.x=0, dout.y=-536870912
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-1.570796
+Float Outputs (gain removed): dout.x=+0.000000,  dout.y=-0.607253
+Ideal Outputs      : ideal.x=0.000000, ideal.y=-0.607253
+Absolute Errors    :   err.x=+0.000000,   err.y=+0.000000
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-402653184
+Fx-pt Outputs: dout.x=205451603, dout.y=-496004047
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-1.178097
+Float Outputs (gain removed): dout.x=+0.232386,  dout.y=-0.561029
+Ideal Outputs      : ideal.x=0.232386, ideal.y=-0.561029
+Relative Errors    :   err.x=+0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-268435456
+Fx-pt Outputs: dout.x=379625062, dout.y=-379625062
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-0.785398
+Float Outputs (gain removed): dout.x=+0.429393,  dout.y=-0.429393
+Ideal Outputs      : ideal.x=0.429393, ideal.y=-0.429393
+Relative Errors    :   err.x=+0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=-134217728
+Fx-pt Outputs: dout.x=496004047, dout.y=-205451603
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=-0.392699
+Float Outputs (gain removed): dout.x=+0.561029,  dout.y=-0.232386
+Ideal Outputs      : ideal.x=0.561029, ideal.y=-0.232386
+Relative Errors    :   err.x=+0.00%,   err.y=-0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=0
+Fx-pt Outputs: dout.x=536870912, dout.y=0
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+0.000000
+Float Outputs (gain removed): dout.x=+0.607253,  dout.y=+0.000000
+Ideal Outputs      : ideal.x=0.607253, ideal.y=+0.000000
+Absolute Errors    :   err.x=+0.000000,   err.y=+0.000000
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=134217728
+Fx-pt Outputs: dout.x=496004047, dout.y=205451603
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+0.392699
+Float Outputs (gain removed): dout.x=+0.561029,  dout.y=+0.232386
+Ideal Outputs      : ideal.x=0.561029, ideal.y=+0.232386
+Relative Errors    :   err.x=+0.00%,   err.y=+0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=268435456
+Fx-pt Outputs: dout.x=379625062, dout.y=379625062
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+0.785398
+Float Outputs (gain removed): dout.x=+0.429393,  dout.y=+0.429393
+Ideal Outputs      : ideal.x=0.429393, ideal.y=+0.429393
+Relative Errors    :   err.x=+0.00%,   err.y=+0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=402653184
+Fx-pt Outputs: dout.x=205451603, dout.y=496004047
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+1.178097
+Float Outputs (gain removed): dout.x=+0.232386,  dout.y=+0.561029
+Ideal Outputs      : ideal.x=0.232386, ideal.y=+0.561029
+Relative Errors    :   err.x=+0.00%,   err.y=+0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=536870912
+Fx-pt Outputs: dout.x=0, dout.y=536870912
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+1.570796
+Float Outputs (gain removed): dout.x=+0.000000,  dout.y=+0.607253
+Ideal Outputs      : ideal.x=0.000000, ideal.y=+0.607253
+Absolute Errors    :   err.x=+0.000000,   err.y=+0.000000
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=671088640
+Fx-pt Outputs: dout.x=-205451603, dout.y=496004047
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+1.963495
+Float Outputs (gain removed): dout.x=-0.232386,  dout.y=+0.561029
+Ideal Outputs      : ideal.x=-0.232386, ideal.y=+0.561029
+Relative Errors    :   err.x=-0.00%,   err.y=+0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=805306368
+Fx-pt Outputs: dout.x=-379625062, dout.y=379625062
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+2.356194
+Float Outputs (gain removed): dout.x=-0.429393,  dout.y=+0.429393
+Ideal Outputs      : ideal.x=-0.429393, ideal.y=+0.429393
+Relative Errors    :   err.x=-0.00%,   err.y=+0.00%
+
+Errors in Rotation Mode 
+  -----------------------
+Fx-pt CORDIC Inputs: din.x=652032874, din.y=0, din.a=939524096
+Fx-pt Outputs: dout.x=-496004047, dout.y=205451603
+Float CORDIC Inputs: din.x=+0.607253, din.y=+0.000000, din.a=+2.748894
+Float Outputs (gain removed): dout.x=-0.561029,  dout.y=+0.232386
+Ideal Outputs      : ideal.x=-0.561029, ideal.y=+0.232386
+Relative Errors    :   err.x=-0.00%,   err.y=+0.00%
+
+
+
+ Max Errors: x=+0.000000, y=+0.000000, a=+0.000000

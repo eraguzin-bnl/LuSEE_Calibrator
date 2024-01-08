@@ -1,0 +1,29 @@
+Microchip Technology Inc. - Microchip Libero Software Release v2022.3 (Version 2022.3.0.8)
+
+Date      :  Tue Jan  2 10:48:11 2024
+Project   :  /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator
+Component :  CORECORDIC_C0
+Family    :  PolarFire
+
+
+HDL source files for all Synthesis and Simulation tools:
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/cordic.mon
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/testVect.mon
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/round.txt
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd
+
+Stimulus files for all Simulation tools:
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd
+    /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd
+
