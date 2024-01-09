@@ -185,15 +185,37 @@ ARCHITECTURE rtl OF cal_phaser_alt_fixpt_tb IS
   SIGNAL readycal_ref                     : std_logic;
   SIGNAL readycal_testFailure             : std_logic;  -- ufix1
   SIGNAL testFailure                      : std_logic;  -- ufix1
+  
+  SIGNAL readyin_gated                    : std_logic;
+  SIGNAL readyin_count                    : unsigned(1 downto 0);
 
 BEGIN
+
+    --Slow down the clock to emulate averaging happening
+    gating_process: PROCESS (readyin, reset)
+      BEGIN
+        IF reset = '1' THEN
+          readyin_gated <= '0';
+          readyin_count <= to_unsigned(0, readyin_count'length);
+        ELSIF readyin'event AND readyin = '1' THEN
+          IF readyin_count = 0 THEN
+            readyin_gated <= '1';
+          ELSE
+            readyin_gated <= '0';
+          END IF;
+          readyin_count <= readyin_count + 1;
+        ELSIF readyin'event AND readyin = '0' THEN
+          readyin_gated <= '0';
+        END IF;
+      END PROCESS gating_process;
+  
   u_cal_phaser_alt_fixpt : cal_phaser_alt_fixpt
     PORT MAP( clk => clk,
               reset => reset,
               clk_enable => enb,
               bin_in => bin_in_2,  -- ufix12
               cal_drift => cal_drift_1,  -- ufix32_En46
-              readyin => readyin,
+              readyin => readyin_gated,
               ce_out => ce_out,
               calbin => calbin,  -- ufix10
               phase_cor_re => phase_cor_re,  -- sfix32_En30
@@ -209,8 +231,9 @@ BEGIN
     PORT MAP( clk => clk,
               reset => reset,
               bin_in => bin_in_2,  -- ufix12
-              cal_drift => cal_drift_1,  -- ufix32_En46
-              readyin => readyin,
+              --Eric Raguzin: Shift incoming test value to actual usable number and try to make it a fraction of pi
+              cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_1), 14) / 3),  -- ufix32_En46
+              readyin => readyin_gated,
               calbin => open,  -- ufix10
               phase_cor_re => open,  -- sfix32_En30
               phase_cor_im => open,  -- sfix32_En30

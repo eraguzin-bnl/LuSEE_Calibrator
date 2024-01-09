@@ -521,8 +521,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1704814060"
-SIZE="21665"
+TIME="1704816888"
+SIZE="21984"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -556,13 +556,13 @@ SIZE="7970"
 ENDFILE
 VALUE "<project>/simulation/cal_phaser_alt_fixpt_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1704815279"
-SIZE="4397980"
+TIME="1704817621"
+SIZE="45980"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1704815256"
-SIZE="6046"
+TIME="1704817534"
+SIZE="5545"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -571,8 +571,8 @@ SIZE="36303"
 ENDFILE
 VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1704814060"
-SIZE="30248"
+TIME="1704817881"
+SIZE="31158"
 ENDFILE
 VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -689,6 +689,28 @@ VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/test/user/testb
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WeqR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WgtR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WltR.v,tb_hdl"
+ENDLIST
+LIST ProjectState5.1
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
 ENDLIST
 ENDLIST
 LIST "CORDICFIFO_CORDICFIFO_0_COREFIFO::work"
@@ -899,6 +921,28 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 ENDLIST
+LIST "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::work"
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
 ENDLIST
 LIST ExcludePackageForSimulation
 ENDLIST
@@ -957,8 +1001,9 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
-StartPage;StartPage;0
-ACTIVEVIEW;StartPage
+HDL;hdl/cal_phaser.vhd;0
+HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
+ACTIVEVIEW;stimulus/cal_phaser_alt_fixpt_tb.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
@@ -1061,8 +1106,6 @@ LIST "cal_average_instance_C1_fixpt_tb::work","stimulus/cal_average_instance_C1_
 SUBBLOCK "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_phaser_alt_fixpt_tb::work","stimulus/cal_phaser_alt_fixpt_tb.vhd","FALSE","TRUE"
-SUBBLOCK "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
-SUBBLOCK "cal_phaser_alt_fixpt::work","hdl/cal_phaser_alt_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_process_fixpt_tb::work","stimulus/cal_process_fixpt_tb.vhd","FALSE","TRUE"
 SUBBLOCK "cal_process_fixpt::work","hdl/cal_process_fixpt.vhd","FALSE","FALSE"

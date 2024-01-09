@@ -228,8 +228,6 @@ begin
         EMPTY    => fifo_empty
         );
         
-
-        
     cos_fifo : entity work.CORDICFIFO
     PORT MAP( 
         CLK      => clk,
@@ -307,6 +305,11 @@ begin
                 error_fifo_order  <= '0';
                 error_multiplication  <= '0';
                 
+                error_sin_fifo_full <= '0';
+                error_sin_fifo_empty <= '0';
+                error_cos_fifo_full <= '0';
+                error_cos_fifo_empty <= '0';
+                
                 readycal <= '0';
                 update_drift <= '0';
                 update_drift_s <= '0';
@@ -342,6 +345,8 @@ begin
                 when S_IDLE =>
                     readycal <= '0';
                     readyout <= '0';
+                    kar_out <= (others=> '0');
+                    calbin <= (others=> '0');
                     update_drift <= '0';
                     -- Only act on incoming bins where bins%4 = 2
                     if (fifo_empty = '0') then
@@ -491,7 +496,6 @@ begin
                             sin_fifo_we <= '1';
                         end if;
                         
-                        cordic_counter <= cordic_counter + 1;
                         state2 <= S_CORDIC_OUTPUT;
                     end if;                
                 when S_CORDIC_OUTPUT =>
@@ -500,6 +504,7 @@ begin
                     if (cordic_counter = 63) then
                         state2 <= S_CORDIC_WAIT_FOR_UPDATE;
                     else
+                        cordic_counter <= cordic_counter + 1;
                         phase_s <= phase_s + cal_drift_s;
                         --Check bounds with +/- pi and adjust
                         state2 <= S_CORDIC_CORRECT;
@@ -512,6 +517,7 @@ begin
                     end if;
                     state2 <= S_CORDIC_INPUT;
                 when S_CORDIC_WAIT_FOR_UPDATE =>
+                    cordic_counter <= 0;
                     if (update_drift_s = '1') then
                         update_drift_s <= '0';
                         state2 <= S_CORDIC_IDLE;
