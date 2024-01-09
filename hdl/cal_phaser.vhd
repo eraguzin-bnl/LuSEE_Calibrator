@@ -62,6 +62,7 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL cordic_cos                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL cordic_sin                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL phase_s                         : signed(32 DOWNTO 0);
+    SIGNAL negative_phase_s                : signed(32 DOWNTO 0);
     SIGNAL update_drift_s                  : std_logic;
     
     SIGNAL fifo_bin_we                     : std_logic;
@@ -265,6 +266,8 @@ begin
         RFD          => cordic_request_for_data
         );
         
+    negative_phase_s <= -phase_s;
+        
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
@@ -378,6 +381,7 @@ begin
                         fifo_bin_re <= '0';
                     end if;
                 when S_WAIT_FOR_FIFO_OUT =>
+                    fifo_check_count <= to_unsigned(0, fifo_check_count'length);
                     cos_fifo_re <= '0';
                     sin_fifo_re <= '0';
                     state <= S_WAIT_FOR_FIFO_OUT2;
@@ -386,6 +390,8 @@ begin
                 when S_FIFO_IS_OUT =>
                     multiplicand_re <= signed(cos_fifo_out);
                     multiplicand_im <= signed(sin_fifo_out);
+                    phase_st_re <= signed(cos_fifo_out);
+                    phase_st_im <= signed(sin_fifo_out);
                     valid_in <= '1';
                     state <= S_WAIT_FOR_RESULT1;
                 when S_WAIT_FOR_RESULT1 =>
@@ -476,15 +482,9 @@ begin
                     sin_fifo_we <= '0';
                     state2 <= S_CORDIC_INPUT;
                 when S_CORDIC_INPUT =>
-                    --Algorithm calls for the cordic to take the negative phase as the input
-                    --The phase is a signed value 1 bit larger than 32 to take into account addition from cal drift before the 2 pi adjust
-                    --So I manually flip it here and take the bottom 31 bits (because 32nd bit should never be needed after 2 pi adjust)
-                    --Todo, gives strange result when MSB is 0
-                    if (phase_s(32) = '1') then
-                        cordic_in <= std_logic_vector('1' & phase_s(30 DOWNTO 0));
-                    else
-                        cordic_in <= std_logic_vector('0' & phase_s(30 DOWNTO 0));
-                    end if;
+                --Algorithm calls for the cordic to take the negative phase as the input
+                --The phase is a signed value 1 bit larger than 32 to take into account addition from cal drift before the 2 pi adjust                    
+                    cordic_in <= std_logic_vector(negative_phase_s(32) & negative_phase_s(30 downto 0));
                     
                     if (cordic_request_for_data = '1') then
                         cordic_valid_in <= '1';
