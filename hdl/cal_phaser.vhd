@@ -289,7 +289,7 @@ begin
                 sin_fifo_in <= (others=>'0');
                 --Real defaults to +1.0, because it's cosine(0)
                 phase_s <= (others=>'0');
-                phase_st_re <= x"40000000";
+                phase_st_re <= x"20000000";
                 phase_st_im <= (others=>'0');
                 phase_mult2_re <= (others=>'0');
                 phase_mult2_im <= (others=>'0');
@@ -431,15 +431,17 @@ begin
                     end if;
                 when S_ACT_ON_RESULT2 =>
                     if (calbin_out = 1) then
-                        phase_mult2_re <= sum_re(64 downto 33);
-                        phase_mult2_im <= sum_im(64 downto 33);
-                        multiplicand_re <= sum_re(64 downto 33);
-                        multiplicand_im <= sum_im(64 downto 33);
+                        phase_mult2_re <= sum_re(64) & sum_re(59 downto 29);
+                        phase_mult2_im <= sum_im(64) & sum_im(59 downto 29);
+                        multiplicand_re <= sum_re(64) & sum_re(59 downto 29);
+                        multiplicand_im <= sum_im(64) & sum_im(59 downto 29);
+                        phase_cor_re <= std_logic_vector(phase_st_re);
+                        phase_cor_im <= std_logic_vector(phase_st_im);
                     else
-                        phase_st_re <= sum_re(64 downto 33);
-                        phase_st_im <= sum_im(64 downto 33);
-                        phase_cor_re <= std_logic_vector(sum_re(64 downto 33));
-                        phase_cor_im <= std_logic_vector(sum_im(64 downto 33));
+                        phase_st_re <= sum_re(64) & sum_re(59 downto 29);
+                        phase_st_im <= sum_im(64) & sum_im(59 downto 29);
+                        phase_cor_re <= std_logic_vector(sum_re(64) & sum_re(59 downto 29));
+                        phase_cor_im <= std_logic_vector(sum_im(64) & sum_im(59 downto 29));
                     end if;
                     --Start next multiplication
                     valid_in <= '1';
@@ -474,7 +476,16 @@ begin
                     sin_fifo_we <= '0';
                     state2 <= S_CORDIC_INPUT;
                 when S_CORDIC_INPUT =>
-                    cordic_in <= std_logic_vector(phase_s(32) & phase_s(30 DOWNTO 0));
+                    --Algorithm calls for the cordic to take the negative phase as the input
+                    --The phase is a signed value 1 bit larger than 32 to take into account addition from cal drift before the 2 pi adjust
+                    --So I manually flip it here and take the bottom 31 bits (because 32nd bit should never be needed after 2 pi adjust)
+                    --Todo, gives strange result when MSB is 0
+                    if (phase_s(32) = '1') then
+                        cordic_in <= std_logic_vector('1' & phase_s(30 DOWNTO 0));
+                    else
+                        cordic_in <= std_logic_vector('0' & phase_s(30 DOWNTO 0));
+                    end if;
+                    
                     if (cordic_request_for_data = '1') then
                         cordic_valid_in <= '1';
                         state2 <= S_CORDIC_WAIT;

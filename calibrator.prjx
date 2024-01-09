@@ -521,8 +521,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1704816888"
-SIZE="21984"
+TIME="1704824888"
+SIZE="22863"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -571,8 +571,8 @@ SIZE="36303"
 ENDFILE
 VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1704817881"
-SIZE="31158"
+TIME="1704817913"
+SIZE="31159"
 ENDFILE
 VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -810,7 +810,7 @@ EntityName=cal_phaser_alt_fixpt_tb
 TopInstanceName=<top>_0
 DoFileName=
 DoFileName2=wave.do
-DoFileParams=
+DoFileParams=radix define sfp_29 -fixed -signed -fraction 29 -base decimal
 DisplayDUTWave=false
 LogAllSignals=false
 DisablePulseFiltering=false
@@ -1003,7 +1003,7 @@ LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
-ACTIVEVIEW;stimulus/cal_phaser_alt_fixpt_tb.vhd
+ACTIVEVIEW;hdl/cal_phaser.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
@@ -1106,6 +1106,8 @@ LIST "cal_average_instance_C1_fixpt_tb::work","stimulus/cal_average_instance_C1_
 SUBBLOCK "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_phaser_alt_fixpt_tb::work","stimulus/cal_phaser_alt_fixpt_tb.vhd","FALSE","TRUE"
+SUBBLOCK "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
+SUBBLOCK "cal_phaser_alt_fixpt::work","hdl/cal_phaser_alt_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_process_fixpt_tb::work","stimulus/cal_process_fixpt_tb.vhd","FALSE","TRUE"
 SUBBLOCK "cal_process_fixpt::work","hdl/cal_process_fixpt.vhd","FALSE","FALSE"
