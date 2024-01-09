@@ -1,18 +1,24 @@
 --------------------------------------------------------------------------------
--- Company: <Name>
+-- Company: Brookhaven Lab - LuSEE Project
 --
 -- File: cal_phaser.vhd
--- File history:
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
 --
 -- Description: 
 --
--- <Description here>
+-- This is the first block of the LuSEE Calibrator. It essentially takes in a stream of bins from 0 to 2047 representing the bins that
+-- have just been released by the notch filter averager. Using the literal numbers from 0 to 2047, it buffers bins 2, 6, 10, etc...
+-- So 512 total bins to do some calculations. For each of the 512 it calculates a `kar` value based on which cycle and bin this is
+-- For each bin, we want a phase value to try to zero in on the angle of the calibration source
+-- We have initial conditions, and this block receives a "cal_drift" angle. It uses a Cordic to get the cosine and sine an initial angle
+-- And that complex number becomes "phase_st". It's squared to get "phase_mult2".
+-- Then for each of the 512 calibration bins, "phase_st" is continually successively by "phase_mult2"
+-- The result is sent out along with the number of the cal bin. Then the next cycle starts, and the cordic input angle is incremented by "cal_drift"
+-- After 64 cycles of this, another signal goes high indicating 64 cycles were done and a new cal_drift value is received from later blocks in the system
+
+-- This block makes use of the numeric notation for the Microsemi Cordic block here:
+-- https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/UserGuides/ip_cores/directcores/CoreCORDIC_HB.pdf
 --
--- Targeted device: <Family::PolarFire> <Die::MPF300TS> <Package::FCG1152>
--- Author: <Name>
+-- Author: Eric Raguzin
 --
 --------------------------------------------------------------------------------
 
@@ -27,24 +33,30 @@ generic(
   );
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
-        bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- ufix12
-        cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- ufix32_En46
-        readyin                           :   IN    std_logic;
-        calbin                            :   OUT   std_logic_vector(9 DOWNTO 0);  -- ufix10
-        phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- ufix16
-        readyout                          :   OUT   std_logic;
-        update_drift                      :   OUT   std_logic;
-        readycal                          :   OUT   std_logic
+        bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
+        cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- The value to shift the cordic input by for 64 cycles
+        readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
+        calbin                            :   OUT   std_logic_vector(9 DOWNTO 0);  -- Output of which bin's values are going out
+        phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Real part of complex phase result
+        phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
+        kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- Calculation based on bin and cycle
+        readyout                          :   OUT   std_logic;                      -- Goes high on 64th cycle
+        update_drift                      :   OUT   std_logic;                      -- Indicates to later block we need a new cal_drift
+        readycal                          :   OUT   std_logic                       -- Goes high every cycle to tell average block to consume new values
         );
 END cal_phaser;
 
 architecture architecture_cal_phaser of cal_phaser is
-    -- Representation of 2pi as a multiple of pi. First bit is sign bit
-    -- Next 2 bits are integer (10 is 2, so 2*pi) followed by 29 bits of fractional 0s
-    -- The standard cordic input is 32 bits, where the first bit is sign and the next bit is integer (max of 1)
-    -- And then 29 fractional bits. This constant is made to be added or subtracted from that number
+    -- See here for how angles and sin/cos outputs are represented:
+    -- https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/UserGuides/ip_cores/directcores/CoreCORDIC_HB.pdf
+    
+    -- cal_drift and phase_s and cordic_input are angles. The way angles are represented are fractions of pi. Manual has good example
+    -- First bit is sign bit, second bit if 1 means the value is +/- pi, and there is an implied decimal point and the other 29 are fractional bits
+    
+    -- All the sin/cos, multiplicand and phase_st and phase_mult2 values are in linear format. Manual has good example
+    -- The standard cordic input is 32 bits, where the first bit is sign and the next bit is integer (max of 2.32) and then 29 fractional bits
+    -- So a 1 (which is the highest the cos/sin output can be) is 001.000...
+    -- With the fractional part at the first decimal point. -1 is 101.000... and so on
     
     SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
     SIGNAL fifo_bin_out                    : std_logic_vector(11 DOWNTO 0);
@@ -72,49 +84,47 @@ architecture architecture_cal_phaser of cal_phaser is
     
     SIGNAL cos_fifo_we                     : std_logic;
     SIGNAL cos_fifo_re                     : std_logic;
-    SIGNAL cos_fifo_full                       : std_logic;
-    SIGNAL cos_fifo_empty                      : std_logic;
-    SIGNAL cos_fifo_in                  : std_logic_vector(31 DOWNTO 0);
-    SIGNAL cos_fifo_out                 : std_logic_vector(31 DOWNTO 0);
+    SIGNAL cos_fifo_full                   : std_logic;
+    SIGNAL cos_fifo_empty                  : std_logic;
+    SIGNAL cos_fifo_in                     : std_logic_vector(31 DOWNTO 0);
+    SIGNAL cos_fifo_out                    : std_logic_vector(31 DOWNTO 0);
     
     SIGNAL sin_fifo_we                     : std_logic;
     SIGNAL sin_fifo_re                     : std_logic;
-    SIGNAL sin_fifo_full                       : std_logic;
-    SIGNAL sin_fifo_empty                      : std_logic;
-    SIGNAL sin_fifo_in                  : std_logic_vector(31 DOWNTO 0);
-    SIGNAL sin_fifo_out                 : std_logic_vector(31 DOWNTO 0);
+    SIGNAL sin_fifo_full                   : std_logic;
+    SIGNAL sin_fifo_empty                  : std_logic;
+    SIGNAL sin_fifo_in                     : std_logic_vector(31 DOWNTO 0);
+    SIGNAL sin_fifo_out                    : std_logic_vector(31 DOWNTO 0);
     
-    --These are fixed point signed values, represented by two's complement
-    --The values range from -1 to +1
-    --The MSB is the signed bit, then the second bit is the whole number, then the rest is the fraction
-    SIGNAL phase_st_re                  : signed(31 DOWNTO 0);
-    SIGNAL phase_st_im                  : signed(31 DOWNTO 0);
-    SIGNAL phase_mult2_re               : signed(31 DOWNTO 0);
-    SIGNAL phase_mult2_im               : signed(31 DOWNTO 0);
+    SIGNAL phase_st_re                     : signed(31 DOWNTO 0);
+    SIGNAL phase_st_im                     : signed(31 DOWNTO 0);
+    SIGNAL phase_mult2_re                  : signed(31 DOWNTO 0);
+    SIGNAL phase_mult2_im                  : signed(31 DOWNTO 0);
     
-    SIGNAL Nac                            : unsigned(6 DOWNTO 0);
-    SIGNAL kar_s                          : std_logic_vector(19 DOWNTO 0);
-    SIGNAL multiplicand_re                : signed(31 DOWNTO 0);
-    SIGNAL multiplicand_im                : signed(31 DOWNTO 0);
-    SIGNAL product_re_re                  : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_re_im                  : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_im_re                  : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_im_im                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL Nac                             : unsigned(6 DOWNTO 0);
+    SIGNAL kar_s                           : std_logic_vector(19 DOWNTO 0);
+    SIGNAL multiplicand_re                 : signed(31 DOWNTO 0);
+    SIGNAL multiplicand_im                 : signed(31 DOWNTO 0);
+    SIGNAL product_re_re                   : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_re_im                   : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_re                   : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_im                   : std_logic_vector(63 DOWNTO 0);
     
-    SIGNAL sum_re                         : signed(64 DOWNTO 0);
-    SIGNAL sum_im                         : signed(64 DOWNTO 0);
-    SIGNAL valid_in                       : std_logic;
-    SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL sum_re                          : signed(64 DOWNTO 0);
+    SIGNAL sum_im                          : signed(64 DOWNTO 0);
+    SIGNAL valid_in                        : std_logic;
+    SIGNAL valid_out                       : std_logic_vector(3 DOWNTO 0);
     
-    SIGNAL error_fifo_full                : std_logic;
-    SIGNAL error_fifo_order               : std_logic;
-    SIGNAL error_multiplication           : std_logic;
+    SIGNAL error_fifo_full                 : std_logic;
+    SIGNAL error_fifo_order                : std_logic;
+    SIGNAL error_multiplication            : std_logic;
     
-    SIGNAL error_sin_fifo_full                : std_logic;
-    SIGNAL error_sin_fifo_empty                : std_logic;
-    SIGNAL error_cos_fifo_full                : std_logic;
-    SIGNAL error_cos_fifo_empty                : std_logic;
+    SIGNAL error_sin_fifo_full             : std_logic;
+    SIGNAL error_sin_fifo_empty            : std_logic;
+    SIGNAL error_cos_fifo_full             : std_logic;
+    SIGNAL error_cos_fifo_empty            : std_logic;
     
+    -- The first state machine does the calaculations for each incoming bin each cycle
     type state_type is (S_IDLE,
         S_WAIT_FOR_FIFO_OUT,
         S_WAIT_FOR_FIFO_OUT2,
@@ -129,6 +139,7 @@ architecture architecture_cal_phaser of cal_phaser is
         S_ACT_ON_RESULT2);
     signal state: state_type;
     
+    -- This state machine calculates the cos and sin values for 64 cycles off the bat given the cal_drift
     type state_type2 is (S_CORDIC_IDLE,
         S_CORDIC_INPUT,
         S_CORDIC_WAIT,
@@ -139,7 +150,8 @@ architecture architecture_cal_phaser of cal_phaser is
 begin
     --Custom made 32 x 32 bit pipelined multipliers
     --Inputs to this block just go straight in
-    --Valid out matches when o_m is valid
+    --Valid out high only when o_m is valid
+    --Algorithm calls for us to multiply different values on first cycle vs other 63, so that's the reason for "multiplicand"
     --We are multiplying 2 complex numbers, so that's 4 different multiplications
     --Real of first * real of second
     mult_re_re : entity work.Multiply_generic32
@@ -217,6 +229,9 @@ begin
             o_m => product_im_im
         );
         
+    --Since we cannot process each bin as fast as they are coming in (every 4 clock cycles), each bin is
+    --Stored in a FIFO and the state machine does the math as it can
+    --This FIFO has room for 512 samples of the bin numbers. But because it is working on them as they come in in batches of 512, it should never fill up
     incoming_bins : entity work.CALFIFO_C0
     PORT MAP( 
         CLK      => clk,
@@ -229,6 +244,9 @@ begin
         EMPTY    => fifo_empty
         );
         
+    --After the Cordic state machine gets a new cal_drift value and knows that it's the first of 64 cycles, it immediately just calculates the
+    --phase value for all 64 cycles and puts it in these FIFOs. The first state machine requests them as it begins each new cycle and then has to
+    --work through 512 bins with that value
     cos_fifo : entity work.CORDICFIFO
     PORT MAP( 
         CLK      => clk,
@@ -253,6 +271,8 @@ begin
         EMPTY    => sin_fifo_empty
         );
         
+    -- This is the actual Cordic IP core, it inputs and outputs values in the characteristic format in the handbook:
+    -- https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/UserGuides/ip_cores/directcores/CoreCORDIC_HB.pdf
     cordic : entity work.CORECORDIC_C0
     PORT MAP(
         NGRST    => '1',
@@ -266,70 +286,70 @@ begin
         RFD          => cordic_request_for_data
         );
         
+    --The algorithm calls for the negative phase value to be inputted into the cordic. Because the phase has an extra bit and I need to do an operation
+    --This is the easiest way to have the complement available the cycle after phase_s is calculated
     negative_phase_s <= -phase_s;
         
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
-                calbin_s <= (others=>'0');
-                calbin_out <= (others=>'0');
-                fifo_check_count <= (others=>'0');
-                kk <= (others=>'0');
+                calbin_s              <= (others=>'0');
+                calbin_out            <= (others=>'0');
+                fifo_check_count      <= (others=>'0');
+                kk                    <= (others=>'0');
                 
-                cal_drift_s <= (others=>'0');
-                cordic_valid_in <= '0';
-                cordic_counter <= 0;
-                cordic_in <= (others=>'0');
+                cal_drift_s           <= (others=>'0');
+                cordic_valid_in       <= '0';
+                cordic_counter        <= 0;
+                cordic_in             <= (others=>'0');
                 
-                fifo_bin_we <= '0';
-                fifo_bin_re <= '0';
+                fifo_bin_we           <= '0';
+                fifo_bin_re           <= '0';
                 
-                cos_fifo_we <= '0';
-                cos_fifo_re <= '0';
-                cos_fifo_in <= (others=>'0');
-                sin_fifo_we <= '0';
-                sin_fifo_re <= '0';
-                sin_fifo_in <= (others=>'0');
-                --Real defaults to +1.0, because it's cosine(0)
-                phase_s <= (others=>'0');
-                phase_st_re <= x"20000000";
-                phase_st_im <= (others=>'0');
-                phase_mult2_re <= (others=>'0');
-                phase_mult2_im <= (others=>'0');
-                multiplicand_re <= (others=>'0');
-                multiplicand_im <= (others=>'0');
-                sum_re          <= (others=>'0');
-                sum_im          <= (others=>'0');
-                Nac              <= to_unsigned(0,Nac'length);
-                kar_s          <= (others=>'0');
-                kk_shift       <= (others=>'0');
-                valid_in         <= '0';
-                error_fifo_full  <= '0';
-                error_fifo_order  <= '0';
+                cos_fifo_we           <= '0';
+                cos_fifo_re           <= '0';
+                cos_fifo_in           <= (others=>'0');
+                sin_fifo_we           <= '0';
+                sin_fifo_re           <= '0';
+                sin_fifo_in           <= (others=>'0');
+                phase_s               <= (others=>'0');
+                
+                --This is +1.0 in the Cordic formatting, since it's defaulting to the real part of cosine(0)
+                phase_st_re           <= x"20000000";
+                phase_st_im           <= (others=>'0');
+                phase_mult2_re        <= (others=>'0');
+                phase_mult2_im        <= (others=>'0');
+                multiplicand_re       <= (others=>'0');
+                multiplicand_im       <= (others=>'0');
+                sum_re                <= (others=>'0');
+                sum_im                <= (others=>'0');
+                Nac                   <= to_unsigned(0,Nac'length);
+                kar_s                 <= (others=>'0');
+                kk_shift              <= (others=>'0');
+                valid_in              <= '0';
+                error_fifo_full       <= '0';
+                error_fifo_order      <= '0';
                 error_multiplication  <= '0';
                 
-                error_sin_fifo_full <= '0';
-                error_sin_fifo_empty <= '0';
-                error_cos_fifo_full <= '0';
-                error_cos_fifo_empty <= '0';
+                error_sin_fifo_full   <= '0';
+                error_sin_fifo_empty  <= '0';
+                error_cos_fifo_full   <= '0';
+                error_cos_fifo_empty  <= '0';
                 
-                readycal <= '0';
-                update_drift <= '0';
-                update_drift_s <= '0';
-                calbin       <= (others=> '0');
-                phase_cor_re  <= (others=> '0');
-                phase_cor_im  <= (others=> '0');
-                kar_out       <= (others=> '0');
-                readyout    <= '0';
+                readycal              <= '0';
+                update_drift          <= '0';
+                update_drift_s        <= '0';
+                calbin                <= (others=> '0');
+                phase_cor_re          <= (others=> '0');
+                phase_cor_im          <= (others=> '0');
+                kar_out               <= (others=> '0');
+                readyout              <= '0';
                 
-                --sin_fifo_full <= '0';
-                --sin_fifo_empty <= '0';
-                --cos_fifo_full <= '0';
-                --cos_fifo_empty <= '0';
-        
-                state            <= S_IDLE;
-                state2           <= S_CORDIC_IDLE;
+                state                 <= S_IDLE;
+                state2                <= S_CORDIC_IDLE;
             else
+                -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
+                -- And throw an error if it ever fills up
                 fifo_bin_we <= '0';
                 if (readyin = '1') then
                     -- Only act on incoming bins where bins%4 = 2
@@ -339,6 +359,7 @@ begin
                             calbin_s <= std_logic_vector(shift_right(unsigned(bin_in)+2, 2));
                             fifo_bin_we <= '1';
                         else
+                            --With a depth of 512 and enough time between notch filter averages to process, should never fill up
                             error_fifo_full <= '1';
                         end if;
                     end if;
@@ -346,13 +367,15 @@ begin
                     
                 case state is
                 when S_IDLE =>
+                    -- Outputs of this block
                     readycal <= '0';
                     readyout <= '0';
                     kar_out <= (others=> '0');
                     calbin <= (others=> '0');
                     update_drift <= '0';
-                    -- Only act on incoming bins where bins%4 = 2
+                    -- Waits for previous block to start filling up the FIFO, and use cal bin format (1 to 512)
                     if (fifo_empty = '0') then
+                        -- If we are in the IDLE state, we're waiting for the first calibration bin always
                         if (fifo_bin_out = x"001") then
                             calbin_out <= unsigned('0' & fifo_bin_out);
                             fifo_bin_re <= '0';
