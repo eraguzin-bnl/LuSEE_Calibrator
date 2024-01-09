@@ -1,7 +1,7 @@
 Project Name: calibrator
-Location: /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/calibrator
-Description: 
-Preferred HDL Type: VHDL
+Location: /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator
+Description: SPI4.2
+Preferred HDL Type: Verilog
 
 #-----------------------------------------------------
                   Device Details
