@@ -215,7 +215,7 @@ BEGIN
               clk_enable => enb,
               bin_in => bin_in_2,  -- ufix12
               cal_drift => cal_drift_1,  -- ufix32_En46
-              readyin => readyin_gated,
+              readyin => readyin,
               ce_out => ce_out,
               calbin => calbin,  -- ufix10
               phase_cor_re => phase_cor_re,  -- sfix32_En30
@@ -884,4 +884,3 @@ BEGIN
   END PROCESS completed_msg;
 
 END rtl;
-
