@@ -504,6 +504,11 @@ SIZE="19400"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
+VALUE "<project>/hdl/cal_average.vhd,hdl"
+STATE="utd"
+TIME="1704914215"
+SIZE="6518"
+ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
 TIME="1704814060"
@@ -1002,9 +1007,10 @@ ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 HDL;hdl/cal_phaser.vhd;0
-HDL;hdl/cal_phaser_alt_fixpt.vhd;0
+HDL;hdl/cal_average.vhd;0
+HDL;hdl/cal_average_instance_C1_fixpt.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
-ACTIVEVIEW;hdl/cal_phaser.vhd
+ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
