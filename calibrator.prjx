@@ -506,8 +506,8 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1704915889"
-SIZE="11059"
+TIME="1704926158"
+SIZE="22304"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
@@ -884,7 +884,7 @@ NAME="ModelSim ME Pro"
 FUNCTION="Simulation"
 TOOL="ModelSim Pro Edition"
 LOCATION="/usr/local/microchip/Libero_SoC_v2022.3/ModelSimPro/modeltech/linuxacoem/vsim"
-PARAM=""
+PARAM=" -l cal_phaser_alt_fixpt_tb_presynth_simulation.log "
 BATCH=0
 LICENSE=""
 IS32BIT="1"
@@ -1014,18 +1014,12 @@ ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
-SUBBLOCK "cal_average_data_fifo::work","","FALSE","FALSE"
-SUBBLOCK "cal_average_other_fifo::work","","FALSE","FALSE"
-ENDLIST
-LIST "cal_average_data_fifo::work","","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt_pkg::work","hdl/cal_average_instance_C1_fixpt_pkg.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt_tb_pkg::work","hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cal_average_other_fifo::work","","FALSE","FALSE"
 ENDLIST
 LIST "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
 SUBBLOCK "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
