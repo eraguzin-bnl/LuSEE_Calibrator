@@ -42,10 +42,35 @@ entity cal_average is
         powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
         powerbot                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En33
         drift_FD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En5
-        drift_SD                          :   OUT   std_logic_vector(31 DOWNTO 0)  -- sfix32_E11
+        drift_SD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_E11
+        average_ready                     :   OUT   std_logic
 );
 end cal_average;
 architecture architecture_cal_average of cal_average is
+    SIGNAL read_address                   : std_logic_vector(9 downto 0);
+    SIGNAL write_address                  : std_logic_vector(9 downto 0);
+    SIGNAL write_en                       : std_logic;
+    
+    SIGNAL sum0_re_write_data                     : signed(37 downto 0);
+    SIGNAL sum0_im_write_data                     : signed(37 downto 0);
+    SIGNAL sum0_re_read_data                      : signed(37 downto 0);
+    SIGNAL sum0_im_read_data                      : signed(37 downto 0);
+    
+    SIGNAL sum0alt_re_write_data                     : signed(37 downto 0);
+    SIGNAL sum0alt_im_write_data                     : signed(37 downto 0);
+    SIGNAL sum0alt_re_read_data                      : signed(37 downto 0);
+    SIGNAL sum0alt_im_read_data                      : signed(37 downto 0);
+    
+    SIGNAL sum1_re_write_data                     : signed(37 downto 0);
+    SIGNAL sum1_im_write_data                     : signed(37 downto 0);
+    SIGNAL sum1_re_read_data                      : signed(37 downto 0);
+    SIGNAL sum1_im_read_data                      : signed(37 downto 0);
+    
+    SIGNAL sum2_re_write_data                     : signed(37 downto 0);
+    SIGNAL sum2_im_write_data                     : signed(37 downto 0);
+    SIGNAL sum2_re_read_data                      : signed(37 downto 0);
+    SIGNAL sum2_im_read_data                      : signed(37 downto 0);
+    
     SIGNAL notch_data_re_we                     : std_logic;
     SIGNAL notch_data_re_re                     : std_logic;
     SIGNAL notch_data_re_full                   : std_logic;
@@ -74,12 +99,13 @@ architecture architecture_cal_average of cal_average is
     SIGNAL phase_data_im_s                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL phase_data_im_out                    : std_logic_vector(31 DOWNTO 0);
     
+    SIGNAL calbin_s                                 : unsigned(9 DOWNTO 0);
     SIGNAL kar_readyout_data_we                     : std_logic;
     SIGNAL kar_readyout_data_re                     : std_logic;
     SIGNAL kar_readyout_data_full                   : std_logic;
     SIGNAL kar_readyout_data_empty                  : std_logic;
-    SIGNAL kar_readyout_data_s                      : std_logic_vector(16 DOWNTO 0);
-    SIGNAL kar_readyout_data_out                    : std_logic_vector(16 DOWNTO 0);
+    SIGNAL kar_readyout_data_s                      : std_logic_vector(26 DOWNTO 0);
+    SIGNAL kar_readyout_data_out                    : std_logic_vector(26 DOWNTO 0);
     
     SIGNAL kar_curr                                : unsigned(15 DOWNTO 0);
     SIGNAL kar_squared                             : unsigned(31 DOWNTO 0);
@@ -128,6 +154,9 @@ architecture architecture_cal_average of cal_average is
     SIGNAL cplx_in_re_rev                  : signed(31 DOWNTO 0);
     SIGNAL cplx_in_im_rev                  : signed(31 DOWNTO 0);
     
+    SIGNAL drift_SD1                       : signed(64 DOWNTO 0);
+    SIGNAL drift_SD_s                      : signed(65 DOWNTO 0);
+    
     type state_type is (S_IDLE,
         S_FIFO_WAIT_1,
         S_FIFO_WAIT_2,
@@ -137,9 +166,18 @@ architecture architecture_cal_average of cal_average is
         S_BEGIN_MULTIPLY_2,
         S_MULTIPLY_WAIT_2,
         S_BIT_SLICE_2,
-        S_WAIT_FOR_RESULT6,
-        S_ACT_ON_RESULT1,
-        S_ACT_ON_RESULT2);
+        S_STORE_OR_OUTPUT,
+        S_BEGIN_MULTIPLY_3,
+        S_MULTIPLY_WAIT_3,
+        S_BEGIN_MULTIPLY_4,
+        S_MULTIPLY_WAIT_4,
+        S_BEGIN_MULTIPLY_5,
+        S_MULTIPLY_WAIT_5,
+        S_BEGIN_MULTIPLY_6,
+        S_MULTIPLY_WAIT_6,
+        S_BEGIN_MULTIPLY_7,
+        S_MULTIPLY_WAIT_7,
+        S_OUTPUT_READY);
     signal state: state_type;
 
 begin
@@ -284,10 +322,103 @@ begin
             -- Outputs
             o_m => product_im_im
         );
+        
+    sum0_re_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum0_re_write_data,
+        R_DATA   => sum0_re_read_data
+        );
+        
+    sum0_im_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum0_im_write_data,
+        R_DATA   => sum0_im_read_data
+        );
+        
+    sum0alt_re_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum0alt_re_write_data,
+        R_DATA   => sum0alt_re_read_data
+        );
+        
+    sum0alt_im_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum0alt_im_write_data,
+        R_DATA   => sum0alt_im_read_data
+        );
+        
+    sum1_re_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum1_re_write_data,
+        R_DATA   => sum1_re_read_data
+        );
+        
+    sum1_im_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum1_im_write_data,
+        R_DATA   => sum1_im_read_data
+        );
+        
+    sum2_re_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum2_re_write_data,
+        R_DATA   => sum2_re_read_data
+        );
+        
+    sum2_im_accumulator : entity work.PF_TPSRAM_CAL
+    PORT MAP( 
+        CLK      => clk,
+        R_ADDR   => read_address,
+        W_EN     => write_en,
+        W_ADDR   => write_address,
+        W_DATA   => sum2_im_write_data,
+        R_DATA   => sum2_im_read_data
+        );
 
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
+                write_en            <= '0';
+                write_address       <= (others=>'0');
+                read_address        <= (others=>'0');  
+                
+                sum0_re_write_data          <= (others=>'0');
+                sum0_im_write_data          <= (others=>'0');
+                sum0alt_re_write_data          <= (others=>'0');
+                sum0alt_im_write_data          <= (others=>'0');
+                sum1_re_write_data          <= (others=>'0');
+                sum1_im_write_data          <= (others=>'0');
+                sum2_re_write_data          <= (others=>'0');
+                sum2_im_write_data          <= (others=>'0');
+                    
                 notch_data_re_s              <= (others=>'0');
                 notch_data_re_we             <= '0';
                 notch_data_im_s              <= (others=>'0');
@@ -310,6 +441,7 @@ begin
                 kar_curr                     <= (others=>'0');
                 kar_squared                  <= (others=>'0');
                 kar_squared_signed           <= (others=>'0');
+                calbin_s                     <= (others=>'0');
                 readyout_curr                <= '0';
                 
                 tick                         <= '1';
@@ -321,6 +453,7 @@ begin
                 slice1                       <= 0;
                 slice2                       <= 0;
                 slice3                       <= 0;
+                average_ready                <= '0';
                 
                 sum0_re_new                  <= (others=>'0');
                 sum0alt_re_new               <= (others=>'0');
@@ -331,6 +464,9 @@ begin
                 sum0alt_im_new               <= (others=>'0');
                 sum1_im_new                  <= (others=>'0');
                 sum2_im_new                  <= (others=>'0');
+                
+                drift_SD1                    <= (others=>'0');
+                drift_SD_s                   <= (others=>'0');
                 
                 error_data_fifo_full         <= '0';
                 error_data_fifo_backup       <= '0';
@@ -376,7 +512,7 @@ begin
                             phase_data_re_we <= '1';
                             phase_data_im_s <= phase_cor_im;
                             phase_data_im_we <= '1';
-                            kar_readyout_data_s <= readyout & kar;
+                            kar_readyout_data_s <= readyout & calbin & kar;
                             kar_readyout_data_we <= '1';
                         else
                             --With a depth of 512 and enough time between notch filter averages to process, should never fill up
@@ -392,6 +528,8 @@ begin
                 
                 case state is
                 when S_IDLE =>
+                    average_ready                <= '0';
+                    write_en <= '0';
                     -- Wait until we have phase data that has been FIFO'data
                     -- If there is phase data, there should ALWAYS be notch data
                     notch_data_re_re <= '0';
@@ -431,10 +569,13 @@ begin
                     valid_in <= '1';
                     
                     kar_curr <= unsigned(kar_readyout_data_out(15 DOWNTO 0));
-                    readyout_curr <= kar_readyout_data_out(16);
+                    calbin_s <= unsigned(kar_readyout_data_out(25 DOWNTO 16)) - 1;
+                    readyout_curr <= kar_readyout_data_out(26);
                     state <= S_MULTIPLY_WAIT;
                 when S_MULTIPLY_WAIT =>
                     valid_in <= '0';
+                    read_address <= std_logic_vector(calbin_s);
+                    write_address <= std_logic_vector(calbin_s);
                     if (valid_out = "1111") then
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         sum_im <= resize(signed(product_re_im), 65) + resize(signed(product_im_re), 65);
@@ -480,7 +621,137 @@ begin
                     sum2_re_new <= signed(product_re_re(63 DOWNTO 32));
                     sum2_im_new <= signed(product_im_re(63 DOWNTO 32));
                     
-                    state <= S_BEGIN_MULTIPLY_2;
+                    state <= S_STORE_OR_OUTPUT;
+                when S_STORE_OR_OUTPUT =>
+                    if (readyout_curr = '0') then
+                        sum0_re_write_data <= sum0_re_read_data + sum0_re_new;
+                        sum0_im_write_data <= sum0_im_read_data + sum0_im_new;
+                        sum0alt_re_write_data <= sum0alt_re_read_data + sum0alt_re_new;
+                        sum0alt_im_write_data <= sum0alt_im_read_data + sum0alt_im_new;
+                        sum1_re_write_data <= sum1_re_read_data + sum1_re_new;
+                        sum1_im_write_data <= sum1_im_read_data + sum1_im_new;
+                        sum2_re_write_data <= sum2_re_read_data + sum2_re_new;
+                        sum2_im_write_data <= sum2_im_read_data + sum2_im_new;
+                        write_en <= '1';
+                        state <= S_IDLE;
+                    else
+                        sum0_re_write_data <= (others=>'0');
+                        sum0_im_write_data <= (others=>'0');
+                        sum0alt_re_write_data <= (others=>'0');
+                        sum0alt_im_write_data <= (others=>'0');
+                        sum1_re_write_data <= (others=>'0');
+                        sum1_im_write_data <= (others=>'0');
+                        sum2_re_write_data <= (others=>'0');
+                        sum2_im_write_data <= (others=>'0');
+                        write_en <= '1';
+                        
+                        sum0_re_new <= sum0_re_read_data + sum0_re_new;
+                        sum0_im_new <= sum0_im_read_data + sum0_im_new;
+                        sum0alt_re_new <= sum0alt_re_read_data + sum0alt_re_new;
+                        sum0alt_im_new <= sum0alt_im_read_data + sum0alt_im_new;
+                        sum1_re_new <= sum1_re_read_data + sum1_re_new;
+                        sum1_im_new <= sum1_im_read_data + sum1_im_new;
+                        sum2_re_new <= sum2_re_read_data + sum2_re_new;
+                        sum2_im_new <= sum2_im_read_data + sum2_im_new;
+                        state <= S_BEGIN_MULTIPLY_3;
+                    end if;
+                when S_BEGIN_MULTIPLY_3 =>
+                    write_en <= '0';
+                    
+                    outreal <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
+                    outimag <= std_logic_vector(sum0_im_new(37 DOWNTO 6));
+                    
+                    multiplicand1_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
+                    multiplicand1_im <= std_logic_vector(sum1_im_new(37 DOWNTO 6));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    valid_in <= '1';
+                    
+                    state <= S_MULTIPLY_WAIT_3;
+                    
+                when S_MULTIPLY_WAIT_3 =>
+                    valid_in <= '0';
+                    if (valid_out = "1111") then
+                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        state <= S_BEGIN_MULTIPLY_4;
+                    end if;
+                    
+                when S_BEGIN_MULTIPLY_4 =>
+                    drift_FD <= std_logic_vector(sum_re(64 DOWNTO 34));
+                    
+                    multiplicand1_re <= std_logic_vector(sum2_re_new(37 DOWNTO 6));
+                    multiplicand1_im <= std_logic_vector(sum2_im_new(37 DOWNTO 6));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    valid_in <= '1';
+                    
+                    state <= S_MULTIPLY_WAIT_4;
+                    
+                when S_MULTIPLY_WAIT_4 =>
+                    valid_in <= '0';
+                    if (valid_out = "1111") then
+                        drift_SD1 <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        state <= S_BEGIN_MULTIPLY_5;
+                    end if;
+                    
+                when S_BEGIN_MULTIPLY_5 =>                    
+                    multiplicand1_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
+                    multiplicand1_im <= std_logic_vector(sum1_im_new(37 DOWNTO 6));
+                    multiplicand2_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
+                    multiplicand2_im <= std_logic_vector(-sum1_im_new(37 DOWNTO 6));
+                    valid_in <= '1';
+                    
+                    state <= S_MULTIPLY_WAIT_5;
+                    
+                when S_MULTIPLY_WAIT_5 =>
+                    valid_in <= '0';
+                    if (valid_out = "1111") then
+                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        state <= S_BEGIN_MULTIPLY_6;
+                    end if;
+                    
+                when S_BEGIN_MULTIPLY_6 =>
+                    drift_SD_s <= resize(signed(drift_SD1), 66) + resize(signed(sum_re), 66);
+                
+                    multiplicand1_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
+                    multiplicand1_im <= std_logic_vector(sum0_im_new(37 DOWNTO 6));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    valid_in <= '1';
+                    
+                    state <= S_MULTIPLY_WAIT_6;
+                    
+                when S_MULTIPLY_WAIT_6 =>
+                    valid_in <= '0';
+                    if (valid_out = "1111") then
+                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        state <= S_BEGIN_MULTIPLY_7;
+                    end if;
+                    
+                when S_BEGIN_MULTIPLY_7 =>
+                    drift_SD <= std_logic_vector(drift_SD_s(65 DOWNTO 34));
+                    powertop <= std_logic_vector(sum_re(64 DOWNTO 33));
+                
+                    multiplicand1_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
+                    multiplicand1_im <= std_logic_vector(sum0alt_im_new(37 DOWNTO 6));
+                    multiplicand2_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
+                    multiplicand2_im <= std_logic_vector(-sum0alt_im_new(37 DOWNTO 6));
+                    valid_in <= '1';
+                    
+                    state <= S_MULTIPLY_WAIT_7;
+                    
+                when S_MULTIPLY_WAIT_7 =>
+                    valid_in <= '0';
+                    if (valid_out = "1111") then
+                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        state <= S_OUTPUT_READY;
+                    end if;
+                    
+                when S_OUTPUT_READY =>
+                    powerbot <= std_logic_vector(sum_re(64 DOWNTO 33));
+                    average_ready                <= '1';
+                    state <= S_IDLE;
+                    
                 when others =>		
                     state <= S_IDLE;
                 end case;

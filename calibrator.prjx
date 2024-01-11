@@ -506,13 +506,13 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1704926158"
-SIZE="22304"
+TIME="1705005255"
+SIZE="35058"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
-TIME="1704814060"
-SIZE="65306"
+TIME="1704996872"
+SIZE="65268"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
 STATE="utd"
@@ -526,13 +526,13 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1704907183"
+TIME="1704985615"
 SIZE="35094"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
-TIME="1704814060"
-SIZE="88556"
+TIME="1704996700"
+SIZE="88207"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
 STATE="utd"
@@ -559,10 +559,15 @@ STATE="utd"
 TIME="1704814060"
 SIZE="7970"
 ENDFILE
+VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
+STATE="utd"
+TIME="1704996960"
+SIZE="28960"
+ENDFILE
 VALUE "<project>/simulation/cal_phaser_alt_fixpt_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1704907465"
-SIZE="46033"
+TIME="1704996713"
+SIZE="28097"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
@@ -571,12 +576,12 @@ SIZE="5545"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1704814060"
+TIME="1704996853"
 SIZE="36303"
 ENDFILE
 VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1704902804"
+TIME="1704986195"
 SIZE="31152"
 ENDFILE
 VALUE "<project>/stimulus/cal_process_fixpt_tb.vhd,tb_hdl"
@@ -643,8 +648,6 @@ ENDLIST
 LIST ProjectState5.1
 LIST Impl1
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -655,8 +658,6 @@ ENDUsed_File_List
 ENDLIST
 LIST Impl2
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -903,8 +904,6 @@ LIST ProjectState5.1
 LIST "cal_phaser_alt_fixpt::work"
 LIST Impl1
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -915,8 +914,6 @@ ENDUsed_File_List
 ENDLIST
 LIST Impl2
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.edn,syn_edn)=StateFailure
-ideSYNTHESIS(<project>/synthesis/cal_phaser_alt_fixpt.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1007,19 +1004,26 @@ ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 HDL;hdl/cal_average.vhd;0
-HDL;hdl/cal_average_instance_C1_fixpt.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
 ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
+SUBBLOCK "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
+SUBBLOCK "cal_average_data_fifo::work","","FALSE","FALSE"
+SUBBLOCK "cal_average_other_fifo::work","","FALSE","FALSE"
+SUBBLOCK "pf_tpsram_cal::work","","FALSE","FALSE"
+ENDLIST
+LIST "cal_average_data_fifo::work","","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt_pkg::work","hdl/cal_average_instance_C1_fixpt_pkg.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt_tb_pkg::work","hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cal_average_other_fifo::work","","FALSE","FALSE"
 ENDLIST
 LIST "cal_phaser::work","hdl/cal_phaser.vhd","FALSE","FALSE"
 SUBBLOCK "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
@@ -1100,6 +1104,8 @@ LIST "CORDICFIFO_CORDICFIFO_0_ram_wrapper::work","component/work/CORDICFIFO/CORD
 SUBBLOCK "CORDICFIFO_CORDICFIFO_0_LSRAM_top::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v","FALSE","FALSE"
 ENDLIST
 LIST "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
+ENDLIST
+LIST "pf_tpsram_cal::work","","FALSE","FALSE"
 ENDLIST
 LIST "bhv_kitDelay_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
 ENDLIST

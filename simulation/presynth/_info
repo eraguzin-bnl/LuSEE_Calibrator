@@ -11,12 +11,12 @@ z2
 cModel Technology
 Z0 d/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/simulation
 Ecal_average_instance_c1_fixpt
-Z1 w1704814060
+Z1 w1704996872
 Z2 DPx4 work 33 cal_average_instance_c1_fixpt_pkg 0 22 eX^;1ok>03d51bC253?PL1
 Z3 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
 Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
 Z5 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
-!i122 1774
+!i122 1944
 R0
 Z6 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt.vhd
 Z7 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt.vhd
@@ -26,9 +26,9 @@ VP3Di:[EZEWSd9DFGgHg^A0
 !s100 o2eLG3_68`Z;H2F[25cfL2
 Z8 OW;C;2022.2;75
 33
-Z9 !s110 1704916798
+Z9 !s110 1704997733
 !i10b 1
-Z10 !s108 1704916798.000000
+Z10 !s108 1704997733.000000
 Z11 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt.vhd|
 Z12 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt.vhd|
 !i113 1
@@ -40,11 +40,11 @@ R3
 R4
 R5
 Z15 DEx4 work 29 cal_average_instance_c1_fixpt 0 22 P3Di:[EZEWSd9DFGgHg^A0
-!i122 1774
+!i122 1944
 l455
 L71 1319
-Vci9G8@>[<V0giW_VVBE9N0
-!s100 9J7G3<b4o7mn6b;znELma3
+V`[23:?84XM0i]82gbKL<V1
+!s100 PSk<nIB5o`=^ETUEa]35`1
 R8
 33
 R9
@@ -59,8 +59,8 @@ Pcal_average_instance_c1_fixpt_pkg
 R3
 R4
 R5
-!i122 1747
-R1
+!i122 1917
+Z16 w1704814060
 R0
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_pkg.vhd
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_pkg.vhd
@@ -70,121 +70,121 @@ VeX^;1ok>03d51bC253?PL1
 !s100 BnP<CeaOJ>bf[B5Uaz34g1
 R8
 33
-Z16 !s110 1704916795
+Z17 !s110 1704997730
 !i10b 1
-Z17 !s108 1704916795.000000
+Z18 !s108 1704997730.000000
 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_pkg.vhd|
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_pkg.vhd|
 !i113 1
 R13
 R14
 Ecal_average_instance_c1_fixpt_tb
-R1
-Z18 DPx4 work 36 cal_average_instance_c1_fixpt_tb_pkg 0 22 `RelMZlWZ<0MBCo0WO9n^2
+Z19 w1704996853
+Z20 DPx4 work 36 cal_average_instance_c1_fixpt_tb_pkg 0 22 `RelMZlWZ<0MBCo0WO9n^2
 R2
 R3
 R5
 R4
-Z19 DPx4 ieee 16 std_logic_textio 0 22 C8j>g0lzF^EAA]5<S6PY32
-!i122 1778
+Z21 DPx4 ieee 16 std_logic_textio 0 22 C8j>g0lzF^EAA]5<S6PY32
+!i122 1948
 R0
-Z20 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd
-Z21 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd
+Z22 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd
+Z23 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd
 l0
-Z22 L52 1
+Z24 L52 1
 VP^No0YMB<QW[@[@_>88j^1
 !s100 a>OWCdeFDEbhC32XR0i053
 R8
 33
-Z23 !s110 1704916799
+R9
 !i10b 1
 R10
-Z24 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd|
-Z25 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd|
+Z25 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd|
+Z26 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_average_instance_C1_fixpt_tb.vhd|
 !i113 1
 R13
 R14
 Artl
 R15
-R18
+R20
 R2
 R3
 R5
 R4
-R19
+R21
 DEx4 work 32 cal_average_instance_c1_fixpt_tb 0 22 P^No0YMB<QW[@[@_>88j^1
-!i122 1778
+!i122 1948
 l215
 L56 977
 V<zTlM<NU]KHQ_EH@X9[Wm2
 !s100 TdU3dDhJ6`INRM^^oD=N52
 R8
 33
-R23
+R9
 !i10b 1
 R10
-R24
 R25
+R26
 !i113 1
 R13
 R14
 Pcal_average_instance_c1_fixpt_tb_pkg
 R2
-R19
+R21
 R3
 R4
 R5
-!i122 1748
-R1
+!i122 1918
+R16
 R0
-Z26 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd
-Z27 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd
+Z27 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd
+Z28 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd
 l0
-Z28 L22 8
+Z29 L22 8
 V`RelMZlWZ<0MBCo0WO9n^2
 !s100 jW2TZ2O]W[Slo8a_A>UgY1
 R8
 33
 b1
-R16
-!i10b 1
 R17
-Z29 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd|
-Z30 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd|
+!i10b 1
+R18
+Z30 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd|
+Z31 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd|
 !i113 1
 R13
 R14
 Bbody
-R18
+R20
 R2
-R19
+R21
 R3
 R4
 R5
-!i122 1748
+!i122 1918
 l0
-Z31 L32 74
+Z32 L32 74
 V]zb7oL<EHWGnj0Zo:e2if2
 !s100 NIHhkO3EVBVB_OU:ddL;L2
 R8
 33
-R16
-!i10b 1
 R17
-R29
+!i10b 1
+R18
 R30
+R31
 !i113 1
 R13
 R14
 Ecal_phaser
-Z32 w1704907183
+Z33 w1704985615
 R3
 R4
 R5
-!i122 1775
+!i122 1945
 R0
-Z33 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd
-Z34 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd
+Z34 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd
+Z35 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd
 l0
 L30 1
 V;LF^mYhe5<m>Q01C4IVKC3
@@ -194,22 +194,22 @@ R8
 R9
 !i10b 1
 R10
-Z35 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd|
-Z36 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd|
+Z36 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd|
+Z37 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser.vhd|
 !i113 1
 R13
 R14
 Aarchitecture_cal_phaser
-Z37 DEx4 work 13 corecordic_c0 0 22 7V;0i0e19EbhWTmGbn]:d1
+Z38 DEx4 work 13 corecordic_c0 0 22 7V;0i0e19EbhWTmGbn]:d1
 DEx4 work 10 CORDICFIFO 0 22 Dg1SIo80bB@j0V0VzS_@n1
 DPx7 verilog 8 vl_types 0 22 P_cIh0I4AM[Slnb4Oe`Ag2
 DEx4 work 10 CALFIFO_C0 0 22 Dg1SIo80bB@j0V0VzS_@n1
-Z38 DEx4 work 18 multiply_generic32 0 22 ;d??10;COnmE5@8z21L4f3
+Z39 DEx4 work 18 multiply_generic32 0 22 ;d??10;COnmE5@8z21L4f3
 R3
 R4
 R5
-Z39 DEx4 work 10 cal_phaser 0 22 ;LF^mYhe5<m>Q01C4IVKC3
-!i122 1775
+Z40 DEx4 work 10 cal_phaser 0 22 ;LF^mYhe5<m>Q01C4IVKC3
+!i122 1945
 l148
 L49 588
 VIb_f^EM@GU4?H;eLS@MT72
@@ -219,31 +219,31 @@ R8
 R9
 !i10b 1
 R10
-R35
 R36
+R37
 !i113 1
 R13
 R14
 Ecal_phaser_alt_fixpt
-R1
+Z41 w1704996700
 R3
 R4
 R5
-!i122 1746
+!i122 1916
 R0
-Z40 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd
-Z41 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd
+Z42 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd
+Z43 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd
 l0
 L48 1
 VhQQPcc>c86DZBZ4aY8P`22
 !s100 =UP;UL^XIP<JSKmFl3oLk1
 R8
 33
-R16
-!i10b 1
 R17
-Z42 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd|
-Z43 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd|
+!i10b 1
+Z44 !s108 1704997729.000000
+Z45 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd|
+Z46 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt.vhd|
 !i113 1
 R13
 R14
@@ -251,35 +251,35 @@ Artl
 R3
 R4
 R5
-Z44 DEx4 work 20 cal_phaser_alt_fixpt 0 22 hQQPcc>c86DZBZ4aY8P`22
-!i122 1746
-l531
-L68 1933
-VHObJ0;Li5kHHf_8Li0nj02
-!s100 SLEc]fW2HfXMEmf;hNIS?3
+Z47 DEx4 work 20 cal_phaser_alt_fixpt 0 22 hQQPcc>c86DZBZ4aY8P`22
+!i122 1916
+l530
+L68 1909
+V02aRmDQnJLD?aR1ge05hb3
+!s100 jj5gPoUC@kcd[C[Ce:2DU1
 R8
 33
-R16
-!i10b 1
 R17
-R42
-R43
+!i10b 1
+R44
+R45
+R46
 !i113 1
 R13
 R14
 Ecal_phaser_alt_fixpt_tb
-Z45 w1704902804
-Z46 DPx4 work 27 cal_phaser_alt_fixpt_tb_pkg 0 22 cDLFH37_@RBLTG48ne;5l3
+Z48 w1704986195
+Z49 DPx4 work 27 cal_phaser_alt_fixpt_tb_pkg 0 22 cDLFH37_@RBLTG48ne;5l3
 R3
 R5
 R4
-R19
-!i122 1777
+R21
+!i122 1947
 R0
-Z47 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd
-Z48 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd
+Z50 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd
+Z51 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd
 l0
-R22
+R24
 V9DBXaW;14>K?Rg2Y8ADT_3
 !s100 e_M4<4j626[IBFgakEln`3
 R8
@@ -287,21 +287,21 @@ R8
 R9
 !i10b 1
 R10
-Z49 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd|
-Z50 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd|
+Z52 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd|
+Z53 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_phaser_alt_fixpt_tb.vhd|
 !i113 1
 R13
 R14
 Artl
-R39
-R44
-R46
+R40
+R47
+R49
 R3
 R5
 R4
-R19
+R21
 DEx4 work 23 cal_phaser_alt_fixpt_tb 0 22 9DBXaW;14>K?Rg2Y8ADT_3
-!i122 1777
+!i122 1947
 l192
 L56 831
 V:mj9KG^GCfnhnoOo@m;0f1
@@ -311,21 +311,21 @@ R8
 R9
 !i10b 1
 R10
-R49
-R50
+R52
+R53
 !i113 1
 R13
 R14
 Pcal_phaser_alt_fixpt_tb_pkg
-R19
+R21
 R3
 R4
 R5
-!i122 1749
-R1
+!i122 1919
+R16
 R0
-Z51 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd
-Z52 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd
+Z54 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd
+Z55 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd
 l0
 L20 8
 VcDLFH37_@RBLTG48ne;5l3
@@ -333,45 +333,45 @@ VcDLFH37_@RBLTG48ne;5l3
 R8
 33
 b1
-R16
-!i10b 1
 R17
-Z53 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd|
-Z54 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd|
+!i10b 1
+R18
+Z56 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd|
+Z57 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd|
 !i113 1
 R13
 R14
 Bbody
-R46
-R19
+R49
+R21
 R3
 R4
 R5
-!i122 1749
+!i122 1919
 l0
 L30 74
 VY>LSDCW1IjQbJz1k<RWVT0
 !s100 II^;Bd@SFmYlo5X5?6Wbd1
 R8
 33
-R16
-!i10b 1
 R17
-R53
-R54
+!i10b 1
+R18
+R56
+R57
 !i113 1
 R13
 R14
 Ecal_process_fixpt
-R1
-Z55 DPx4 work 21 cal_process_fixpt_pkg 0 22 XMcHV:d2c6j^N1QWg3<N?1
+R16
+Z58 DPx4 work 21 cal_process_fixpt_pkg 0 22 XMcHV:d2c6j^N1QWg3<N?1
 R3
 R4
 R5
-!i122 1776
+!i122 1946
 R0
-Z56 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd
-Z57 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd
+Z59 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd
+Z60 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd
 l0
 L51 1
 VS9a3BMW]_NZo7znSidZ7j0
@@ -381,18 +381,18 @@ R8
 R9
 !i10b 1
 R10
-Z58 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd|
-Z59 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd|
+Z61 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd|
+Z62 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt.vhd|
 !i113 1
 R13
 R14
 Artl
-R55
+R58
 R3
 R4
 R5
-Z60 DEx4 work 17 cal_process_fixpt 0 22 S9a3BMW]_NZo7znSidZ7j0
-!i122 1776
+Z63 DEx4 work 17 cal_process_fixpt 0 22 S9a3BMW]_NZo7znSidZ7j0
+!i122 1946
 l445
 L98 1704
 V;^Rd@Y0SK`A;R:;I4NCe_2
@@ -402,8 +402,8 @@ R8
 R9
 !i10b 1
 R10
-R58
-R59
+R61
+R62
 !i113 1
 R13
 R14
@@ -411,8 +411,8 @@ Pcal_process_fixpt_pkg
 R3
 R4
 R5
-!i122 1750
-R1
+!i122 1920
+R16
 R0
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_pkg.vhd
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_pkg.vhd
@@ -422,131 +422,131 @@ VXMcHV:d2c6j^N1QWg3<N?1
 !s100 1XVgF_;md[^e:Wb1Q;Aab3
 R8
 33
-R16
-!i10b 1
 R17
+!i10b 1
+R18
 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_pkg.vhd|
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_pkg.vhd|
 !i113 1
 R13
 R14
 Ecal_process_fixpt_tb
-R1
-Z61 DPx4 work 24 cal_process_fixpt_tb_pkg 0 22 fh;gLdZ4;=WAQ6S4Gb;9`2
-R55
+R16
+Z64 DPx4 work 24 cal_process_fixpt_tb_pkg 0 22 fh;gLdZ4;=WAQ6S4Gb;9`2
+R58
 R3
 R5
 R4
-R19
-!i122 1779
+R21
+!i122 1949
 R0
-Z62 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd
-Z63 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd
+Z65 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd
+Z66 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd
 l0
 L56 1
 V<5AcN7Z]2b@<bbO:3G5h[3
 !s100 fO7ZHe[aVAn10dfTONViH3
 R8
 33
-R23
+R9
 !i10b 1
-Z64 !s108 1704916799.000000
-Z65 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd|
-Z66 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd|
+R10
+Z67 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd|
+Z68 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/stimulus/cal_process_fixpt_tb.vhd|
 !i113 1
 R13
 R14
 Artl
-R60
-R61
-R55
+R63
+R64
+R58
 R3
 R5
 R4
-R19
-Z67 DEx4 work 20 cal_process_fixpt_tb 0 22 <5AcN7Z]2b@<bbO:3G5h[3
-!i122 1779
+R21
+Z69 DEx4 work 20 cal_process_fixpt_tb 0 22 <5AcN7Z]2b@<bbO:3G5h[3
+!i122 1949
 l396
-Z68 L60 2157
-Z69 VSW8Jc]b5c8_NOg[ITEXUl1
-Z70 !s100 RTa<W92T]m8KWCW0U=L6R1
+Z70 L60 2157
+Z71 VSW8Jc]b5c8_NOg[ITEXUl1
+Z72 !s100 RTa<W92T]m8KWCW0U=L6R1
 R8
 33
-R23
+R9
 !i10b 1
-R64
-R65
-R66
+R10
+R67
+R68
 !i113 1
 R13
 R14
 Pcal_process_fixpt_tb_pkg
-R55
-R19
+R58
+R21
 R3
 R4
 R5
-!i122 1751
-R1
+!i122 1921
+R16
 R0
-Z71 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd
-Z72 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd
+Z73 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd
+Z74 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd
 l0
-R28
+R29
 Vfh;gLdZ4;=WAQ6S4Gb;9`2
 !s100 ]W9L:AjH31AhBNigRX?lX2
 R8
 33
 b1
-R16
-!i10b 1
 R17
-Z73 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd|
-Z74 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd|
+!i10b 1
+R18
+Z75 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd|
+Z76 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/cal_process_fixpt_tb_pkg.vhd|
 !i113 1
 R13
 R14
 Bbody
-R61
-R55
-R19
+R64
+R58
+R21
 R3
 R4
 R5
-!i122 1751
+!i122 1921
 l0
-R31
+R32
 V04CNCja^n7aHYdiZ`kH^B1
 !s100 DadX_N[6>lGjHN4]SZn;P3
 R8
 33
-R16
-!i10b 1
 R17
-R73
-R74
+!i10b 1
+R18
+R75
+R76
 !i113 1
 R13
 R14
 vCALFIFO_C0
-Z75 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z76 !s110 1704916796
+Z77 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+R17
 !i10b 1
 !s100 IEb^[kQTlc0=iEgSXeHJ:2
 I0ncBWRSBE_amgW3lHJ`993
 S1
 R0
-Z77 w1704815467
+Z78 w1704815467
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0.v
-!i122 1753
-Z78 L0 49 129
-Z79 VDg1SIo80bB@j0V0VzS_@n1
-Z80 OW;L;2022.2;75
+!i122 1923
+Z79 L0 49 129
+Z80 VDg1SIo80bB@j0V0VzS_@n1
+Z81 OW;L;2022.2;75
 r1
 !s85 0
 31
-Z81 !s108 1704916796.000000
+R18
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0.v|
 !s101 -O0
@@ -555,24 +555,24 @@ Z82 o-sv -work presynth -O0
 Z83 tCvgOpt 0
 n@c@a@l@f@i@f@o_@c0
 vCALFIFO_C0_CALFIFO_C0_0_COREFIFO
-R75
-R76
+R77
+Z84 !s110 1704997731
 !i10b 1
 !s100 ;FSXAfJm8WIi_WHKSQ?>W0
 I@:=;oc>:]Q>5>CDV0iiMd1
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v
-!i122 1756
-Z84 L0 29 1457
-R79
+!i122 1926
+Z85 L0 29 1457
 R80
+R81
 r1
 !s85 0
 31
-R81
+Z86 !s108 1704997731.000000
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v|
 !s101 -O0
@@ -581,24 +581,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_@c@o@r@e@f@i@f@o
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_async
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 zjhf7@_B7i48R_VngL9iz3
 IW1EJ]:joeTIf0HjJ3>e>n3
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v
-!i122 1758
-Z85 L0 28 1306
-R79
+!i122 1928
+Z87 L0 28 1306
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v|
 !s101 -O0
@@ -607,24 +607,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_async
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_fwft
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 fSd^QFc33>k1^o[S_MH?k3
 IVgF7G_PR@kBifZJ`1_YVW3
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v
-!i122 1759
-Z86 L0 28 348
-R79
+!i122 1929
+Z88 L0 28 348
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v|
 !s101 -O0
@@ -633,24 +633,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_fwft
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_grayToBinConv
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 if_KMSeYYY12oa9:e^F023
 IW@n>KoGI?ZbJab2DRNZO;2
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v
-!i122 1760
-Z87 L0 29 51
-R79
+!i122 1930
+Z89 L0 29 51
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v|
 !s101 -O0
@@ -659,24 +659,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_gray@to@bin@conv
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_NstagesSync
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 oEalT@0e`Wi>iEC[h1KzA2
 I1iFWg;]bfbGihAPNG;O[`1
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v
-!i122 1757
-Z88 L0 29 69
-R79
+!i122 1927
+Z90 L0 29 69
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v|
 !s101 -O0
@@ -685,24 +685,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_@nstages@sync
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_sync
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 i<kd1Xbb4OcRkN`>YEQZQ0
 Ie?m30_HH90SL^egDJ6Sd42
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v
-!i122 1761
-Z89 L0 28 837
-R79
+!i122 1931
+Z91 L0 28 837
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v|
 !s101 -O0
@@ -711,24 +711,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_sync
 vCALFIFO_C0_CALFIFO_C0_0_corefifo_sync_scntr
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 [`:YVH3XBO1@k9?^64V^>3
 IeeH>7lYF3Ia3Jif8ChK<d3
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v
-!i122 1762
-Z90 L0 28 633
-R79
+!i122 1932
+Z92 L0 28 633
 R80
+R81
 r1
 !s85 0
 31
-R81
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v|
 !s101 -O0
@@ -737,8 +737,8 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_corefifo_sync_scntr
 vCALFIFO_C0_CALFIFO_C0_0_ram_wrapper
-R75
-R76
+R77
+R84
 !i10b 1
 !s100 PdHFJgKiIjQ?J=23TnF9<1
 IK]^PgogRO1c04:hF]?e<K2
@@ -747,14 +747,14 @@ R0
 w1704815466
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v
-!i122 1755
+!i122 1925
 L0 4 65
-R79
 R80
+R81
 r1
 !s85 0
 31
-R81
+R18
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v|
 !s101 -O0
@@ -763,24 +763,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_ram_wrapper
 vCALFIFO_C0_CALFIFO_C0_0_USRAM_top
-R75
-R76
+R77
+R17
 !i10b 1
 !s100 V:PF=IH2CPc;Q9i]]O?[D3
 IV>HW:bGN2SUi5i]A1aVM>0
 S1
 R0
-R77
+R78
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v
-!i122 1754
+!i122 1924
 L0 5 343
-R79
 R80
+R81
 r1
 !s85 0
 31
-R81
+R18
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v|
 !s101 -O0
@@ -789,24 +789,24 @@ R82
 R83
 n@c@a@l@f@i@f@o_@c0_@c@a@l@f@i@f@o_@c0_0_@u@s@r@a@m_top
 vCORDICFIFO
-R75
-Z91 !s110 1704916797
+R77
+R84
 !i10b 1
 !s100 lzGFjM>A1K^m9Aik3Of_`2
 I<?ZPGRPd4Y_ZfK<<MzeXZ0
 S1
 R0
-Z92 w1704815587
+Z93 w1704815587
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO.v
-!i122 1763
-R78
+!i122 1933
 R79
 R80
+R81
 r1
 !s85 0
 31
-Z93 !s108 1704916797.000000
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO.v|
 !s101 -O0
@@ -815,24 +815,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o
 vCORDICFIFO_CORDICFIFO_0_COREFIFO
-R75
-R91
+R77
+R84
 !i10b 1
 !s100 ?zGLdzdFcPb^98RV:m]9d1
 IPSglfd2KHcL]5mi:Y0B1c0
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v
-!i122 1766
-R84
-R79
+!i122 1936
+R85
 R80
+R81
 r1
 !s85 0
 31
-R93
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v|
 !s101 -O0
@@ -841,24 +841,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_@c@o@r@e@f@i@f@o
 vCORDICFIFO_CORDICFIFO_0_corefifo_async
-R75
-R91
+R77
+Z94 !s110 1704997732
 !i10b 1
 !s100 I4bhbSng:39mK6nBD94dJ0
 I6c3T0`I7@SmkP^9hR0E?:2
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v
-!i122 1768
-R85
-R79
+!i122 1938
+R87
 R80
+R81
 r1
 !s85 0
 31
-R93
+Z95 !s108 1704997732.000000
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v|
 !s101 -O0
@@ -867,24 +867,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_async
 vCORDICFIFO_CORDICFIFO_0_corefifo_fwft
-R75
-R91
+R77
+R94
 !i10b 1
 !s100 NDMEVJ2XDRlVoGDQhJ;_i0
 IQ6JhfCCnQST^cJ_^CARnl3
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v
-!i122 1769
-R86
-R79
+!i122 1939
+R88
 R80
+R81
 r1
 !s85 0
 31
-R93
+R95
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v|
 !s101 -O0
@@ -893,24 +893,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_fwft
 vCORDICFIFO_CORDICFIFO_0_corefifo_grayToBinConv
-R75
-R91
+R77
+R94
 !i10b 1
 !s100 BIDCjMe=]n70dBi_QAK7U1
 Ij8KWDP:WbjA]O7:OD[lR63
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v
-!i122 1770
-R87
-R79
+!i122 1940
+R89
 R80
+R81
 r1
 !s85 0
 31
-R93
+R95
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v|
 !s101 -O0
@@ -919,24 +919,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_gray@to@bin@conv
 vCORDICFIFO_CORDICFIFO_0_corefifo_NstagesSync
-R75
-R91
+R77
+R94
 !i10b 1
 !s100 Voa:X<cI0F20IkK?a4BD02
 IY4hOJMjR]NR936Sc89ZCn3
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v
-!i122 1767
-R88
-R79
+!i122 1937
+R90
 R80
+R81
 r1
 !s85 0
 31
-R93
+R95
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v|
 !s101 -O0
@@ -945,24 +945,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_@nstages@sync
 vCORDICFIFO_CORDICFIFO_0_corefifo_sync
-R75
-R91
+R77
+R94
 !i10b 1
 !s100 <GJ_VGWL2?6NUBbjd6HzD2
 IY1GPA9HTRBFB=Bk6Qie>40
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v
-!i122 1771
-R89
-R79
+!i122 1941
+R91
 R80
+R81
 r1
 !s85 0
 31
-R93
+R95
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v|
 !s101 -O0
@@ -971,24 +971,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_sync
 vCORDICFIFO_CORDICFIFO_0_corefifo_sync_scntr
-R75
-R91
+R77
+R94
 !i10b 1
 !s100 9DF?9c1WQmZ66L[KmnHPa1
 ITX]h`EYI70]M1C4l3ImOV2
 S1
 R0
-R92
+R93
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v
-!i122 1772
-R90
-R79
+!i122 1942
+R92
 R80
+R81
 r1
 !s85 0
 31
-R93
+R95
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v|
 !s101 -O0
@@ -997,24 +997,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_corefifo_sync_scntr
 vCORDICFIFO_CORDICFIFO_0_LSRAM_top
-R75
-R91
+R77
+R84
 !i10b 1
 !s100 4OHdPn99gcJTM=O2[EE?D0
 ICiJCHWgb6oRb6Jz0o3ze>3
 S1
 R0
-Z94 w1704815586
+Z96 w1704815586
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v
-!i122 1764
+!i122 1934
 L0 5 63
-R79
 R80
+R81
 r1
 !s85 0
 31
-R93
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v|
 !s101 -O0
@@ -1023,24 +1023,24 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_@l@s@r@a@m_top
 vCORDICFIFO_CORDICFIFO_0_ram_wrapper
-R75
-R91
+R77
+R84
 !i10b 1
 !s100 3onXzn7nh4TG93geH7Pkg3
 IlAoaS1bXG^Fl=G9PXa^1i3
 S1
 R0
-R94
+R96
 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v
 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v
-!i122 1765
+!i122 1935
 L0 4 63
-R79
 R80
+R81
 r1
 !s85 0
 31
-R93
+R86
 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v|
 !s90 -reportprogress|300|-sv|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v|
 !s101 -O0
@@ -1049,66 +1049,66 @@ R82
 R83
 n@c@o@r@d@i@c@f@i@f@o_@c@o@r@d@i@c@f@i@f@o_0_ram_wrapper
 Ecorecordic_c0
-Z95 w1704814784
+Z97 w1704814784
 R4
 R5
-!i122 1773
+!i122 1943
 R0
-Z96 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd
-Z97 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd
+Z98 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd
+Z99 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd
 l0
 L38 1
 V7V;0i0e19EbhWTmGbn]:d1
 !s100 CnGMA@dH6kjNoZlOFb^F[2
 R8
 33
-R91
+R94
 !i10b 1
-R93
-Z98 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd|
-Z99 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd|
+R95
+Z100 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd|
+Z101 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd|
 !i113 1
 R13
 R14
 Artl
 R4
 R5
-R37
-!i122 1773
+R38
+!i122 1943
 l109
 L57 103
 VFmJz9h`X_B?@7AT[IkhgL1
 !s100 FccOQf`]R2k0Cg3WN`nHe3
 R8
 33
-R91
+R94
 !i10b 1
-R93
-R98
-R99
+R95
+R100
+R101
 !i113 1
 R13
 R14
 Emultiply_generic32
-R1
+R16
 R3
 R4
 R5
-!i122 1752
+!i122 1922
 R0
-Z100 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd
-Z101 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd
+Z102 8/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd
+Z103 F/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd
 l0
 L18 1
 V;d??10;COnmE5@8z21L4f3
 !s100 ?>S[kU^7;EbohV<z7C_TX2
 R8
 33
-R76
+R17
 !i10b 1
-R81
-Z102 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd|
-Z103 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd|
+R18
+Z104 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd|
+Z105 !s107 /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/hdl/Multiply_generic_32.vhd|
 !i113 1
 R13
 R14
@@ -1116,19 +1116,19 @@ Artl
 R3
 R4
 R5
-R38
-!i122 1752
+R39
+!i122 1922
 l85
 L38 121
 VhW=FTlG]g>zH78HUT]6hK1
 !s100 ZbmDX10ZWB^0JTMQNVL]E1
 R8
 33
-R76
+R17
 !i10b 1
-R81
-R102
-R103
+R18
+R104
+R105
 !i113 1
 R13
 R14
