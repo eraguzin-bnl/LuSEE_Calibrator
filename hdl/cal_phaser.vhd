@@ -139,6 +139,7 @@ architecture architecture_cal_phaser of cal_phaser is
     
     -- This state machine calculates the cos and sin values for 64 cycles off the bat given the cal_drift
     type state_type2 is (S_CORDIC_IDLE,
+        S_CORDIC_WAIT_FOR_DRIFT,
         S_CORDIC_INPUT,
         S_CORDIC_WAIT,
         S_CORDIC_OUTPUT,
@@ -459,9 +460,6 @@ begin
                         if (unsigned('0' & fifo_bin_out) /= (calbin_out + 1)) then
                             error_fifo_order <= '1';
                         end if;
-                    else
-                        -- And if not, increment the cycle counter (64 total cycles until we get new cordic values)
-                        Nac <= Nac + 1;
                     end if;
                     state <= S_WAIT_FOR_RESULT5;
                 when S_WAIT_FOR_RESULT5 =>
@@ -528,11 +526,13 @@ begin
                     else
                         -- If that was the 512th bin, set back to 0 and go back to Idle to wait for the next stream of bins
                         calbin_out <= (others=>'0');
-                        if (Nac > 63) then
+                        if (Nac = 63) then
                             -- If this was also the 64th cycle, then send the update drift flags to further blocks know to give us new cordic inputs
                             update_drift <= '1';
                             update_drift_s <= '1';
                             Nac <= to_unsigned(0, Nac'length);
+                        else
+                            Nac <= Nac + 1;
                         end if;
                         state <= S_IDLE;
                     end if;
@@ -547,10 +547,13 @@ begin
                 when S_CORDIC_IDLE =>
                     -- The cal drift that we use for 64 cycles is the input into this block when reset is lifted
                     -- Todo: See if I need to wait a certain amount of cycles after reset to start doing this?
-                    cal_drift_s <= resize(signed(cal_drift), cal_drift_s'length);
+                    --cal_drift_s <= resize(signed(cal_drift), cal_drift_s'length);
                     cordic_valid_in <= '0';
                     cos_fifo_we <= '0';
                     sin_fifo_we <= '0';
+                    state2 <= S_CORDIC_WAIT_FOR_DRIFT;
+                when S_CORDIC_WAIT_FOR_DRIFT =>
+                    cal_drift_s <= resize(signed(cal_drift), cal_drift_s'length);
                     state2 <= S_CORDIC_INPUT;
                 when S_CORDIC_INPUT =>
                 -- Algorithm calls for the cordic to take the negative phase as the input
