@@ -45,6 +45,9 @@ architecture behavioral of calibration_tb is
     signal bin_in_s   : std_logic_vector(11 DOWNTO 0);
     signal cal_drift_s   : std_logic_vector(31 DOWNTO 0);
     signal readyin_s   : std_logic;
+    
+    signal real_in_s  : std_logic_vector(31 DOWNTO 0);
+    signal imag_in_s  : std_logic_vector(31 DOWNTO 0);
 
     signal calbin      : std_logic_vector(9 DOWNTO 0);
     signal phase_cor_re  : std_logic_vector(31 DOWNTO 0);
@@ -53,6 +56,14 @@ architecture behavioral of calibration_tb is
     signal readyout      : std_logic;
     signal update_drift   : std_logic;
     signal readycal      : std_logic;
+    
+    signal outreal_s                           : std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
+    signal outimag_s                           : std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
+    signal powertop_s                          : std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
+    signal powerbot_s                          : std_logic_vector(31 DOWNTO 0);  -- ufix32_En33
+    signal drift_FD_s                          : std_logic_vector(31 DOWNTO 0);  -- sfix32_En5
+    signal drift_SD_s                          : std_logic_vector(31 DOWNTO 0);  -- sfix32_E11
+    signal average_ready_s                     : std_logic;
     
     SIGNAL readyin_gated                    : std_logic;
     SIGNAL readyin_count                    : unsigned(1 downto 0);
@@ -89,6 +100,14 @@ begin
     FILE readyin_file: TEXT;
     VARIABLE readyin_l: LINE;
     VARIABLE readyin_v: std_logic_vector(0 DOWNTO 0);
+    
+    FILE real_in_file: TEXT;
+    VARIABLE real_in_l: LINE;
+    VARIABLE real_in_v: std_logic_vector(31 DOWNTO 0);
+    
+    FILE imag_in_file: TEXT;
+    VARIABLE imag_in_l: LINE;
+    VARIABLE imag_in_v: std_logic_vector(31 DOWNTO 0);
 
   BEGIN
   wait for SYSCLK_PERIOD;
@@ -97,6 +116,8 @@ begin
         file_open(bin_in_file, "bin_in.dat", read_mode);
         file_open(cal_drift_file, "cal_drift.dat", read_mode);
         file_open(readyin_file, "readyin.dat", read_mode);
+        file_open(real_in_file, "real_in.dat", read_mode);
+        file_open(imag_in_file, "imag_in.dat", read_mode);
         file_status := '1';
     END IF;
 
@@ -112,6 +133,14 @@ begin
       READLINE(readyin_file, readyin_l);
       HREAD(readyin_l, readyin_v);
       readyin_s <= readyin_v(0);
+      
+      READLINE(real_in_file, real_in_l);
+      HREAD(real_in_l, real_in_v);
+      real_in_s <= real_in_v;
+      
+      READLINE(imag_in_file, imag_in_l);
+      HREAD(imag_in_l, imag_in_v);
+      imag_in_s <= imag_in_v;
     END IF;
 
     IF ENDFILE(bin_in_file) THEN
@@ -157,6 +186,34 @@ begin
             update_drift =>  update_drift,
             readycal =>  readycal
         );
-
+        
+    cal_average : entity work.cal_average
+        port map( 
+            -- Inputs
+            clk => SYSCLK,
+            reset => SYSRESET,
+            bin_in => bin_in_s,
+            readyin => readyin_gated,
+            real_in => real_in_s,
+            imag_in => imag_in_s,
+            calbin => calbin,
+            phase_cor_re => phase_cor_re,
+            phase_cor_im => phase_cor_im,
+            kar => kar_out,
+            readyout => readyout,
+            readycal => readycal,
+            index1 => "00" & x"0",
+            index2 => "00" & x"0",
+            index3 => "00" & x"0",
+            
+            -- Outputs
+            outreal => outreal_s,
+            outimag => outimag_s,
+            powertop => powertop_s,
+            powerbot => powerbot_s,
+            drift_FD =>  drift_FD_s,
+            drift_SD =>  drift_SD_s,
+            average_ready =>  average_ready_s
+        );
 end behavioral;
 

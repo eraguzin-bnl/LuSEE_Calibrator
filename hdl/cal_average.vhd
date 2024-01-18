@@ -51,6 +51,7 @@ architecture architecture_cal_average of cal_average is
     SIGNAL write_address                  : std_logic_vector(9 downto 0);
     SIGNAL write_en                       : std_logic;
     
+    SIGNAL first_time                     : std_logic;
     SIGNAL sum0_re_write_data                     : signed(37 downto 0);
     SIGNAL sum0_im_write_data                     : signed(37 downto 0);
     SIGNAL sum0_re_read_data                      : signed(37 downto 0);
@@ -234,7 +235,7 @@ begin
         EMPTY    => phase_data_im_empty
         );
         
-    --17 bits, 16 for kar, 1 for readyout
+    --27 bits, 10 for calbin, 16 for kar, 1 for readyout, 512 depth
     kar_readyout : entity work.CAL_AVERAGE_OTHER_FIFO
     PORT MAP( 
         CLK      => clk,
@@ -408,8 +409,9 @@ begin
             if (reset = '1') then
                 write_en            <= '0';
                 write_address       <= (others=>'0');
-                read_address        <= (others=>'0');  
+                read_address        <= (others=>'0');
                 
+                first_time        <= '1';
                 sum0_re_write_data          <= (others=>'0');
                 sum0_im_write_data          <= (others=>'0');
                 sum0alt_re_write_data          <= (others=>'0');
@@ -475,6 +477,15 @@ begin
                 error_fifo_alignment         <= '0';
                 readyin_s                    <= '0';
                 readycal_s                   <= '0';
+                
+                outreal                      <= (others=>'0');
+                outimag                      <= (others=>'0');
+                powertop                      <= (others=>'0');
+                powerbot                      <= (others=>'0');
+                drift_FD                      <= (others=>'0');
+                drift_SD                      <= (others=>'0');
+                sum_re                        <= (others=>'0');
+                sum_im                        <= (others=>'0');
             else
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
@@ -505,19 +516,17 @@ begin
                 phase_data_im_we <= '0';
                 kar_readyout_data_we <= '0';
                 if (readycal = '1') then
-                    if (bin_in(1 downto 0) = "10") then
-                        -- Save incoming data so we can multiply when we have the phase later
-                        if (phase_data_re_full = '0' and phase_data_im_full = '0' and kar_readyout_data_full = '0') then
-                            phase_data_re_s <= phase_cor_re;
-                            phase_data_re_we <= '1';
-                            phase_data_im_s <= phase_cor_im;
-                            phase_data_im_we <= '1';
-                            kar_readyout_data_s <= readyout & calbin & kar;
-                            kar_readyout_data_we <= '1';
-                        else
-                            --With a depth of 512 and enough time between notch filter averages to process, should never fill up
-                            error_phase_fifo_full <= '1';
-                        end if;
+                    -- Save incoming data so we can multiply when we have the phase later
+                    if (phase_data_re_full = '0' and phase_data_im_full = '0' and kar_readyout_data_full = '0') then
+                        phase_data_re_s <= phase_cor_re;
+                        phase_data_re_we <= '1';
+                        phase_data_im_s <= phase_cor_im;
+                        phase_data_im_we <= '1';
+                        kar_readyout_data_s <= readyout & calbin & kar;
+                        kar_readyout_data_we <= '1';
+                    else
+                        --With a depth of 512 and enough time between notch filter averages to process, should never fill up
+                        error_phase_fifo_full <= '1';
                     end if;
                 end if;
                 readycal_s <= readycal;
@@ -574,8 +583,9 @@ begin
                     state <= S_MULTIPLY_WAIT;
                 when S_MULTIPLY_WAIT =>
                     valid_in <= '0';
-                    read_address <= std_logic_vector(calbin_s);
-                    write_address <= std_logic_vector(calbin_s);
+                    if (first_time = '0') then
+                        read_address <= std_logic_vector(calbin_s);
+                    end if;
                     if (valid_out = "1111") then
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         sum_im <= resize(signed(product_re_im), 65) + resize(signed(product_im_re), 65);
@@ -603,36 +613,58 @@ begin
                     end if;
                     slice2 <= to_integer(unsigned(index2));
                 when S_BIT_SLICE_2 =>
-                    sum0_re_new <= cplx_in_re;
-                    sum0_im_new <= cplx_in_im;
+                    sum0_re_new <= resize(cplx_in_re, 38);
+                    sum0_im_new <= resize(cplx_in_im, 38);
                     if (tick) then
-                        sum0alt_re_new <= cplx_in_re;
-                        sum0alt_im_new <= cplx_in_im;
+                        sum0alt_re_new <= resize(cplx_in_re, 38);
+                        sum0alt_im_new <= resize(cplx_in_im, 38);
                     else
-                        sum0alt_re_new <= -cplx_in_re;
-                        sum0alt_im_new <= -cplx_in_im;
+                        sum0alt_re_new <= resize(-cplx_in_re, 38);
+                        sum0alt_im_new <= resize(-cplx_in_im, 38);
                     end if;
                     tick <= not tick;
                     
-                    --Todo, do the negative part in the next step when adding
-                    sum1_re_new <= -1 * signed(product_im_im(63 DOWNTO 32));
-                    sum1_im_new <= signed(product_re_im(63 DOWNTO 32));
+                    sum1_re_new <= resize(signed(product_im_im(63 DOWNTO 32)), 38);
+                    sum1_im_new <= resize(signed(product_re_im(63 DOWNTO 32)), 38);
                     
-                    sum2_re_new <= signed(product_re_re(63 DOWNTO 32));
-                    sum2_im_new <= signed(product_im_re(63 DOWNTO 32));
+                    sum2_re_new <= resize(signed(product_re_re(63 DOWNTO 32)), 38);
+                    sum2_im_new <= resize(signed(product_im_re(63 DOWNTO 32)), 38);
                     
                     state <= S_STORE_OR_OUTPUT;
                 when S_STORE_OR_OUTPUT =>
+                    --Write and Read addresses can't be the same
+                    write_address <= std_logic_vector(calbin_s);
+                    if (std_logic_vector(calbin_s) = "00" & x"00") then
+                        read_address        <= ("00" & x"10");
+                    else
+                        read_address        <= (others=>'0');
+                    end if;
+                    write_en <= '1';
                     if (readyout_curr = '0') then
-                        sum0_re_write_data <= sum0_re_read_data + sum0_re_new;
-                        sum0_im_write_data <= sum0_im_read_data + sum0_im_new;
-                        sum0alt_re_write_data <= sum0alt_re_read_data + sum0alt_re_new;
-                        sum0alt_im_write_data <= sum0alt_im_read_data + sum0alt_im_new;
-                        sum1_re_write_data <= sum1_re_read_data + sum1_re_new;
-                        sum1_im_write_data <= sum1_im_read_data + sum1_im_new;
-                        sum2_re_write_data <= sum2_re_read_data + sum2_re_new;
-                        sum2_im_write_data <= sum2_im_read_data + sum2_im_new;
-                        write_en <= '1';
+                        -- Because the first time after powerup, the read output will be undefined and you can't add to it
+                        if (first_time = '1') then
+                            sum0_re_write_data <= sum0_re_new;
+                            sum0_im_write_data <= sum0_im_new;
+                            sum0alt_re_write_data <= sum0alt_re_new;
+                            sum0alt_im_write_data <= sum0alt_im_new;
+                            sum1_re_write_data <= -sum1_re_new; -- Negative because this is the imaginary squared component
+                            sum1_im_write_data <= sum1_im_new;
+                            sum2_re_write_data <= sum2_re_new;
+                            sum2_im_write_data <= sum2_im_new;
+                            if (calbin_s = to_unsigned(511, calbin_s'length)) then
+                                first_time <= '0';
+                            end if;
+                        else
+                            sum0_re_write_data <= sum0_re_read_data + sum0_re_new;
+                            sum0_im_write_data <= sum0_im_read_data + sum0_im_new;
+                            sum0alt_re_write_data <= sum0alt_re_read_data + sum0alt_re_new;
+                            sum0alt_im_write_data <= sum0alt_im_read_data + sum0alt_im_new;
+                            sum1_re_write_data <= sum1_re_read_data - sum1_re_new; -- Negative because this is the imaginary squared component
+                            sum1_im_write_data <= sum1_im_read_data + sum1_im_new;
+                            sum2_re_write_data <= sum2_re_read_data + sum2_re_new;
+                            sum2_im_write_data <= sum2_im_read_data + sum2_im_new;
+                        end if;
+                        
                         state <= S_IDLE;
                     else
                         sum0_re_write_data <= (others=>'0');
@@ -643,13 +675,12 @@ begin
                         sum1_im_write_data <= (others=>'0');
                         sum2_re_write_data <= (others=>'0');
                         sum2_im_write_data <= (others=>'0');
-                        write_en <= '1';
                         
                         sum0_re_new <= sum0_re_read_data + sum0_re_new;
                         sum0_im_new <= sum0_im_read_data + sum0_im_new;
                         sum0alt_re_new <= sum0alt_re_read_data + sum0alt_re_new;
                         sum0alt_im_new <= sum0alt_im_read_data + sum0alt_im_new;
-                        sum1_re_new <= sum1_re_read_data + sum1_re_new;
+                        sum1_re_new <= sum1_re_read_data - sum1_re_new; -- Negative because this is the imaginary squared component
                         sum1_im_new <= sum1_im_read_data + sum1_im_new;
                         sum2_re_new <= sum2_re_read_data + sum2_re_new;
                         sum2_im_new <= sum2_im_read_data + sum2_im_new;
