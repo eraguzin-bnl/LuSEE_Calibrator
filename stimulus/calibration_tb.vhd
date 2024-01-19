@@ -66,7 +66,7 @@ architecture behavioral of calibration_tb is
     signal average_ready_s                     : std_logic;
     
     SIGNAL readyin_gated                    : std_logic;
-    SIGNAL readyin_count                    : unsigned(1 downto 0);
+    SIGNAL readyin_count                    : unsigned(2 downto 0);
 begin
 
     process
