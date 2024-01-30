@@ -65,7 +65,17 @@ architecture behavioral of calibration_tb is
     signal drift_SD_s                          : std_logic_vector(31 DOWNTO 0);  -- sfix32_E11
     signal average_ready_s                     : std_logic;
     
+    signal cplx_index                          : std_logic_vector(5 downto 0);
+    signal sum1_index                          : std_logic_vector(5 downto 0);
+    signal sum2_index                          : std_logic_vector(5 downto 0);
+    signal powertop_index                      : std_logic_vector(5 downto 0);
+    signal powerbot_index                      : std_logic_vector(5 downto 0);
+    signal driftFD_index                       : std_logic_vector(5 downto 0);
+    signal driftSD_index                       : std_logic_vector(5 downto 0);
+    signal error_s                             : std_logic_vector(6 DOWNTO 0);
+    
     SIGNAL readyin_gated                    : std_logic;
+    SIGNAL readyin_gated_s                  : std_logic;
     SIGNAL readyin_count                    : unsigned(2 downto 0);
 begin
 
@@ -74,6 +84,13 @@ begin
 
     begin
         if ( vhdl_initial ) then
+            cplx_index       <= std_logic_vector(to_unsigned(33, cplx_index'length));
+            sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
+            sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
+            powertop_index   <= std_logic_vector(to_unsigned(24, powertop_index'length));
+            powerbot_index   <= std_logic_vector(to_unsigned(24, powerbot_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(8, driftFD_index'length));
+            driftSD_index    <= std_logic_vector(to_unsigned(8, driftSD_index'length));
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -88,7 +105,7 @@ begin
 
     -- Data source for adc
   fileread: PROCESS
-    VARIABLE file_status: std_logic := '0';
+    VARIABLE file_status: integer := 0;
     FILE bin_in_file: TEXT;
     VARIABLE bin_in_l: LINE;
     VARIABLE bin_in_v: std_logic_vector(11 DOWNTO 0);
@@ -111,14 +128,41 @@ begin
 
   BEGIN
   wait for SYSCLK_PERIOD;
-    IF (file_status = '0') THEN
+    IF (file_status = 0) THEN
         report "Opening file";
         file_open(bin_in_file, "bin_in.dat", read_mode);
         file_open(cal_drift_file, "cal_drift.dat", read_mode);
         file_open(readyin_file, "readyin.dat", read_mode);
+        --file_open(real_in_file, "real_in_short.dat", read_mode);
+        --file_open(imag_in_file, "imag_in_short.dat", read_mode);
         file_open(real_in_file, "real_in.dat", read_mode);
         file_open(imag_in_file, "imag_in.dat", read_mode);
-        file_status := '1';
+        
+        READLINE(real_in_file, real_in_l);
+        HREAD(real_in_l, real_in_v);
+        real_in_s <= real_in_v;
+      
+        READLINE(imag_in_file, imag_in_l);
+        HREAD(imag_in_l, imag_in_v);
+        imag_in_s <= imag_in_v;
+        
+        file_status := 1;
+    END IF;
+    
+    IF (file_status = 2) THEN
+        report "Opening real and imag file";
+        file_open(real_in_file, "real_in_short.dat", read_mode);
+        file_open(imag_in_file, "imag_in_short.dat", read_mode);
+        
+        READLINE(real_in_file, real_in_l);
+        HREAD(real_in_l, real_in_v);
+        real_in_s <= real_in_v;
+      
+        READLINE(imag_in_file, imag_in_l);
+        HREAD(imag_in_l, imag_in_v);
+        imag_in_s <= imag_in_v;
+        
+        file_status := 1;
     END IF;
 
     IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) THEN
@@ -133,7 +177,10 @@ begin
       READLINE(readyin_file, readyin_l);
       HREAD(readyin_l, readyin_v);
       readyin_s <= readyin_v(0);
-      
+    END IF;
+    
+    --IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) AND readyin_gated = '1' THEN
+    IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) THEN
       READLINE(real_in_file, real_in_l);
       HREAD(real_in_l, real_in_v);
       real_in_s <= real_in_v;
@@ -142,11 +189,22 @@ begin
       HREAD(imag_in_l, imag_in_v);
       imag_in_s <= imag_in_v;
     END IF;
+    
+    --IF readyin_gated = '0' and readyin_gated_s = '1' THEN
+        --report "VHDL --> Falling edge of readyin, restarting";
+        --file_close(real_in_file);
+        --file_close(imag_in_file);
+        --file_status := 2;
+    --END IF;
+    
+    readyin_gated_s <= readyin_gated;
 
     IF ENDFILE(bin_in_file) THEN
       report "VHDL --> Sample input file ended, restarting";
+      file_close(readyin_file);
+      file_close(cal_drift_file);
       file_close(bin_in_file);
-      file_status := '0';
+      file_status := 0;
     END IF;
   END PROCESS fileread;
   
@@ -174,7 +232,8 @@ begin
             clk => SYSCLK,
             reset => SYSRESET,
             bin_in => bin_in_s,
-            cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
+            --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
+            cal_drift => (others=>'0'),
             readyin => readyin_gated,
 
             -- Outputs
@@ -202,11 +261,17 @@ begin
             kar => kar_out,
             readyout => readyout,
             readycal => readycal,
-            index1 => "00" & x"0",
-            index2 => "00" & x"0",
-            index3 => "00" & x"0",
+            cplx_index => cplx_index,
+            sum1_index => sum1_index,
+            sum2_index => sum2_index,
+            powertop_index => powertop_index,
+            powerbot_index => powerbot_index,
+            driftFD_index => driftFD_index,
+            driftSD_index => driftSD_index,
+            error_stick => '1',
             
             -- Outputs
+            error => error_s,
             outreal => outreal_s,
             outimag => outimag_s,
             powertop => powertop_s,

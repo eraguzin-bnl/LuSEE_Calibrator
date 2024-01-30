@@ -34,9 +34,15 @@ entity cal_average is
         kar                               :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
         readyout                          :   IN    std_logic;
         readycal                          :   IN    std_logic;
-        index1                            :   IN    std_logic_vector(5 downto 0);
-        index2                            :   IN    std_logic_vector(5 downto 0);
-        index3                            :   IN    std_logic_vector(5 downto 0);
+        cplx_index                        :   IN    std_logic_vector(5 downto 0);
+        sum1_index                        :   IN    std_logic_vector(5 downto 0);
+        sum2_index                        :   IN    std_logic_vector(5 downto 0);
+        powertop_index                    :   IN    std_logic_vector(5 downto 0);
+        powerbot_index                    :   IN    std_logic_vector(5 downto 0);
+        driftFD_index                     :   IN    std_logic_vector(5 downto 0);
+        driftSD_index                     :   IN    std_logic_vector(5 downto 0);
+        error_stick                       :   IN    std_logic;
+        error                             :   OUT   std_logic_vector(6 DOWNTO 0);
         outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         outimag                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
@@ -154,14 +160,24 @@ architecture architecture_cal_average of cal_average is
     SIGNAL sum1_im_new                        : signed(37 DOWNTO 0);
     SIGNAL sum2_im_new                        : signed(37 DOWNTO 0);
     
-    SIGNAL slice1                          : integer range 0 to 33;
-    SIGNAL slice2                          : integer range 0 to 33;
-    SIGNAL slice3                          : integer range 0 to 33;
+    SIGNAL cplx_slice                        : integer range 0 to 33;
+    SIGNAL sum1_slice                        : integer range 0 to 33;
+    SIGNAL sum2_slice                        : integer range 0 to 33;
+    SIGNAL powertop_slice                    : integer range 0 to 33;
+    SIGNAL powerbot_slice                    : integer range 0 to 33;
+    SIGNAL driftFD_slice                     : integer range 0 to 33;
+    SIGNAL driftSD_slice                     : integer range 0 to 33;
+    
     SIGNAL cplx_in_re                      : signed(31 DOWNTO 0);
     SIGNAL cplx_in_im                      : signed(31 DOWNTO 0);
     
     SIGNAL drift_SD1                       : signed(64 DOWNTO 0);
     SIGNAL drift_SD_s                      : signed(65 DOWNTO 0);
+    
+    SIGNAL error_stick_s                   : std_logic;
+    SIGNAL error_s                         : std_logic_vector(6 DOWNTO 0);
+    CONSTANT error_ones                    : signed(64 downto 0) := (others=>'1');
+    CONSTANT error_zeroes                  : signed(64 downto 0) := (others=>'0');
     
     type state_type is (S_IDLE,
         S_FIFO_WAIT_1,
@@ -409,7 +425,28 @@ begin
         R_DATA   => sum2_im_read_data
         );
 
-    process (clk) begin
+    error <= error_s;
+    process (clk)
+        variable result66_shifted : signed(65 DOWNTO 0) := (others=>'0');
+    
+        variable result65_shifted : signed(64 DOWNTO 0) := (others=>'0');
+        variable result65_shifted2: signed(64 DOWNTO 0) := (others=>'0');
+        
+        variable result64_shifted : signed(63 DOWNTO 0) := (others=>'0');
+        variable result64_shifted2: signed(63 DOWNTO 0) := (others=>'0');
+        variable result64_shifted3: signed(63 DOWNTO 0) := (others=>'0');
+        variable result64_shifted4: signed(63 DOWNTO 0) := (others=>'0');
+        
+        variable test66_slice     : signed(65 DOWNTO 0) := (others=>'0');
+        
+        variable test65_slice     : signed(64 DOWNTO 0) := (others=>'0');
+        variable test65_slice2    : signed(64 DOWNTO 0) := (others=>'0');
+        
+        variable test64_slice     : signed(63 DOWNTO 0) := (others=>'0');
+        variable test64_slice2    : signed(63 DOWNTO 0) := (others=>'0');
+        variable test64_slice3    : signed(63 DOWNTO 0) := (others=>'0');
+        variable test64_slice4    : signed(63 DOWNTO 0) := (others=>'0');
+        begin
         if (rising_edge(clk)) then
             if (reset = '1') then
                 write_en            <= '0';
@@ -455,9 +492,14 @@ begin
                 cplx_in_re                   <= (others=>'0');
                 cplx_in_im                   <= (others=>'0');
                 
-                slice1                       <= 0;
-                slice2                       <= 0;
-                slice3                       <= 0;
+                cplx_slice                   <= 0;
+                sum1_slice                   <= 0;
+                sum2_slice                   <= 0;
+                powertop_slice               <= 0;
+                powerbot_slice               <= 0;
+                driftFD_slice                <= 0;
+                driftSD_slice                <= 0;
+                
                 average_ready                <= '0';
                 
                 sum0_re_new                  <= (others=>'0');
@@ -497,11 +539,37 @@ begin
                 drift_SD                      <= (others=>'0');
                 sum_re                        <= (others=>'0');
                 sum_im                        <= (others=>'0');
+                
+                error_s                       <= (others=>'0');
+                
+                result66_shifted                := (others=>'0');
+                result65_shifted                := (others=>'0');
+                result65_shifted2               := (others=>'0');
+                
+                result64_shifted                := (others=>'0');
+                result64_shifted2               := (others=>'0');
+                result64_shifted3               := (others=>'0');
+                result64_shifted4               := (others=>'0');
+                
+                test66_slice                    := (others=>'0');
+                test65_slice                    := (others=>'0');
+                test65_slice2                   := (others=>'0');
+                
+                test64_slice                    := (others=>'0');
+                test64_slice2                   := (others=>'0');
+                test64_slice3                   := (others=>'0');
+                test64_slice4                   := (others=>'0');
             else
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
                 notch_data_re_we <= '0';
                 notch_data_im_we <= '0';
+                
+                error_stick_s    <= error_stick;
+                if (error_stick_s = '0') then
+                    error_s <= (others=>'0');
+                end if;
+                
                 if (readyin = '1') then
                     -- Only act on incoming bins where bins%4 = 2
                     if (bin_in(1 downto 0) = "10") then
@@ -599,10 +667,41 @@ begin
                         kar_squared <= kar_curr * kar_curr;
                         state <= S_BIT_SLICE;
                     end if;
-                    slice1 <= to_integer(unsigned(index1));
+                    cplx_slice <= to_integer(unsigned(cplx_index));
                 when S_BIT_SLICE =>
-                    cplx_in_re <= sum_re(64 DOWNTO 33);
-                    cplx_in_im <= sum_im(64 DOWNTO 33);
+                    result65_shifted  := shift_right(sum_re, cplx_slice);
+                    result65_shifted2 := shift_right(sum_im, cplx_slice);
+                    cplx_in_re <= result65_shifted(31 DOWNTO 0);
+                    cplx_in_im <= result65_shifted2(31 DOWNTO 0);
+                    
+                    test65_slice := shift_right(sum_re, cplx_slice + 32);
+                    -- First check to see if number is negative
+                    if (test65_slice(64) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test65_slice < error_ones) then
+                            error_s(0) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test65_slice > error_zeroes) then
+                            error_s(0) <= '1';
+                        end if;
+                    end if;
+                    
+                    test65_slice2 := shift_right(sum_im, cplx_slice + 32);
+                    -- First check to see if number is negative
+                    if (test65_slice2(64) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test65_slice2 < error_ones) then
+                            error_s(0) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test65_slice2 > error_zeroes) then
+                            error_s(0) <= '1';
+                        end if;
+                    end if;
+                    
                     kar_squared_signed <= signed(kar_squared);
                     state <= S_BEGIN_MULTIPLY_2;
                 when S_BEGIN_MULTIPLY_2 =>
@@ -618,7 +717,8 @@ begin
                     if (valid_out = "1111") then
                         state <= S_BIT_SLICE_2;
                     end if;
-                    slice2 <= to_integer(unsigned(index2));
+                    sum1_slice <= to_integer(unsigned(sum1_index));
+                    sum2_slice <= to_integer(unsigned(sum2_index));
                 when S_BIT_SLICE_2 =>
                     sum0_re_new <= resize(cplx_in_re, 38);
                     sum0_im_new <= resize(cplx_in_im, 38);
@@ -630,11 +730,73 @@ begin
                         sum0alt_im_new <= resize(-cplx_in_im, 38);
                     end if;
                     
-                    sum1_re_new <= resize(signed(product_im_im(63 DOWNTO 32)), 38);
-                    sum1_im_new <= resize(signed(product_re_im(63 DOWNTO 32)), 38);
+                    result64_shifted  := shift_right(signed(product_im_im), sum1_slice);
+                    result64_shifted2 := shift_right(signed(product_re_im), sum1_slice);
                     
-                    sum2_re_new <= resize(signed(product_re_re(63 DOWNTO 32)), 38);
-                    sum2_im_new <= resize(signed(product_im_re(63 DOWNTO 32)), 38);
+                    sum1_re_new <= resize(result64_shifted(31 DOWNTO 0), 38);
+                    sum1_im_new <= resize(result64_shifted2(31 DOWNTO 0), 38);
+                    
+                    test64_slice := shift_right(signed(product_im_im), sum1_slice + 32);
+                    -- First check to see if number is negative
+                    if (test64_slice(63) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test64_slice < error_ones) then
+                            error_s(1) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test64_slice > error_zeroes) then
+                            error_s(1) <= '1';
+                        end if;
+                    end if;
+                    
+                    test64_slice2 := shift_right(signed(product_re_im), sum1_slice + 32);
+                    -- First check to see if number is negative
+                    if (test64_slice2(63) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test64_slice2 < error_ones) then
+                            error_s(1) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test64_slice2 > error_zeroes) then
+                            error_s(1) <= '1';
+                        end if;
+                    end if;
+                    
+                    result64_shifted3 := shift_right(signed(product_re_re), sum2_slice);
+                    result64_shifted4 := shift_right(signed(product_im_re), sum2_slice);
+                    
+                    sum2_re_new <= resize(result64_shifted3(31 DOWNTO 0), 38);
+                    sum2_im_new <= resize(result64_shifted4(31 DOWNTO 0), 38);
+                    
+                    test64_slice3 := shift_right(signed(product_re_re), sum2_slice + 32);
+                    -- First check to see if number is negative
+                    if (test64_slice3(63) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test64_slice3 < error_ones) then
+                            error_s(2) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test64_slice3 > error_zeroes) then
+                            error_s(2) <= '1';
+                        end if;
+                    end if;
+                    
+                    test64_slice4 := shift_right(signed(product_im_re), sum2_slice + 32);
+                    -- First check to see if number is negative
+                    if (test64_slice4(63) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test64_slice4 < error_ones) then
+                            error_s(2) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test64_slice4 > error_zeroes) then
+                            error_s(2) <= '1';
+                        end if;
+                    end if;
                     
                     sum0_re_read_data_s <= sum0_re_read_data;
                     sum0_im_read_data_s <= sum0_im_read_data;
@@ -723,9 +885,24 @@ begin
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_BEGIN_MULTIPLY_4;
                     end if;
-                    
+                    driftFD_slice <= to_integer(unsigned(driftFD_index));
                 when S_BEGIN_MULTIPLY_4 =>
-                    drift_FD <= std_logic_vector(sum_re(64 DOWNTO 33));
+                    result65_shifted := shift_right(sum_re, driftFD_slice);
+                    drift_FD <= std_logic_vector(result65_shifted(31 DOWNTO 0));
+                    
+                    test65_slice := shift_right(sum_re, driftFD_slice + 32);
+                    -- First check to see if number is negative
+                    if (test65_slice(64) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test65_slice < error_ones) then
+                            error_s(3) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test65_slice > error_zeroes) then
+                            error_s(3) <= '1';
+                        end if;
+                    end if;
                     
                     multiplicand1_re <= std_logic_vector(sum2_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum2_im_new(37 DOWNTO 6));
@@ -775,10 +952,43 @@ begin
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_BEGIN_MULTIPLY_7;
                     end if;
+                    driftSD_slice <= to_integer(unsigned(driftSD_index));
+                    powertop_slice <= to_integer(unsigned(powertop_index));
                     
                 when S_BEGIN_MULTIPLY_7 =>
-                    drift_SD <= std_logic_vector(drift_SD_s(65 DOWNTO 34));
-                    powertop <= std_logic_vector(sum_re(64 DOWNTO 33));
+                    result66_shifted := shift_right(drift_SD_s, driftSD_slice);
+                    result65_shifted2 := shift_right(sum_re, powertop_slice);
+                    
+                    drift_SD <= std_logic_vector(result66_shifted(31 DOWNTO 0));
+                    powertop <= std_logic_vector(result65_shifted2(31 DOWNTO 0));
+                    
+                    test66_slice := shift_right(drift_SD_s, driftSD_slice + 32);
+                    -- First check to see if number is negative
+                    if (test66_slice(65) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test66_slice < error_ones) then
+                            error_s(4) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test66_slice > error_zeroes) then
+                            error_s(4) <= '1';
+                        end if;
+                    end if;
+                    
+                    test65_slice2 := shift_right(sum_re, powertop_slice + 32);
+                    -- First check to see if number is negative
+                    if (test65_slice2(64) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test65_slice2 < error_ones) then
+                            error_s(5) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test65_slice2 > error_zeroes) then
+                            error_s(5) <= '1';
+                        end if;
+                    end if;
                 
                     multiplicand1_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum0alt_im_new(37 DOWNTO 6));
@@ -794,9 +1004,26 @@ begin
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_OUTPUT_READY;
                     end if;
+                    powerbot_slice <= to_integer(unsigned(powerbot_index));
                     
                 when S_OUTPUT_READY =>
-                    powerbot <= std_logic_vector(sum_re(64 DOWNTO 33));
+                    result65_shifted := shift_right(sum_re, powerbot_slice);
+                    powerbot <= std_logic_vector(result65_shifted(31 DOWNTO 0));
+                    
+                    test65_slice := shift_right(sum_re, powerbot_slice + 32);
+                    -- First check to see if number is negative
+                    if (test65_slice(64) = '1') then
+                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                        if (test65_slice < error_ones) then
+                            error_s(6) <= '1';
+                        end if;
+                    else
+                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                        if (test65_slice > error_zeroes) then
+                            error_s(6) <= '1';
+                        end if;
+                    end if;
+                    
                     average_ready                <= '1';
                     state <= S_IDLE;
                     

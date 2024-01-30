@@ -793,8 +793,8 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1705690307"
-SIZE="38185"
+TIME="1706641876"
+SIZE="51353"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
@@ -848,8 +848,8 @@ SIZE="7970"
 ENDFILE
 VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1705608617"
-SIZE="121932"
+TIME="1706558610"
+SIZE="84773"
 ENDFILE
 VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
 STATE="utd"
@@ -863,13 +863,13 @@ SIZE="61897"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1705608509"
+TIME="1706558428"
 SIZE="8709"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1705690675"
-SIZE="7174"
+TIME="1706645567"
+SIZE="10146"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -1414,8 +1414,7 @@ HDL;hdl/cal_average.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-StartPage;StartPage;0
-ACTIVEVIEW;hdl/cal_phaser.vhd
+ACTIVEVIEW;stimulus/calibration_tb.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
