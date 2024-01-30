@@ -84,6 +84,7 @@ vlog -sv -work presynth "${PROJECT_DIR}/component/work/CAL_AVERAGE_OTHER_FIFO/CA
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v"
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v"
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/multiply_test_pkg.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_average.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/cal_phaser_alt_fixpt_tb.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/cal_average_instance_C1_fixpt_tb.vhd"

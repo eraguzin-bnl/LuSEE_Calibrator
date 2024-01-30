@@ -21,6 +21,8 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.ALL;
 
+use work.MultiplyTestPkg.all;
+
 entity cal_average is
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
@@ -58,126 +60,124 @@ architecture architecture_cal_average of cal_average is
     SIGNAL write_en                       : std_logic;
     
     SIGNAL first_time                     : std_logic;
-    SIGNAL sum0_re_write_data                     : signed(37 downto 0);
-    SIGNAL sum0_im_write_data                     : signed(37 downto 0);
-    SIGNAL sum0_re_read_data                      : signed(37 downto 0);
-    SIGNAL sum0_im_read_data                      : signed(37 downto 0);
-    SIGNAL sum0_re_read_data_s                      : signed(37 downto 0);
-    SIGNAL sum0_im_read_data_s                      : signed(37 downto 0);
+    SIGNAL sum0_re_write_data             : signed(37 downto 0);
+    SIGNAL sum0_im_write_data             : signed(37 downto 0);
+    SIGNAL sum0_re_read_data              : signed(37 downto 0);
+    SIGNAL sum0_im_read_data              : signed(37 downto 0);
+    SIGNAL sum0_re_read_data_s            : signed(37 downto 0);
+    SIGNAL sum0_im_read_data_s            : signed(37 downto 0);
     
-    SIGNAL sum0alt_re_write_data                     : signed(37 downto 0);
-    SIGNAL sum0alt_im_write_data                     : signed(37 downto 0);
-    SIGNAL sum0alt_re_read_data                      : signed(37 downto 0);
-    SIGNAL sum0alt_im_read_data                      : signed(37 downto 0);
-    SIGNAL sum0alt_re_read_data_s                      : signed(37 downto 0);
-    SIGNAL sum0alt_im_read_data_s                      : signed(37 downto 0);
+    SIGNAL sum0alt_re_write_data          : signed(37 downto 0);
+    SIGNAL sum0alt_im_write_data          : signed(37 downto 0);
+    SIGNAL sum0alt_re_read_data           : signed(37 downto 0);
+    SIGNAL sum0alt_im_read_data           : signed(37 downto 0);
+    SIGNAL sum0alt_re_read_data_s         : signed(37 downto 0);
+    SIGNAL sum0alt_im_read_data_s         : signed(37 downto 0);
     
-    SIGNAL sum1_re_write_data                     : signed(37 downto 0);
-    SIGNAL sum1_im_write_data                     : signed(37 downto 0);
-    SIGNAL sum1_re_read_data                      : signed(37 downto 0);
-    SIGNAL sum1_im_read_data                      : signed(37 downto 0);
-    SIGNAL sum1_re_read_data_s                      : signed(37 downto 0);
-    SIGNAL sum1_im_read_data_s                      : signed(37 downto 0);
+    SIGNAL sum1_re_write_data             : signed(37 downto 0);
+    SIGNAL sum1_im_write_data             : signed(37 downto 0);
+    SIGNAL sum1_re_read_data              : signed(37 downto 0);
+    SIGNAL sum1_im_read_data              : signed(37 downto 0);
+    SIGNAL sum1_re_read_data_s            : signed(37 downto 0);
+    SIGNAL sum1_im_read_data_s            : signed(37 downto 0);
     
-    SIGNAL sum2_re_write_data                     : signed(37 downto 0);
-    SIGNAL sum2_im_write_data                     : signed(37 downto 0);
-    SIGNAL sum2_re_read_data                      : signed(37 downto 0);
-    SIGNAL sum2_im_read_data                      : signed(37 downto 0);
-    SIGNAL sum2_re_read_data_s                      : signed(37 downto 0);
-    SIGNAL sum2_im_read_data_s                      : signed(37 downto 0);
+    SIGNAL sum2_re_write_data             : signed(37 downto 0);
+    SIGNAL sum2_im_write_data             : signed(37 downto 0);
+    SIGNAL sum2_re_read_data              : signed(37 downto 0);
+    SIGNAL sum2_im_read_data              : signed(37 downto 0);
+    SIGNAL sum2_re_read_data_s            : signed(37 downto 0);
+    SIGNAL sum2_im_read_data_s            : signed(37 downto 0);
     
-    SIGNAL notch_data_re_we                     : std_logic;
-    SIGNAL notch_data_re_re                     : std_logic;
-    SIGNAL notch_data_re_full                   : std_logic;
-    SIGNAL notch_data_re_empty                  : std_logic;
-    SIGNAL notch_data_re_s                      : std_logic_vector(31 DOWNTO 0);
-    SIGNAL notch_data_re_out                    : std_logic_vector(31 DOWNTO 0);
+    SIGNAL notch_data_re_we               : std_logic;
+    SIGNAL notch_data_re_re               : std_logic;
+    SIGNAL notch_data_re_full             : std_logic;
+    SIGNAL notch_data_re_empty            : std_logic;
+    SIGNAL notch_data_re_s                : std_logic_vector(31 DOWNTO 0);
+    SIGNAL notch_data_re_out              : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL notch_data_im_we                     : std_logic;
-    SIGNAL notch_data_im_re                     : std_logic;
-    SIGNAL notch_data_im_full                   : std_logic;
-    SIGNAL notch_data_im_empty                  : std_logic;
-    SIGNAL notch_data_im_s                      : std_logic_vector(31 DOWNTO 0);
-    SIGNAL notch_data_im_out                    : std_logic_vector(31 DOWNTO 0);
+    SIGNAL notch_data_im_we               : std_logic;
+    SIGNAL notch_data_im_re               : std_logic;
+    SIGNAL notch_data_im_full             : std_logic;
+    SIGNAL notch_data_im_empty            : std_logic;
+    SIGNAL notch_data_im_s                : std_logic_vector(31 DOWNTO 0);
+    SIGNAL notch_data_im_out              : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL phase_data_re_we                     : std_logic;
-    SIGNAL phase_data_re_re                     : std_logic;
-    SIGNAL phase_data_re_full                   : std_logic;
-    SIGNAL phase_data_re_empty                  : std_logic;
-    SIGNAL phase_data_re_s                      : std_logic_vector(31 DOWNTO 0);
-    SIGNAL phase_data_re_out                    : std_logic_vector(31 DOWNTO 0);
+    SIGNAL phase_data_re_we               : std_logic;
+    SIGNAL phase_data_re_re               : std_logic;
+    SIGNAL phase_data_re_full             : std_logic;
+    SIGNAL phase_data_re_empty            : std_logic;
+    SIGNAL phase_data_re_s                : std_logic_vector(31 DOWNTO 0);
+    SIGNAL phase_data_re_out              : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL phase_data_im_we                     : std_logic;
-    SIGNAL phase_data_im_re                     : std_logic;
-    SIGNAL phase_data_im_full                   : std_logic;
-    SIGNAL phase_data_im_empty                  : std_logic;
-    SIGNAL phase_data_im_s                      : std_logic_vector(31 DOWNTO 0);
-    SIGNAL phase_data_im_out                    : std_logic_vector(31 DOWNTO 0);
+    SIGNAL phase_data_im_we               : std_logic;
+    SIGNAL phase_data_im_re               : std_logic;
+    SIGNAL phase_data_im_full             : std_logic;
+    SIGNAL phase_data_im_empty            : std_logic;
+    SIGNAL phase_data_im_s                : std_logic_vector(31 DOWNTO 0);
+    SIGNAL phase_data_im_out              : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL calbin_s                                 : unsigned(9 DOWNTO 0);
-    SIGNAL kar_readyout_data_we                     : std_logic;
-    SIGNAL kar_readyout_data_re                     : std_logic;
-    SIGNAL kar_readyout_data_full                   : std_logic;
-    SIGNAL kar_readyout_data_empty                  : std_logic;
-    SIGNAL kar_readyout_data_s                      : std_logic_vector(26 DOWNTO 0);
-    SIGNAL kar_readyout_data_out                    : std_logic_vector(26 DOWNTO 0);
+    SIGNAL calbin_s                       : unsigned(9 DOWNTO 0);
+    SIGNAL kar_readyout_data_we           : std_logic;
+    SIGNAL kar_readyout_data_re           : std_logic;
+    SIGNAL kar_readyout_data_full         : std_logic;
+    SIGNAL kar_readyout_data_empty        : std_logic;
+    SIGNAL kar_readyout_data_s            : std_logic_vector(26 DOWNTO 0);
+    SIGNAL kar_readyout_data_out          : std_logic_vector(26 DOWNTO 0);
     
-    SIGNAL kar_curr                                : unsigned(15 DOWNTO 0);
-    SIGNAL kar_squared                             : unsigned(31 DOWNTO 0);
-    SIGNAL kar_squared_signed                      : signed(31 DOWNTO 0);
-    SIGNAL readyout_curr                           : std_logic; 
-    SIGNAL tick                                    : std_logic;
+    SIGNAL kar_curr                       : unsigned(15 DOWNTO 0);
+    SIGNAL kar_squared                    : unsigned(31 DOWNTO 0);
+    SIGNAL kar_squared_signed             : signed(31 DOWNTO 0);
+    SIGNAL readyout_curr                  : std_logic; 
+    SIGNAL tick                           : std_logic;
     
-    SIGNAL readyin_s                            : std_logic;
-    SIGNAL readycal_s                           : std_logic;
-    SIGNAL error_data_fifo_full                 : std_logic;
-    SIGNAL error_data_fifo_backup               : std_logic;
-    SIGNAL error_phase_fifo_full                 : std_logic;
-    SIGNAL error_fifo_alignment                 : std_logic;
+    SIGNAL readyin_s                      : std_logic;
+    SIGNAL readycal_s                     : std_logic;
+    SIGNAL error_data_fifo_full           : std_logic;
+    SIGNAL error_data_fifo_backup         : std_logic;
+    SIGNAL error_phase_fifo_full          : std_logic;
+    SIGNAL error_fifo_alignment           : std_logic;
     
-    SIGNAL product_re_re                   : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_re_im                   : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_im_re                   : std_logic_vector(63 DOWNTO 0);
-    SIGNAL product_im_im                   : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_re_re                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_re_im                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_re                  : std_logic_vector(63 DOWNTO 0);
+    SIGNAL product_im_im                  : std_logic_vector(63 DOWNTO 0);
     
-    SIGNAL multiplicand1_re                 : std_logic_vector(31 DOWNTO 0);
-    SIGNAL multiplicand1_im                 : std_logic_vector(31 DOWNTO 0);
-    SIGNAL multiplicand2_re                 : std_logic_vector(31 DOWNTO 0);
-    SIGNAL multiplicand2_im                 : std_logic_vector(31 DOWNTO 0);
+    SIGNAL multiplicand1_re               : std_logic_vector(31 DOWNTO 0);
+    SIGNAL multiplicand1_im               : std_logic_vector(31 DOWNTO 0);
+    SIGNAL multiplicand2_re               : std_logic_vector(31 DOWNTO 0);
+    SIGNAL multiplicand2_im               : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL sum_re                          : signed(64 DOWNTO 0);
-    SIGNAL sum_im                          : signed(64 DOWNTO 0);
-    SIGNAL valid_in                        : std_logic;
-    SIGNAL valid_out                       : std_logic_vector(3 DOWNTO 0);
+    SIGNAL sum_re                         : signed(64 DOWNTO 0);
+    SIGNAL sum_im                         : signed(64 DOWNTO 0);
+    SIGNAL valid_in                       : std_logic;
+    SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
     
-    SIGNAL sum0_re_new                        : signed(37 DOWNTO 0);
-    SIGNAL sum0alt_re_new                     : signed(37 DOWNTO 0);
-    SIGNAL sum1_re_new                        : signed(37 DOWNTO 0);
-    SIGNAL sum2_re_new                        : signed(37 DOWNTO 0);
+    SIGNAL sum0_re_new                    : signed(37 DOWNTO 0);
+    SIGNAL sum0alt_re_new                 : signed(37 DOWNTO 0);
+    SIGNAL sum1_re_new                    : signed(37 DOWNTO 0);
+    SIGNAL sum2_re_new                    : signed(37 DOWNTO 0);
     
-    SIGNAL sum0_im_new                        : signed(37 DOWNTO 0);
-    SIGNAL sum0alt_im_new                     : signed(37 DOWNTO 0);
-    SIGNAL sum1_im_new                        : signed(37 DOWNTO 0);
-    SIGNAL sum2_im_new                        : signed(37 DOWNTO 0);
+    SIGNAL sum0_im_new                    : signed(37 DOWNTO 0);
+    SIGNAL sum0alt_im_new                 : signed(37 DOWNTO 0);
+    SIGNAL sum1_im_new                    : signed(37 DOWNTO 0);
+    SIGNAL sum2_im_new                    : signed(37 DOWNTO 0);
     
-    SIGNAL cplx_slice                        : integer range 0 to 33;
-    SIGNAL sum1_slice                        : integer range 0 to 33;
-    SIGNAL sum2_slice                        : integer range 0 to 33;
-    SIGNAL powertop_slice                    : integer range 0 to 33;
-    SIGNAL powerbot_slice                    : integer range 0 to 33;
-    SIGNAL driftFD_slice                     : integer range 0 to 33;
-    SIGNAL driftSD_slice                     : integer range 0 to 33;
+    SIGNAL cplx_slice                     : integer range 0 to 33;
+    SIGNAL sum1_slice                     : integer range 0 to 33;
+    SIGNAL sum2_slice                     : integer range 0 to 33;
+    SIGNAL powertop_slice                 : integer range 0 to 33;
+    SIGNAL powerbot_slice                 : integer range 0 to 33;
+    SIGNAL driftFD_slice                  : integer range 0 to 33;
+    SIGNAL driftSD_slice                  : integer range 0 to 33;
     
-    SIGNAL cplx_in_re                      : signed(31 DOWNTO 0);
-    SIGNAL cplx_in_im                      : signed(31 DOWNTO 0);
+    SIGNAL cplx_in_re                     : signed(31 DOWNTO 0);
+    SIGNAL cplx_in_im                     : signed(31 DOWNTO 0);
     
-    SIGNAL drift_SD1                       : signed(64 DOWNTO 0);
-    SIGNAL drift_SD_s                      : signed(65 DOWNTO 0);
+    SIGNAL drift_SD1                      : signed(64 DOWNTO 0);
+    SIGNAL drift_SD_s                     : signed(65 DOWNTO 0);
     
-    SIGNAL error_stick_s                   : std_logic;
-    SIGNAL error_s                         : std_logic_vector(6 DOWNTO 0);
-    CONSTANT error_ones                    : signed(64 downto 0) := (others=>'1');
-    CONSTANT error_zeroes                  : signed(64 downto 0) := (others=>'0');
+    SIGNAL error_stick_s                  : std_logic;
+    SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
     
     type state_type is (S_IDLE,
         S_FIFO_WAIT_1,
@@ -203,7 +203,7 @@ architecture architecture_cal_average of cal_average is
     signal state: state_type;
 
 begin
-
+    error <= error_s;
     -- Since we cannot process each bin as fast as they are coming in (every 4 clock cycles), each real and imaginary value is
     -- Stored in a FIFO and the state machine does the math as it can
     -- This FIFO has room for 512 samples of values. 
@@ -425,7 +425,6 @@ begin
         R_DATA   => sum2_im_read_data
         );
 
-    error <= error_s;
     process (clk)
         variable result66_shifted : signed(65 DOWNTO 0) := (others=>'0');
     
@@ -436,32 +435,22 @@ begin
         variable result64_shifted2: signed(63 DOWNTO 0) := (others=>'0');
         variable result64_shifted3: signed(63 DOWNTO 0) := (others=>'0');
         variable result64_shifted4: signed(63 DOWNTO 0) := (others=>'0');
-        
-        variable test66_slice     : signed(65 DOWNTO 0) := (others=>'0');
-        
-        variable test65_slice     : signed(64 DOWNTO 0) := (others=>'0');
-        variable test65_slice2    : signed(64 DOWNTO 0) := (others=>'0');
-        
-        variable test64_slice     : signed(63 DOWNTO 0) := (others=>'0');
-        variable test64_slice2    : signed(63 DOWNTO 0) := (others=>'0');
-        variable test64_slice3    : signed(63 DOWNTO 0) := (others=>'0');
-        variable test64_slice4    : signed(63 DOWNTO 0) := (others=>'0');
         begin
         if (rising_edge(clk)) then
             if (reset = '1') then
-                write_en            <= '0';
-                write_address       <= (others=>'0');
-                read_address        <= (others=>'0');
+                write_en                     <= '0';
+                write_address                <= (others=>'0');
+                read_address                 <= (others=>'0');
                 
-                first_time        <= '1';
-                sum0_re_write_data          <= (others=>'0');
-                sum0_im_write_data          <= (others=>'0');
-                sum0alt_re_write_data          <= (others=>'0');
-                sum0alt_im_write_data          <= (others=>'0');
-                sum1_re_write_data          <= (others=>'0');
-                sum1_im_write_data          <= (others=>'0');
-                sum2_re_write_data          <= (others=>'0');
-                sum2_im_write_data          <= (others=>'0');
+                first_time                   <= '1';
+                sum0_re_write_data           <= (others=>'0');
+                sum0_im_write_data           <= (others=>'0');
+                sum0alt_re_write_data        <= (others=>'0');
+                sum0alt_im_write_data        <= (others=>'0');
+                sum1_re_write_data           <= (others=>'0');
+                sum1_im_write_data           <= (others=>'0');
+                sum2_re_write_data           <= (others=>'0');
+                sum2_im_write_data           <= (others=>'0');
                     
                 notch_data_re_s              <= (others=>'0');
                 notch_data_re_we             <= '0';
@@ -473,9 +462,9 @@ begin
                 phase_data_im_s              <= (others=>'0');
                 phase_data_im_we             <= '0';
                 
-                kar_readyout_data_s              <= (others=>'0');
-                kar_readyout_data_we             <= '0';
-                valid_in                      <= '0';
+                kar_readyout_data_s          <= (others=>'0');
+                kar_readyout_data_we         <= '0';
+                valid_in                     <= '0';
                 
                 multiplicand1_re             <= (others=>'0');
                 multiplicand1_im             <= (others=>'0');
@@ -526,39 +515,30 @@ begin
                 
                 error_data_fifo_full         <= '0';
                 error_data_fifo_backup       <= '0';
-                error_phase_fifo_full         <= '0';
+                error_phase_fifo_full        <= '0';
                 error_fifo_alignment         <= '0';
                 readyin_s                    <= '0';
                 readycal_s                   <= '0';
                 
                 outreal                      <= (others=>'0');
                 outimag                      <= (others=>'0');
-                powertop                      <= (others=>'0');
-                powerbot                      <= (others=>'0');
-                drift_FD                      <= (others=>'0');
-                drift_SD                      <= (others=>'0');
-                sum_re                        <= (others=>'0');
-                sum_im                        <= (others=>'0');
+                powertop                     <= (others=>'0');
+                powerbot                     <= (others=>'0');
+                drift_FD                     <= (others=>'0');
+                drift_SD                     <= (others=>'0');
+                sum_re                       <= (others=>'0');
+                sum_im                       <= (others=>'0');
                 
-                error_s                       <= (others=>'0');
+                error_s                      <= (others=>'0');
                 
-                result66_shifted                := (others=>'0');
-                result65_shifted                := (others=>'0');
-                result65_shifted2               := (others=>'0');
+                result66_shifted             := (others=>'0');
+                result65_shifted             := (others=>'0');
+                result65_shifted2            := (others=>'0');
                 
-                result64_shifted                := (others=>'0');
-                result64_shifted2               := (others=>'0');
-                result64_shifted3               := (others=>'0');
-                result64_shifted4               := (others=>'0');
-                
-                test66_slice                    := (others=>'0');
-                test65_slice                    := (others=>'0');
-                test65_slice2                   := (others=>'0');
-                
-                test64_slice                    := (others=>'0');
-                test64_slice2                   := (others=>'0');
-                test64_slice3                   := (others=>'0');
-                test64_slice4                   := (others=>'0');
+                result64_shifted             := (others=>'0');
+                result64_shifted2            := (others=>'0');
+                result64_shifted3            := (others=>'0');
+                result64_shifted4            := (others=>'0');
             else
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
@@ -674,33 +654,8 @@ begin
                     cplx_in_re <= result65_shifted(31 DOWNTO 0);
                     cplx_in_im <= result65_shifted2(31 DOWNTO 0);
                     
-                    test65_slice := shift_right(sum_re, cplx_slice + 32);
-                    -- First check to see if number is negative
-                    if (test65_slice(64) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test65_slice < error_ones) then
-                            error_s(0) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test65_slice > error_zeroes) then
-                            error_s(0) <= '1';
-                        end if;
-                    end if;
-                    
-                    test65_slice2 := shift_right(sum_im, cplx_slice + 32);
-                    -- First check to see if number is negative
-                    if (test65_slice2(64) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test65_slice2 < error_ones) then
-                            error_s(0) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test65_slice2 > error_zeroes) then
-                            error_s(0) <= '1';
-                        end if;
-                    end if;
+                    test65_slice_proc(sum_re, cplx_slice, 0, error_s);                    
+                    test65_slice_proc(sum_im, cplx_slice, 0, error_s);
                     
                     kar_squared_signed <= signed(kar_squared);
                     state <= S_BEGIN_MULTIPLY_2;
@@ -736,33 +691,8 @@ begin
                     sum1_re_new <= resize(result64_shifted(31 DOWNTO 0), 38);
                     sum1_im_new <= resize(result64_shifted2(31 DOWNTO 0), 38);
                     
-                    test64_slice := shift_right(signed(product_im_im), sum1_slice + 32);
-                    -- First check to see if number is negative
-                    if (test64_slice(63) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test64_slice < error_ones) then
-                            error_s(1) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test64_slice > error_zeroes) then
-                            error_s(1) <= '1';
-                        end if;
-                    end if;
-                    
-                    test64_slice2 := shift_right(signed(product_re_im), sum1_slice + 32);
-                    -- First check to see if number is negative
-                    if (test64_slice2(63) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test64_slice2 < error_ones) then
-                            error_s(1) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test64_slice2 > error_zeroes) then
-                            error_s(1) <= '1';
-                        end if;
-                    end if;
+                    test64_slice_proc(product_im_im, sum1_slice, 1, error_s);
+                    test64_slice_proc(product_re_im, sum1_slice, 1, error_s);
                     
                     result64_shifted3 := shift_right(signed(product_re_re), sum2_slice);
                     result64_shifted4 := shift_right(signed(product_im_re), sum2_slice);
@@ -770,33 +700,8 @@ begin
                     sum2_re_new <= resize(result64_shifted3(31 DOWNTO 0), 38);
                     sum2_im_new <= resize(result64_shifted4(31 DOWNTO 0), 38);
                     
-                    test64_slice3 := shift_right(signed(product_re_re), sum2_slice + 32);
-                    -- First check to see if number is negative
-                    if (test64_slice3(63) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test64_slice3 < error_ones) then
-                            error_s(2) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test64_slice3 > error_zeroes) then
-                            error_s(2) <= '1';
-                        end if;
-                    end if;
-                    
-                    test64_slice4 := shift_right(signed(product_im_re), sum2_slice + 32);
-                    -- First check to see if number is negative
-                    if (test64_slice4(63) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test64_slice4 < error_ones) then
-                            error_s(2) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test64_slice4 > error_zeroes) then
-                            error_s(2) <= '1';
-                        end if;
-                    end if;
+                    test64_slice_proc(product_re_re, sum2_slice, 2, error_s);                    
+                    test64_slice_proc(product_im_re, sum2_slice, 2, error_s);
                     
                     sum0_re_read_data_s <= sum0_re_read_data;
                     sum0_im_read_data_s <= sum0_im_read_data;
@@ -890,19 +795,7 @@ begin
                     result65_shifted := shift_right(sum_re, driftFD_slice);
                     drift_FD <= std_logic_vector(result65_shifted(31 DOWNTO 0));
                     
-                    test65_slice := shift_right(sum_re, driftFD_slice + 32);
-                    -- First check to see if number is negative
-                    if (test65_slice(64) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test65_slice < error_ones) then
-                            error_s(3) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test65_slice > error_zeroes) then
-                            error_s(3) <= '1';
-                        end if;
-                    end if;
+                    test65_slice_proc(sum_re, driftFD_slice, 3, error_s);
                     
                     multiplicand1_re <= std_logic_vector(sum2_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum2_im_new(37 DOWNTO 6));
@@ -962,33 +855,8 @@ begin
                     drift_SD <= std_logic_vector(result66_shifted(31 DOWNTO 0));
                     powertop <= std_logic_vector(result65_shifted2(31 DOWNTO 0));
                     
-                    test66_slice := shift_right(drift_SD_s, driftSD_slice + 32);
-                    -- First check to see if number is negative
-                    if (test66_slice(65) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test66_slice < error_ones) then
-                            error_s(4) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test66_slice > error_zeroes) then
-                            error_s(4) <= '1';
-                        end if;
-                    end if;
-                    
-                    test65_slice2 := shift_right(sum_re, powertop_slice + 32);
-                    -- First check to see if number is negative
-                    if (test65_slice2(64) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test65_slice2 < error_ones) then
-                            error_s(5) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test65_slice2 > error_zeroes) then
-                            error_s(5) <= '1';
-                        end if;
-                    end if;
+                    test66_slice_proc(drift_SD_s, driftSD_slice, 4, error_s);                    
+                    test65_slice_proc(sum_re, powertop_slice, 5, error_s);
                 
                     multiplicand1_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum0alt_im_new(37 DOWNTO 6));
@@ -1010,21 +878,9 @@ begin
                     result65_shifted := shift_right(sum_re, powerbot_slice);
                     powerbot <= std_logic_vector(result65_shifted(31 DOWNTO 0));
                     
-                    test65_slice := shift_right(sum_re, powerbot_slice + 32);
-                    -- First check to see if number is negative
-                    if (test65_slice(64) = '1') then
-                        --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
-                        if (test65_slice < error_ones) then
-                            error_s(6) <= '1';
-                        end if;
-                    else
-                        --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
-                        if (test65_slice > error_zeroes) then
-                            error_s(6) <= '1';
-                        end if;
-                    end if;
+                    test65_slice_proc(sum_re, powerbot_slice, 6, error_s);
                     
-                    average_ready                <= '1';
+                    average_ready    <= '1';
                     state <= S_IDLE;
                     
                 when others =>		

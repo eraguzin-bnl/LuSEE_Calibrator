@@ -793,8 +793,8 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1706641876"
-SIZE="51353"
+TIME="1706654761"
+SIZE="42323"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
@@ -846,6 +846,11 @@ STATE="utd"
 TIME="1704814060"
 SIZE="7970"
 ENDFILE
+VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
+STATE="utd"
+TIME="1706653313"
+SIZE="5491"
+ENDFILE
 VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
 STATE="utd"
 TIME="1706558610"
@@ -868,7 +873,7 @@ SIZE="8709"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1706645567"
+TIME="1706651901"
 SIZE="10146"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
@@ -990,6 +995,7 @@ VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/
 VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 ENDFILELIST
 ENDLIST
@@ -1403,6 +1409,7 @@ VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/
 VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 ENDFILELIST
 ENDLIST
@@ -1411,10 +1418,11 @@ ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 HDL;hdl/cal_average.vhd;0
+HDL;hdl/multiply_test_pkg.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-ACTIVEVIEW;stimulus/calibration_tb.vhd
+ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
@@ -1576,6 +1584,8 @@ LIST "CORDICFIFO_CORDICFIFO_0_ram_wrapper::work","component/work/CORDICFIFO/CORD
 SUBBLOCK "CORDICFIFO_CORDICFIFO_0_LSRAM_top::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v","FALSE","FALSE"
 ENDLIST
 LIST "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
+ENDLIST
+LIST "MultiplyTestPkg::work","hdl/multiply_test_pkg.vhd","FALSE","FALSE"
 ENDLIST
 LIST "PF_TPSRAM_CAL::work","component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v","TRUE","FALSE"
 SUBBLOCK "PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM::work","component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v","FALSE","FALSE"
