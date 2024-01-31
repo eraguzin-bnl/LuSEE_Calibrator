@@ -793,7 +793,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1706654761"
+TIME="1706714773"
 SIZE="42323"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
@@ -848,8 +848,8 @@ SIZE="7970"
 ENDFILE
 VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
 STATE="utd"
-TIME="1706653313"
-SIZE="5491"
+TIME="1706714819"
+SIZE="5457"
 ENDFILE
 VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
 STATE="utd"
@@ -1422,7 +1422,7 @@ HDL;hdl/multiply_test_pkg.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/cal_phaser_alt_fixpt_tb.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-ACTIVEVIEW;hdl/cal_average.vhd
+ACTIVEVIEW;hdl/multiply_test_pkg.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
