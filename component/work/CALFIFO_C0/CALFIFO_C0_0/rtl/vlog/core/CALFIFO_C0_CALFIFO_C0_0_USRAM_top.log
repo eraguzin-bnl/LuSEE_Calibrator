@@ -19,9 +19,9 @@ R_DATA Enable Polarity          : Active High
 Write Clock Edge                : Rising
 Write Enable Polarity           : Active High
 Write Depth                     : 512
-Write Width                     : 12
+Write Width                     : 9
 Read Depth                      : 512
-Read Width                      : 12
+Read Width                      : 9
 R_ADDR Pipeline                 : Register
 R_DATA Pipeline                 : Register
 Portname R_DATA                 : R_DATA

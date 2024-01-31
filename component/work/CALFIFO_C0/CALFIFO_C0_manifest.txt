@@ -1,6 +1,6 @@
 Microchip Technology Inc. - Microchip Libero Software Release v2022.3 (Version 2022.3.0.8)
 
-Date      :  Tue Jan  9 10:51:07 2024
+Date      :  Wed Jan 31 13:04:19 2024
 Project   :  /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator
 Component :  CALFIFO_C0
 Family    :  PolarFire

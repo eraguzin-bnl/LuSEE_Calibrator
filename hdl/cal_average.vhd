@@ -30,7 +30,7 @@ entity cal_average is
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
         real_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
         imag_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        calbin                            :   IN    std_logic_vector(9 DOWNTO 0);  -- ufix10
+        calbin_in                         :   IN    std_logic_vector(8 DOWNTO 0);  -- ufix10
         phase_cor_re                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
         phase_cor_im                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
         kar                               :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
@@ -51,12 +51,14 @@ entity cal_average is
         powerbot                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En33
         drift_FD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En5
         drift_SD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_E11
-        average_ready                     :   OUT   std_logic
+        calbin_out                        :   OUT   std_logic_vector(8 DOWNTO 0);  -- ufix10
+        average_ready                     :   OUT   std_logic;
+        update_drift                      :   OUT   std_logic
 );
 end cal_average;
 architecture architecture_cal_average of cal_average is
-    SIGNAL read_address                   : std_logic_vector(9 downto 0);
-    SIGNAL write_address                  : std_logic_vector(9 downto 0);
+    SIGNAL read_address                   : std_logic_vector(8 downto 0);
+    SIGNAL write_address                  : std_logic_vector(8 downto 0);
     SIGNAL write_en                       : std_logic;
     
     SIGNAL first_time                     : std_logic;
@@ -116,13 +118,13 @@ architecture architecture_cal_average of cal_average is
     SIGNAL phase_data_im_s                : std_logic_vector(31 DOWNTO 0);
     SIGNAL phase_data_im_out              : std_logic_vector(31 DOWNTO 0);
     
-    SIGNAL calbin_s                       : unsigned(9 DOWNTO 0);
+    SIGNAL calbin_s                       : unsigned(8 DOWNTO 0);
     SIGNAL kar_readyout_data_we           : std_logic;
     SIGNAL kar_readyout_data_re           : std_logic;
     SIGNAL kar_readyout_data_full         : std_logic;
     SIGNAL kar_readyout_data_empty        : std_logic;
-    SIGNAL kar_readyout_data_s            : std_logic_vector(26 DOWNTO 0);
-    SIGNAL kar_readyout_data_out          : std_logic_vector(26 DOWNTO 0);
+    SIGNAL kar_readyout_data_s            : std_logic_vector(25 DOWNTO 0);
+    SIGNAL kar_readyout_data_out          : std_logic_vector(25 DOWNTO 0);
     
     SIGNAL kar_curr                       : unsigned(15 DOWNTO 0);
     SIGNAL kar_squared                    : unsigned(31 DOWNTO 0);
@@ -163,8 +165,8 @@ architecture architecture_cal_average of cal_average is
     SIGNAL sum2_im_new                    : signed(37 DOWNTO 0);
     
     SIGNAL cplx_slice                     : integer range 0 to 33;
-    SIGNAL sum1_slice                     : integer range 0 to 33;
-    SIGNAL sum2_slice                     : integer range 0 to 33;
+    SIGNAL sum1_slice                     : integer range 0 to 32;
+    SIGNAL sum2_slice                     : integer range 0 to 32;
     SIGNAL powertop_slice                 : integer range 0 to 33;
     SIGNAL powerbot_slice                 : integer range 0 to 33;
     SIGNAL driftFD_slice                  : integer range 0 to 33;
@@ -489,7 +491,9 @@ begin
                 driftFD_slice                <= 0;
                 driftSD_slice                <= 0;
                 
+                calbin_out                   <= (others=>'0');
                 average_ready                <= '0';
+                update_drift                 <= '0';
                 
                 sum0_re_new                  <= (others=>'0');
                 sum0alt_re_new               <= (others=>'0');
@@ -581,7 +585,7 @@ begin
                         phase_data_re_we <= '1';
                         phase_data_im_s <= phase_cor_im;
                         phase_data_im_we <= '1';
-                        kar_readyout_data_s <= readyout & calbin & kar;
+                        kar_readyout_data_s <= readyout & calbin_in & kar;
                         kar_readyout_data_we <= '1';
                     else
                         --With a depth of 512 and enough time between notch filter averages to process, should never fill up
@@ -592,7 +596,9 @@ begin
                 
                 case state is
                 when S_IDLE =>
-                    average_ready                <= '0';
+                    average_ready <= '0';
+                    update_drift <= '0';
+                    calbin_out <= (others=>'0');
                     write_en <= '0';
                     -- Wait until we have phase data that has been FIFO'data
                     -- If there is phase data, there should ALWAYS be notch data
@@ -633,8 +639,8 @@ begin
                     valid_in <= '1';
                     
                     kar_curr <= unsigned(kar_readyout_data_out(15 DOWNTO 0));
-                    calbin_s <= unsigned(kar_readyout_data_out(25 DOWNTO 16)) - 1;
-                    readyout_curr <= kar_readyout_data_out(26);
+                    calbin_s <= unsigned(kar_readyout_data_out(24 DOWNTO 16));
+                    readyout_curr <= kar_readyout_data_out(25);
                     state <= S_MULTIPLY_WAIT;
                 when S_MULTIPLY_WAIT =>
                     valid_in <= '0';
@@ -768,6 +774,8 @@ begin
                         sum1_im_new <= sum1_im_read_data_s + sum1_im_new;
                         sum2_re_new <= sum2_re_read_data_s + sum2_re_new;
                         sum2_im_new <= sum2_im_read_data_s + sum2_im_new;
+                        
+                        calbin_out <= std_logic_vector(calbin_s);
                         state <= S_BEGIN_MULTIPLY_3;
                     end if;
                 when S_BEGIN_MULTIPLY_3 =>
@@ -881,6 +889,9 @@ begin
                     test65_slice_proc(sum_re, powerbot_slice, 6, error_s);
                     
                     average_ready    <= '1';
+                    if (kar_readyout_data_empty = '1') then
+                        update_drift <= '1';
+                    end if;
                     state <= S_IDLE;
                     
                 when others =>		

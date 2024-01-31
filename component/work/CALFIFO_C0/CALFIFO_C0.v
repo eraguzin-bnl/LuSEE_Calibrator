@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Jan  9 10:51:07 2024
+// Created by SmartDesign Wed Jan 31 13:04:19 2024
 // Version: 2022.3 2022.3.0.8
 //////////////////////////////////////////////////////////////////////
 
@@ -33,7 +33,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREFIFO:3.0.101} -compon
 "RDEPTH:512"  \
 "RE_POLARITY:0"  \
 "READ_DVALID:false"  \
-"RWIDTH:12"  \
+"RWIDTH:9"  \
 "SYNC:1"  \
 "SYNC_RESET:1"  \
 "UNDERFLOW_EN:false"  \
@@ -41,7 +41,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREFIFO:3.0.101} -compon
 "WE_POLARITY:0"  \
 "WRCNT_EN:false"  \
 "WRITE_ACK:false"  \
-"WWIDTH:12"   }
+"WWIDTH:9"   }
 # Exporting Component Description of CALFIFO_C0 to TCL done
 */
 
@@ -62,50 +62,50 @@ module CALFIFO_C0(
 //--------------------------------------------------------------------
 // Input
 //--------------------------------------------------------------------
-input         CLK;
-input  [11:0] DATA;
-input         RE;
-input         RESET_N;
-input         WE;
+input        CLK;
+input  [8:0] DATA;
+input        RE;
+input        RESET_N;
+input        WE;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
-output        EMPTY;
-output        FULL;
-output [11:0] Q;
+output       EMPTY;
+output       FULL;
+output [8:0] Q;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
-wire          CLK;
-wire   [11:0] DATA;
-wire          EMPTY_net_0;
-wire          FULL_net_0;
-wire   [11:0] Q_net_0;
-wire          RE;
-wire          RESET_N;
-wire          WE;
-wire   [11:0] Q_net_1;
-wire          FULL_net_1;
-wire          EMPTY_net_1;
+wire         CLK;
+wire   [8:0] DATA;
+wire         EMPTY_net_0;
+wire         FULL_net_0;
+wire   [8:0] Q_net_0;
+wire         RE;
+wire         RESET_N;
+wire         WE;
+wire         FULL_net_1;
+wire         EMPTY_net_1;
+wire   [8:0] Q_net_1;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
-wire          GND_net;
-wire   [11:0] MEMRD_const_net_0;
+wire         GND_net;
+wire   [8:0] MEMRD_const_net_0;
 //--------------------------------------------------------------------
 // Constant assignments
 //--------------------------------------------------------------------
 assign GND_net           = 1'b0;
-assign MEMRD_const_net_0 = 12'h000;
+assign MEMRD_const_net_0 = 9'h000;
 //--------------------------------------------------------------------
 // Top level output port assignments
 //--------------------------------------------------------------------
-assign Q_net_1     = Q_net_0;
-assign Q[11:0]     = Q_net_1;
 assign FULL_net_1  = FULL_net_0;
 assign FULL        = FULL_net_1;
 assign EMPTY_net_1 = EMPTY_net_0;
 assign EMPTY       = EMPTY_net_1;
+assign Q_net_1     = Q_net_0;
+assign Q[8:0]      = Q_net_1;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
@@ -131,7 +131,7 @@ CALFIFO_C0_CALFIFO_C0_0_COREFIFO #(
         .RDEPTH       ( 512 ),
         .RE_POLARITY  ( 0 ),
         .READ_DVALID  ( 0 ),
-        .RWIDTH       ( 12 ),
+        .RWIDTH       ( 9 ),
         .SYNC         ( 1 ),
         .SYNC_RESET   ( 1 ),
         .UNDERFLOW_EN ( 0 ),
@@ -139,7 +139,7 @@ CALFIFO_C0_CALFIFO_C0_0_COREFIFO #(
         .WE_POLARITY  ( 0 ),
         .WRCNT_EN     ( 0 ),
         .WRITE_ACK    ( 0 ),
-        .WWIDTH       ( 12 ) )
+        .WWIDTH       ( 9 ) )
 CALFIFO_C0_0(
         // Inputs
         .CLK        ( CLK ),
@@ -148,12 +148,11 @@ CALFIFO_C0_0(
         .RESET_N    ( RESET_N ),
         .WRESET_N   ( GND_net ), // tied to 1'b0 from definition
         .RRESET_N   ( GND_net ), // tied to 1'b0 from definition
-        .DATA       ( DATA ),
         .WE         ( WE ),
         .RE         ( RE ),
-        .MEMRD      ( MEMRD_const_net_0 ), // tied to 12'h000 from definition
+        .DATA       ( DATA ),
+        .MEMRD      ( MEMRD_const_net_0 ), // tied to 9'h000 from definition
         // Outputs
-        .Q          ( Q_net_0 ),
         .FULL       ( FULL_net_0 ),
         .EMPTY      ( EMPTY_net_0 ),
         .AFULL      (  ),
@@ -162,15 +161,16 @@ CALFIFO_C0_0(
         .UNDERFLOW  (  ),
         .WACK       (  ),
         .DVLD       (  ),
-        .WRCNT      (  ),
-        .RDCNT      (  ),
         .MEMWE      (  ),
         .MEMRE      (  ),
+        .SB_CORRECT (  ),
+        .DB_DETECT  (  ),
+        .Q          ( Q_net_0 ),
+        .WRCNT      (  ),
+        .RDCNT      (  ),
         .MEMWADDR   (  ),
         .MEMRADDR   (  ),
-        .MEMWD      (  ),
-        .SB_CORRECT (  ),
-        .DB_DETECT  (  ) 
+        .MEMWD      (  ) 
         );
 
 

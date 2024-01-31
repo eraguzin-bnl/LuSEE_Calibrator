@@ -36,7 +36,7 @@ generic(
         bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
         cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- The value to shift the cordic input by for 64 cycles
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
-        calbin                            :   OUT   std_logic_vector(9 DOWNTO 0);  -- Output of which bin's values are going out
+        calbin                            :   OUT   std_logic_vector(8 DOWNTO 0);  -- Output of which bin's values are going out
         phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Real part of complex phase result
         phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
         kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- Calculation based on bin and cycle
@@ -59,9 +59,9 @@ architecture architecture_cal_phaser of cal_phaser is
     -- With the fractional part at the first decimal point. -1 is 101.000... and so on
     
     SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
-    SIGNAL fifo_bin_out                    : std_logic_vector(11 DOWNTO 0);
+    SIGNAL fifo_bin_out                    : std_logic_vector(8 DOWNTO 0);
     SIGNAL fifo_check_count                : unsigned (1 downto 0);
-    SIGNAL calbin_out                      : unsigned(12 DOWNTO 0);
+    SIGNAL calbin_out                      : unsigned(8 DOWNTO 0);
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
     SIGNAL kk_shift                        : unsigned(12 DOWNTO 0);
     
@@ -121,6 +121,8 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL error_sin_fifo_empty            : std_logic;
     SIGNAL error_cos_fifo_full             : std_logic;
     SIGNAL error_cos_fifo_empty            : std_logic;
+    
+    SIGNAL first_time                      : std_logic;
     
     -- The first state machine does the calaculations for each incoming bin each cycle
     type state_type is (S_IDLE,
@@ -235,7 +237,7 @@ begin
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
-        DATA     => calbin_s,
+        DATA     => calbin_s(8 downto 0),
         WE       => fifo_bin_we,
         FULL     => fifo_full,
         Q        => fifo_bin_out,
@@ -342,6 +344,7 @@ begin
                 kar_out               <= (others=> '0');
                 readyout              <= '0';
                 
+                first_time            <= '1';
                 state                 <= S_IDLE;
                 state2                <= S_CORDIC_IDLE;
             else
@@ -353,7 +356,7 @@ begin
                     if (bin_in(1 downto 0) = "10") then
                         if (fifo_full = '0') then
                             --Add 2 and divide by 4 to get equivalent calibration bin
-                            calbin_s <= std_logic_vector(shift_right(unsigned(bin_in)+2, 2));
+                            calbin_s <= std_logic_vector(shift_right(unsigned(bin_in)+2, 2) - 1);
                             fifo_bin_we <= '1';
                         else
                             --With a depth of 512 and enough time between notch filter averages to process, should never fill up
@@ -373,17 +376,26 @@ begin
                     -- Waits for previous block to start filling up the FIFO, and use cal bin format (1 to 512)
                     if (fifo_empty = '0') then
                         -- If we are in the IDLE state, we're waiting for the first calibration bin always
-                        if (fifo_bin_out = x"001") then
-                            -- We use the bin number for further calculations
-                            calbin_out <= unsigned('0' & fifo_bin_out);
-                            fifo_bin_re <= '0';
-                            
-                            -- We also wait until we have a Cordic output ready to do phase calculations with and then move into the state machine
-                            if ((cos_fifo_empty = '0') and (sin_fifo_empty = '0')) then
-                                cos_fifo_re <= '1';
-                                sin_fifo_re <= '1';
-                                state <= S_WAIT_FOR_FIFO_OUT;
-                            end if;                            
+                        if (fifo_bin_out = "0" & x"00") then
+                            -- Because the default reset FIFO outputs 0, it looks identical to when the first bin of 0 has been written
+                            -- So for the first time after a reset, if the FIFO gets something put in it, immediately read it out
+                            -- So the 0 we see is the actual data 0 and the next calbin will be 1, etc...
+                            -- Without this, we will be a bin behind with two 0s in a row
+                            if (first_time = '1') then
+                                fifo_bin_re <= '1';
+                                first_time <= '0';
+                            else
+                                -- We use the bin number for further calculations
+                                calbin_out <= unsigned(fifo_bin_out);
+                                fifo_bin_re <= '0';
+                                
+                                -- We also wait until we have a Cordic output ready to do phase calculations with and then move into the state machine
+                                if ((cos_fifo_empty = '0') and (sin_fifo_empty = '0')) then
+                                    cos_fifo_re <= '1';
+                                    sin_fifo_re <= '1';
+                                    state <= S_WAIT_FOR_FIFO_OUT;
+                                end if;
+                            end if;
                         else
                             -- If we are in this state and don't see cal bin 1, we are erroneously halfway through a stream
                             -- So we will want to clear the FIFO until the previous IF check sees cal bin 1
@@ -433,8 +445,8 @@ begin
                     readycal <= '0';
                     readyout <= '0';
                     fifo_bin_re <= '0';
-                    kk_shift <= shift_left(calbin_out, 1);
-                    calbin <= std_logic_vector(calbin_out(9 downto 0));
+                    kk_shift <= shift_left(resize(calbin_out, 13), 1);
+                    calbin <= fifo_bin_out;
                     if (fifo_empty = '0') then
                         fifo_bin_re <= '1';
                     end if;
@@ -456,8 +468,8 @@ begin
                     kar_out <= kar_s(15 downto 0);
                     -- By now the next cal bin has come out for the next cycle
                     -- If we're still in the same cycle, check to make sure it was one larger than the one we're processing now
-                    if (calbin_out /= 512) then
-                        if (unsigned('0' & fifo_bin_out) /= (calbin_out + 1)) then
+                    if (calbin_out /= 511) then
+                        if (unsigned(fifo_bin_out) /= (calbin_out + 1)) then
                             error_fifo_order <= '1';
                         end if;
                     end if;
@@ -490,7 +502,7 @@ begin
                     -- to 32 bits for the output. So I decided to do it fixed like this and go directly to the output in 1 step
                     -- I grab the sign bit and then the relevant from the fixed point product output
                     -- I have confirmed that this works with the multiplicands and products by checking by hand
-                    if (calbin_out = 1) then
+                    if (calbin_out = 0) then
                         -- On the first cycle, the algorithm calls for us to save the output of this first multiplication
                         -- And use it as the second multiplicand for the next 511 cycles, so that's what's done here
                         -- We'll never go back in these next 511 to overwrite the value of multiplicand_re and _im
@@ -519,8 +531,8 @@ begin
                     
                     -- If we still have more cal bins to go in the 512 long run, we have our next one ready at the output of the FIFO
                     -- And go back to the middle of the state machine where it will wait for the multiplication that just started
-                    if (calbin_out /= 512) then
-                        calbin_out <= unsigned('0' & fifo_bin_out);
+                    if (calbin_out /= 511) then
+                        calbin_out <= unsigned(fifo_bin_out);
                         valid_in <= '1';
                         state <= S_WAIT_FOR_RESULT1;
                     else

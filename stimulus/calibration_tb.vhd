@@ -49,7 +49,8 @@ architecture behavioral of calibration_tb is
     signal real_in_s  : std_logic_vector(31 DOWNTO 0);
     signal imag_in_s  : std_logic_vector(31 DOWNTO 0);
 
-    signal calbin      : std_logic_vector(9 DOWNTO 0);
+    signal calbin      : std_logic_vector(8 DOWNTO 0);
+    signal calbin_out      : std_logic_vector(8 DOWNTO 0);
     signal phase_cor_re  : std_logic_vector(31 DOWNTO 0);
     signal phase_cor_im  : std_logic_vector(31 DOWNTO 0);
     signal kar_out       : std_logic_vector(15 DOWNTO 0);
@@ -232,8 +233,8 @@ begin
             clk => SYSCLK,
             reset => SYSRESET,
             bin_in => bin_in_s,
-            --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
-            cal_drift => (others=>'0'),
+            cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
+            --cal_drift => (others=>'0'),
             readyin => readyin_gated,
 
             -- Outputs
@@ -242,7 +243,7 @@ begin
             phase_cor_im => phase_cor_im,
             kar_out => kar_out,
             readyout =>  readyout,
-            update_drift =>  update_drift,
+            update_drift =>  open,
             readycal =>  readycal
         );
         
@@ -255,7 +256,7 @@ begin
             readyin => readyin_gated,
             real_in => real_in_s,
             imag_in => imag_in_s,
-            calbin => calbin,
+            calbin_in => calbin,
             phase_cor_re => phase_cor_re,
             phase_cor_im => phase_cor_im,
             kar => kar_out,
@@ -278,7 +279,9 @@ begin
             powerbot => powerbot_s,
             drift_FD =>  drift_FD_s,
             drift_SD =>  drift_SD_s,
-            average_ready =>  average_ready_s
+            calbin_out => calbin_out,
+            average_ready =>  average_ready_s,
+            update_drift => update_drift
         );
 end behavioral;
 
