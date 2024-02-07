@@ -44,7 +44,7 @@ entity cal_average is
         driftFD_index                     :   IN    std_logic_vector(5 downto 0);
         driftSD_index                     :   IN    std_logic_vector(5 downto 0);
         error_stick                       :   IN    std_logic;
-        error                             :   OUT   std_logic_vector(6 DOWNTO 0);
+        error                             :   OUT   std_logic_vector(10 DOWNTO 0);
         outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         outimag                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
@@ -205,7 +205,7 @@ architecture architecture_cal_average of cal_average is
     signal state: state_type;
 
 begin
-    error <= error_s;
+    error <= error_s & error_data_fifo_full & error_data_fifo_backup & error_phase_fifo_full & error_fifo_alignment;
     -- Since we cannot process each bin as fast as they are coming in (every 4 clock cycles), each real and imaginary value is
     -- Stored in a FIFO and the state machine does the math as it can
     -- This FIFO has room for 512 samples of values. 

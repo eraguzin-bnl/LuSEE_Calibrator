@@ -78,6 +78,9 @@ architecture architecture_cal_process of cal_process is
     signal SD3                            : signed(37 DOWNTO 0);
     signal SD4                            : signed(37 DOWNTO 0);
     
+    signal FDX                            : signed(39 DOWNTO 0);
+    signal SDX                            : signed(39 DOWNTO 0);
+    
     signal top1                           : signed(37 DOWNTO 0);
     signal bot1                           : signed(37 DOWNTO 0);
     signal top2                           : signed(37 DOWNTO 0);
@@ -112,6 +115,56 @@ architecture architecture_cal_process of cal_process is
     SIGNAL sig4_im_read_data              : signed(37 DOWNTO 0);
     
     signal Nac2                           : integer range 0 to 9;
+    
+    signal numerator_s                    : std_logic_vector(31 downto 0);
+    signal denominator_s                  : std_logic_vector(31 downto 0);
+    signal valid_in_s                     : std_logic;
+    signal valid_out_s                    : std_logic;
+    signal quotient_s                     : std_logic_vector(31 downto 0);
+    signal delta_drift                    : std_logic_vector(31 downto 0);
+    
+    -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I think you leave out the pi because of angle fixed point representation
+    -- phase_drift_per_ppm = 0.000004
+    -- alpha_to_pdrift = 16*phase_drift_per_ppm;
+    -- alpha_to_pdrift = 0.000064
+    
+    -- 0.05*alpha_to_pdrift = 0.0000032
+    -- 0.05*alpha_to_pdrift = binary(00.000000000000000000110101101100) aka
+    -- 1/(2**19) + 1/(2**20) + 1/(2**22) + 1/(2**24) + 1/(2**25) + 1/(2**27) + 1/(2**28) = 0.000003200024...
+    -- So this can be added cleanly to the phase output which has the same fixed point representation
+    
+    -- 1.2*alpha_to_pdrift = 0.0000768
+    -- 1.2*alpha_to_pdrift = binary(00.000000000000010100001000011111) aka
+    -- 1/(2**14) + 1/(2**16) + 1/(2**21) + 1/(2**26) + 1/(2**27) + 1/(2**28) + 1/(2**29) + 1/(2**30) = 0.00007679965...
+    -- So this can be compared directly to the phase output which has the same fixed point representation
+    -- -1.2*alpha_to_pdrift = binary(10.000000000000010100001000011111)
+    
+    CONSTANT k_0_05_alpha                : signed(31 DOWNTO 0) := "00000000000000000000110101101100";
+    CONSTANT k_1_2_alpha                 : signed(31 DOWNTO 0) := "00000000000000010100001000011111";
+    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "10000000000000010100001000011111";
+    
+    type state_type is (S_IDLE,
+        S_PWR_1,
+        S_PWR_2,
+        S_PWR_3,
+        S_PWR_4,
+        S_DIVIDE_1,
+        S_DIVIDE_2,
+        S_CHECK_LOCK,
+        S_CALCULATE_NEW_DRIFT,
+        S_CORRECT_NEW_DRIFT,
+        S_OUTPUT_NEW_DRIFT,
+        S_MULTIPLY_WAIT_3,
+        S_BEGIN_MULTIPLY_4,
+        S_MULTIPLY_WAIT_4,
+        S_BEGIN_MULTIPLY_5,
+        S_MULTIPLY_WAIT_5,
+        S_BEGIN_MULTIPLY_6,
+        S_MULTIPLY_WAIT_6,
+        S_BEGIN_MULTIPLY_7,
+        S_MULTIPLY_WAIT_7,
+        S_OUTPUT_READY);
+    signal state: state_type;
 
 begin
     sig1_re_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
@@ -195,6 +248,17 @@ begin
         R_DATA   => sig4_im_read_data
         );
         
+    vhdl_divide : entity work.divide
+    PORT MAP(
+        clk         => clk,
+        reset       => reset,
+        numerator   => numerator_s,
+        denominator => denominator_s,
+        valid_in    => valid_in_s, 
+        valid_out   => valid_out_s,
+        quotient    => quotient_s
+    );
+    error <= error_s;
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
@@ -206,6 +270,10 @@ begin
                 SD2              <= (others=>'0');
                 SD3              <= (others=>'0');
                 SD4              <= (others=>'0');
+                
+                FDX              <= (others=>'0');
+                SDX              <= (others=>'0');
+                delta_drift      <= (others=>'0');
                 
                 top1             <= (others=>'0');
                 bot1             <= (others=>'0');
@@ -221,6 +289,7 @@ begin
                 write_en               <= '0';
                 Nac2                   <= 0;
                 fout_ready             <= '0';
+                have_lock_out          <= '0';
                 
                 sig1_re_write_data     <= (others=>'0');
                 sig1_im_write_data     <= (others=>'0');
@@ -230,6 +299,11 @@ begin
                 sig3_im_write_data     <= (others=>'0');
                 sig4_re_write_data     <= (others=>'0');
                 sig4_im_write_data     <= (others=>'0');
+                
+                numerator_s            <= (others=>'0');
+                denominator_s          <= (others=>'0');
+                valid_in_s             <= '0';
+                state                  <= S_IDLE;
             else
                 error_stick_s    <= error_stick;
                 if (error_stick_s = '0') then
@@ -293,13 +367,61 @@ begin
                             fout_ready             <= '1';
                         end if;
                     else
-                        error(0) <= '1';
+                        error_s(0) <= '1';
                     end if;
                     
                     if (update_drift = '1') then
-                    
+                        if (state = S_IDLE) then
+                            state <= S_PWR_1;
+                        else
+                            error_s(1) <= '1';
+                        end if;
                     end if;
                 end if;
+                
+                case state is
+                when S_IDLE =>
+                    FDX <= (others=>'0');
+                    SDX <= (others=>'0');
+                    valid_in_s <= '0';
+                when S_PWR_1 =>
+                    if (shift_right(top1, 4) > bot1) then
+                        FDX <= FDX + FD1;
+                        SDX <= SDX + SD1;
+                    end if;
+                    state <= S_PWR_2;
+                when S_PWR_2 =>
+                    if (shift_right(top2, 4) > bot2) then
+                        FDX <= FDX + FD2;
+                        SDX <= SDX + SD2;
+                    end if;
+                    state <= S_PWR_3;
+                when S_PWR_3 =>
+                    if (shift_right(top3, 4) > bot3) then
+                        FDX <= FDX + FD3;
+                        SDX <= SDX + SD3;
+                    end if;
+                    state <= S_PWR_4;
+                when S_PWR_4 =>
+                    if (shift_right(top4, 4) > bot4) then
+                        FDX <= FDX + FD4;
+                        SDX <= SDX + SD4;
+                    end if;
+                    state <= S_DIVIDE_1;
+                when S_DIVIDE_1 =>
+                    numerator_s <= std_logic_vector(FDX(39 DOWNTO 8));
+                    denominator_s <= std_logic_vector(SDX(39 DOWNTO 8));
+                    valid_in_s <= '1';
+                    state <= S_DIVIDE_2;
+                when S_DIVIDE_2 =>
+                    valid_in_s <= '0';
+                    if (valid_out_s <= '1') then
+                        delta_drift <= quotient_s;
+                        state <= S_CHECK_LOCK;
+                    end if;
+                when others =>		
+                    state <= S_IDLE;
+                end case;
             end if;
         end if;
     end process;
