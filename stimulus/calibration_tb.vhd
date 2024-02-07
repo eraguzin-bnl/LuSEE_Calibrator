@@ -85,7 +85,7 @@ begin
 
     begin
         if ( vhdl_initial ) then
-            cplx_index       <= std_logic_vector(to_unsigned(33, cplx_index'length));
+            cplx_index       <= std_logic_vector(to_unsigned(24, cplx_index'length));
             sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
             powertop_index   <= std_logic_vector(to_unsigned(24, powertop_index'length));

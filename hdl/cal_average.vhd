@@ -552,6 +552,10 @@ begin
                 error_stick_s    <= error_stick;
                 if (error_stick_s = '0') then
                     error_s <= (others=>'0');
+                    error_data_fifo_full         <= '0';
+                    error_data_fifo_backup       <= '0';
+                    error_phase_fifo_full        <= '0';
+                    error_fifo_alignment         <= '0';
                 end if;
                 
                 if (readyin = '1') then

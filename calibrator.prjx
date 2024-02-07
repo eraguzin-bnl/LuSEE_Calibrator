@@ -834,8 +834,8 @@ SIZE="138"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1707256128"
-SIZE="42989"
+TIME="1707323465"
+SIZE="43217"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 STATE="utd"
@@ -869,8 +869,8 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1707257876"
-SIZE="20460"
+TIME="1707257983"
+SIZE="20509"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 STATE="utd"
@@ -934,7 +934,7 @@ SIZE="8789"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1706728738"
+TIME="1707324911"
 SIZE="10280"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
@@ -1511,7 +1511,7 @@ HDL;hdl/cal_average.vhd;0
 HDL;hdl/cal_phaser.vhd;0
 HDL;hdl/divide.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-ACTIVEVIEW;hdl/cal_process.vhd
+ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
