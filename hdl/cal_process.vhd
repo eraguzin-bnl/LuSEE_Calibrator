@@ -114,6 +114,17 @@ architecture architecture_cal_process of cal_process is
     SIGNAL sig4_re_read_data              : signed(37 DOWNTO 0);
     SIGNAL sig4_im_read_data              : signed(37 DOWNTO 0);
     
+    SIGNAL foutreal1_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutimag1_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutreal2_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutimag2_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutreal3_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutimag3_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutreal4_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutimag4_s                    : signed(37 DOWNTO 0);
+    
+    SIGNAL drift_s                        : signed(31 DOWNTO 0);
+    
     signal Nac2                           : integer range 0 to 9;
     
     signal numerator_s                    : std_logic_vector(31 downto 0);
@@ -121,7 +132,7 @@ architecture architecture_cal_process of cal_process is
     signal valid_in_s                     : std_logic;
     signal valid_out_s                    : std_logic;
     signal quotient_s                     : std_logic_vector(31 downto 0);
-    signal delta_drift                    : std_logic_vector(31 downto 0);
+    signal delta_drift                    : signed(31 downto 0);
     
     -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I think you leave out the pi because of angle fixed point representation
     -- phase_drift_per_ppm = 0.000004
@@ -151,8 +162,8 @@ architecture architecture_cal_process of cal_process is
         S_DIVIDE_1,
         S_DIVIDE_2,
         S_CHECK_LOCK,
-        S_CALCULATE_NEW_DRIFT,
-        S_CORRECT_NEW_DRIFT,
+        S_ADD_DRIFT,
+        S_CORRECT_DRIFT,
         S_OUTPUT_NEW_DRIFT,
         S_MULTIPLY_WAIT_3,
         S_BEGIN_MULTIPLY_4,
@@ -258,7 +269,15 @@ begin
         valid_out   => valid_out_s,
         quotient    => quotient_s
     );
-    error <= error_s;
+    error       <= error_s;
+    foutreal1   <= std_logic_vector(foutreal1_s(37 DOWNTO 6));
+    foutimag1   <= std_logic_vector(foutimag1_s(37 DOWNTO 6));
+    foutreal2   <= std_logic_vector(foutreal2_s(37 DOWNTO 6));
+    foutimag2   <= std_logic_vector(foutimag2_s(37 DOWNTO 6));
+    foutreal3   <= std_logic_vector(foutreal3_s(37 DOWNTO 6));
+    foutimag3   <= std_logic_vector(foutimag3_s(37 DOWNTO 6));
+    foutreal4   <= std_logic_vector(foutreal4_s(37 DOWNTO 6));
+    foutimag4   <= std_logic_vector(foutimag4_s(37 DOWNTO 6));
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
@@ -289,6 +308,8 @@ begin
                 write_en               <= '0';
                 Nac2                   <= 0;
                 fout_ready             <= '0';
+                drift_s                <= (others=>'0');
+                drift_out              <= (others=>'0');
                 have_lock_out          <= '0';
                 
                 sig1_re_write_data     <= (others=>'0');
@@ -300,8 +321,18 @@ begin
                 sig4_re_write_data     <= (others=>'0');
                 sig4_im_write_data     <= (others=>'0');
                 
-                numerator_s            <= (others=>'0');
-                denominator_s          <= (others=>'0');
+                foutreal1_s            <= (others=>'0');
+                foutimag1_s            <= (others=>'0');
+                foutreal2_s            <= (others=>'0');
+                foutimag2_s            <= (others=>'0');
+                foutreal3_s            <= (others=>'0');
+                foutimag3_s            <= (others=>'0');
+                foutreal4_s            <= (others=>'0');
+                foutimag4_s            <= (others=>'0');
+                error_s                <= (others=>'0');
+                
+                numerator_s            <= x"00000214";
+                denominator_s          <= x"0000003E";
                 valid_in_s             <= '0';
                 state                  <= S_IDLE;
             else
@@ -336,7 +367,16 @@ begin
                         write_en               <= '1';
                         read_address           <= std_logic_vector(unsigned(read_address) + 1);
                         
-                        if (Nac2 < 9) then
+                        if (Nac2 = 0) then
+                            sig1_re_write_data     <= resize(signed(outreal1), 38);
+                            sig1_im_write_data     <= resize(signed(outimag1), 38);
+                            sig2_re_write_data     <= resize(signed(outreal2), 38);
+                            sig2_im_write_data     <= resize(signed(outimag2), 38);
+                            sig3_re_write_data     <= resize(signed(outreal3), 38);
+                            sig3_im_write_data     <= resize(signed(outimag3), 38);
+                            sig4_re_write_data     <= resize(signed(outreal4), 38);
+                            sig4_im_write_data     <= resize(signed(outimag4), 38);
+                        elsif (Nac2 < 9) then
                             sig1_re_write_data     <= sig1_re_read_data + signed(outreal1);
                             sig1_im_write_data     <= sig1_im_read_data + signed(outimag1);
                             sig2_re_write_data     <= sig2_re_read_data + signed(outreal2);
@@ -355,14 +395,14 @@ begin
                             sig4_re_write_data     <= (others=>'0');
                             sig4_im_write_data     <= (others=>'0');
                             
-                            foutreal1              <= std_logic_vector(sig1_re_read_data + signed(outreal1));
-                            foutimag1              <= std_logic_vector(sig1_im_read_data + signed(outimag1));
-                            foutreal2              <= std_logic_vector(sig2_re_read_data + signed(outreal2));
-                            foutimag2              <= std_logic_vector(sig2_im_read_data + signed(outimag2));
-                            foutreal3              <= std_logic_vector(sig3_re_read_data + signed(outreal3));
-                            foutimag3              <= std_logic_vector(sig3_im_read_data + signed(outimag3));
-                            foutreal4              <= std_logic_vector(sig4_re_read_data + signed(outreal4));
-                            foutimag4              <= std_logic_vector(sig4_im_read_data + signed(outimag4));
+                            foutreal1_s            <= sig1_re_read_data + signed(outreal1);
+                            foutimag1_s            <= sig1_im_read_data + signed(outimag1);
+                            foutreal2_s            <= sig2_re_read_data + signed(outreal2);
+                            foutimag2_s            <= sig2_im_read_data + signed(outimag2);
+                            foutreal3_s            <= sig3_re_read_data + signed(outreal3);
+                            foutimag3_s            <= sig3_im_read_data + signed(outimag3);
+                            foutreal4_s            <= sig4_re_read_data + signed(outreal4);
+                            foutimag4_s            <= sig4_im_read_data + signed(outimag4);
         
                             fout_ready             <= '1';
                         end if;
@@ -416,9 +456,51 @@ begin
                 when S_DIVIDE_2 =>
                     valid_in_s <= '0';
                     if (valid_out_s <= '1') then
-                        delta_drift <= quotient_s;
+                        delta_drift <= signed(quotient_s);
                         state <= S_CHECK_LOCK;
                     end if;
+                when S_CHECK_LOCK =>
+                    if ((SDX < 0) and (abs(delta_drift) < k_0_05_alpha)) then
+                        have_lock_out <= '1';
+                    else
+                        delta_drift <= k_0_05_alpha;
+                    end if;
+                    state <= S_ADD_DRIFT;
+                when S_ADD_DRIFT =>
+                --TODO: See if we need overflow bit
+                    drift_s <= drift_s + delta_drift;
+                    state <= S_CORRECT_DRIFT;
+                when S_CORRECT_DRIFT =>
+                    if (drift_s > k_1_2_alpha) then
+                        drift_s <= k_negative_1_2_alpha;
+                    end if;
+                    
+                    if (drift_s > k_negative_1_2_alpha) then
+                        drift_s <= k_1_2_alpha;
+                    end if;
+                    state <= S_OUTPUT_NEW_DRIFT;
+                when S_OUTPUT_NEW_DRIFT =>
+                    FD1 <= (others=>'0');
+                    FD2 <= (others=>'0');
+                    FD3 <= (others=>'0');
+                    FD4 <= (others=>'0');
+                    
+                    SD1 <= (others=>'0');
+                    SD2 <= (others=>'0');
+                    SD3 <= (others=>'0');
+                    SD4 <= (others=>'0');
+                    
+                    top1 <= (others=>'0');
+                    top2 <= (others=>'0');
+                    top3 <= (others=>'0');
+                    top4 <= (others=>'0');
+                    
+                    bot1 <= (others=>'0');
+                    bot2 <= (others=>'0');
+                    bot3 <= (others=>'0');
+                    bot4 <= (others=>'0');
+                    
+                    drift_out <= std_logic_vector(drift_s);
                 when others =>		
                     state <= S_IDLE;
                 end case;

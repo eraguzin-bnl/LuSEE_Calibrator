@@ -78,6 +78,19 @@ architecture behavioral of calibration_tb is
     SIGNAL readyin_gated                    : std_logic;
     SIGNAL readyin_gated_s                  : std_logic;
     SIGNAL readyin_count                    : unsigned(2 downto 0);
+    
+    signal cal_drift_out                         : std_logic_vector(31 DOWNTO 0);
+    signal error_process                       : std_logic_vector(6 DOWNTO 0);
+    signal have_lock_out_s                   : std_logic;
+    signal foutreal1_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutimag1_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutreal2_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutimag2_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutreal3_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutimag3_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutreal4_s                       : std_logic_vector(31 DOWNTO 0);
+    signal foutimag4_s                       : std_logic_vector(31 DOWNTO 0);
+    signal fout_ready_s                      : std_logic;
 begin
 
     process
@@ -234,7 +247,7 @@ begin
             reset => SYSRESET,
             bin_in => bin_in_s,
             --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
-            cal_drift => (others=>'0'),
+            cal_drift => cal_drift_out,
             readyin => readyin_gated,
 
             -- Outputs
@@ -277,11 +290,59 @@ begin
             outimag => outimag_s,
             powertop => powertop_s,
             powerbot => powerbot_s,
-            drift_FD =>  drift_FD_s,
-            drift_SD =>  drift_SD_s,
+            drift_FD => drift_FD_s,
+            drift_SD => drift_SD_s,
             calbin_out => calbin_out,
             average_ready =>  average_ready_s,
             update_drift => update_drift
+        );
+        
+    cal_process : entity work.cal_process
+        PORT MAP( 
+            clk => SYSCLK,
+            reset => SYSRESET,
+            outreal1 => outreal_s,
+            outimag1 => outimag_s,
+            powertop1 => powertop_s,
+            powerbot1 => powerbot_s,
+            drift_FD1 => drift_FD_s,
+            drift_SD1 => drift_SD_s,
+            outreal2 => outreal_s,
+            outimag2 => outimag_s,
+            powertop2 => powertop_s,
+            powerbot2 => powerbot_s,
+            drift_FD2 => drift_FD_s,
+            drift_SD2 => drift_SD_s,
+            outreal3 => outreal_s,
+            outimag3 => outimag_s,
+            powertop3 => powertop_s,
+            powerbot3 => powerbot_s,
+            drift_FD3 => drift_FD_s,
+            drift_SD3 => drift_SD_s,
+            outreal4 => outreal_s,
+            outimag4 => outimag_s,
+            powertop4 => powertop_s,
+            powerbot4 => powerbot_s,
+            drift_FD4 => drift_FD_s,
+            drift_SD4 => drift_SD_s,
+            calbin => calbin,
+            readyout => readyout,
+            drift_in => cal_drift_out,
+            update_drift => update_drift,
+            error_stick => '1',
+            
+            error => error_process,
+            drift_out => cal_drift_out,
+            have_lock_out => have_lock_out_s,
+            foutreal1 => foutreal1_s,
+            foutimag1 => foutimag1_s,
+            foutreal2 => foutreal2_s,
+            foutimag2 => foutimag2_s,
+            foutreal3 => foutreal3_s,
+            foutimag3 => foutimag3_s,
+            foutreal4 => foutreal4_s,
+            foutimag4 => foutimag4_s,
+            fout_ready => fout_ready_s
         );
 end behavioral;
 

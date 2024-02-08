@@ -642,7 +642,7 @@ begin
                     multiplicand2_im <= phase_data_im_out;
                     valid_in <= '1';
                     
-                    kar_curr <= unsigned(kar_readyout_data_out(15 DOWNTO 0));
+                    kar_curr <= shift_right(unsigned(kar_readyout_data_out(15 DOWNTO 0)), 1);
                     calbin_s <= unsigned(kar_readyout_data_out(24 DOWNTO 16));
                     readyout_curr <= kar_readyout_data_out(25);
                     state <= S_MULTIPLY_WAIT;

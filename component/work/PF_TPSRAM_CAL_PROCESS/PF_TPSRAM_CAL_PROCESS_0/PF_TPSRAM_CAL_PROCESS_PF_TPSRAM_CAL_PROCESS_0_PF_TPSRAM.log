@@ -21,9 +21,9 @@ Write Clock Edge                : Rising
 A_REN Polarity                  : None
 B_REN Polarity                  : None
 Write Depth                     : 512
-Write Width                     : 36
+Write Width                     : 38
 Read Depth                      : 512
-Read Width                      : 36
+Read Width                      : 38
 Portname DataIn                 : W_DATA
 Portname DataOut                : R_DATA
 Portname WClock                 : W_CLK
