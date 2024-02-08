@@ -73,7 +73,7 @@ architecture behavioral of calibration_tb is
     signal powerbot_index                      : std_logic_vector(5 downto 0);
     signal driftFD_index                       : std_logic_vector(5 downto 0);
     signal driftSD_index                       : std_logic_vector(5 downto 0);
-    signal error_s                             : std_logic_vector(6 DOWNTO 0);
+    signal error_s                             : std_logic_vector(10 DOWNTO 0);
     
     SIGNAL readyin_gated                    : std_logic;
     SIGNAL readyin_gated_s                  : std_logic;
@@ -85,13 +85,13 @@ begin
 
     begin
         if ( vhdl_initial ) then
-            cplx_index       <= std_logic_vector(to_unsigned(24, cplx_index'length));
-            sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
+            cplx_index       <= std_logic_vector(to_unsigned(30, cplx_index'length));
+            sum1_index       <= std_logic_vector(to_unsigned(16, sum1_index'length));
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
-            powertop_index   <= std_logic_vector(to_unsigned(24, powertop_index'length));
-            powerbot_index   <= std_logic_vector(to_unsigned(24, powerbot_index'length));
-            driftFD_index    <= std_logic_vector(to_unsigned(8, driftFD_index'length));
-            driftSD_index    <= std_logic_vector(to_unsigned(8, driftSD_index'length));
+            powertop_index   <= std_logic_vector(to_unsigned(30, powertop_index'length));
+            powerbot_index   <= std_logic_vector(to_unsigned(30, powerbot_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(12, driftFD_index'length));
+            driftSD_index    <= std_logic_vector(to_unsigned(17+12, driftSD_index'length));
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -134,10 +134,10 @@ begin
         file_open(bin_in_file, "bin_in.dat", read_mode);
         file_open(cal_drift_file, "cal_drift.dat", read_mode);
         file_open(readyin_file, "readyin.dat", read_mode);
-        --file_open(real_in_file, "real_in_short.dat", read_mode);
-        --file_open(imag_in_file, "imag_in_short.dat", read_mode);
-        file_open(real_in_file, "real_in.dat", read_mode);
-        file_open(imag_in_file, "imag_in.dat", read_mode);
+        file_open(real_in_file, "real_in_short.dat", read_mode);
+        file_open(imag_in_file, "imag_in_short.dat", read_mode);
+        --file_open(real_in_file, "real_in.dat", read_mode);
+        --file_open(imag_in_file, "imag_in.dat", read_mode);
         
         READLINE(real_in_file, real_in_l);
         HREAD(real_in_l, real_in_v);
@@ -180,8 +180,8 @@ begin
       readyin_s <= readyin_v(0);
     END IF;
     
-    --IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) AND readyin_gated = '1' THEN
-    IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) THEN
+    IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) AND readyin_gated = '1' THEN
+    --IF SYSRESET = '0' AND NOT ENDFILE(bin_in_file) THEN
       READLINE(real_in_file, real_in_l);
       HREAD(real_in_l, real_in_v);
       real_in_s <= real_in_v;
@@ -191,12 +191,12 @@ begin
       imag_in_s <= imag_in_v;
     END IF;
     
-    --IF readyin_gated = '0' and readyin_gated_s = '1' THEN
-        --report "VHDL --> Falling edge of readyin, restarting";
-        --file_close(real_in_file);
-        --file_close(imag_in_file);
-        --file_status := 2;
-    --END IF;
+    IF readyin_gated = '0' and readyin_gated_s = '1' THEN
+        report "VHDL --> Falling edge of readyin, restarting";
+        file_close(real_in_file);
+        file_close(imag_in_file);
+        file_status := 2;
+    END IF;
     
     readyin_gated_s <= readyin_gated;
 
@@ -233,8 +233,8 @@ begin
             clk => SYSCLK,
             reset => SYSRESET,
             bin_in => bin_in_s,
-            cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
-            --cal_drift => (others=>'0'),
+            --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
+            cal_drift => (others=>'0'),
             readyin => readyin_gated,
 
             -- Outputs

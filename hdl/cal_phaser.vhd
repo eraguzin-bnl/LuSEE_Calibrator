@@ -63,7 +63,6 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL fifo_check_count                : unsigned (1 downto 0);
     SIGNAL calbin_out                      : unsigned(8 DOWNTO 0);
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
-    SIGNAL kk_shift                        : unsigned(12 DOWNTO 0);
     
     SIGNAL cordic_counter                  : integer range 0 to 63 := 0;
     SIGNAL cal_drift_s                     : signed(32 DOWNTO 0);
@@ -324,7 +323,6 @@ begin
                 sum_im                <= (others=>'0');
                 Nac                   <= to_unsigned(0,Nac'length);
                 kar_s                 <= (others=>'0');
-                kk_shift              <= (others=>'0');
                 valid_in              <= '0';
                 error_fifo_full       <= '0';
                 error_fifo_order      <= '0';
@@ -445,16 +443,15 @@ begin
                     readycal <= '0';
                     readyout <= '0';
                     fifo_bin_re <= '0';
-                    kk_shift <= shift_left(resize(calbin_out, 13), 1);
+                    kk <= shift_left(resize(calbin_out, 13), 1);
                     calbin <= fifo_bin_out;
                     if (fifo_empty = '0') then
                         fifo_bin_re <= '1';
                     end if;
                     state <= S_WAIT_FOR_RESULT2;
                 when S_WAIT_FOR_RESULT2 =>
-                    -- Still waiting for multiplication, the kk calculation now needs a subtraction
+                    -- Still waiting for multiplication
                     -- And we are also waiting for the next calbin to come out from the FIFO so request goes low
-                    kk <= kk_shift - 1;
                     fifo_bin_re <= '0';
                     state <= S_WAIT_FOR_RESULT3;
                 when S_WAIT_FOR_RESULT3 =>

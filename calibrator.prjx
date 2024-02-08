@@ -854,8 +854,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1706730772"
-SIZE="35999"
+TIME="1707420363"
+SIZE="35785"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -934,8 +934,8 @@ SIZE="8789"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1707324911"
-SIZE="10280"
+TIME="1707408674"
+SIZE="10274"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -1157,6 +1157,80 @@ ENDLIST
 ENDLIST
 LIST "test_divide::work"
 FILE "<project>/hdl/test_divide.vhd,hdl"
+LIST UserCustomizedFileList
+LIST "ideSIMULATION"
+USE_LIST=TRUE
+FILELIST
+VALUE "<project>/hdl/test_divide.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
+VALUE "<project>/hdl/cal_average.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+ENDFILELIST
+ENDLIST
+ENDLIST 
+LIST AssociatedStimulus
+VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
+ENDLIST
 LIST SynthesisConstraints
 VALUE "<project>/constraint/test_divide_derived_constraints.sdc,sdc"
 ENDLIST
@@ -1170,6 +1244,7 @@ ENDLIST
 LIST ProjectState5.1
 LIST Impl1
 ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1180,6 +1255,7 @@ ENDUsed_File_List
 ENDLIST
 LIST Impl2
 ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1203,6 +1279,9 @@ ENDLIST
 ENDLIST
 ENDLIST
 LIST AssociatedStimulus
+LIST test_divide
+VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
+ENDLIST
 LIST cal_phaser_alt_fixpt
 VALUE "<project>/stimulus/cal_phaser_alt_fixpt_tb.vhd,tb_hdl"
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
@@ -1397,6 +1476,7 @@ ENDLIST
 LIST "test_divide::work"
 LIST Impl1
 ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1407,6 +1487,7 @@ ENDUsed_File_List
 ENDLIST
 LIST Impl2
 ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1426,6 +1507,77 @@ ENDLIST
 LIST CDBOrder
 ENDLIST
 LIST UserCustomizedFileList
+LIST "test_divide"
+LIST "ideSIMULATION"
+USE_LIST=TRUE
+FILELIST
+VALUE "<project>/hdl/test_divide.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
+VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
+VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_USRAM_top.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_NstagesSync.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_async.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_fwft.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
+VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v,hdl"
+VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v,hdl"
+VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
+VALUE "<project>/hdl/cal_average.vhd,hdl"
+VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
+VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
+ENDFILELIST
+ENDLIST
+ENDLIST
 LIST "cal_phaser_alt_fixpt"
 LIST "ideSIMULATION"
 USE_LIST=TRUE
@@ -1509,7 +1661,6 @@ ReportsCurrentItem;Synthesize:test_divide_compile_netlist_resources.xml
 HDL;hdl/cal_process.vhd;0
 HDL;hdl/cal_average.vhd;0
 HDL;hdl/cal_phaser.vhd;0
-HDL;hdl/divide.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
 ACTIVEVIEW;hdl/cal_average.vhd
 ENDLIST
