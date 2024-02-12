@@ -91,6 +91,7 @@ architecture behavioral of calibration_tb is
     signal foutreal4_s                       : std_logic_vector(31 DOWNTO 0);
     signal foutimag4_s                       : std_logic_vector(31 DOWNTO 0);
     signal fout_ready_s                      : std_logic;
+    
 begin
 
     process
@@ -326,7 +327,7 @@ begin
             drift_FD4 => drift_FD_s,
             drift_SD4 => drift_SD_s,
             calbin => calbin,
-            readyout => readyout,
+            readyout => average_ready_s,
             drift_in => cal_drift_out,
             update_drift => update_drift,
             error_stick => '1',

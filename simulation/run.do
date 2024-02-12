@@ -92,7 +92,8 @@ vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/divide.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process_fixpt.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/calibration_tb.vhd"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/cal_process_tb.vhd"
 
-vsim -L PolarFire -L presynth -L COREFIFO_LIB -L CORECORDIC_LIB  -t 1ps -pli /usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so presynth.calibration_tb
-add wave /calibration_tb/*
+vsim -L PolarFire -L presynth -L COREFIFO_LIB -L CORECORDIC_LIB  -t 1ps -pli /usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so presynth.cal_process_tb
+add wave /cal_process_tb/*
 run 1000ns
