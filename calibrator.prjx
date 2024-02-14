@@ -32,7 +32,7 @@ KEY VendorTechnology_VCCI_1.8_VOLTR "IND"
 KEY VendorTechnology_VCCI_2.5_VOLTR "IND"
 KEY VendorTechnology_VCCI_3.3_VOLTR "IND"
 KEY VendorTechnology_VOLTR "IND"
-KEY ProjectLocation "/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
+KEY ProjectLocation "/home/eraguzin/Nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
 KEY ProjectDescription "SPI4.2"
 KEY UseRootLocationForLinkedFiles "FALSE"
 KEY RootLocationENVForLinkedFiles ""
@@ -75,7 +75,7 @@ PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.cxf"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
 STATE="utd"
-TIME="1704814784"
+TIME="1707853748"
 SIZE="771"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
@@ -83,7 +83,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
 STATE="utd"
-TIME="1704814784"
+TIME="1707853748"
 SIZE="41497"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
@@ -91,7 +91,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
 STATE="utd"
-TIME="1704814784"
+TIME="1707853748"
 SIZE="15291"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
@@ -99,7 +99,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
 STATE="utd"
-TIME="1704814784"
+TIME="1707853748"
 SIZE="9281"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
@@ -107,7 +107,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
 STATE="utd"
-TIME="1704814784"
+TIME="1707853748"
 SIZE="14551"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
@@ -124,7 +124,7 @@ PARENT="<project>/component/work/CORDICFIFO/CORDICFIFO.cxf"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/clock_driver.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="697"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -135,7 +135,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_driver.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="13955"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -146,7 +146,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_monitor.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="22096"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -157,7 +157,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/g4_dp_ext_mem.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="3801"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -168,7 +168,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WeqR.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="2194"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -179,7 +179,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WgtR.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="2287"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -190,7 +190,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WltR.v,tb_hdl"
 STATE="utd"
-TIME="1706724259"
+TIME="1707853748"
 SIZE="1981"
 PARENT="<project>/component/Actel/DirectCore/COREFIFO/3.0.101/COREFIFO.cxf"
 PARENT="<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/CALFIFO_C0_CALFIFO_C0_0_COREFIFO.cxf"
@@ -205,6 +205,33 @@ TIME="1707427527"
 SIZE="246"
 PARENT="<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.cxf"
 PARENT="<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.cxf"
+ENDFILE
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/DIVISION.cxf,actgen_cxf"
+STATE="utd"
+TIME="1707951528"
+SIZE="781"
+PARENT="<project>/component/work/DIVISION_C0/DIVISION_C0.cxf"
+ENDFILE
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
+STATE="utd"
+TIME="1707951528"
+SIZE="10612"
+PARENT="<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/DIVISION.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
+STATE="utd"
+TIME="1707951528"
+SIZE="721"
+PARENT="<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/DIVISION.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
+STATE="utd"
+TIME="1707951528"
+SIZE="8760"
+PARENT="<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/DIVISION.cxf"
+IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.cxf,actgen_cxf"
 STATE="utd"
@@ -767,6 +794,18 @@ SIZE="19400"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
+VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.cxf,actgen_cxf"
+STATE="utd"
+TIME="1707951528"
+SIZE="3119"
+ENDFILE
+VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.vhd,hdl"
+STATE="utd"
+TIME="1707951528"
+SIZE="4396"
+PARENT="<project>/component/work/DIVISION_C0/DIVISION_C0.cxf"
+IS_READONLY="TRUE"
+ENDFILE
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.cxf,actgen_cxf"
 STATE="utd"
 TIME="1706723897"
@@ -869,8 +908,8 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1707431932"
-SIZE="24560"
+TIME="1707952168"
+SIZE="27321"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 STATE="utd"
@@ -889,7 +928,7 @@ SIZE="3264"
 ENDFILE
 VALUE "<project>/hdl/divide.vhd,hdl"
 STATE="utd"
-TIME="1707254771"
+TIME="1707853748"
 SIZE="1856"
 ENDFILE
 VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
@@ -909,8 +948,8 @@ SIZE="1691"
 ENDFILE
 VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1707751282"
-SIZE="103638"
+TIME="1707759310"
+SIZE="86530"
 ENDFILE
 VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
 STATE="utd"
@@ -929,13 +968,13 @@ SIZE="117189"
 ENDFILE
 VALUE "<project>/simulation/cal_process_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1707757574"
-SIZE="24466"
+TIME="1707780839"
+SIZE="50578"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1707508909"
-SIZE="8989"
+TIME="1707852805"
+SIZE="9071"
 ENDFILE
 VALUE "<project>/simulation/testbench_presynth_simulation.log,log"
 STATE="utd"
@@ -964,8 +1003,8 @@ SIZE="83303"
 ENDFILE
 VALUE "<project>/stimulus/cal_process_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1707759510"
-SIZE="18118"
+TIME="1707759801"
+SIZE="18131"
 ENDFILE
 VALUE "<project>/synthesis/synwork/layer0.so,so"
 STATE="utd"
@@ -984,7 +1023,7 @@ SIZE="909868"
 ENDFILE
 VALUE "<project>/synthesis/test_divide_syn.prj,prj"
 STATE="utd"
-TIME="1706825147"
+TIME="1707851940"
 SIZE="2409"
 ENDFILE
 VALUE "<project>/synthesis/test_divide_vm.sdc,syn_sdc"
@@ -1306,6 +1345,13 @@ ENDUsed_File_List
 ENDLIST
 ENDLIST
 ENDLIST
+LIST "division::work"
+FILE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
+LIST Other_Association
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
+ENDLIST
+ENDLIST
 LIST "test_divide::work"
 FILE "<project>/hdl/test_divide.vhd,hdl"
 LIST UserCustomizedFileList
@@ -1377,8 +1423,10 @@ VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 VALUE "<project>/hdl/divide.vhd,hdl"
-VALUE "<project>/hdl/cal_process.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
+VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.vhd,hdl"
+VALUE "<project>/hdl/cal_process.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST 
@@ -1532,6 +1580,10 @@ VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/
 ENDLIST
 ENDLIST
 LIST Other_Association
+LIST division
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
+ENDLIST
 LIST CALFIFO_C0_CALFIFO_C0_0_COREFIFO
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/coreparameters.v,tb_hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/test/user/top_define.v,tb_hdl"
@@ -1928,8 +1980,10 @@ VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 VALUE "<project>/hdl/divide.vhd,hdl"
-VALUE "<project>/hdl/cal_process.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
+VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.vhd,hdl"
+VALUE "<project>/hdl/cal_process.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST
@@ -2011,12 +2065,13 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
-HDL;hdl/cal_average.vhd;0
-HDL;hdl/cal_phaser.vhd;0
 HDL;hdl/cal_process.vhd;0
-HDL;stimulus/calibration_tb.vhd;0
+HDL;component/work/DIVISION_C0/DIVISION_C0.vhd;0
+HDL;component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd;0
+HDL;hdl/cal_average.vhd;0
 HDL;stimulus/cal_process_tb.vhd;0
-ACTIVEVIEW;stimulus/cal_process_tb.vhd
+HDL;stimulus/calibration_tb.vhd;0
+ACTIVEVIEW;hdl/cal_process.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
@@ -2101,7 +2156,7 @@ ENDLIST
 LIST "cal_phaser_alt_fixpt_tb_pkg::work","hdl/cal_phaser_alt_fixpt_tb_pkg.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cal_process::work","hdl/cal_process.vhd","FALSE","FALSE"
-SUBBLOCK "divide::work","hdl/divide.vhd","FALSE","FALSE"
+SUBBLOCK "DIVISION_C0::work","component/work/DIVISION_C0/DIVISION_C0.vhd","TRUE","FALSE"
 SUBBLOCK "PF_TPSRAM_CAL_PROCESS::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v","TRUE","FALSE"
 SUBBLOCK "PF_TPSRAM_CAL_PROCESS::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v","TRUE","FALSE"
 SUBBLOCK "PF_TPSRAM_CAL_PROCESS::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v","TRUE","FALSE"
@@ -2141,6 +2196,8 @@ LIST "CALFIFO_C0_CALFIFO_C0_0_corefifo_sync::work","component/work/CALFIFO_C0/CA
 ENDLIST
 LIST "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v","FALSE","FALSE"
 ENDLIST
+LIST "COND_ADD_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
 LIST "CORDICFIFO::work","component/work/CORDICFIFO/CORDICFIFO.v","TRUE","FALSE"
 SUBBLOCK "CORDICFIFO_CORDICFIFO_0_COREFIFO::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/COREFIFO.v","FALSE","FALSE"
 ENDLIST
@@ -2170,6 +2227,15 @@ SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib","component/w
 ENDLIST
 LIST "divide::work","hdl/divide.vhd","FALSE","FALSE"
 ENDLIST
+LIST "DIVISION_C0::work","component/work/DIVISION_C0/DIVISION_C0.vhd","TRUE","FALSE"
+SUBBLOCK "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
+LIST "DIVISIon_pipe::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "COND_ADD_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "RADIX4_CELL_div::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
+LIST "ADD_SUB_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
 LIST "CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_corefifo_sync_scntr::work","component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/corefifo_sync_scntr.v","FALSE","FALSE"
 ENDLIST
 LIST "CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_ram_wrapper::work","component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/rtl/vlog/core/CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_ram_wrapper.v","FALSE","FALSE"
@@ -2185,10 +2251,20 @@ ENDLIST
 LIST "CALFIFO_C0_CALFIFO_C0_0_ram_wrapper::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v","FALSE","FALSE"
 SUBBLOCK "CALFIFO_C0_CALFIFO_C0_0_USRAM_top::work","component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v","FALSE","FALSE"
 ENDLIST
+LIST "COND_ADD_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
 LIST "CORDICFIFO_CORDICFIFO_0_corefifo_sync_scntr::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v","FALSE","FALSE"
 ENDLIST
 LIST "CORDICFIFO_CORDICFIFO_0_ram_wrapper::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_ram_wrapper.v","FALSE","FALSE"
 SUBBLOCK "CORDICFIFO_CORDICFIFO_0_LSRAM_top::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v","FALSE","FALSE"
+ENDLIST
+LIST "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "DIVISIon_pipe::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "division_seq::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+ENDLIST
+LIST "division_seq::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "ADD_SUB_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "COND_ADD_DIV::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
 LIST "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE"
 ENDLIST
@@ -2203,6 +2279,8 @@ LIST "PF_TPSRAM_CAL_PROCESS::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSR
 SUBBLOCK "PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v","FALSE","FALSE"
 ENDLIST
 LIST "PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM::work","component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v","FALSE","FALSE"
+ENDLIST
+LIST "RADIX4_CELL_div::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
 LIST "test_divide::work","hdl/test_divide.vhd","FALSE","FALSE"
 ENDLIST
@@ -2241,6 +2319,12 @@ ENDLIST
 LIST "cordic_bhvOutpVect::corecordic_lib","","FALSE","FALSE"
 ENDLIST
 LIST "coreparameters::work","component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd","FALSE","TRUE"
+ENDLIST
+LIST "coreparameters::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd","FALSE","TRUE"
+ENDLIST
+LIST "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "DIVISIon_pipe::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
+SUBBLOCK "division_seq::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
 LIST "bhv_kitDelay_bit_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
 ENDLIST
@@ -2295,6 +2379,9 @@ SUBBLOCK "clock_driver::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/v
 SUBBLOCK "fifo_driver::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_driver.v","FALSE","TRUE"
 SUBBLOCK "fifo_monitor::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_monitor.v","FALSE","TRUE"
 SUBBLOCK "g4_dp_ext_mem::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/g4_dp_ext_mem.v","FALSE","TRUE"
+ENDLIST
+LIST "testbench::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd","FALSE","TRUE"
+SUBBLOCK "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
 LIST "testbench::work","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd","FALSE","TRUE"
 SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd","FALSE","FALSE"

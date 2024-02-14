@@ -81,6 +81,11 @@ architecture architecture_cal_process of cal_process is
     signal FDX                            : signed(39 DOWNTO 0);
     signal SDX                            : signed(39 DOWNTO 0);
     
+    signal FDX_neg                        : std_logic;
+    signal SDX_neg                        : std_logic;
+    signal div_result                     : std_logic_vector(30 downto 0);
+    signal fraction_num                   : integer range 0 to 30;
+    
     signal top1                           : signed(37 DOWNTO 0);
     signal bot1                           : signed(37 DOWNTO 0);
     signal top2                           : signed(37 DOWNTO 0);
@@ -132,6 +137,7 @@ architecture architecture_cal_process of cal_process is
     signal valid_in_s                     : std_logic;
     signal valid_out_s                    : std_logic;
     signal quotient_s                     : std_logic_vector(31 downto 0);
+    signal remainder_s                    : std_logic_vector(31 downto 0);
     signal delta_drift                    : signed(31 downto 0);
     
     -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I think you leave out the pi because of angle fixed point representation
@@ -159,21 +165,14 @@ architecture architecture_cal_process of cal_process is
         S_PWR_2,
         S_PWR_3,
         S_PWR_4,
+        S_DIV_PREP_1,
         S_DIVIDE_1,
         S_DIVIDE_2,
+        S_LATCH_DRIFT,
         S_CHECK_LOCK,
         S_ADD_DRIFT,
         S_CORRECT_DRIFT,
         S_OUTPUT_NEW_DRIFT,
-        S_MULTIPLY_WAIT_3,
-        S_BEGIN_MULTIPLY_4,
-        S_MULTIPLY_WAIT_4,
-        S_BEGIN_MULTIPLY_5,
-        S_MULTIPLY_WAIT_5,
-        S_BEGIN_MULTIPLY_6,
-        S_MULTIPLY_WAIT_6,
-        S_BEGIN_MULTIPLY_7,
-        S_MULTIPLY_WAIT_7,
         S_OUTPUT_READY);
     signal state: state_type;
 
@@ -259,15 +258,16 @@ begin
         R_DATA   => sig4_im_read_data
         );
         
-    vhdl_divide : entity work.divide
+    vhdl_divide : entity work.DIVISION_C0
     PORT MAP(
-        clk         => clk,
-        reset       => reset,
-        numerator   => numerator_s,
-        denominator => denominator_s,
-        valid_in    => valid_in_s, 
-        valid_out   => valid_out_s,
-        quotient    => quotient_s
+        sys_clk_i         => clk,
+        reset_i       => not reset,
+        num_i   => numerator_s,
+        den_i => denominator_s,
+        start_i    => valid_in_s, 
+        done_o   => valid_out_s,
+        q_o    => quotient_s,
+        r_o    => remainder_s
     );
     error       <= error_s;
     foutreal1   <= std_logic_vector(foutreal1_s(37 DOWNTO 6));
@@ -278,7 +278,10 @@ begin
     foutimag3   <= std_logic_vector(foutimag3_s(37 DOWNTO 6));
     foutreal4   <= std_logic_vector(foutreal4_s(37 DOWNTO 6));
     foutimag4   <= std_logic_vector(foutimag4_s(37 DOWNTO 6));
-    process (clk) begin
+    
+    process (clk)
+        variable div_result_neg : signed(31 DOWNTO 0) := (others=>'0');
+        begin
         if (rising_edge(clk)) then
             if (reset = '1') then
                 FD1              <= (others=>'0');
@@ -289,6 +292,11 @@ begin
                 SD2              <= (others=>'0');
                 SD3              <= (others=>'0');
                 SD4              <= (others=>'0');
+                
+                FDX_neg          <= '0';
+                SDX_neg          <= '0';
+                fraction_num     <= 30;
+                div_result       <= (others=>'0');
                 
                 FDX              <= (others=>'0');
                 SDX              <= (others=>'0');
@@ -331,8 +339,8 @@ begin
                 foutimag4_s            <= (others=>'0');
                 error_s                <= (others=>'0');
                 
-                numerator_s            <= x"00000214";
-                denominator_s          <= x"0000003E";
+                numerator_s            <= (others=>'0');
+                denominator_s          <= (others=>'0');
                 valid_in_s             <= '0';
                 state                  <= S_IDLE;
             else
@@ -342,6 +350,7 @@ begin
                 end if;
                 write_en <= '0';
                 fout_ready <= '0';
+                
                 if (readyout = '1') then
                     FD1 <= FD1 + signed(drift_FD1);
                     FD2 <= FD2 + signed(drift_FD2);
@@ -423,6 +432,7 @@ begin
                 when S_IDLE =>
                     FDX <= (others=>'0');
                     SDX <= (others=>'0');
+                    fraction_num     <= 30;
                     valid_in_s <= '0';
                 when S_PWR_1 =>
                     if (shift_right(top1, 4) > bot1) then
@@ -447,18 +457,63 @@ begin
                         FDX <= FDX + FD4;
                         SDX <= SDX + SD4;
                     end if;
-                    state <= S_DIVIDE_1;
-                when S_DIVIDE_1 =>
-                    numerator_s <= std_logic_vector(FDX(39 DOWNTO 8));
-                    denominator_s <= std_logic_vector(SDX(39 DOWNTO 8));
+                    state <= S_DIV_PREP_1;
+                when S_DIV_PREP_1 =>
+                    if (FDX(FDX'left) = '1') then
+                        FDX_neg <= '1';
+                        numerator_s <= std_logic_vector(-FDX(FDX'left DOWNTO FDX'left - 31));
+                    else
+                        FDX_neg <= '0';
+                        numerator_s <= std_logic_vector(FDX(FDX'left DOWNTO FDX'left - 31));
+                    end if;
+                    
+                    if (SDX(SDX'left) = '1') then
+                        SDX_neg <= '1';
+                        denominator_s <= std_logic_vector(-SDX(SDX'left DOWNTO SDX'left - 31));
+                    else
+                        SDX_neg <= '0';
+                        denominator_s <= std_logic_vector(SDX(SDX'left DOWNTO SDX'left - 31));
+                    end if;
                     valid_in_s <= '1';
                     state <= S_DIVIDE_2;
                 when S_DIVIDE_2 =>
                     valid_in_s <= '0';
-                    if (valid_out_s <= '1') then
-                        delta_drift <= signed(quotient_s);
-                        state <= S_CHECK_LOCK;
+                    if (valid_out_s = '1') then
+                        if (quotient_s /= x"00000001") then
+                            div_result(fraction_num) <= '1';
+                            if (remainder_s /= x"00000000") then
+                                numerator_s <= remainder_s(30 DOWNTO 0) & '0';
+                                valid_in_s <= '1';
+                            else
+                                state <= S_LATCH_DRIFT;
+                            end if;
+                        elsif (quotient_s /= x"00000000") then
+                            div_result(fraction_num) <= '0';
+                            if (remainder_s /= x"00000000") then
+                                numerator_s <= numerator_s(30 DOWNTO 0) & '0';
+                                valid_in_s <= '1';
+                            else
+                                state <= S_LATCH_DRIFT;
+                            end if;
+                        else
+                            error_s(2) <= '1';
+                        end if;
+                        
+                        if (fraction_num /= 0) then
+                            fraction_num <= fraction_num - 1;
+                            numerator_s <= remainder_s(30 DOWNTO 0) & '0';
+                        else
+                            state <= S_LATCH_DRIFT;
+                        end if;
                     end if;
+                when S_LATCH_DRIFT =>
+                    if ((FDX_neg = '1' and SDX_neg = '1') or (FDX_neg = '0' and SDX_neg = '0')) then
+                        delta_drift <= signed('0' & div_result);
+                    else
+                        div_result_neg := '1' & signed(div_result);
+                        delta_drift <= -div_result_neg;
+                    end if;
+                    state <= S_CHECK_LOCK;
                 when S_CHECK_LOCK =>
                     if ((SDX < 0) and (abs(delta_drift) < k_0_05_alpha)) then
                         have_lock_out <= '1';

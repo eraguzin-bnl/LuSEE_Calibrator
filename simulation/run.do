@@ -1,5 +1,5 @@
 quietly set ACTELLIBNAME PolarFire
-quietly set PROJECT_DIR "/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
+quietly set PROJECT_DIR "/home/eraguzin/Nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
 
 if {[file exists presynth/_info]} {
    echo "INFO: Simulation library presynth already exists"
@@ -89,8 +89,10 @@ vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_average_instance_C1
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_phaser.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_phaser_alt_fixpt.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/divide.vhd"
-vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process_fixpt.vhd"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/component/work/DIVISION_C0/DIVISION_C0.vhd"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/calibration_tb.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/cal_process_tb.vhd"
 
