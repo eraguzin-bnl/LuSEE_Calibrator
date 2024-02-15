@@ -91,6 +91,7 @@ architecture behavioral of calibration_tb is
     signal foutreal4_s                       : std_logic_vector(31 DOWNTO 0);
     signal foutimag4_s                       : std_logic_vector(31 DOWNTO 0);
     signal fout_ready_s                      : std_logic;
+    signal new_phase_rdy_s                   : std_logic;
     
 begin
 
@@ -104,8 +105,8 @@ begin
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
             powertop_index   <= std_logic_vector(to_unsigned(30, powertop_index'length));
             powerbot_index   <= std_logic_vector(to_unsigned(30, powerbot_index'length));
-            driftFD_index    <= std_logic_vector(to_unsigned(12, driftFD_index'length));
-            driftSD_index    <= std_logic_vector(to_unsigned(17+12, driftSD_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(14, driftFD_index'length));
+            driftSD_index    <= std_logic_vector(to_unsigned(17+14, driftSD_index'length));
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -250,6 +251,7 @@ begin
             --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
             cal_drift => cal_drift_out,
             readyin => readyin_gated,
+            new_phase_rdy => new_phase_rdy_s,
 
             -- Outputs
             calbin => calbin,
@@ -326,7 +328,7 @@ begin
             powerbot4 => powerbot_s,
             drift_FD4 => drift_FD_s,
             drift_SD4 => drift_SD_s,
-            calbin => calbin,
+            calbin => calbin_out,
             readyout => average_ready_s,
             drift_in => cal_drift_out,
             update_drift => update_drift,
@@ -343,7 +345,8 @@ begin
             foutimag3 => foutimag3_s,
             foutreal4 => foutreal4_s,
             foutimag4 => foutimag4_s,
-            fout_ready => fout_ready_s
+            fout_ready => fout_ready_s,
+            new_phase_rdy => new_phase_rdy_s
         );
 end behavioral;
 

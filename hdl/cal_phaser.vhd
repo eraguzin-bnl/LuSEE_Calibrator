@@ -36,6 +36,7 @@ generic(
         bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
         cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- The value to shift the cordic input by for 64 cycles
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
+        new_phase_rdy                     :   IN    std_logic;
         calbin                            :   OUT   std_logic_vector(8 DOWNTO 0);  -- Output of which bin's values are going out
         phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Real part of complex phase result
         phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
@@ -637,6 +638,8 @@ begin
                     cordic_counter <= 0;
                     if (update_drift_s = '1') then
                         update_drift_s <= '0';
+                    end if;
+                    if (new_phase_rdy = '1') then
                         state2 <= S_CORDIC_IDLE;
                     end if;
                 when others =>

@@ -65,7 +65,8 @@ entity cal_process is
         foutimag3                         :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En20
         foutreal4                         :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         foutimag4                         :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
-        fout_ready                        :   OUT   std_logic
+        fout_ready                        :   OUT   std_logic;
+        new_phase_rdy                     :   OUT   std_logic
         );
 end cal_process;
 architecture architecture_cal_process of cal_process is
@@ -83,7 +84,7 @@ architecture architecture_cal_process of cal_process is
     
     signal FDX_neg                        : std_logic;
     signal SDX_neg                        : std_logic;
-    signal div_result                     : std_logic_vector(30 downto 0);
+    signal div_result                     : std_logic_vector(31 downto 0);
     signal fraction_num                   : integer range 0 to 30;
     
     signal top1                           : signed(37 DOWNTO 0);
@@ -140,7 +141,7 @@ architecture architecture_cal_process of cal_process is
     signal remainder_s                    : std_logic_vector(31 downto 0);
     signal delta_drift                    : signed(31 downto 0);
     
-    -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I think you leave out the pi because of angle fixed point representation
+    -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I will leave out the pi because of angle fixed point representation
     -- phase_drift_per_ppm = 0.000004
     -- alpha_to_pdrift = 16*phase_drift_per_ppm;
     -- alpha_to_pdrift = 0.000064
@@ -154,11 +155,12 @@ architecture architecture_cal_process of cal_process is
     -- 1.2*alpha_to_pdrift = binary(00.000000000000010100001000011111) aka
     -- 1/(2**14) + 1/(2**16) + 1/(2**21) + 1/(2**26) + 1/(2**27) + 1/(2**28) + 1/(2**29) + 1/(2**30) = 0.00007679965...
     -- So this can be compared directly to the phase output which has the same fixed point representation
-    -- -1.2*alpha_to_pdrift = binary(10.000000000000010100001000011111)
+    -- -1.2*alpha_to_pdrift = binary(11.111111111111101011110111100000)
     
     CONSTANT k_0_05_alpha                : signed(31 DOWNTO 0) := "00000000000000000000110101101100";
     CONSTANT k_1_2_alpha                 : signed(31 DOWNTO 0) := "00000000000000010100001000011111";
-    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "10000000000000010100001000011111";
+    --CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "10000000000000010100001000011111";
+    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "11111111111111101011110111100000";
     
     type state_type is (S_IDLE,
         S_PWR_1,
@@ -319,6 +321,7 @@ begin
                 drift_s                <= (others=>'0');
                 drift_out              <= (others=>'0');
                 have_lock_out          <= '0';
+                new_phase_rdy          <= '0';
                 
                 sig1_re_write_data     <= (others=>'0');
                 sig1_im_write_data     <= (others=>'0');
@@ -350,6 +353,7 @@ begin
                 end if;
                 write_en <= '0';
                 fout_ready <= '0';
+                new_phase_rdy <= '0';
                 
                 if (readyout = '1') then
                     FD1 <= FD1 + signed(drift_FD1);
@@ -375,6 +379,7 @@ begin
                     if (calbin = read_address) then
                         write_en               <= '1';
                         read_address           <= std_logic_vector(unsigned(read_address) + 1);
+                        write_address          <= read_address;
                         
                         if (Nac2 = 0) then
                             sig1_re_write_data     <= resize(signed(outreal1), 38);
@@ -479,7 +484,7 @@ begin
                 when S_DIVIDE_2 =>
                     valid_in_s <= '0';
                     if (valid_out_s = '1') then
-                        if (quotient_s /= x"00000001") then
+                        if (quotient_s /= x"00000000") then
                             div_result(fraction_num) <= '1';
                             if (remainder_s /= x"00000000") then
                                 numerator_s <= remainder_s(30 DOWNTO 0) & '0';
@@ -487,7 +492,7 @@ begin
                             else
                                 state <= S_LATCH_DRIFT;
                             end if;
-                        elsif (quotient_s /= x"00000000") then
+                        elsif (quotient_s /= x"00000001") then
                             div_result(fraction_num) <= '0';
                             if (remainder_s /= x"00000000") then
                                 numerator_s <= numerator_s(30 DOWNTO 0) & '0';
@@ -503,16 +508,18 @@ begin
                             fraction_num <= fraction_num - 1;
                             numerator_s <= remainder_s(30 DOWNTO 0) & '0';
                         else
+                            valid_in_s <= '0';
                             state <= S_LATCH_DRIFT;
                         end if;
                     end if;
                 when S_LATCH_DRIFT =>
                     if ((FDX_neg = '1' and SDX_neg = '1') or (FDX_neg = '0' and SDX_neg = '0')) then
-                        delta_drift <= signed('0' & div_result);
+                        delta_drift <= signed(div_result);
                     else
-                        div_result_neg := '1' & signed(div_result);
+                        div_result_neg := signed(div_result);
                         delta_drift <= -div_result_neg;
                     end if;
+                    valid_in_s <= '0';
                     state <= S_CHECK_LOCK;
                 when S_CHECK_LOCK =>
                     if ((SDX < 0) and (abs(delta_drift) < k_0_05_alpha)) then
@@ -528,9 +535,7 @@ begin
                 when S_CORRECT_DRIFT =>
                     if (drift_s > k_1_2_alpha) then
                         drift_s <= k_negative_1_2_alpha;
-                    end if;
-                    
-                    if (drift_s > k_negative_1_2_alpha) then
+                    elsif (drift_s < k_negative_1_2_alpha) then
                         drift_s <= k_1_2_alpha;
                     end if;
                     state <= S_OUTPUT_NEW_DRIFT;
@@ -556,6 +561,8 @@ begin
                     bot4 <= (others=>'0');
                     
                     drift_out <= std_logic_vector(drift_s);
+                    new_phase_rdy          <= '1';
+                    state <= S_IDLE;
                 when others =>		
                     state <= S_IDLE;
                 end case;
