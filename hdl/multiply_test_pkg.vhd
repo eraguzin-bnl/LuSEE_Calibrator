@@ -63,9 +63,18 @@ package body MultiplyTestPkg is
                 if (test64_slice < error_ones) then
                     error_out(error_index) <= '1';
                 end if;
+                -- Saw cases where the top most signed bit was different, so you get an overflow effect. 
+                -- That's not caught by method above, need to check the MSB directly
+                if (data(31 + slice) /= '1') then
+                    error_out(error_index) <= '1';
+                end if;
             else
                 --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
                 if (test64_slice > error_zeroes) then
+                    error_out(error_index) <= '1';
+                end if;
+                
+                if (data(31 + slice) /= '0') then
                     error_out(error_index) <= '1';
                 end if;
             end if;
@@ -89,9 +98,17 @@ package body MultiplyTestPkg is
                 if (test65_slice < error_ones) then
                     error_out(error_index) <= '1';
                 end if;
+                
+                if (data(31 + slice) /= '1') then
+                    error_out(error_index) <= '1';
+                end if;
             else
                 --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
                 if (test65_slice > error_zeroes) then
+                    error_out(error_index) <= '1';
+                end if;
+                
+                if (data(31 + slice) /= '0') then
                     error_out(error_index) <= '1';
                 end if;
             end if;
@@ -115,9 +132,17 @@ package body MultiplyTestPkg is
                 if (test66_slice < error_ones) then
                     error_out(error_index) <= '1';
                 end if;
+                
+                if (data(31 + slice) /= '1') then
+                    error_out(error_index) <= '1';
+                end if;
             else
                 --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
                 if (test66_slice > error_zeroes) then
+                    error_out(error_index) <= '1';
+                end if;
+                
+                if (data(31 + slice) /= '0') then
                     error_out(error_index) <= '1';
                 end if;
             end if;

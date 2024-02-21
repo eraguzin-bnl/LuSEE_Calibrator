@@ -101,12 +101,12 @@ begin
     begin
         if ( vhdl_initial ) then
             cplx_index       <= std_logic_vector(to_unsigned(30, cplx_index'length));
-            sum1_index       <= std_logic_vector(to_unsigned(16, sum1_index'length));
+            sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
-            powertop_index   <= std_logic_vector(to_unsigned(30, powertop_index'length));
-            powerbot_index   <= std_logic_vector(to_unsigned(30, powerbot_index'length));
-            driftFD_index    <= std_logic_vector(to_unsigned(14, driftFD_index'length));
-            driftSD_index    <= std_logic_vector(to_unsigned(17+14, driftSD_index'length));
+            powertop_index   <= std_logic_vector(to_unsigned(32, powertop_index'length));
+            powerbot_index   <= std_logic_vector(to_unsigned(32, powerbot_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(32, driftFD_index'length));
+            driftSD_index    <= std_logic_vector(to_unsigned(28, driftSD_index'length));
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -220,6 +220,8 @@ begin
       file_close(readyin_file);
       file_close(cal_drift_file);
       file_close(bin_in_file);
+      file_close(real_in_file);
+      file_close(imag_in_file);
       file_status := 0;
     END IF;
   END PROCESS fileread;

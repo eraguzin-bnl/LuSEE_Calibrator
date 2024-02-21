@@ -205,7 +205,7 @@ architecture architecture_cal_average of cal_average is
     signal state: state_type;
 
 begin
-    error <= error_s & error_data_fifo_full & error_data_fifo_backup & error_phase_fifo_full & error_fifo_alignment;
+    error <= error_data_fifo_full & error_data_fifo_backup & error_phase_fifo_full & error_fifo_alignment & error_s;
     -- Since we cannot process each bin as fast as they are coming in (every 4 clock cycles), each real and imaginary value is
     -- Stored in a FIFO and the state machine does the math as it can
     -- This FIFO has room for 512 samples of values. 

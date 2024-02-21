@@ -70,31 +70,28 @@ entity cal_process is
         );
 end cal_process;
 architecture architecture_cal_process of cal_process is
-    signal FD1                            : signed(37 DOWNTO 0);
-    signal FD2                            : signed(37 DOWNTO 0);
-    signal FD3                            : signed(37 DOWNTO 0);
-    signal FD4                            : signed(37 DOWNTO 0);
-    signal SD1                            : signed(37 DOWNTO 0);
-    signal SD2                            : signed(37 DOWNTO 0);
-    signal SD3                            : signed(37 DOWNTO 0);
-    signal SD4                            : signed(37 DOWNTO 0);
-    
-    signal FDX                            : signed(39 DOWNTO 0);
-    signal SDX                            : signed(39 DOWNTO 0);
+    -- Will add up to 2048/4 = 512 values (2^9), so needs another 9 bits for overflow
+    signal FD1                            : signed(40 DOWNTO 0);
+    signal FD2                            : signed(40 DOWNTO 0);
+    signal FD3                            : signed(40 DOWNTO 0);
+    signal FD4                            : signed(40 DOWNTO 0);
+    signal SD1                            : signed(40 DOWNTO 0);
+    signal SD2                            : signed(40 DOWNTO 0);
+    signal SD3                            : signed(40 DOWNTO 0);
+    signal SD4                            : signed(40 DOWNTO 0);
     
     signal FDX_neg                        : std_logic;
     signal SDX_neg                        : std_logic;
-    signal div_result                     : std_logic_vector(31 downto 0);
     signal fraction_num                   : integer range 0 to 30;
     
-    signal top1                           : signed(37 DOWNTO 0);
-    signal bot1                           : signed(37 DOWNTO 0);
-    signal top2                           : signed(37 DOWNTO 0);
-    signal bot2                           : signed(37 DOWNTO 0);
-    signal top3                           : signed(37 DOWNTO 0);
-    signal bot3                           : signed(37 DOWNTO 0);
-    signal top4                           : signed(37 DOWNTO 0);
-    signal bot4                           : signed(37 DOWNTO 0);
+    signal top1                           : signed(40 DOWNTO 0);
+    signal bot1                           : signed(40 DOWNTO 0);
+    signal top2                           : signed(40 DOWNTO 0);
+    signal bot2                           : signed(40 DOWNTO 0);
+    signal top3                           : signed(40 DOWNTO 0);
+    signal bot3                           : signed(40 DOWNTO 0);
+    signal top4                           : signed(40 DOWNTO 0);
+    signal bot4                           : signed(40 DOWNTO 0);
     
     SIGNAL read_address                   : std_logic_vector(8 downto 0);
     SIGNAL write_address                  : std_logic_vector(8 downto 0);
@@ -102,6 +99,7 @@ architecture architecture_cal_process of cal_process is
     SIGNAL error_stick_s                  : std_logic;
     SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
     
+    -- Todo, I think we only need to go to 35
     SIGNAL sig1_re_write_data             : signed(37 DOWNTO 0);
     SIGNAL sig1_im_write_data             : signed(37 DOWNTO 0);
     SIGNAL sig2_re_write_data             : signed(37 DOWNTO 0);
@@ -128,9 +126,6 @@ architecture architecture_cal_process of cal_process is
     SIGNAL foutimag3_s                    : signed(37 DOWNTO 0);
     SIGNAL foutreal4_s                    : signed(37 DOWNTO 0);
     SIGNAL foutimag4_s                    : signed(37 DOWNTO 0);
-    
-    SIGNAL drift_s                        : signed(31 DOWNTO 0);
-    
     signal Nac2                           : integer range 0 to 9;
     
     signal numerator_s                    : std_logic_vector(31 downto 0);
@@ -139,7 +134,11 @@ architecture architecture_cal_process of cal_process is
     signal valid_out_s                    : std_logic;
     signal quotient_s                     : std_logic_vector(31 downto 0);
     signal remainder_s                    : std_logic_vector(31 downto 0);
+    signal div_result                     : std_logic_vector(31 downto 0);
+    signal FDX                            : signed(42 DOWNTO 0);
+    signal SDX                            : signed(42 DOWNTO 0);
     signal delta_drift                    : signed(31 downto 0);
+    SIGNAL drift_s                        : signed(31 DOWNTO 0);
     
     -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I will leave out the pi because of angle fixed point representation
     -- phase_drift_per_ppm = 0.000004
@@ -319,7 +318,12 @@ begin
                 Nac2                   <= 0;
                 fout_ready             <= '0';
                 drift_s                <= (others=>'0');
-                drift_out              <= (others=>'0');
+                --drift_out              <= (others=>'0');
+                drift_out              <= x"00005088";
+                --Was -0.0000192
+                --drift_out              <= "11111111111111111010111101111000";
+                -- Was 5.3E-8
+                --drift_out              <= "00000000000000000000000000111001";
                 have_lock_out          <= '0';
                 new_phase_rdy          <= '0';
                 
@@ -484,7 +488,7 @@ begin
                 when S_DIVIDE_2 =>
                     valid_in_s <= '0';
                     if (valid_out_s = '1') then
-                        if (quotient_s /= x"00000000") then
+                        if (quotient_s = x"00000001") then
                             div_result(fraction_num) <= '1';
                             if (remainder_s /= x"00000000") then
                                 numerator_s <= remainder_s(30 DOWNTO 0) & '0';
@@ -492,7 +496,7 @@ begin
                             else
                                 state <= S_LATCH_DRIFT;
                             end if;
-                        elsif (quotient_s /= x"00000001") then
+                        elsif (quotient_s = x"00000000") then
                             div_result(fraction_num) <= '0';
                             if (remainder_s /= x"00000000") then
                                 numerator_s <= numerator_s(30 DOWNTO 0) & '0';
@@ -562,6 +566,11 @@ begin
                     
                     drift_out <= std_logic_vector(drift_s);
                     new_phase_rdy          <= '1';
+                    if (Nac2 /= 9) then
+                        Nac2 <= Nac2 + 1;
+                    else
+                        Nac2 <= 0;
+                    end if;
                     state <= S_IDLE;
                 when others =>		
                     state <= S_IDLE;

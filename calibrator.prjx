@@ -69,46 +69,31 @@ ENDLIST
 LIST FileManager
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf,actgen_cxf"
 STATE="utd"
-TIME="1704814784"
-SIZE="1170"
+TIME="1708534338"
+SIZE="985"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.cxf"
 ENDFILE
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
 STATE="utd"
-TIME="1707853748"
-SIZE="771"
+TIME="1708534338"
+SIZE="473"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
+IS_INCLUDED="TRUE"
 ENDFILE
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v,hdl"
 STATE="utd"
-TIME="1707853748"
-SIZE="41497"
+TIME="1708534338"
+SIZE="31471"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v,tb_hdl"
 STATE="utd"
-TIME="1707853748"
-SIZE="15291"
-LIBRARY="CORECORDIC_LIB"
-PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
-IS_READONLY="TRUE"
-ENDFILE
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
-STATE="utd"
-TIME="1707853748"
-SIZE="9281"
-PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
-PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
-IS_READONLY="TRUE"
-ENDFILE
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
-STATE="utd"
-TIME="1707853748"
-SIZE="14551"
+TIME="1708534338"
+SIZE="17385"
 PARENT="<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/CORECORDIC.cxf"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
@@ -715,82 +700,74 @@ IS_INCLUDED="TRUE"
 ENDFILE
 VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.cxf,actgen_cxf"
 STATE="utd"
-TIME="1704814784"
-SIZE="3623"
+TIME="1708534339"
+SIZE="3565"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.v,hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="6106"
+TIME="1708534338"
+SIZE="4178"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.v,hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="4025"
+TIME="1708534338"
+SIZE="2686"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf,actgen_cxf"
 STATE="utd"
-TIME="1704814784"
-SIZE="2704"
+TIME="1708534338"
+SIZE="2474"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.cxf"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.v,hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="472"
+TIME="1708534338"
+SIZE="250"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v,tb_hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="6721"
+TIME="1708534338"
+SIZE="6718"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v,tb_hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="4109"
+TIME="1708534338"
+SIZE="4103"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v,hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="17118"
+TIME="1708534338"
+SIZE="8877"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v,hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="18592"
+TIME="1708534338"
+SIZE="8880"
 LIBRARY="CORECORDIC_LIB"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
 STATE="utd"
-TIME="1704814784"
-SIZE="10325"
-LIBRARY="CORECORDIC_LIB"
-PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
-IS_READONLY="TRUE"
-ENDFILE
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd,tb_hdl"
-STATE="utd"
-TIME="1704814784"
-SIZE="19400"
+TIME="1708534338"
+SIZE="10803"
 PARENT="<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -873,7 +850,7 @@ SIZE="138"
 ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1707422254"
+TIME="1708114908"
 SIZE="43233"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
@@ -893,8 +870,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1708023261"
-SIZE="35926"
+TIME="1708547954"
+SIZE="35987"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -908,8 +885,8 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1708034471"
-SIZE="27794"
+TIME="1708543807"
+SIZE="28313"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 STATE="utd"
@@ -938,8 +915,8 @@ SIZE="7970"
 ENDFILE
 VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
 STATE="utd"
-TIME="1706714916"
-SIZE="5429"
+TIME="1708469197"
+SIZE="6455"
 ENDFILE
 VALUE "<project>/hdl/test_divide.vhd,hdl"
 STATE="utd"
@@ -948,8 +925,8 @@ SIZE="1691"
 ENDFILE
 VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1707759310"
-SIZE="86530"
+TIME="1708534422"
+SIZE="118719"
 ENDFILE
 VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
 STATE="utd"
@@ -968,13 +945,13 @@ SIZE="117189"
 ENDFILE
 VALUE "<project>/simulation/cal_process_tb_presynth_simulation.log,log"
 STATE="utd"
-TIME="1707924908"
-SIZE="52291"
+TIME="1708010943"
+SIZE="52410"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1708008131"
-SIZE="9294"
+TIME="1708534366"
+SIZE="8675"
 ENDFILE
 VALUE "<project>/simulation/testbench_presynth_simulation.log,log"
 STATE="utd"
@@ -983,8 +960,8 @@ SIZE="42419"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1708032292"
-SIZE="13010"
+TIME="1708470600"
+SIZE="13071"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
 STATE="utd"
@@ -1018,7 +995,7 @@ SIZE="909868"
 ENDFILE
 VALUE "<project>/synthesis/test_divide_syn.prj,prj"
 STATE="utd"
-TIME="1707851940"
+TIME="1708008149"
 SIZE="2409"
 ENDFILE
 VALUE "<project>/synthesis/test_divide_vm.sdc,syn_sdc"
@@ -1353,15 +1330,12 @@ LIST "ideSIMULATION"
 USE_LIST=TRUE
 FILELIST
 VALUE "<project>/hdl/test_divide.vhd,hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd,hdl"
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.v,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v,hdl"
@@ -1402,25 +1376,23 @@ VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_f
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v,hdl"
 VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
 VALUE "<project>/hdl/cal_average.vhd,hdl"
-VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
-VALUE "<project>/hdl/cal_phaser.vhd,hdl"
-VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 VALUE "<project>/hdl/divide.vhd,hdl"
-VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
 VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.vhd,hdl"
 VALUE "<project>/hdl/cal_process.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST 
@@ -1463,45 +1435,14 @@ ENDUsed_File_List
 ENDLIST
 ENDLIST
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib"
-FILE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::CORECORDIC_LIB"
+FILE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v,hdl"
 LIST Other_Association
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd,tb_hdl"
-ENDLIST
-LIST AssociatedStimulus
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd,tb_hdl"
-ENDLIST
-LIST ProjectState5.1
-LIST Impl1
-ideSTIMULUS=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
-LIST Impl2
-ideSTIMULUS=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
 ENDLIST
 ENDLIST
 ENDLIST
@@ -1538,14 +1479,6 @@ VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/test/user/testb
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WeqR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WgtR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WltR.v,tb_hdl"
-ENDLIST
-LIST CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd,tb_hdl"
 ENDLIST
 LIST CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_COREFIFO
 VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/coreparameters.v,tb_hdl"
@@ -1606,12 +1539,11 @@ VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/mti/scripts/wave.do,do"
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/mti/scripts/runall.do,do"
 ENDLIST
 LIST CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd,tb_hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd,tb_hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
 ENDLIST
 LIST CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_COREFIFO
 VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/coreparameters.v,tb_hdl"
@@ -1872,28 +1804,6 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib"
-LIST Impl1
-ideSTIMULUS=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
-LIST Impl2
-ideSTIMULUS=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
-ENDLIST
 ENDLIST
 LIST ExcludePackageForSimulation
 ENDLIST
@@ -1909,15 +1819,12 @@ LIST "ideSIMULATION"
 USE_LIST=TRUE
 FILELIST
 VALUE "<project>/hdl/test_divide.vhd,hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd,hdl"
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_phaser_alt_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt_pkg.vhd,hdl"
 VALUE "<project>/hdl/cal_process_fixpt_tb_pkg.vhd,hdl"
 VALUE "<project>/hdl/multiply_test_pkg.vhd,hdl"
-VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0.v,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_USRAM_top.v,hdl"
 VALUE "<project>/component/work/CALFIFO_C0/CALFIFO_C0_0/rtl/vlog/core/CALFIFO_C0_CALFIFO_C0_0_ram_wrapper.v,hdl"
@@ -1958,25 +1865,23 @@ VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_f
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_grayToBinConv.v,hdl"
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync.v,hdl"
 VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/corefifo_sync_scntr.v,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd,hdl"
-VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v,hdl"
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v,hdl"
 VALUE "<project>/hdl/Multiply_generic_32.vhd,hdl"
 VALUE "<project>/hdl/cal_average.vhd,hdl"
-VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
-VALUE "<project>/hdl/cal_phaser.vhd,hdl"
-VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 VALUE "<project>/hdl/divide.vhd,hdl"
-VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd,hdl"
 VALUE "<project>/component/work/DIVISION_C0/DIVISION_C0.vhd,hdl"
 VALUE "<project>/hdl/cal_process.vhd,hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v,hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v,hdl"
+VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST
@@ -2058,12 +1963,13 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
+HDL;hdl/cal_phaser.vhd;0
 HDL;hdl/cal_average.vhd;0
 HDL;hdl/cal_process.vhd;0
+HDL;hdl/multiply_test_pkg.vhd;0
 HDL;stimulus/cal_process_tb.vhd;0
-HDL;hdl/cal_phaser.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-ACTIVEVIEW;hdl/cal_process.vhd
+ACTIVEVIEW;hdl/cal_phaser.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
@@ -2141,7 +2047,7 @@ SUBBLOCK "Multiply_generic32::work","hdl/Multiply_generic_32.vhd","FALSE","FALSE
 SUBBLOCK "CALFIFO_C0::work","component/work/CALFIFO_C0/CALFIFO_C0.v","TRUE","FALSE"
 SUBBLOCK "CORDICFIFO::work","component/work/CORDICFIFO/CORDICFIFO.v","TRUE","FALSE"
 SUBBLOCK "CORDICFIFO::work","component/work/CORDICFIFO/CORDICFIFO.v","TRUE","FALSE"
-SUBBLOCK "CORECORDIC_C0::work","component/work/CORECORDIC_C0/CORECORDIC_C0.vhd","TRUE","FALSE"
+SUBBLOCK "CORECORDIC_C0::work","component/work/CORECORDIC_C0/CORECORDIC_C0.v","TRUE","FALSE"
 ENDLIST
 LIST "cal_phaser_alt_fixpt::work","hdl/cal_phaser_alt_fixpt.vhd","FALSE","FALSE"
 ENDLIST
@@ -2214,8 +2120,8 @@ LIST "CORDICFIFO_CORDICFIFO_0_corefifo_sync::work","component/work/CORDICFIFO/CO
 ENDLIST
 LIST "CORDICFIFO_CORDICFIFO_0_LSRAM_top::work","component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/core/CORDICFIFO_CORDICFIFO_0_LSRAM_top.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0::work","component/work/CORECORDIC_C0/CORECORDIC_C0.vhd","TRUE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0::work","component/work/CORECORDIC_C0/CORECORDIC_C0.v","TRUE","FALSE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v","FALSE","FALSE"
 ENDLIST
 LIST "divide::work","hdl/divide.vhd","FALSE","FALSE"
 ENDLIST
@@ -2276,15 +2182,26 @@ LIST "RADIX4_CELL_div::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Ob
 ENDLIST
 LIST "test_divide::work","hdl/test_divide.vhd","FALSE","FALSE"
 ENDLIST
-LIST "bhv_kitDelay_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhv_dirac::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhv_pack::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhv_pack.vhd","FALSE","TRUE"
+LIST "bhv_fEdge_ce::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvClockGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhv_gen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvEdge::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhv_dirac::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhv_fEdge_ce::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhv_lfsr::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhv_step::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvDelay::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhv_lfsr::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvEdge::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhv_step::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+ENDLIST
+LIST "bhvClockGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+ENDLIST
+LIST "bhvDelay::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+ENDLIST
+LIST "bhvEdge::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
 LIST "cal_average_instance_C1_fixpt_tb::work","stimulus/cal_average_instance_C1_fixpt_tb.vhd","FALSE","TRUE"
 SUBBLOCK "cal_average_instance_C1_fixpt::work","hdl/cal_average_instance_C1_fixpt.vhd","FALSE","FALSE"
@@ -2302,11 +2219,9 @@ SUBBLOCK "cal_process::work","hdl/cal_process.vhd","FALSE","FALSE"
 ENDLIST
 LIST "clock_driver::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/clock_driver.v","FALSE","TRUE"
 ENDLIST
-LIST "cordic_bhvInpVect::corecordic_lib","","FALSE","FALSE"
+LIST "cordic_bhvInpVect::CORECORDIC_LIB","","FALSE","FALSE"
 ENDLIST
-LIST "cordic_bhvOutpVect::corecordic_lib","","FALSE","FALSE"
-ENDLIST
-LIST "coreparameters::work","component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.vhd","FALSE","TRUE"
+LIST "cordic_bhvOutpVect::CORECORDIC_LIB","","FALSE","FALSE"
 ENDLIST
 LIST "coreparameters::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd","FALSE","TRUE"
 ENDLIST
@@ -2314,12 +2229,12 @@ LIST "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscate
 SUBBLOCK "DIVISIon_pipe::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 SUBBLOCK "division_seq::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
-LIST "bhv_kitDelay_bit_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhvClkGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvDelay::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvClkGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "bhv_kitDelay_bit_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhvDelay::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
 LIST "fifo_driver::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_driver.v","FALSE","TRUE"
 ENDLIST
@@ -2332,9 +2247,9 @@ SUBBLOCK "MEM_WeqR::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/
 ENDLIST
 LIST "MEM_WeqR::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WeqR.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
-LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
 ENDLIST
 LIST "MEM_WgtR::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WgtR.v","FALSE","TRUE"
 ENDLIST
@@ -2368,162 +2283,119 @@ SUBBLOCK "fifo_driver::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vl
 SUBBLOCK "fifo_monitor::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/fifo_monitor.v","FALSE","TRUE"
 SUBBLOCK "g4_dp_ext_mem::work","component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/g4_dp_ext_mem.v","FALSE","TRUE"
 ENDLIST
+LIST "testbench::work","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v","FALSE","TRUE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v","FALSE","FALSE"
+SUBBLOCK "bhvDelay::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvEdge::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "cordic_bhvInpVect::CORECORDIC_LIB","","FALSE","FALSE"
+SUBBLOCK "cordic_bhvOutpVect::CORECORDIC_LIB","","FALSE","FALSE"
+SUBBLOCK "bhvClkGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v","FALSE","TRUE"
+ENDLIST
 LIST "testbench::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd","FALSE","TRUE"
 SUBBLOCK "division::work","component/Microsemi/SolutionCore/DIVISION/1.0.5/Obfuscated/division.vhd","FALSE","FALSE"
 ENDLIST
-LIST "testbench::work","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/test/user/coreCordic_tb.vhd","FALSE","TRUE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd","FALSE","FALSE"
-SUBBLOCK "bhvEdge::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "bhv_kitDelay_reg::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "cordic_bhvInpVect::corecordic_lib","","FALSE","FALSE"
-SUBBLOCK "cordic_bhvOutpVect::corecordic_lib","","FALSE","FALSE"
-SUBBLOCK "bhvClkGen::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
-SUBBLOCK "bhvCountS::work","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/test/user/bhvKit.vhd","FALSE","TRUE"
+LIST "cordic_init_kickstart::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_countS::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_coarse_post_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_coarse_pre_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_dp_bits_trans::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitRndEven::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_init_kickstart::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitCountS::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitRndSymm::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitRndUp::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_par_calc::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRndEven::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par::CORECORDIC_LIB","","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRndSymm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/CORECORDIC.v","FALSE","FALSE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par::CORECORDIC_LIB","","FALSE","FALSE"
+SUBBLOCK "cordic_init_kickstart::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRndUp::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_word_cROM::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndEven::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndSymm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndUp::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_coarse_post_rotator::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_par_calc::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_coarse_pre_rotator::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_rtl_pack::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_rtl_pack.vhd","FALSE","FALSE"
+LIST "cordic_countS::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_dp_bits_trans::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par_uRotator::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_coarse_post_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_coarse_pre_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_dp_bits_trans::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par_uRotator::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cROM_par::corecordic_lib","","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_par_calc::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/CORECORDIC.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_par::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_par.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_init_kickstart::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd","FALSE","FALSE"
+LIST "cordic_kitRoundTop::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndEven::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndSymm::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndUp::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_cROM_par::corecordic_lib","","FALSE","FALSE"
+LIST "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_word_cROM::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd","FALSE","FALSE"
+LIST "cordic_word_calc::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "coreparameters::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/coreparameters.vhd","FALSE","FALSE"
+LIST "cordicSm::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_countS::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_coarse_post_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v","FALSE","FALSE"
+SUBBLOCK "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word_uRotator::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v","FALSE","FALSE"
+SUBBLOCK "cordicSm::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_coarse_post_rotator::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_coarse_pre_rotator::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_dp_bits_trans::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRoundTop::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRoundTop::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_coarse_pre_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word_uRotator::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/core/cordic_word.v","FALSE","FALSE"
+SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_word_cROM::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.v","FALSE","FALSE"
+SUBBLOCK "cordic_word_calc::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_dp_bits_trans::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_countS::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitCountS::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitRoundTop::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_bit_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndEven::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndSymm::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitRndUp::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_signExt::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
+SUBBLOCK "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRndUp::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_kitDelay_reg::CORECORDIC_LIB","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/core/cordic_kit.v","FALSE","FALSE"
 ENDLIST
-LIST "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndEven::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndSymm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndUp::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
+LIST "cordic_bhvInpVect::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v","FALSE","TRUE"
 ENDLIST
-LIST "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_word_calc::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordicSm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitCountS::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word_uRotator::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd","FALSE","FALSE"
-SUBBLOCK "cordicSm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_coarse_post_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_coarse_pre_rotator::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_dp_bits_trans::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "CORECORDIC_C0_CORECORDIC_C0_0_cordic_word_uRotator::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vhdl/core/cordic_word.vhd","FALSE","FALSE"
-SUBBLOCK "CORECORDIC_C0_CORECORDIC_C0_0_word_cROM::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/CORECORDIC_C0_CORECORDIC_C0_0_CordicLUT_word.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_word_calc::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_kitCountS::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_kitRoundTop::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_bit_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndEven::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndSymm::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_signExt::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-SUBBLOCK "cordic_kitRndUp::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_kitDelay_reg::corecordic_lib","component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vhdl/core/cordic_kit.vhd","FALSE","FALSE"
-ENDLIST
-LIST "cordic_bhvInpVect::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.vhd","FALSE","TRUE"
-ENDLIST
-LIST "cordic_bhvOutpVect::corecordic_lib","component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.vhd","FALSE","TRUE"
+LIST "cordic_bhvOutpVect::CORECORDIC_LIB","component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v","FALSE","TRUE"
 ENDLIST
 ENDLIST
 LIST ActiveTestBenchList

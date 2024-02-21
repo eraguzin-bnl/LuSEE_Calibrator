@@ -62,7 +62,7 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL calbin_s                        : std_logic_vector(11 DOWNTO 0);
     SIGNAL fifo_bin_out                    : std_logic_vector(8 DOWNTO 0);
     SIGNAL fifo_check_count                : unsigned (1 downto 0);
-    SIGNAL calbin_out                      : unsigned(8 DOWNTO 0);
+    SIGNAL calbin_out                      : unsigned(9 DOWNTO 0); --Needs an extra bit for addition overflow
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
     
     SIGNAL cordic_counter                  : integer range 0 to 63 := 0;
@@ -385,7 +385,7 @@ begin
                                 first_time <= '0';
                             else
                                 -- We use the bin number for further calculations
-                                calbin_out <= unsigned(fifo_bin_out);
+                                calbin_out <= unsigned('0' & fifo_bin_out);
                                 fifo_bin_re <= '0';
                                 
                                 -- We also wait until we have a Cordic output ready to do phase calculations with and then move into the state machine
@@ -444,7 +444,7 @@ begin
                     readycal <= '0';
                     readyout <= '0';
                     fifo_bin_re <= '0';
-                    kk <= shift_left(resize(calbin_out, 13), 1);
+                    kk <= shift_left(resize(calbin_out+1, 13), 1) - 1;
                     calbin <= fifo_bin_out;
                     if (fifo_empty = '0') then
                         fifo_bin_re <= '1';
@@ -530,7 +530,7 @@ begin
                     -- If we still have more cal bins to go in the 512 long run, we have our next one ready at the output of the FIFO
                     -- And go back to the middle of the state machine where it will wait for the multiplication that just started
                     if (calbin_out /= 511) then
-                        calbin_out <= unsigned(fifo_bin_out);
+                        calbin_out <= unsigned('0' & fifo_bin_out);
                         valid_in <= '1';
                         state <= S_WAIT_FOR_RESULT1;
                     else
