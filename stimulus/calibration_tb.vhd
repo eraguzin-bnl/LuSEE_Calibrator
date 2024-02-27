@@ -100,12 +100,12 @@ begin
 
     begin
         if ( vhdl_initial ) then
-            cplx_index       <= std_logic_vector(to_unsigned(30, cplx_index'length));
+            cplx_index       <= std_logic_vector(to_unsigned(29, cplx_index'length));
             sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
             powertop_index   <= std_logic_vector(to_unsigned(32, powertop_index'length));
             powerbot_index   <= std_logic_vector(to_unsigned(32, powerbot_index'length));
-            driftFD_index    <= std_logic_vector(to_unsigned(32, driftFD_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(29, driftFD_index'length));
             driftSD_index    <= std_logic_vector(to_unsigned(28, driftSD_index'length));
             -- Assert Reset
             SYSRESET <= '1';
@@ -261,7 +261,6 @@ begin
             phase_cor_im => phase_cor_im,
             kar_out => kar_out,
             readyout =>  readyout,
-            update_drift =>  open,
             readycal =>  readycal
         );
         

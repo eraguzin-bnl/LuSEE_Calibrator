@@ -175,11 +175,17 @@ architecture architecture_cal_average of cal_average is
     SIGNAL cplx_in_re                     : signed(31 DOWNTO 0);
     SIGNAL cplx_in_im                     : signed(31 DOWNTO 0);
     
-    SIGNAL drift_SD1                      : signed(64 DOWNTO 0);
-    SIGNAL drift_SD_s                     : signed(65 DOWNTO 0);
+    SIGNAL drift_SD1                      : signed(63 DOWNTO 0);
+    SIGNAL drift_SD_s                     : signed(31 DOWNTO 0);
     
     SIGNAL error_stick_s                  : std_logic;
     SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
+    
+    signal SD1_shifted1_dummy      : signed(63 DOWNTO 0);
+    signal SD1_shifted2_dummy      : signed(31 DOWNTO 0);
+    
+    signal SD2_shifted1_dummy      : signed(64 DOWNTO 0);
+    signal SD2_shifted2_dummy      : signed(31 DOWNTO 0);
     
     type state_type is (S_IDLE,
         S_FIFO_WAIT_1,
@@ -203,6 +209,43 @@ architecture architecture_cal_average of cal_average is
         S_MULTIPLY_WAIT_7,
         S_OUTPUT_READY);
     signal state: state_type;
+    
+    component CAL_AVERAGE_DATA_FIFO
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        DATA                              :   IN    std_logic_vector(31 downto 0);
+        RE                                :   IN    std_logic;
+        RESET_N                           :   IN    std_logic;
+        WE                                :   IN    std_logic;
+        EMPTY                             :   OUT   std_logic;
+        FULL                              :   OUT   std_logic;
+        Q                                 :   OUT   std_logic_vector(31 downto 0)
+        );
+    end component;
+    
+    component CAL_AVERAGE_OTHER_FIFO
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        DATA                              :   IN    std_logic_vector(25 downto 0);
+        RE                                :   IN    std_logic;
+        RESET_N                           :   IN    std_logic;
+        WE                                :   IN    std_logic;
+        EMPTY                             :   OUT   std_logic;
+        FULL                              :   OUT   std_logic;
+        Q                                 :   OUT   std_logic_vector(25 downto 0)
+        );
+    end component;
+    
+    component PF_TPSRAM_CAL
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        R_ADDR                            :   IN    std_logic_vector(8 downto 0);
+        W_ADDR                            :   IN    std_logic_vector(8 downto 0);
+        W_DATA                            :   IN    signed(37 downto 0);
+        W_EN                              :   IN    std_logic;
+        R_DATA                            :   OUT   signed(37 downto 0)
+        );
+    end component;
 
 begin
     error <= error_data_fifo_full & error_data_fifo_backup & error_phase_fifo_full & error_fifo_alignment & error_s;
@@ -210,7 +253,7 @@ begin
     -- Stored in a FIFO and the state machine does the math as it can
     -- This FIFO has room for 512 samples of values. 
     -- It should never fill up, because the cal_phaser block should be sending the phase data soon after a batch is coming in
-    notch_data_re : entity work.CAL_AVERAGE_DATA_FIFO
+    notch_data_re : CAL_AVERAGE_DATA_FIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -222,7 +265,7 @@ begin
         EMPTY    => notch_data_re_empty
         );
         
-    notch_data_im : entity work.CAL_AVERAGE_DATA_FIFO
+    notch_data_im : CAL_AVERAGE_DATA_FIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -234,7 +277,7 @@ begin
         EMPTY    => notch_data_im_empty
         );
         
-    phase_data_re : entity work.CAL_AVERAGE_DATA_FIFO
+    phase_data_re : CAL_AVERAGE_DATA_FIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -246,7 +289,7 @@ begin
         EMPTY    => phase_data_re_empty
         );
         
-    phase_data_im : entity work.CAL_AVERAGE_DATA_FIFO
+    phase_data_im : CAL_AVERAGE_DATA_FIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -259,7 +302,7 @@ begin
         );
         
     --27 bits, 10 for calbin, 16 for kar, 1 for readyout, 512 depth
-    kar_readyout : entity work.CAL_AVERAGE_OTHER_FIFO
+    kar_readyout : CAL_AVERAGE_OTHER_FIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -347,7 +390,7 @@ begin
             o_m => product_im_im
         );
         
-    sum0_re_accumulator : entity work.PF_TPSRAM_CAL
+    sum0_re_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -357,7 +400,7 @@ begin
         R_DATA   => sum0_re_read_data
         );
         
-    sum0_im_accumulator : entity work.PF_TPSRAM_CAL
+    sum0_im_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -367,7 +410,7 @@ begin
         R_DATA   => sum0_im_read_data
         );
         
-    sum0alt_re_accumulator : entity work.PF_TPSRAM_CAL
+    sum0alt_re_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -377,7 +420,7 @@ begin
         R_DATA   => sum0alt_re_read_data
         );
         
-    sum0alt_im_accumulator : entity work.PF_TPSRAM_CAL
+    sum0alt_im_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -387,7 +430,7 @@ begin
         R_DATA   => sum0alt_im_read_data
         );
         
-    sum1_re_accumulator : entity work.PF_TPSRAM_CAL
+    sum1_re_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -397,7 +440,7 @@ begin
         R_DATA   => sum1_re_read_data
         );
         
-    sum1_im_accumulator : entity work.PF_TPSRAM_CAL
+    sum1_im_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -407,7 +450,7 @@ begin
         R_DATA   => sum1_im_read_data
         );
         
-    sum2_re_accumulator : entity work.PF_TPSRAM_CAL
+    sum2_re_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -417,7 +460,7 @@ begin
         R_DATA   => sum2_re_read_data
         );
         
-    sum2_im_accumulator : entity work.PF_TPSRAM_CAL
+    sum2_im_accumulator : PF_TPSRAM_CAL
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -437,6 +480,12 @@ begin
         variable result64_shifted2: signed(63 DOWNTO 0) := (others=>'0');
         variable result64_shifted3: signed(63 DOWNTO 0) := (others=>'0');
         variable result64_shifted4: signed(63 DOWNTO 0) := (others=>'0');
+        
+        variable SD1_shifted1      : signed(63 DOWNTO 0) := (others=>'0');
+        variable SD1_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
+        
+        variable SD2_shifted1      : signed(64 DOWNTO 0) := (others=>'0');
+        variable SD2_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
         begin
         if (rising_edge(clk)) then
             if (reset = '1') then
@@ -820,7 +869,8 @@ begin
                 when S_MULTIPLY_WAIT_4 =>
                     valid_in <= '0';
                     if (valid_out = "1111") then
-                        drift_SD1 <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
+                        drift_SD1 <= signed(product_re_re) - signed(product_im_im);
+                        --drift_SD1 <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_BEGIN_MULTIPLY_5;
                     end if;
                     
@@ -841,7 +891,18 @@ begin
                     end if;
                     
                 when S_BEGIN_MULTIPLY_6 =>
-                    drift_SD_s <= resize(signed(drift_SD1), 66) + resize(signed(sum_re), 66);
+                    SD1_shifted1 := shift_right(drift_SD1, 28);
+                    SD1_shifted1_dummy <= SD1_shifted1;
+                    SD1_shifted2 := resize(SD1_shifted1, 32);
+                    SD1_shifted2_dummy <= SD1_shifted2;
+                    
+                    SD2_shifted1 := shift_left(sum_re, 4);
+                    SD2_shifted1_dummy <= SD2_shifted1;
+                    SD2_shifted2 := resize(SD2_shifted1, 32);
+                    SD2_shifted2_dummy <= SD2_shifted2;
+                    
+                    
+                    drift_SD_s <= SD1_shifted2 + SD2_shifted2;
                 
                     multiplicand1_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum0_im_new(37 DOWNTO 6));
@@ -861,14 +922,15 @@ begin
                     powertop_slice <= to_integer(unsigned(powertop_index));
                     
                 when S_BEGIN_MULTIPLY_7 =>
-                    result66_shifted := shift_right(drift_SD_s, driftSD_slice);
+                    --result66_shifted := shift_right(drift_SD_s, driftSD_slice);
                     result65_shifted2 := shift_right(sum_re, powertop_slice);
                     
-                    drift_SD <= std_logic_vector(result66_shifted(31 DOWNTO 0));
+                    --drift_SD <= std_logic_vector(result66_shifted(31 DOWNTO 0));
+                    drift_SD <= std_logic_vector(drift_SD_s);
                     powertop <= std_logic_vector(result65_shifted2(31 DOWNTO 0));
                     
-                    test66_slice_proc(drift_SD_s, driftSD_slice, 4, error_s);                    
-                    test65_slice_proc(sum_re, powertop_slice, 5, error_s);
+                    --test66_slice_proc(drift_SD_s, driftSD_slice, 4, error_s);                    
+                    --test65_slice_proc(sum_re, powertop_slice, 5, error_s);
                 
                     multiplicand1_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
                     multiplicand1_im <= std_logic_vector(sum0alt_im_new(37 DOWNTO 6));

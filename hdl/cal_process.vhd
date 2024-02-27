@@ -176,9 +176,34 @@ architecture architecture_cal_process of cal_process is
         S_OUTPUT_NEW_DRIFT,
         S_OUTPUT_READY);
     signal state: state_type;
+    
+    component PF_TPSRAM_CAL_PROCESS
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        R_ADDR                            :   IN    std_logic_vector(8 downto 0);
+        W_ADDR                            :   IN    std_logic_vector(8 downto 0);
+        W_DATA                            :   IN    signed(37 downto 0);
+        W_EN                              :   IN    std_logic;
+        R_DATA                            :   OUT   signed(37 downto 0)
+        );
+    end component;
+    
+    component DIVISION_C0
+    PORT ( 
+        den_i     : in  std_logic_vector(31 downto 0);
+        num_i     : in  std_logic_vector(31 downto 0);
+        reset_i   : in  std_logic;
+        start_i   : in  std_logic;
+        sys_clk_i : in  std_logic;
+        
+        done_o    : out std_logic;
+        q_o       : out std_logic_vector(31 downto 0);
+        r_o       : out std_logic_vector(31 downto 0)
+        );
+    end component;
 
 begin
-    sig1_re_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig1_re_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -188,7 +213,7 @@ begin
         R_DATA   => sig1_re_read_data
         );
         
-    sig1_im_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig1_im_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -199,7 +224,7 @@ begin
         );
         
         
-    sig2_re_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig2_re_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -209,7 +234,7 @@ begin
         R_DATA   => sig2_re_read_data
         );
         
-    sig2_im_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig2_im_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -219,7 +244,7 @@ begin
         R_DATA   => sig2_im_read_data
         );
         
-    sig3_re_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig3_re_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -229,7 +254,7 @@ begin
         R_DATA   => sig3_re_read_data
         );
         
-    sig3_im_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig3_im_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -239,7 +264,7 @@ begin
         R_DATA   => sig3_im_read_data
         );
     
-    sig4_re_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig4_re_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -249,7 +274,7 @@ begin
         R_DATA   => sig4_re_read_data
         );
         
-    sig4_im_accumulator : entity work.PF_TPSRAM_CAL_PROCESS
+    sig4_im_accumulator : PF_TPSRAM_CAL_PROCESS
     PORT MAP( 
         CLK      => clk,
         R_ADDR   => read_address,
@@ -259,7 +284,7 @@ begin
         R_DATA   => sig4_im_read_data
         );
         
-    vhdl_divide : entity work.DIVISION_C0
+    vhdl_divide : DIVISION_C0
     PORT MAP(
         sys_clk_i         => clk,
         reset_i       => not reset,
@@ -317,8 +342,9 @@ begin
                 write_en               <= '0';
                 Nac2                   <= 0;
                 fout_ready             <= '0';
-                drift_s                <= (others=>'0');
+                --drift_s                <= (others=>'0');
                 --drift_out              <= (others=>'0');
+                drift_s                <= x"00005088";
                 drift_out              <= x"00005088";
                 --Was -0.0000192
                 --drift_out              <= "11111111111111111010111101111000";
@@ -487,6 +513,9 @@ begin
                     state <= S_DIVIDE_2;
                 when S_DIVIDE_2 =>
                     valid_in_s <= '0';
+                    if (denominator_s = x"00000000") then
+                        error_s(3) <= '1';
+                    end if;
                     if (valid_out_s = '1') then
                         if (quotient_s = x"00000001") then
                             div_result(fraction_num) <= '1';

@@ -27,6 +27,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.ALL;
 
+
 ENTITY cal_phaser IS
 generic(
   size : integer := 32
@@ -42,7 +43,6 @@ generic(
         phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
         kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- Calculation based on bin and cycle
         readyout                          :   OUT   std_logic;                      -- Goes high on 64th cycle
-        update_drift                      :   OUT   std_logic;                      -- Indicates to later block we need a new cal_drift
         readycal                          :   OUT   std_logic                       -- Goes high every cycle to tell average block to consume new values
         );
 END cal_phaser;
@@ -75,7 +75,6 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL cordic_sin                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL phase_s                         : signed(32 DOWNTO 0);
     SIGNAL negative_phase_s                : signed(32 DOWNTO 0);
-    SIGNAL update_drift_s                  : std_logic;
     
     SIGNAL fifo_bin_we                     : std_logic;
     SIGNAL fifo_bin_re                     : std_logic;
@@ -148,6 +147,47 @@ architecture architecture_cal_phaser of cal_phaser is
         S_CORDIC_CORRECT,
         S_CORDIC_WAIT_FOR_UPDATE);
     signal state2: state_type2;
+    
+    component CALFIFO_C0
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        DATA                              :   IN    std_logic_vector(8 downto 0);
+        RE                                :   IN    std_logic;
+        RESET_N                           :   IN    std_logic;
+        WE                                :   IN    std_logic;
+        EMPTY                             :   OUT   std_logic;
+        FULL                              :   OUT   std_logic;
+        Q                                 :   OUT   std_logic_vector(8 downto 0)
+        );
+    end component;
+    
+    component CORDICFIFO
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        DATA                              :   IN    std_logic_vector(31 downto 0);
+        RE                                :   IN    std_logic;
+        RESET_N                           :   IN    std_logic;
+        WE                                :   IN    std_logic;
+        EMPTY                             :   OUT   std_logic;
+        FULL                              :   OUT   std_logic;
+        Q                                 :   OUT   std_logic_vector(31 downto 0)
+        );
+    end component;
+    
+    component CORECORDIC_C0
+    PORT ( 
+        CLK                               :   IN    std_logic;
+        DIN_A                             :   IN    std_logic_vector(31 downto 0);
+        DIN_VALID                         :   IN    std_logic;
+        RST                               :   IN    std_logic;
+        NGRST                             :   IN    std_logic;
+        
+        DOUT_VALID                        :   OUT   std_logic;
+        DOUT_X                            :   OUT   std_logic_vector(31 downto 0);
+        DOUT_Y                            :   OUT   std_logic_vector(31 downto 0);
+        RFD                               :   OUT   std_logic
+        );
+    end component;
 begin
     --Custom made 32 x 32 bit pipelined multipliers
     --Inputs to this block just go straight in
@@ -233,7 +273,7 @@ begin
     --Since we cannot process each bin as fast as they are coming in (every 4 clock cycles), each bin is
     --Stored in a FIFO and the state machine does the math as it can
     --This FIFO has room for 512 samples of the bin numbers. But because it is working on them as they come in in batches of 512, it should never fill up
-    incoming_bins : entity work.CALFIFO_C0
+    incoming_bins : CALFIFO_C0
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -248,7 +288,7 @@ begin
     --After the Cordic state machine gets a new cal_drift value and knows that it's the first of 64 cycles, it immediately just calculates the
     --phase value for all 64 cycles and puts it in these FIFOs. The first state machine requests them as it begins each new cycle and then has to
     --work through 512 bins with that value
-    cos_fifo : entity work.CORDICFIFO
+    cos_fifo : CORDICFIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -260,7 +300,7 @@ begin
         EMPTY    => cos_fifo_empty
         );
         
-    sin_fifo : entity work.CORDICFIFO
+    sin_fifo : CORDICFIFO
     PORT MAP( 
         CLK      => clk,
         RESET_N  => not reset,
@@ -274,7 +314,7 @@ begin
         
     -- This is the actual Cordic IP core, it inputs and outputs values in the characteristic format in the handbook:
     -- https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/UserGuides/ip_cores/directcores/CoreCORDIC_HB.pdf
-    cordic : entity work.CORECORDIC_C0
+    cordic : CORECORDIC_C0
     PORT MAP(
         NGRST    => '1',
         RST      => reset,
@@ -335,8 +375,6 @@ begin
                 error_cos_fifo_empty  <= '0';
                 
                 readycal              <= '0';
-                update_drift          <= '0';
-                update_drift_s        <= '0';
                 calbin                <= (others=> '0');
                 phase_cor_re          <= (others=> '0');
                 phase_cor_im          <= (others=> '0');
@@ -371,7 +409,6 @@ begin
                     readyout <= '0';
                     kar_out <= (others=> '0');
                     calbin <= (others=> '0');
-                    update_drift <= '0';
                     -- Waits for previous block to start filling up the FIFO, and use cal bin format (1 to 512)
                     if (fifo_empty = '0') then
                         -- If we are in the IDLE state, we're waiting for the first calibration bin always
@@ -538,8 +575,6 @@ begin
                         calbin_out <= (others=>'0');
                         if (Nac = 63) then
                             -- If this was also the 64th cycle, then send the update drift flags to further blocks know to give us new cordic inputs
-                            update_drift <= '1';
-                            update_drift_s <= '1';
                             Nac <= to_unsigned(0, Nac'length);
                         else
                             Nac <= Nac + 1;
@@ -636,9 +671,6 @@ begin
                     -- Acknowledge and cancel the flag and go back to calculate the next 64 drift values
                     -- Todo: I think there will need to be some more wait logic here, since new cal_drift values won't come instantaneously
                     cordic_counter <= 0;
-                    if (update_drift_s = '1') then
-                        update_drift_s <= '0';
-                    end if;
                     if (new_phase_rdy = '1') then
                         state2 <= S_CORDIC_IDLE;
                     end if;
