@@ -810,28 +810,33 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.cxf,actgen_cxf"
 STATE="utd"
-TIME="1707427528"
+TIME="1709154751"
 SIZE="4940"
 ENDFILE
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.v,hdl"
 STATE="utd"
-TIME="1707427527"
+TIME="1709154751"
 SIZE="3656"
 PARENT="<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.cxf,actgen_cxf"
 STATE="utd"
-TIME="1707427527"
+TIME="1709154751"
 SIZE="774"
 PARENT="<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.cxf"
 ENDFILE
 VALUE "<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v,hdl"
 STATE="utd"
-TIME="1707427526"
-SIZE="2820"
+TIME="1709154750"
+SIZE="2783"
 PARENT="<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0/PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.cxf"
 IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>/constraint/cal_top_derived_constraints.sdc,sdc"
+STATE="utd"
+TIME="1709136248"
+SIZE="881"
 ENDFILE
 VALUE "<project>/constraint/fp/test.pdc,fp_pdc"
 STATE="utd"
@@ -843,14 +848,9 @@ STATE="utd"
 TIME="1706821861"
 SIZE="6076"
 ENDFILE
-VALUE "<project>/constraint/test_divide_derived_constraints.sdc,sdc"
-STATE="utd"
-TIME="1706825102"
-SIZE="138"
-ENDFILE
 VALUE "<project>/hdl/cal_average.vhd,hdl"
 STATE="utd"
-TIME="1709051987"
+TIME="1709143872"
 SIZE="46059"
 ENDFILE
 VALUE "<project>/hdl/cal_average_instance_C1_fixpt.vhd,hdl"
@@ -870,8 +870,8 @@ SIZE="3348"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 STATE="utd"
-TIME="1709051341"
-SIZE="37327"
+TIME="1709135976"
+SIZE="36986"
 ENDFILE
 VALUE "<project>/hdl/cal_phaser_alt_fixpt.vhd,hdl"
 STATE="utd"
@@ -885,7 +885,7 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1709051939"
+TIME="1709154722"
 SIZE="29350"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
@@ -950,8 +950,8 @@ SIZE="52410"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1708629660"
-SIZE="8675"
+TIME="1709065692"
+SIZE="8411"
 ENDFILE
 VALUE "<project>/simulation/testbench_presynth_simulation.log,log"
 STATE="utd"
@@ -960,7 +960,7 @@ SIZE="42419"
 ENDFILE
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 STATE="utd"
-TIME="1709049190"
+TIME="1709137044"
 SIZE="13036"
 ENDFILE
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
@@ -978,75 +978,30 @@ STATE="utd"
 TIME="1707759801"
 SIZE="18131"
 ENDFILE
-VALUE "<project>/synthesis/cal_top.edn,syn_edn"
+VALUE "<project>/synthesis/cal_top_3.edn,syn_edn"
 STATE="utd"
-TIME="1709052018"
+TIME="1709053122"
 SIZE="3308366"
 ENDFILE
-VALUE "<project>/synthesis/cal_top.so,so"
+VALUE "<project>/synthesis/cal_top_3.so,so"
 STATE="utd"
-TIME="1709052019"
-SIZE="248"
-ENDFILE
-VALUE "<project>/synthesis/cal_top_1.edn,syn_edn"
-STATE="utd"
-TIME="1709052295"
-SIZE="3308366"
-ENDFILE
-VALUE "<project>/synthesis/cal_top_1.so,so"
-STATE="utd"
-TIME="1709052296"
+TIME="1709053124"
 SIZE="250"
 ENDFILE
-VALUE "<project>/synthesis/cal_top_1_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1709052295"
-SIZE="914"
+VALUE "<project>/synthesis/cal_top_3.vm,syn_vm"
+STATE="ood"
+TIME="1709136295"
+SIZE="3307928"
 ENDFILE
-VALUE "<project>/synthesis/cal_top_2.edn,syn_edn"
+VALUE "<project>/synthesis/cal_top_3_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1709052482"
-SIZE="3308366"
-ENDFILE
-VALUE "<project>/synthesis/cal_top_2.so,so"
-STATE="utd"
-TIME="1709052483"
-SIZE="250"
-ENDFILE
-VALUE "<project>/synthesis/cal_top_2_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1709052482"
+TIME="1709053123"
 SIZE="914"
 ENDFILE
 VALUE "<project>/synthesis/cal_top_syn.prj,prj"
 STATE="utd"
-TIME="1709049261"
-SIZE="10531"
-ENDFILE
-VALUE "<project>/synthesis/cal_top_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1709052018"
-SIZE="914"
-ENDFILE
-VALUE "<project>/synthesis/test_divide.so,so"
-STATE="utd"
-TIME="1706825137"
-SIZE="256"
-ENDFILE
-VALUE "<project>/synthesis/test_divide.vm,syn_vm"
-STATE="utd"
-TIME="1706825137"
-SIZE="909868"
-ENDFILE
-VALUE "<project>/synthesis/test_divide_syn.prj,prj"
-STATE="utd"
-TIME="1708008149"
-SIZE="2409"
-ENDFILE
-VALUE "<project>/synthesis/test_divide_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1706825137"
-SIZE="922"
+TIME="1709053124"
+SIZE="12038"
 ENDFILE
 ENDLIST
 LIST UsedFile
@@ -1325,10 +1280,21 @@ VALUE "<project>/hdl/cal_top.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST 
+LIST AssociatedStimulus
+VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
+ENDLIST
+LIST SynthesisConstraints
+VALUE "<project>/constraint/cal_top_derived_constraints.sdc,sdc"
+ENDLIST
+LIST TimingConstraints
+VALUE "<project>/constraint/cal_top_derived_constraints.sdc,sdc"
+ENDLIST
+LIST PNRConstraints
+VALUE "<project>/constraint/cal_top_derived_constraints.sdc,sdc"
+ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-ideSYNTHESIS(<project>/synthesis/cal_top_2.edn,syn_edn)=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_top_3.edn,syn_edn)=StateFailure
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1338,19 +1304,29 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>/synthesis/cal_top_2.edn,syn_edn)=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_top_3.edn,syn_edn)=StateFailure
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
 UseFhbAutoInst=FALSE
 ENDLIST
 Used_File_List
+VALUE "<project>/synthesis/cal_top.edn,syn_edn"
+VALUE "<project>/phy_synthesis/cal_top_palace.edn,palace_edn"
+VALUE "<project>/phy_synthesis/cal_top_palace.gcf,palace_gcf"
+VALUE "<project>/phy_synthesis/cal_top_palace.pdc,palace_pdc"
+VALUE "<project>/phy_synthesis/cal_top_palace.sdc,palace_sdc"
+VALUE "<project>/phy_synthesis/cal_top_palace.v,palace_hdl"
+VALUE "<project>/designer/impl2/cal_top.adb,adb"
+VALUE "<project>/designer/impl2/cal_top.fdb,fdb"
+VALUE "<project>/designer/impl2/cal_top.pdb,pdb"
+VALUE "<project>/designer/impl2/cal_top.stp,stp"
+VALUE "<project>/designer/impl2/cal_top_fp/cal_top.pro,pro"
+VALUE "<project>/synthesis/cal_top_3.vm,syn_vm"
+VALUE "<project>/synthesis/cal_top_3_sdc.sdc,syn_sdc"
+VALUE "<project>/synthesis/cal_top_3.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
-ENDLIST
-LIST synthesis_implementations
-VALUE "synthesis"
 ENDLIST
 ENDLIST
 LIST "CALFIFO_C0_CALFIFO_C0_0_COREFIFO::work"
@@ -1461,6 +1437,32 @@ LIST Other_Association
 VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
 VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
 ENDLIST
+LIST AssociatedStimulus
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
+ENDLIST
+LIST ProjectState5.1
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
 ENDLIST
 LIST "test_divide::work"
 FILE "<project>/hdl/test_divide.vhd,hdl"
@@ -1539,21 +1541,12 @@ LIST AssociatedStimulus
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 VALUE "<project>/stimulus/cal_process_tb.vhd,tb_hdl"
 ENDLIST
-LIST SynthesisConstraints
-VALUE "<project>/constraint/test_divide_derived_constraints.sdc,sdc"
-ENDLIST
-LIST TimingConstraints
-VALUE "<project>/constraint/test_divide_derived_constraints.sdc,sdc"
-ENDLIST
 LIST PNRConstraints
 VALUE "<project>/constraint/io/test.pdc,io_pdc"
-VALUE "<project>/constraint/test_divide_derived_constraints.sdc,sdc"
 ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/test_divide.edn,syn_edn)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1563,9 +1556,7 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/test_divide.edn,syn_edn)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1585,12 +1576,44 @@ VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/use
 VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
 VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
 ENDLIST
+LIST AssociatedStimulus
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
+ENDLIST
+LIST ProjectState5.1
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
 ENDLIST
 ENDLIST
 LIST AssociatedStimulus
 LIST test_divide
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 VALUE "<project>/stimulus/cal_process_tb.vhd,tb_hdl"
+ENDLIST
+LIST cal_top
+VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 ENDLIST
 LIST CAL_AVERAGE_DATA_FIFO_CAL_AVERAGE_DATA_FIFO_0_COREFIFO
 VALUE "<project>/component/work/CAL_AVERAGE_DATA_FIFO/CAL_AVERAGE_DATA_FIFO_0/coreparameters.v,tb_hdl"
@@ -1639,6 +1662,17 @@ VALUE "<project>/component/work/CORDICFIFO/CORDICFIFO_0/rtl/vlog/test/user/testb
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WeqR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WgtR.v,tb_hdl"
 VALUE "<project>/component/Actel/DirectCore/COREFIFO/3.0.101/rtl/vlog/test/user/MEM_WltR.v,tb_hdl"
+ENDLIST
+LIST CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/inpTestVect.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/outpTestVect.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/rtl/vlog/test/user/bhvKit.v,tb_hdl"
+VALUE "<project>/component/Actel/DirectCore/CORECORDIC/4.1.100/coreparameters.v,tb_hdl"
+VALUE "<project>/component/work/CORECORDIC_C0/CORECORDIC_C0_0/rtl/vlog/test/user/coreCordic_tb.v,tb_hdl"
+ENDLIST
+LIST division
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/coreparameters.vhd,tb_hdl"
+VALUE "<project>/component/Microsemi/SolutionCore/DIVISION/1.0.5/Stimulus/division_tb.vhd,tb_hdl"
 ENDLIST
 LIST cal_phaser_alt_fixpt
 VALUE "<project>/stimulus/cal_average_instance_C1_fixpt_tb.vhd,tb_hdl"
@@ -1759,7 +1793,7 @@ OnDemandBuildDH=TRUE
 EnableViewDraw=FALSE
 UpdateViewDrawIni=TRUE
 GenerateHDLFromSchematic=TRUE
-VmNetlistFlowOn=FALSE
+VmNetlistFlowOn=TRUE
 EnableDesignSeparationOn=FALSE
 EnableSETMitigationOn=FALSE
 DisplayFanoutLimit=10
@@ -1879,8 +1913,7 @@ ENDLIST
 ENDLIST
 LIST "cal_top::work"
 LIST Impl1
-ideSYNTHESIS(<project>/synthesis/cal_top_2.edn,syn_edn)=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_top_3.edn,syn_edn)=StateFailure
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1890,14 +1923,27 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>/synthesis/cal_top_2.edn,syn_edn)=StateSuccess
-ideSYNTHESIS(<project>/synthesis/cal_top_3.edn,syn_edn)=StateFailure
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
 UseFhbAutoInst=FALSE
 ENDLIST
 Used_File_List
+VALUE "<project>/synthesis/cal_top.edn,syn_edn"
+VALUE "<project>/phy_synthesis/cal_top_palace.edn,palace_edn"
+VALUE "<project>/phy_synthesis/cal_top_palace.gcf,palace_gcf"
+VALUE "<project>/phy_synthesis/cal_top_palace.pdc,palace_pdc"
+VALUE "<project>/phy_synthesis/cal_top_palace.sdc,palace_sdc"
+VALUE "<project>/phy_synthesis/cal_top_palace.v,palace_hdl"
+VALUE "<project>/designer/impl2/cal_top.adb,adb"
+VALUE "<project>/designer/impl2/cal_top.fdb,fdb"
+VALUE "<project>/designer/impl2/cal_top.pdb,pdb"
+VALUE "<project>/designer/impl2/cal_top.stp,stp"
+VALUE "<project>/designer/impl2/cal_top_fp/cal_top.pro,pro"
+VALUE "<project>/synthesis/cal_top_3.vm,syn_vm"
+VALUE "<project>/synthesis/cal_top_3_sdc.sdc,syn_sdc"
+VALUE "<project>/synthesis/cal_top_3.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 ENDLIST
@@ -1945,11 +1991,9 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 ENDLIST
-LIST "test_divide::work"
+LIST "division::work"
 LIST Impl1
-ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/test_divide.edn,syn_edn)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -1959,9 +2003,51 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>/synthesis/test_divide.vm,syn_vm)=StateSuccess
 ideSTIMULUS=StateSuccess
-ideSYNTHESIS(<project>/synthesis/test_divide.edn,syn_edn)=StateFailure
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+LIST "test_divide::work"
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+LIST "CORECORDIC_C0_CORECORDIC_C0_0_CORECORDIC::CORECORDIC_LIB"
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+LIST Impl2
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2194,8 +2280,14 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
+Reports;Reports;0
+ReportsCurrentItem;synthesis:cal_top_3_ram_rpt.txt
+HDL;hdl/cal_phaser.vhd;0
+HDL;hdl/cal_average.vhd;0
+HDL;hdl/cal_process.vhd;0
 HDL;hdl/cal_top.vhd;0
-ACTIVEVIEW;hdl/cal_top.vhd
+HDL;stimulus/calibration_tb.vhd;0
+ACTIVEVIEW;hdl/cal_process.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"
@@ -2618,7 +2710,7 @@ ENDLIST
 LIST FPTabList
 ENDLIST
 LIST TimingTabList
-VALUE "constraint/test_divide_derived_constraints.sdc"
+VALUE "constraint/cal_top_derived_constraints.sdc"
 ENDLIST
 LIST FDCTabList
 ENDLIST

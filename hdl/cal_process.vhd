@@ -100,32 +100,32 @@ architecture architecture_cal_process of cal_process is
     SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
     
     -- Todo, I think we only need to go to 35
-    SIGNAL sig1_re_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig1_im_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig2_re_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig2_im_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig3_re_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig3_im_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig4_re_write_data             : signed(37 DOWNTO 0);
-    SIGNAL sig4_im_write_data             : signed(37 DOWNTO 0);
+    SIGNAL sig1_re_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig1_im_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig2_re_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig2_im_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig3_re_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig3_im_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig4_re_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig4_im_write_data             : signed(35 DOWNTO 0);
     
-    SIGNAL sig1_re_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig1_im_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig2_re_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig2_im_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig3_re_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig3_im_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig4_re_read_data              : signed(37 DOWNTO 0);
-    SIGNAL sig4_im_read_data              : signed(37 DOWNTO 0);
+    SIGNAL sig1_re_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig1_im_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig2_re_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig2_im_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig3_re_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig3_im_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig4_re_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig4_im_read_data              : signed(35 DOWNTO 0);
     
-    SIGNAL foutreal1_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutimag1_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutreal2_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutimag2_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutreal3_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutimag3_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutreal4_s                    : signed(37 DOWNTO 0);
-    SIGNAL foutimag4_s                    : signed(37 DOWNTO 0);
+    SIGNAL foutreal1_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutimag1_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutreal2_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutimag2_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutreal3_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutimag3_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutreal4_s                    : signed(35 DOWNTO 0);
+    SIGNAL foutimag4_s                    : signed(35 DOWNTO 0);
     signal Nac2                           : integer range 0 to 9;
     
     signal numerator_s                    : std_logic_vector(31 downto 0);
@@ -182,9 +182,9 @@ architecture architecture_cal_process of cal_process is
         CLK                               :   IN    std_logic;
         R_ADDR                            :   IN    std_logic_vector(8 downto 0);
         W_ADDR                            :   IN    std_logic_vector(8 downto 0);
-        W_DATA                            :   IN    signed(37 downto 0);
+        W_DATA                            :   IN    signed(35 downto 0);
         W_EN                              :   IN    std_logic;
-        R_DATA                            :   OUT   signed(37 downto 0)
+        R_DATA                            :   OUT   signed(35 downto 0)
         );
     end component;
     
@@ -296,14 +296,14 @@ begin
         r_o    => remainder_s
     );
     error       <= error_s;
-    foutreal1   <= std_logic_vector(foutreal1_s(37 DOWNTO 6));
-    foutimag1   <= std_logic_vector(foutimag1_s(37 DOWNTO 6));
-    foutreal2   <= std_logic_vector(foutreal2_s(37 DOWNTO 6));
-    foutimag2   <= std_logic_vector(foutimag2_s(37 DOWNTO 6));
-    foutreal3   <= std_logic_vector(foutreal3_s(37 DOWNTO 6));
-    foutimag3   <= std_logic_vector(foutimag3_s(37 DOWNTO 6));
-    foutreal4   <= std_logic_vector(foutreal4_s(37 DOWNTO 6));
-    foutimag4   <= std_logic_vector(foutimag4_s(37 DOWNTO 6));
+    foutreal1   <= std_logic_vector(foutreal1_s(35 DOWNTO 4));
+    foutimag1   <= std_logic_vector(foutimag1_s(35 DOWNTO 4));
+    foutreal2   <= std_logic_vector(foutreal2_s(35 DOWNTO 4));
+    foutimag2   <= std_logic_vector(foutimag2_s(35 DOWNTO 4));
+    foutreal3   <= std_logic_vector(foutreal3_s(35 DOWNTO 4));
+    foutimag3   <= std_logic_vector(foutimag3_s(35 DOWNTO 4));
+    foutreal4   <= std_logic_vector(foutreal4_s(35 DOWNTO 4));
+    foutimag4   <= std_logic_vector(foutimag4_s(35 DOWNTO 4));
     
     process (clk)
         variable div_result_neg : signed(31 DOWNTO 0) := (others=>'0');

@@ -66,15 +66,15 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
     
     SIGNAL cordic_counter                  : integer range 0 to 63 := 0;
-    SIGNAL cal_drift_s                     : signed(32 DOWNTO 0);
+    SIGNAL cal_drift_s                     : signed(31 DOWNTO 0);
     SIGNAL cordic_in                       : std_logic_vector(31 DOWNTO 0);
     SIGNAL cordic_valid_in                 : std_logic;
     SIGNAL cordic_valid_out                : std_logic;
     SIGNAL cordic_request_for_data         : std_logic;
     SIGNAL cordic_cos                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL cordic_sin                      : std_logic_vector(31 DOWNTO 0);
-    SIGNAL phase_s                         : signed(32 DOWNTO 0);
-    SIGNAL negative_phase_s                : signed(32 DOWNTO 0);
+    SIGNAL phase_s                         : signed(31 DOWNTO 0);
+    SIGNAL negative_phase_s                : signed(31 DOWNTO 0);
     
     SIGNAL fifo_bin_we                     : std_logic;
     SIGNAL fifo_bin_re                     : std_logic;
@@ -107,8 +107,8 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL product_im_re                   : std_logic_vector(63 DOWNTO 0);
     SIGNAL product_im_im                   : std_logic_vector(63 DOWNTO 0);
     
-    SIGNAL sum_re                          : signed(64 DOWNTO 0);
-    SIGNAL sum_im                          : signed(64 DOWNTO 0);
+    SIGNAL sum_re                          : signed(63 DOWNTO 0);
+    SIGNAL sum_im                          : signed(63 DOWNTO 0);
     SIGNAL valid_in                        : std_logic;
     SIGNAL valid_out                       : std_logic_vector(3 DOWNTO 0);
     
@@ -520,8 +520,8 @@ begin
                     -- Because we're adding 64 bit numbers, I resize them to 65 bits to account for the overflow bit
                     -- Resizing a signed value takes into account the signed bit
                     if (valid_out = "1111") then
-                        sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
-                        sum_im <= resize(signed(product_re_im), 65) + resize(signed(product_im_re), 65);
+                        sum_re <= signed(product_re_re) - signed(product_im_im);
+                        sum_im <= signed(product_re_im) + signed(product_im_re);
                         state <= S_ACT_ON_RESULT2;
                     else
                         -- Doing it this way ensures that the multiplier pipeline is always steady time-wise
@@ -542,17 +542,17 @@ begin
                         -- And use it as the second multiplicand for the next 511 cycles, so that's what's done here
                         -- We'll never go back in these next 511 to overwrite the value of multiplicand_re and _im
                         -- But the output of this first cycle is the original cordic output, not the product
-                        multiplicand_re <= sum_re(64) & sum_re(59 downto 29);
-                        multiplicand_im <= sum_im(64) & sum_im(59 downto 29);
+                        multiplicand_re <= sum_re(63) & sum_re(59 downto 29);
+                        multiplicand_im <= sum_im(63) & sum_im(59 downto 29);
                         phase_cor_re <= std_logic_vector(phase_st_re);
                         phase_cor_im <= std_logic_vector(phase_st_im);
                     else
                         -- For the rest of the 511 cycles, the product output is the phase_cor output
                         -- As well as the phase_st that will be multiplied by next cycle
-                        phase_st_re <= sum_re(64) & sum_re(59 downto 29);
-                        phase_st_im <= sum_im(64) & sum_im(59 downto 29);
-                        phase_cor_re <= std_logic_vector(sum_re(64) & sum_re(59 downto 29));
-                        phase_cor_im <= std_logic_vector(sum_im(64) & sum_im(59 downto 29));
+                        phase_st_re <= sum_re(63) & sum_re(59 downto 29);
+                        phase_st_im <= sum_im(63) & sum_im(59 downto 29);
+                        phase_cor_re <= std_logic_vector(sum_re(63) & sum_re(59 downto 29));
+                        phase_cor_im <= std_logic_vector(sum_im(63) & sum_im(59 downto 29));
                     end if;
                     
                     -- We have a new phase to output, the output cal bin indicator is ready
@@ -598,7 +598,7 @@ begin
                     sin_fifo_we <= '0';
                     state2 <= S_CORDIC_WAIT_FOR_DRIFT;
                 when S_CORDIC_WAIT_FOR_DRIFT =>
-                    cal_drift_s <= resize(signed(cal_drift), cal_drift_s'length);
+                    cal_drift_s <= signed(cal_drift);
                     state2 <= S_CORDIC_INPUT;
                 when S_CORDIC_INPUT =>
                 -- Algorithm calls for the cordic to take the negative phase as the input
@@ -606,7 +606,7 @@ begin
                 -- And negative phase is the instantaneous negation of it
                 -- The phase is a signed value 1 bit larger than 32 to take into account addition from cal drift before the 2 pi adjust          
                 -- So it's inputted like this
-                    cordic_in <= std_logic_vector(negative_phase_s(32) & negative_phase_s(30 downto 0));
+                    cordic_in <= std_logic_vector(negative_phase_s);
                     
                     -- Make sure the Cordic block is ready to start calculating with this angle
                     if (cordic_request_for_data = '1') then
@@ -650,18 +650,16 @@ begin
                     end if;
                 when S_CORDIC_CORRECT =>
                     -- Cordic can take in values from pi to -pi so we need to correct if we go over
-                    -- Because angle input is represented as shown in the Cordic IP documentation, and because I add a bit to phase_s
-                    -- So that it doesn't overflow when we added cal_drift last clock cycle
                     -- This checks to see if the overflow happened. With the way the representation of the angle works
                     -- To subtract or add 2*pi, you only need to change the sign bit, which is what I do here
                     -- The representation should always be a fraction of pi, so if we get to 1.XXXX pi or -1.XXXX pi, I subtract or add 2*pi
                     -- It's difficult to get across without actually writing it out bit by bit
-                    if ((phase_s(32 downto 30) = "001")) then
+                    if ((phase_s(31 downto 310) = "01")) then
                         -- This means that we are at at least 1.XXX pi. Flipping these bits is the equivalent of subtracting 2*pi
-                        phase_s(32 downto 30) <= "111";
-                    elsif (phase_s(32 DOWNTO 30) = "110") then
+                        phase_s(31 downto 30) <= "11";
+                    elsif (phase_s(31 DOWNTO 30) = "10") then
                         -- This means that we are at at least -1.XXX pi. Flipping these bits is the equivalent of adding 2*pi
-                        phase_s(32 downto 30) <= "000";
+                        phase_s(31 downto 30) <= "00";
                     end if;
                     -- If needed, the phase was corrected, and it can be inputted to the cordic at this state
                     state2 <= S_CORDIC_INPUT;
