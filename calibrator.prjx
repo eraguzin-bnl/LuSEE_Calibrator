@@ -186,7 +186,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>/component/Actel/SgCore/PF_TPSRAM/1.1.108/PF_TPSRAM.cxf,actgen_cxf"
 STATE="utd"
-TIME="1707427527"
+TIME="1709154751"
 SIZE="246"
 PARENT="<project>/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.cxf"
 PARENT="<project>/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS.cxf"
@@ -885,8 +885,8 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1709154722"
-SIZE="29350"
+TIME="1709235095"
+SIZE="32979"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 STATE="utd"
@@ -927,6 +927,11 @@ VALUE "<project>/hdl/test_divide.vhd,hdl"
 STATE="utd"
 TIME="1706825099"
 SIZE="1691"
+ENDFILE
+VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
+STATE="utd"
+TIME="1709235109"
+SIZE="20963"
 ENDFILE
 VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
 STATE="utd"
@@ -2280,11 +2285,11 @@ ENDLIST
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
+HDL;hdl/cal_process.vhd;0
 Reports;Reports;0
 ReportsCurrentItem;synthesis:cal_top_3_ram_rpt.txt
 HDL;hdl/cal_phaser.vhd;0
 HDL;hdl/cal_average.vhd;0
-HDL;hdl/cal_process.vhd;0
 HDL;hdl/cal_top.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
 ACTIVEVIEW;hdl/cal_process.vhd

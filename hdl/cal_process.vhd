@@ -82,6 +82,7 @@ architecture architecture_cal_process of cal_process is
     
     signal FDX_neg                        : std_logic;
     signal SDX_neg                        : std_logic;
+    signal delta_neg                      : std_logic;
     signal fraction_num                   : integer range 0 to 30;
     
     signal top1                           : signed(40 DOWNTO 0);
@@ -145,8 +146,13 @@ architecture architecture_cal_process of cal_process is
     -- alpha_to_pdrift = 16*phase_drift_per_ppm;
     -- alpha_to_pdrift = 0.000064
     
-    -- 0.05*alpha_to_pdrift = 0.0000032
-    -- 0.05*alpha_to_pdrift = binary(00.000000000000000000110101101100) aka
+    -- 0.05*alpha_to_pdrift = 0.0000032 * pi = 1.0053E-5
+    -- 0.05*alpha_to_pdrift = binary(00.000000000000000010101000101010) aka
+    -- 1/(2**17) + 1/(2**19) + 1/(2**21) + 1/(2**25) + 1/(2**27) + 1/(2**29) = 1.0053E-5
+    -- So this can be compared cleanly to the ratio which is not in radian mode
+    
+    -- 0.05*alpha_to_pdrift_radian = 0.0000032
+    -- 0.05*alpha_to_pdrift_radian = binary(00.000000000000000000110101101100) aka
     -- 1/(2**19) + 1/(2**20) + 1/(2**22) + 1/(2**24) + 1/(2**25) + 1/(2**27) + 1/(2**28) = 0.000003200024...
     -- So this can be added cleanly to the phase output which has the same fixed point representation
     
@@ -154,12 +160,14 @@ architecture architecture_cal_process of cal_process is
     -- 1.2*alpha_to_pdrift = binary(00.000000000000010100001000011111) aka
     -- 1/(2**14) + 1/(2**16) + 1/(2**21) + 1/(2**26) + 1/(2**27) + 1/(2**28) + 1/(2**29) + 1/(2**30) = 0.00007679965...
     -- So this can be compared directly to the phase output which has the same fixed point representation
-    -- -1.2*alpha_to_pdrift = binary(11.111111111111101011110111100000)
+    -- -1.2*alpha_to_pdrift = binary(11.111111111111101011110111100001)
     
-    CONSTANT k_0_05_alpha                : signed(31 DOWNTO 0) := "00000000000000000000110101101100";
+    CONSTANT k_0_05_alpha                : signed(31 DOWNTO 0) := "00000000000000000010101000101010";
+    CONSTANT k_0_05_alpha_radian         : signed(31 DOWNTO 0) := "00000000000000000000110101101100";
     CONSTANT k_1_2_alpha                 : signed(31 DOWNTO 0) := "00000000000000010100001000011111";
     --CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "10000000000000010100001000011111";
-    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "11111111111111101011110111100000";
+    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "11111111111111101011110111100001";
+    CONSTANT k_pi                        : signed(31 DOWNTO 0) := "01100100100001111110110101010001";
     
     type state_type is (S_IDLE,
         S_PWR_1,
@@ -171,6 +179,9 @@ architecture architecture_cal_process of cal_process is
         S_DIVIDE_2,
         S_LATCH_DRIFT,
         S_CHECK_LOCK,
+        S_DIV_PREP_2,
+        S_DIVIDE_3,
+        S_LATCH_DRIFT_RADIAN,
         S_ADD_DRIFT,
         S_CORRECT_DRIFT,
         S_OUTPUT_NEW_DRIFT,
@@ -321,6 +332,7 @@ begin
                 
                 FDX_neg          <= '0';
                 SDX_neg          <= '0';
+                delta_neg        <= '0';
                 fraction_num     <= 30;
                 div_result       <= (others=>'0');
                 
@@ -344,6 +356,8 @@ begin
                 fout_ready             <= '0';
                 --drift_s                <= (others=>'0');
                 --drift_out              <= (others=>'0');
+                --drift_s                <= x"000002C8";
+                --drift_out              <= x"000002C8";
                 drift_s                <= x"00005088";
                 drift_out              <= x"00005088";
                 --Was -0.0000192
@@ -412,14 +426,14 @@ begin
                         write_address          <= read_address;
                         
                         if (Nac2 = 0) then
-                            sig1_re_write_data     <= resize(signed(outreal1), 38);
-                            sig1_im_write_data     <= resize(signed(outimag1), 38);
-                            sig2_re_write_data     <= resize(signed(outreal2), 38);
-                            sig2_im_write_data     <= resize(signed(outimag2), 38);
-                            sig3_re_write_data     <= resize(signed(outreal3), 38);
-                            sig3_im_write_data     <= resize(signed(outimag3), 38);
-                            sig4_re_write_data     <= resize(signed(outreal4), 38);
-                            sig4_im_write_data     <= resize(signed(outimag4), 38);
+                            sig1_re_write_data     <= resize(signed(outreal1), sig1_re_write_data'length);
+                            sig1_im_write_data     <= resize(signed(outimag1), sig1_im_write_data'length);
+                            sig2_re_write_data     <= resize(signed(outreal2), sig2_re_write_data'length);
+                            sig2_im_write_data     <= resize(signed(outimag2), sig2_im_write_data'length);
+                            sig3_re_write_data     <= resize(signed(outreal3), sig3_re_write_data'length);
+                            sig3_im_write_data     <= resize(signed(outimag3), sig3_im_write_data'length);
+                            sig4_re_write_data     <= resize(signed(outreal4), sig4_re_write_data'length);
+                            sig4_im_write_data     <= resize(signed(outimag4), sig4_im_write_data'length);
                         elsif (Nac2 < 9) then
                             sig1_re_write_data     <= sig1_re_read_data + signed(outreal1);
                             sig1_im_write_data     <= sig1_im_read_data + signed(outimag1);
@@ -557,9 +571,63 @@ begin
                 when S_CHECK_LOCK =>
                     if ((SDX < 0) and (abs(delta_drift) < k_0_05_alpha)) then
                         have_lock_out <= '1';
+                        state <= S_DIV_PREP_2;
                     else
-                        delta_drift <= k_0_05_alpha;
+                        delta_drift <= k_0_05_alpha_radian;
+                        state <= S_ADD_DRIFT;
                     end if;
+                when S_DIV_PREP_2 =>
+                    if (delta_drift(delta_drift'left) = '1') then
+                        delta_neg <= '1';
+                        numerator_s <= std_logic_vector(-delta_drift);
+                    else
+                        delta_neg <= '0';
+                        numerator_s <= std_logic_vector(delta_drift);
+                    end if;
+                    denominator_s <= std_logic_vector(k_pi);
+                    fraction_num     <= 30;
+                    valid_in_s <= '1';
+                    state <= S_DIVIDE_3;
+                when S_DIVIDE_3 =>
+                    valid_in_s <= '0';
+                    if (valid_out_s = '1') then
+                        if (quotient_s = x"00000001") then
+                            div_result(fraction_num) <= '1';
+                            if (remainder_s /= x"00000000") then
+                                numerator_s <= remainder_s(30 DOWNTO 0) & '0';
+                                valid_in_s <= '1';
+                            else
+                                state <= S_LATCH_DRIFT_RADIAN;
+                            end if;
+                        elsif (quotient_s = x"00000000") then
+                            div_result(fraction_num) <= '0';
+                            if (remainder_s /= x"00000000") then
+                                numerator_s <= numerator_s(30 DOWNTO 0) & '0';
+                                valid_in_s <= '1';
+                            else
+                                state <= S_LATCH_DRIFT_RADIAN;
+                            end if;
+                        else
+                            error_s(4) <= '1';
+                        end if;
+                        
+                        if (fraction_num /= 0) then
+                            fraction_num <= fraction_num - 1;
+                            numerator_s <= remainder_s(30 DOWNTO 0) & '0';
+                        else
+                            valid_in_s <= '0';
+                            state <= S_LATCH_DRIFT_RADIAN;
+                        end if;
+                    end if;
+                when S_LATCH_DRIFT_RADIAN =>
+                    if (delta_neg = '0') then
+                        delta_drift <= shift_right(signed(div_result), 1);
+                    else
+                        div_result_neg := shift_right(signed(div_result), 1);
+                        delta_drift <= -div_result_neg;
+                    end if;
+                    valid_in_s <= '0';
+                    fraction_num     <= 30;
                     state <= S_ADD_DRIFT;
                 when S_ADD_DRIFT =>
                 --TODO: See if we need overflow bit
