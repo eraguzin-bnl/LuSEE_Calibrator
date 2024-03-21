@@ -24,8 +24,12 @@ USE IEEE.numeric_std.ALL;
 use work.MultiplyTestPkg.all;
 
 entity cal_average is
+  generic(
+    ACCUMULATOR_BASE : integer := 36
+  );
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
+        Nac1                              :   IN    std_logic_vector(1 DOWNTO 0);
         bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
         real_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
@@ -33,7 +37,7 @@ entity cal_average is
         calbin_in                         :   IN    std_logic_vector(8 DOWNTO 0);  -- ufix10
         phase_cor_re                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
         phase_cor_im                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        kar                               :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
+        kar                               :   IN    std_logic_vector(17 DOWNTO 0);  -- ufix16
         readyout                          :   IN    std_logic;
         readycal                          :   IN    std_logic;
         cplx_index                        :   IN    std_logic_vector(5 downto 0);
@@ -62,33 +66,33 @@ architecture architecture_cal_average of cal_average is
     SIGNAL write_en                       : std_logic;
     
     SIGNAL first_time                     : std_logic;
-    SIGNAL sum0_re_write_data             : signed(37 downto 0);
-    SIGNAL sum0_im_write_data             : signed(37 downto 0);
-    SIGNAL sum0_re_read_data              : signed(37 downto 0);
-    SIGNAL sum0_im_read_data              : signed(37 downto 0);
-    SIGNAL sum0_re_read_data_s            : signed(37 downto 0);
-    SIGNAL sum0_im_read_data_s            : signed(37 downto 0);
+    SIGNAL sum0_re_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0_im_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0_re_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0_im_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0_re_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0_im_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
     
-    SIGNAL sum0alt_re_write_data          : signed(37 downto 0);
-    SIGNAL sum0alt_im_write_data          : signed(37 downto 0);
-    SIGNAL sum0alt_re_read_data           : signed(37 downto 0);
-    SIGNAL sum0alt_im_read_data           : signed(37 downto 0);
-    SIGNAL sum0alt_re_read_data_s         : signed(37 downto 0);
-    SIGNAL sum0alt_im_read_data_s         : signed(37 downto 0);
+    SIGNAL sum0alt_re_write_data          : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0alt_im_write_data          : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0alt_re_read_data           : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0alt_im_read_data           : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0alt_re_read_data_s         : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum0alt_im_read_data_s         : signed(ACCUMULATOR_BASE+2 downto 0);
     
-    SIGNAL sum1_re_write_data             : signed(37 downto 0);
-    SIGNAL sum1_im_write_data             : signed(37 downto 0);
-    SIGNAL sum1_re_read_data              : signed(37 downto 0);
-    SIGNAL sum1_im_read_data              : signed(37 downto 0);
-    SIGNAL sum1_re_read_data_s            : signed(37 downto 0);
-    SIGNAL sum1_im_read_data_s            : signed(37 downto 0);
+    SIGNAL sum1_re_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum1_im_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum1_re_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum1_im_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum1_re_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum1_im_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
     
-    SIGNAL sum2_re_write_data             : signed(37 downto 0);
-    SIGNAL sum2_im_write_data             : signed(37 downto 0);
-    SIGNAL sum2_re_read_data              : signed(37 downto 0);
-    SIGNAL sum2_im_read_data              : signed(37 downto 0);
-    SIGNAL sum2_re_read_data_s            : signed(37 downto 0);
-    SIGNAL sum2_im_read_data_s            : signed(37 downto 0);
+    SIGNAL sum2_re_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum2_im_write_data             : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum2_re_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum2_im_read_data              : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum2_re_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
+    SIGNAL sum2_im_read_data_s            : signed(ACCUMULATOR_BASE+2 downto 0);
     
     SIGNAL notch_data_re_we               : std_logic;
     SIGNAL notch_data_re_re               : std_logic;
@@ -123,12 +127,12 @@ architecture architecture_cal_average of cal_average is
     SIGNAL kar_readyout_data_re           : std_logic;
     SIGNAL kar_readyout_data_full         : std_logic;
     SIGNAL kar_readyout_data_empty        : std_logic;
-    SIGNAL kar_readyout_data_s            : std_logic_vector(25 DOWNTO 0);
-    SIGNAL kar_readyout_data_out          : std_logic_vector(25 DOWNTO 0);
+    SIGNAL kar_readyout_data_s            : std_logic_vector(27 DOWNTO 0);
+    SIGNAL kar_readyout_data_out          : std_logic_vector(27 DOWNTO 0);
     
-    SIGNAL kar_curr                       : unsigned(15 DOWNTO 0);
-    SIGNAL kar_squared                    : unsigned(31 DOWNTO 0);
-    SIGNAL kar_squared_signed             : signed(31 DOWNTO 0);
+    SIGNAL kar_curr                       : unsigned(17 DOWNTO 0);
+    SIGNAL kar_squared                    : unsigned(35 DOWNTO 0);
+    SIGNAL kar_squared_signed             : signed(35 DOWNTO 0);
     SIGNAL readyout_curr                  : std_logic; 
     SIGNAL tick                           : std_logic;
     
@@ -144,29 +148,41 @@ architecture architecture_cal_average of cal_average is
     SIGNAL product_im_re                  : std_logic_vector(63 DOWNTO 0);
     SIGNAL product_im_im                  : std_logic_vector(63 DOWNTO 0);
     
+    SIGNAL product_kar_squared_re         : std_logic_vector(67 DOWNTO 0);
+    SIGNAL product_kar_squared_im         : std_logic_vector(67 DOWNTO 0);
+    
     SIGNAL multiplicand1_re               : std_logic_vector(31 DOWNTO 0);
     SIGNAL multiplicand1_im               : std_logic_vector(31 DOWNTO 0);
     SIGNAL multiplicand2_re               : std_logic_vector(31 DOWNTO 0);
     SIGNAL multiplicand2_im               : std_logic_vector(31 DOWNTO 0);
+    
+    SIGNAL multiplicand_kar_squared       : std_logic_vector(35 DOWNTO 0);
+    SIGNAL multiplicand3_re               : std_logic_vector(31 DOWNTO 0);
+    SIGNAL multiplicand3_im               : std_logic_vector(31 DOWNTO 0);
     
     SIGNAL sum_re                         : signed(64 DOWNTO 0);
     SIGNAL sum_im                         : signed(64 DOWNTO 0);
     SIGNAL valid_in                       : std_logic;
     SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
     
-    SIGNAL sum0_re_new                    : signed(37 DOWNTO 0);
-    SIGNAL sum0alt_re_new                 : signed(37 DOWNTO 0);
-    SIGNAL sum1_re_new                    : signed(37 DOWNTO 0);
-    SIGNAL sum2_re_new                    : signed(37 DOWNTO 0);
+    SIGNAL valid_in_kar_squared           : std_logic;
+    SIGNAL valid_out_kar_squared          : std_logic_vector(1 DOWNTO 0);
     
-    SIGNAL sum0_im_new                    : signed(37 DOWNTO 0);
-    SIGNAL sum0alt_im_new                 : signed(37 DOWNTO 0);
-    SIGNAL sum1_im_new                    : signed(37 DOWNTO 0);
-    SIGNAL sum2_im_new                    : signed(37 DOWNTO 0);
+    SIGNAL Nac1_s                         : integer range 0 to 2;
+    
+    SIGNAL sum0_re_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum0alt_re_new                 : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum1_re_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum2_re_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    
+    SIGNAL sum0_im_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum0alt_im_new                 : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum1_im_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
+    SIGNAL sum2_im_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
     
     SIGNAL cplx_slice                     : integer range 0 to 33;
     SIGNAL sum1_slice                     : integer range 0 to 32;
-    SIGNAL sum2_slice                     : integer range 0 to 32;
+    SIGNAL sum2_slice                     : integer range 0 to 36;
     SIGNAL powertop_slice                 : integer range 0 to 33;
     SIGNAL powerbot_slice                 : integer range 0 to 33;
     SIGNAL driftFD_slice                  : integer range 0 to 33;
@@ -226,13 +242,13 @@ architecture architecture_cal_average of cal_average is
     component CAL_AVERAGE_OTHER_FIFO
     PORT ( 
         CLK                               :   IN    std_logic;
-        DATA                              :   IN    std_logic_vector(25 downto 0);
+        DATA                              :   IN    std_logic_vector(27 downto 0);
         RE                                :   IN    std_logic;
         RESET_N                           :   IN    std_logic;
         WE                                :   IN    std_logic;
         EMPTY                             :   OUT   std_logic;
         FULL                              :   OUT   std_logic;
-        Q                                 :   OUT   std_logic_vector(25 downto 0)
+        Q                                 :   OUT   std_logic_vector(27 downto 0)
         );
     end component;
     
@@ -241,9 +257,9 @@ architecture architecture_cal_average of cal_average is
         CLK                               :   IN    std_logic;
         R_ADDR                            :   IN    std_logic_vector(8 downto 0);
         W_ADDR                            :   IN    std_logic_vector(8 downto 0);
-        W_DATA                            :   IN    signed(37 downto 0);
+        W_DATA                            :   IN    signed(ACCUMULATOR_BASE+2 downto 0);
         W_EN                              :   IN    std_logic;
-        R_DATA                            :   OUT   signed(37 downto 0)
+        R_DATA                            :   OUT   signed(ACCUMULATOR_BASE+2 downto 0)
         );
     end component;
 
@@ -312,6 +328,44 @@ begin
         Q        => kar_readyout_data_out,
         RE       => kar_readyout_data_re,
         EMPTY    => kar_readyout_data_empty
+        );
+        
+    --Kar^2 * real of cplx_in
+    mult_kar_squared_re : entity work.Multiply_generic36
+        generic map(
+            a_size => 35)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => multiplicand_kar_squared,
+            i_mb => multiplicand3_re,
+
+            --Valid
+            valid_in => valid_in_kar_squared,
+            valid_out => valid_out_kar_squared(0),
+
+            -- Outputs
+            o_m => product_kar_squared_re
+        );
+        
+    --Kar^2 * imag of cplx_in
+    mult_kar_squared_ime : entity work.Multiply_generic36
+        generic map(
+            a_size => 35)
+        port map(
+            -- Inputs
+            i_clk => clk,
+            i_rstb => reset,
+            i_ma => multiplicand_kar_squared,
+            i_mb => multiplicand3_im,
+
+            --Valid
+            valid_in => valid_in_kar_squared,
+            valid_out => valid_out_kar_squared(1),
+
+            -- Outputs
+            o_m => product_kar_squared_im
         );
         
     --Real of first * real of second
@@ -478,8 +532,8 @@ begin
         
         variable result64_shifted : signed(63 DOWNTO 0) := (others=>'0');
         variable result64_shifted2: signed(63 DOWNTO 0) := (others=>'0');
-        variable result64_shifted3: signed(63 DOWNTO 0) := (others=>'0');
-        variable result64_shifted4: signed(63 DOWNTO 0) := (others=>'0');
+        variable result68_shifted : signed(67 DOWNTO 0) := (others=>'0');
+        variable result68_shifted2: signed(67 DOWNTO 0) := (others=>'0');
         
         variable SD1_shifted1      : signed(63 DOWNTO 0) := (others=>'0');
         variable SD1_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
@@ -516,11 +570,16 @@ begin
                 kar_readyout_data_s          <= (others=>'0');
                 kar_readyout_data_we         <= '0';
                 valid_in                     <= '0';
+                valid_in_kar_squared         <= '0';
                 
                 multiplicand1_re             <= (others=>'0');
                 multiplicand1_im             <= (others=>'0');
                 multiplicand2_re             <= (others=>'0');
                 multiplicand2_im             <= (others=>'0');
+                
+                multiplicand3_re             <= (others=>'0');
+                multiplicand3_im             <= (others=>'0');
+                multiplicand_kar_squared     <= (others=>'0');
                 
                 kar_curr                     <= (others=>'0');
                 kar_squared                  <= (others=>'0');
@@ -539,6 +598,7 @@ begin
                 powerbot_slice               <= 0;
                 driftFD_slice                <= 0;
                 driftSD_slice                <= 0;
+                Nac1_s                       <= 1;
                 
                 calbin_out                   <= (others=>'0');
                 average_ready                <= '0';
@@ -590,8 +650,8 @@ begin
                 
                 result64_shifted             := (others=>'0');
                 result64_shifted2            := (others=>'0');
-                result64_shifted3            := (others=>'0');
-                result64_shifted4            := (others=>'0');
+                result68_shifted             := (others=>'0');
+                result68_shifted2            := (others=>'0');
             else
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
@@ -691,9 +751,9 @@ begin
                     multiplicand2_im <= phase_data_im_out;
                     valid_in <= '1';
                     
-                    kar_curr <= shift_right(unsigned(kar_readyout_data_out(15 DOWNTO 0)), 1);
-                    calbin_s <= unsigned(kar_readyout_data_out(24 DOWNTO 16));
-                    readyout_curr <= kar_readyout_data_out(25);
+                    kar_curr <= unsigned(kar_readyout_data_out(17 DOWNTO 0));
+                    calbin_s <= unsigned(kar_readyout_data_out(26 DOWNTO 18));
+                    readyout_curr <= kar_readyout_data_out(27);
                     state <= S_MULTIPLY_WAIT;
                 when S_MULTIPLY_WAIT =>
                     valid_in <= '0';
@@ -721,46 +781,51 @@ begin
                 when S_BEGIN_MULTIPLY_2 =>
                     multiplicand1_re <= std_logic_vector(cplx_in_re);
                     multiplicand1_im <= std_logic_vector(cplx_in_im);
-                    multiplicand2_re <= std_logic_vector(-kar_squared_signed);
-                    multiplicand2_im <= x"0000" & std_logic_vector(kar_curr);
+                    multiplicand2_im <= x"000" & "00" & std_logic_vector(kar_curr);
                     valid_in <= '1';
+                    
+                    multiplicand3_re <= std_logic_vector(cplx_in_re);
+                    multiplicand3_im <= std_logic_vector(cplx_in_im);
+                    multiplicand_kar_squared <= std_logic_vector(-kar_squared_signed);
+                    valid_in_kar_squared <= '1';
                     
                     state <= S_MULTIPLY_WAIT_2;
                 when S_MULTIPLY_WAIT_2 =>
                     valid_in <= '0';
-                    if (valid_out = "1111") then
+                    valid_in_kar_squared <= '0';
+                    if (valid_out_kar_squared = "11") then
                         state <= S_BIT_SLICE_2;
                     end if;
                     sum1_slice <= to_integer(unsigned(sum1_index));
                     sum2_slice <= to_integer(unsigned(sum2_index));
                 when S_BIT_SLICE_2 =>
-                    sum0_re_new <= resize(cplx_in_re, 38);
-                    sum0_im_new <= resize(cplx_in_im, 38);
+                    sum0_re_new <= resize(cplx_in_re, sum0_re_new'length);
+                    sum0_im_new <= resize(cplx_in_im, sum0_im_new'length);
                     if (tick) then
-                        sum0alt_re_new <= resize(cplx_in_re, 38);
-                        sum0alt_im_new <= resize(cplx_in_im, 38);
+                        sum0alt_re_new <= resize(cplx_in_re, sum0alt_re_new'length);
+                        sum0alt_im_new <= resize(cplx_in_im, sum0alt_im_new'length);
                     else
-                        sum0alt_re_new <= resize(-cplx_in_re, 38);
-                        sum0alt_im_new <= resize(-cplx_in_im, 38);
+                        sum0alt_re_new <= resize(-cplx_in_re, sum0alt_re_new'length);
+                        sum0alt_im_new <= resize(-cplx_in_im, sum0alt_im_new'length);
                     end if;
                     
                     result64_shifted  := shift_right(signed(product_im_im), sum1_slice);
                     result64_shifted2 := shift_right(signed(product_re_im), sum1_slice);
                     
-                    sum1_re_new <= resize(result64_shifted(31 DOWNTO 0), 38);
-                    sum1_im_new <= resize(result64_shifted2(31 DOWNTO 0), 38);
+                    sum1_re_new <= resize(result64_shifted(31 DOWNTO 0), sum1_re_new'length);
+                    sum1_im_new <= resize(result64_shifted2(31 DOWNTO 0), sum1_im_new'length);
                     
                     test64_slice_proc(product_im_im, sum1_slice, 1, error_s);
                     test64_slice_proc(product_re_im, sum1_slice, 1, error_s);
                     
-                    result64_shifted3 := shift_right(signed(product_re_re), sum2_slice);
-                    result64_shifted4 := shift_right(signed(product_im_re), sum2_slice);
+                    result68_shifted  := shift_right(signed(product_kar_squared_re), sum2_slice);
+                    result68_shifted2 := shift_right(signed(product_kar_squared_im), sum2_slice);
                     
-                    sum2_re_new <= resize(result64_shifted3(31 DOWNTO 0), 38);
-                    sum2_im_new <= resize(result64_shifted4(31 DOWNTO 0), 38);
+                    sum2_re_new <= resize(result68_shifted(31 DOWNTO 0), sum2_re_new'length);
+                    sum2_im_new <= resize(result68_shifted2(31 DOWNTO 0), sum2_im_new'length);
                     
-                    test64_slice_proc(product_re_re, sum2_slice, 2, error_s);                    
-                    test64_slice_proc(product_im_re, sum2_slice, 2, error_s);
+                    test68_slice_proc(product_kar_squared_re, sum2_slice, 2, error_s);                    
+                    test68_slice_proc(product_kar_squared_im, sum2_slice, 2, error_s);
                     
                     sum0_re_read_data_s <= sum0_re_read_data;
                     sum0_im_read_data_s <= sum0_im_read_data;
@@ -829,18 +894,19 @@ begin
                         sum2_im_new <= sum2_im_read_data_s + sum2_im_new;
                         
                         calbin_out <= std_logic_vector(calbin_s);
+                        Nac1_s <= to_integer(unsigned(Nac1));
                         state <= S_BEGIN_MULTIPLY_3;
                     end if;
                 when S_BEGIN_MULTIPLY_3 =>
                     write_en <= '0';
                     
-                    outreal <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
-                    outimag <= std_logic_vector(sum0_im_new(37 DOWNTO 6));
+                    outreal <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    outimag <= std_logic_vector(sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     
-                    multiplicand1_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
-                    multiplicand1_im <= std_logic_vector(sum1_im_new(37 DOWNTO 6));
-                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
-                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    multiplicand1_re <= std_logic_vector(sum1_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand1_im <= std_logic_vector(sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
                     state <= S_MULTIPLY_WAIT_3;
@@ -858,10 +924,10 @@ begin
                     
                     test65_slice_proc(sum_re, driftFD_slice, 3, error_s);
                     
-                    multiplicand1_re <= std_logic_vector(sum2_re_new(37 DOWNTO 6));
-                    multiplicand1_im <= std_logic_vector(sum2_im_new(37 DOWNTO 6));
-                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
-                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    multiplicand1_re <= std_logic_vector(sum2_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand1_im <= std_logic_vector(sum2_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
                     state <= S_MULTIPLY_WAIT_4;
@@ -875,10 +941,10 @@ begin
                     end if;
                     
                 when S_BEGIN_MULTIPLY_5 =>                    
-                    multiplicand1_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
-                    multiplicand1_im <= std_logic_vector(sum1_im_new(37 DOWNTO 6));
-                    multiplicand2_re <= std_logic_vector(sum1_re_new(37 DOWNTO 6));
-                    multiplicand2_im <= std_logic_vector(-sum1_im_new(37 DOWNTO 6));
+                    multiplicand1_re <= std_logic_vector(sum1_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand1_im <= std_logic_vector(sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_re <= std_logic_vector(sum1_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_im <= std_logic_vector(-sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
                     state <= S_MULTIPLY_WAIT_5;
@@ -896,7 +962,7 @@ begin
                     SD1_shifted2 := resize(SD1_shifted1, 32);
                     SD1_shifted2_dummy <= SD1_shifted2;
                     
-                    SD2_shifted1 := shift_left(sum_re, 4);
+                    SD2_shifted1 := shift_left(sum_re, 2);
                     SD2_shifted1_dummy <= SD2_shifted1;
                     SD2_shifted2 := resize(SD2_shifted1, 32);
                     SD2_shifted2_dummy <= SD2_shifted2;
@@ -904,10 +970,10 @@ begin
                     
                     drift_SD_s <= SD1_shifted2 + SD2_shifted2;
                 
-                    multiplicand1_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
-                    multiplicand1_im <= std_logic_vector(sum0_im_new(37 DOWNTO 6));
-                    multiplicand2_re <= std_logic_vector(sum0_re_new(37 DOWNTO 6));
-                    multiplicand2_im <= std_logic_vector(-sum0_im_new(37 DOWNTO 6));
+                    multiplicand1_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand1_im <= std_logic_vector(sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_im <= std_logic_vector(-sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
                     state <= S_MULTIPLY_WAIT_6;
@@ -932,10 +998,10 @@ begin
                     --test66_slice_proc(drift_SD_s, driftSD_slice, 4, error_s);                    
                     --test65_slice_proc(sum_re, powertop_slice, 5, error_s);
                 
-                    multiplicand1_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
-                    multiplicand1_im <= std_logic_vector(sum0alt_im_new(37 DOWNTO 6));
-                    multiplicand2_re <= std_logic_vector(sum0alt_re_new(37 DOWNTO 6));
-                    multiplicand2_im <= std_logic_vector(-sum0alt_im_new(37 DOWNTO 6));
+                    multiplicand1_re <= std_logic_vector(sum0alt_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand1_im <= std_logic_vector(sum0alt_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_re <= std_logic_vector(sum0alt_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
+                    multiplicand2_im <= std_logic_vector(-sum0alt_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
                     state <= S_MULTIPLY_WAIT_7;

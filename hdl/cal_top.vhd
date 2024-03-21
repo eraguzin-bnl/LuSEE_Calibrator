@@ -38,12 +38,14 @@ architecture architecture_cal_top of cal_top is
     
     signal real_in_s  : std_logic_vector(31 DOWNTO 0);
     signal imag_in_s  : std_logic_vector(31 DOWNTO 0);
+    
+    signal Nac1_s      : std_logic_vector(1 DOWNTO 0);
 
     signal calbin      : std_logic_vector(8 DOWNTO 0);
     signal calbin_out      : std_logic_vector(8 DOWNTO 0);
     signal phase_cor_re  : std_logic_vector(31 DOWNTO 0);
     signal phase_cor_im  : std_logic_vector(31 DOWNTO 0);
-    signal kar_out       : std_logic_vector(15 DOWNTO 0);
+    signal kar_out       : std_logic_vector(17 DOWNTO 0);
     signal readyout      : std_logic;
     signal update_drift   : std_logic;
     signal readycal      : std_logic;
@@ -91,6 +93,7 @@ begin
             -- Inputs
             clk => clk,
             reset => reset,
+            Nac1 => Nac1_s,
             bin_in => bin_in_s,
             --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
             cal_drift => cal_drift_out,
@@ -111,6 +114,7 @@ begin
             -- Inputs
             clk => clk,
             reset => reset,
+            Nac1 => Nac1_s,
             bin_in => bin_in_s,
             readyin => '1',
             real_in => real_in_s,

@@ -42,6 +42,13 @@ package MultiplyTestPkg is
         error_index         : in integer range 0 to 6;
         signal error_out    : out std_logic_vector(6 downto 0)
         );
+        
+    procedure test68_slice_proc (
+        signal data         : in std_logic_vector(67 downto 0);
+        signal slice        : in integer range 0 to 36;
+        error_index         : in integer range 0 to 6;
+        signal error_out    : out std_logic_vector(6 downto 0)
+        );
 end package MultiplyTestPkg;
 
 package body MultiplyTestPkg is
@@ -147,4 +154,38 @@ package body MultiplyTestPkg is
                 end if;
             end if;
     end test66_slice_proc;
+    
+    procedure test68_slice_proc (
+            signal data            : in std_logic_vector(67 downto 0);
+            signal slice           : in integer range 0 to 36;
+            error_index            : in integer range 0 to 6;
+            signal error_out       : out std_logic_vector(6 downto 0)
+            )
+        is
+            variable test68_slice  : signed(67 DOWNTO 0) := (others=>'0');
+            CONSTANT error_ones    : signed(67 downto 0) := (others=>'1');
+            CONSTANT error_zeroes  : signed(67 downto 0) := (others=>'0');
+        begin
+            test68_slice := shift_right(signed(data), slice + 32);
+            -- First check to see if number is negative
+            if (test68_slice(67) = '1') then
+                --This is a signed negative number, if there are any 0s higher than the slice you took off, you missed data
+                if (test68_slice < error_ones) then
+                    error_out(error_index) <= '1';
+                end if;
+                
+                if (data(31 + slice) /= '1') then
+                    error_out(error_index) <= '1';
+                end if;
+            else
+                --This is a signed positive number, if there are any 1s higher than the slice you took off, you missed data
+                if (test68_slice > error_zeroes) then
+                    error_out(error_index) <= '1';
+                end if;
+                
+                if (data(31 + slice) /= '0') then
+                    error_out(error_index) <= '1';
+                end if;
+            end if;
+    end test68_slice_proc;
 end package body MultiplyTestPkg;

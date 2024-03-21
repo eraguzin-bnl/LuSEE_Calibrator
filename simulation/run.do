@@ -8,7 +8,7 @@ if {[file exists presynth/_info]} {
    vlib presynth
 }
 vmap presynth presynth
-vmap PolarFire "/usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/precompiled/vlog/polarfire"
+vmap PolarFire "/usr/local/microchip/Libero_SoC_v2024.1/Libero/lib/modelsimpro/precompiled/vlog/polarfire"
 if {[file exists COREFIFO_LIB/_info]} {
    echo "INFO: Simulation library COREFIFO_LIB already exists"
 } else {
@@ -45,6 +45,7 @@ vlog -sv -work presynth "${PROJECT_DIR}/component/work/CAL_AVERAGE_OTHER_FIFO/CA
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO_0/rtl/vlog/core/COREFIFO.v"
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/CAL_AVERAGE_OTHER_FIFO/CAL_AVERAGE_OTHER_FIFO.v"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/Multiply_generic_32.vhd"
+vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/Multiply_generic_36.vhd"
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL_0/PF_TPSRAM_CAL_PF_TPSRAM_CAL_0_PF_TPSRAM.v"
 vlog -sv -work presynth "${PROJECT_DIR}/component/work/PF_TPSRAM_CAL/PF_TPSRAM_CAL.v"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/multiply_test_pkg.vhd"
@@ -88,6 +89,6 @@ vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process_fixpt_pkg.v
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/hdl/cal_process_fixpt_tb_pkg.vhd"
 vcom -2008 -explicit  -work presynth "${PROJECT_DIR}/stimulus/calibration_tb.vhd"
 
-vsim -L PolarFire -L presynth -L COREFIFO_LIB -L CORECORDIC_LIB  -t 1ps -pli /usr/local/microchip/Libero_SoC_v2022.3/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so presynth.calibration_tb
+vsim -L PolarFire -L presynth -L COREFIFO_LIB -L CORECORDIC_LIB  -t 1ps -pli /usr/local/microchip/Libero_SoC_v2024.1/Libero/lib/modelsimpro/pli/pf_crypto_lin_me_pli.so presynth.calibration_tb
 add wave /calibration_tb/*
 run 1000ns

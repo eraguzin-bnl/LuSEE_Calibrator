@@ -48,12 +48,14 @@ architecture behavioral of calibration_tb is
     
     signal real_in_s  : std_logic_vector(31 DOWNTO 0);
     signal imag_in_s  : std_logic_vector(31 DOWNTO 0);
+    
+    signal Nac1_s     : std_logic_vector(1 DOWNTO 0);
 
     signal calbin      : std_logic_vector(8 DOWNTO 0);
     signal calbin_out      : std_logic_vector(8 DOWNTO 0);
     signal phase_cor_re  : std_logic_vector(31 DOWNTO 0);
     signal phase_cor_im  : std_logic_vector(31 DOWNTO 0);
-    signal kar_out       : std_logic_vector(15 DOWNTO 0);
+    signal kar_out       : std_logic_vector(17 DOWNTO 0);
     signal readyout      : std_logic;
     signal update_drift   : std_logic;
     signal readycal      : std_logic;
@@ -105,8 +107,9 @@ begin
             sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
             powertop_index   <= std_logic_vector(to_unsigned(32, powertop_index'length));
             powerbot_index   <= std_logic_vector(to_unsigned(32, powerbot_index'length));
-            driftFD_index    <= std_logic_vector(to_unsigned(29, driftFD_index'length));
+            driftFD_index    <= std_logic_vector(to_unsigned(30, driftFD_index'length));
             driftSD_index    <= std_logic_vector(to_unsigned(28, driftSD_index'length));
+            Nac1_s           <= "01";
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -249,6 +252,7 @@ begin
             -- Inputs
             clk => SYSCLK,
             reset => SYSRESET,
+            Nac1 => Nac1_s,
             bin_in => bin_in_s,
             --cal_drift => std_logic_vector(shift_right(unsigned(cal_drift_s), 14) / 3),
             cal_drift => cal_drift_out,
@@ -269,6 +273,7 @@ begin
             -- Inputs
             clk => SYSCLK,
             reset => SYSRESET,
+            Nac1 => Nac1_s,
             bin_in => bin_in_s,
             readyin => readyin_gated,
             real_in => real_in_s,

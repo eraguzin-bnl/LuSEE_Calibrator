@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Wed Jan 31 13:01:30 2024
-// Version: 2022.3 2022.3.0.8
+// Created by SmartDesign Wed Mar 20 11:12:38 2024
+// Version: 2024.1 2024.1.0.3
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -33,7 +33,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREFIFO:3.0.101} -compon
 "RDEPTH:512"  \
 "RE_POLARITY:0"  \
 "READ_DVALID:false"  \
-"RWIDTH:26"  \
+"RWIDTH:28"  \
 "SYNC:1"  \
 "SYNC_RESET:1"  \
 "UNDERFLOW_EN:false"  \
@@ -41,7 +41,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREFIFO:3.0.101} -compon
 "WE_POLARITY:0"  \
 "WRCNT_EN:false"  \
 "WRITE_ACK:false"  \
-"WWIDTH:26"   }
+"WWIDTH:28"   }
 # Exporting Component Description of CAL_AVERAGE_OTHER_FIFO to TCL done
 */
 
@@ -63,7 +63,7 @@ module CAL_AVERAGE_OTHER_FIFO(
 // Input
 //--------------------------------------------------------------------
 input         CLK;
-input  [25:0] DATA;
+input  [27:0] DATA;
 input         RE;
 input         RESET_N;
 input         WE;
@@ -72,31 +72,31 @@ input         WE;
 //--------------------------------------------------------------------
 output        EMPTY;
 output        FULL;
-output [25:0] Q;
+output [27:0] Q;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
 wire          CLK;
-wire   [25:0] DATA;
+wire   [27:0] DATA;
 wire          EMPTY_net_0;
 wire          FULL_net_0;
-wire   [25:0] Q_net_0;
+wire   [27:0] Q_net_0;
 wire          RE;
 wire          RESET_N;
 wire          WE;
 wire          FULL_net_1;
 wire          EMPTY_net_1;
-wire   [25:0] Q_net_1;
+wire   [27:0] Q_net_1;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
 wire          GND_net;
-wire   [25:0] MEMRD_const_net_0;
+wire   [27:0] MEMRD_const_net_0;
 //--------------------------------------------------------------------
 // Constant assignments
 //--------------------------------------------------------------------
 assign GND_net           = 1'b0;
-assign MEMRD_const_net_0 = 26'h0000000;
+assign MEMRD_const_net_0 = 28'h0000000;
 //--------------------------------------------------------------------
 // Top level output port assignments
 //--------------------------------------------------------------------
@@ -105,7 +105,7 @@ assign FULL        = FULL_net_1;
 assign EMPTY_net_1 = EMPTY_net_0;
 assign EMPTY       = EMPTY_net_1;
 assign Q_net_1     = Q_net_0;
-assign Q[25:0]     = Q_net_1;
+assign Q[27:0]     = Q_net_1;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
@@ -131,7 +131,7 @@ CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_COREFIFO #(
         .RDEPTH       ( 512 ),
         .RE_POLARITY  ( 0 ),
         .READ_DVALID  ( 0 ),
-        .RWIDTH       ( 26 ),
+        .RWIDTH       ( 28 ),
         .SYNC         ( 1 ),
         .SYNC_RESET   ( 1 ),
         .UNDERFLOW_EN ( 0 ),
@@ -139,7 +139,7 @@ CAL_AVERAGE_OTHER_FIFO_CAL_AVERAGE_OTHER_FIFO_0_COREFIFO #(
         .WE_POLARITY  ( 0 ),
         .WRCNT_EN     ( 0 ),
         .WRITE_ACK    ( 0 ),
-        .WWIDTH       ( 26 ) )
+        .WWIDTH       ( 28 ) )
 CAL_AVERAGE_OTHER_FIFO_0(
         // Inputs
         .CLK        ( CLK ),
@@ -151,7 +151,7 @@ CAL_AVERAGE_OTHER_FIFO_0(
         .WE         ( WE ),
         .RE         ( RE ),
         .DATA       ( DATA ),
-        .MEMRD      ( MEMRD_const_net_0 ), // tied to 26'h0000000 from definition
+        .MEMRD      ( MEMRD_const_net_0 ), // tied to 28'h0000000 from definition
         // Outputs
         .FULL       ( FULL_net_0 ),
         .EMPTY      ( EMPTY_net_0 ),

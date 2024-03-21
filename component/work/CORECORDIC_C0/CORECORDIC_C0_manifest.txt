@@ -1,6 +1,6 @@
-Microchip Technology Inc. - Microchip Libero Software Release v2022.3 (Version 2022.3.0.8)
+Microchip Technology Inc. - Microchip Libero Software Release v2024.1 (Version 2024.1.0.3)
 
-Date      :  Wed Feb 21 11:52:19 2024
+Date      :  Tue Mar 19 17:31:01 2024
 Project   :  /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator
 Component :  CORECORDIC_C0
 Family    :  PolarFire

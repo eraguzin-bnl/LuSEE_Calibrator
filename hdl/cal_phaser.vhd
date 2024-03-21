@@ -30,10 +30,12 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY cal_phaser IS
 generic(
-  size : integer := 32
+  size : integer := 32;
+  Nac_max : integer := 127
   );
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
+        Nac1                              :   IN    std_logic_vector(1 DOWNTO 0);
         bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
         cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- The value to shift the cordic input by for 64 cycles
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
@@ -41,7 +43,7 @@ generic(
         calbin                            :   OUT   std_logic_vector(8 DOWNTO 0);  -- Output of which bin's values are going out
         phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Real part of complex phase result
         phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
-        kar_out                           :   OUT   std_logic_vector(15 DOWNTO 0);  -- Calculation based on bin and cycle
+        kar_out                           :   OUT   std_logic_vector(17 DOWNTO 0);  -- Calculation based on bin and cycle
         readyout                          :   OUT   std_logic;                      -- Goes high on 64th cycle
         readycal                          :   OUT   std_logic                       -- Goes high every cycle to tell average block to consume new values
         );
@@ -65,7 +67,11 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL calbin_out                      : unsigned(9 DOWNTO 0); --Needs an extra bit for addition overflow
     SIGNAL kk                              : unsigned(12 DOWNTO 0);
     
-    SIGNAL cordic_counter                  : integer range 0 to 63 := 0;
+    CONSTANT NAC_BASE_SHIFT                : integer := 5;
+    CONSTANT ONE_U                         : unsigned(7 DOWNTO 0) := x"01";
+    SIGNAL Nac_shift_s                     : std_logic_vector(1 DOWNTO 0);
+    
+    SIGNAL cordic_counter                  : integer range 0 to Nac_max := 0;
     SIGNAL cal_drift_s                     : signed(31 DOWNTO 0);
     SIGNAL cordic_in                       : std_logic_vector(31 DOWNTO 0);
     SIGNAL cordic_valid_in                 : std_logic;
@@ -98,8 +104,9 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL phase_st_re                     : signed(31 DOWNTO 0);
     SIGNAL phase_st_im                     : signed(31 DOWNTO 0);
     
-    SIGNAL Nac                             : unsigned(6 DOWNTO 0);
-    SIGNAL kar_s                           : std_logic_vector(19 DOWNTO 0);
+    SIGNAL Nac                             : unsigned(7 DOWNTO 0);
+    SIGNAL Nac_size                        : unsigned(7 DOWNTO 0);
+    SIGNAL kar_s                           : std_logic_vector(20 DOWNTO 0);
     SIGNAL multiplicand_re                 : signed(31 DOWNTO 0);
     SIGNAL multiplicand_im                 : signed(31 DOWNTO 0);
     SIGNAL product_re_re                   : std_logic_vector(63 DOWNTO 0);
@@ -362,7 +369,9 @@ begin
                 multiplicand_im       <= (others=>'0');
                 sum_re                <= (others=>'0');
                 sum_im                <= (others=>'0');
+                Nac_shift_s           <= (others=>'0');
                 Nac                   <= to_unsigned(0,Nac'length);
+                Nac_size              <= to_unsigned(63,Nac_size'length);
                 kar_s                 <= (others=>'0');
                 valid_in              <= '0';
                 error_fifo_full       <= '0';
@@ -385,6 +394,9 @@ begin
                 state                 <= S_IDLE;
                 state2                <= S_CORDIC_IDLE;
             else
+                -- Do Nac calculation
+                Nac_shift_s <= Nac1;
+                Nac_size    <= shift_left(ONE_U, NAC_BASE_SHIFT + to_integer(unsigned(Nac_shift_s))) - 1;
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
                 fifo_bin_we <= '0';
@@ -495,12 +507,12 @@ begin
                 when S_WAIT_FOR_RESULT3 =>
                     -- Last step for kar output is to multiply by the cycle number (out of 64)
                     -- This is a multiplication that can be done in one cycle
-                    -- Max would be (1024-1) * (64) which is fine for 18 x 18 unsigned multiplier in one clock cycle
+                    -- Max would be (1024-1) * (128) which is fine for 18 x 18 unsigned multiplier in one clock cycle
                     kar_s <= std_logic_vector(kk * Nac);
                     state <= S_WAIT_FOR_RESULT4;
                 when S_WAIT_FOR_RESULT4 =>
-                    -- Product will always have a max of 16 bits, and that's the output size of block for kar
-                    kar_out <= kar_s(15 downto 0);
+                    -- Product will always have a max of 18 bits, and that's the output size of block for kar
+                    kar_out <= kar_s(17 downto 0);
                     -- By now the next cal bin has come out for the next cycle
                     -- If we're still in the same cycle, check to make sure it was one larger than the one we're processing now
                     if (calbin_out /= 511) then
@@ -559,8 +571,8 @@ begin
                     -- Set the flag high so the further blocks know to latch it in
                     readycal <= '1';
                     
-                    -- If this is the 64th cycle, this flag goes high for the further blocks to do things with
-                    if (Nac = 63) then
+                    -- If this is the last (32nd, 64th, 128th) cycle, this flag goes high for the further blocks to do things with
+                    if (Nac = Nac_size) then
                         readyout <= '1';
                     end if;
                     
@@ -573,8 +585,8 @@ begin
                     else
                         -- If that was the 512th bin, set back to 0 and go back to Idle to wait for the next stream of bins
                         calbin_out <= (others=>'0');
-                        if (Nac = 63) then
-                            -- If this was also the 64th cycle, then send the update drift flags to further blocks know to give us new cordic inputs
+                        if (Nac = Nac_size) then
+                            -- If this was also the last cycle, then send the update drift flags to further blocks know to give us new cordic inputs
                             Nac <= to_unsigned(0, Nac'length);
                         else
                             Nac <= Nac + 1;
@@ -639,7 +651,7 @@ begin
                     -- This phase either recognizes we're at the end for this 64 cycle batch, or calculates the next cordic input value
                     cos_fifo_we <= '0';
                     sin_fifo_we <= '0';
-                    if (cordic_counter = 63) then
+                    if (cordic_counter = Nac_size) then
                         state2 <= S_CORDIC_WAIT_FOR_UPDATE;
                     else
                         cordic_counter <= cordic_counter + 1;
