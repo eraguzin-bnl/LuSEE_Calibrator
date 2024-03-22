@@ -74,7 +74,8 @@ architecture behavioral of calibration_tb is
     signal powertop_index                      : std_logic_vector(5 downto 0);
     signal powerbot_index                      : std_logic_vector(5 downto 0);
     signal driftFD_index                       : std_logic_vector(5 downto 0);
-    signal driftSD_index                       : std_logic_vector(5 downto 0);
+    signal driftSD1_index                      : std_logic_vector(5 downto 0);
+    signal driftSD2_index                      : std_logic_vector(5 downto 0);
     signal error_s                             : std_logic_vector(10 DOWNTO 0);
     
     SIGNAL readyin_gated                    : std_logic;
@@ -104,12 +105,13 @@ begin
         if ( vhdl_initial ) then
             cplx_index       <= std_logic_vector(to_unsigned(29, cplx_index'length));
             sum1_index       <= std_logic_vector(to_unsigned(32, sum1_index'length));
-            sum2_index       <= std_logic_vector(to_unsigned(32, sum2_index'length));
+            sum2_index       <= std_logic_vector(to_unsigned(36, sum2_index'length));
             powertop_index   <= std_logic_vector(to_unsigned(32, powertop_index'length));
             powerbot_index   <= std_logic_vector(to_unsigned(32, powerbot_index'length));
             driftFD_index    <= std_logic_vector(to_unsigned(30, driftFD_index'length));
-            driftSD_index    <= std_logic_vector(to_unsigned(28, driftSD_index'length));
-            Nac1_s           <= "01";
+            driftSD1_index   <= std_logic_vector(to_unsigned(26, driftSD1_index'length));
+            driftSD2_index   <= std_logic_vector(to_unsigned(2, driftSD2_index'length));
+            Nac1_s           <= "10";
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -290,7 +292,8 @@ begin
             powertop_index => powertop_index,
             powerbot_index => powerbot_index,
             driftFD_index => driftFD_index,
-            driftSD_index => driftSD_index,
+            driftSD1_index => driftSD1_index,
+            driftSD2_index => driftSD2_index,
             error_stick => '1',
             
             -- Outputs

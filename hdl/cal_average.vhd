@@ -46,7 +46,8 @@ entity cal_average is
         powertop_index                    :   IN    std_logic_vector(5 downto 0);
         powerbot_index                    :   IN    std_logic_vector(5 downto 0);
         driftFD_index                     :   IN    std_logic_vector(5 downto 0);
-        driftSD_index                     :   IN    std_logic_vector(5 downto 0);
+        driftSD1_index                    :   IN    std_logic_vector(5 downto 0);
+        driftSD2_index                    :   IN    std_logic_vector(5 downto 0);
         error_stick                       :   IN    std_logic;
         error                             :   OUT   std_logic_vector(10 DOWNTO 0);
         outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
@@ -186,7 +187,8 @@ architecture architecture_cal_average of cal_average is
     SIGNAL powertop_slice                 : integer range 0 to 33;
     SIGNAL powerbot_slice                 : integer range 0 to 33;
     SIGNAL driftFD_slice                  : integer range 0 to 33;
-    SIGNAL driftSD_slice                  : integer range 0 to 33;
+    SIGNAL driftSD1_slice                 : integer range 0 to 33;
+    SIGNAL driftSD2_slice                 : integer range 0 to 33;
     
     SIGNAL cplx_in_re                     : signed(31 DOWNTO 0);
     SIGNAL cplx_in_im                     : signed(31 DOWNTO 0);
@@ -597,7 +599,8 @@ begin
                 powertop_slice               <= 0;
                 powerbot_slice               <= 0;
                 driftFD_slice                <= 0;
-                driftSD_slice                <= 0;
+                driftSD1_slice               <= 0;
+                driftSD2_slice               <= 0;
                 Nac1_s                       <= 1;
                 
                 calbin_out                   <= (others=>'0');
@@ -947,6 +950,9 @@ begin
                     multiplicand2_im <= std_logic_vector(-sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
                     
+                    driftSD1_slice <= to_integer(unsigned(driftSD1_index));
+                    driftSD2_slice <= to_integer(unsigned(driftSD2_index));
+                    
                     state <= S_MULTIPLY_WAIT_5;
                     
                 when S_MULTIPLY_WAIT_5 =>
@@ -957,12 +963,12 @@ begin
                     end if;
                     
                 when S_BEGIN_MULTIPLY_6 =>
-                    SD1_shifted1 := shift_right(drift_SD1, 28);
+                    SD1_shifted1 := shift_right(drift_SD1, driftSD1_slice);
                     SD1_shifted1_dummy <= SD1_shifted1;
                     SD1_shifted2 := resize(SD1_shifted1, 32);
                     SD1_shifted2_dummy <= SD1_shifted2;
                     
-                    SD2_shifted1 := shift_left(sum_re, 2);
+                    SD2_shifted1 := shift_left(sum_re, driftSD2_slice);
                     SD2_shifted1_dummy <= SD2_shifted1;
                     SD2_shifted2 := resize(SD2_shifted1, 32);
                     SD2_shifted2_dummy <= SD2_shifted2;
@@ -984,7 +990,7 @@ begin
                         sum_re <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_BEGIN_MULTIPLY_7;
                     end if;
-                    driftSD_slice <= to_integer(unsigned(driftSD_index));
+                    --driftSD_slice <= to_integer(unsigned(driftSD_index));
                     powertop_slice <= to_integer(unsigned(powertop_index));
                     
                 when S_BEGIN_MULTIPLY_7 =>

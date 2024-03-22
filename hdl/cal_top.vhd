@@ -131,7 +131,8 @@ begin
             powertop_index => std_logic_vector(to_unsigned(32, powertop_index'length)),
             powerbot_index => std_logic_vector(to_unsigned(32, powerbot_index'length)),
             driftFD_index => std_logic_vector(to_unsigned(29, driftFD_index'length)),
-            driftSD_index => std_logic_vector(to_unsigned(28, driftSD_index'length)),
+            driftSD1_index => std_logic_vector(to_unsigned(26, driftSD_index'length)),
+            driftSD2_index => std_logic_vector(to_unsigned(2, driftSD_index'length)),
             error_stick => '1',
             
             -- Outputs
