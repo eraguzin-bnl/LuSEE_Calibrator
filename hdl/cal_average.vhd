@@ -49,7 +49,7 @@ entity cal_average is
         driftSD1_index                    :   IN    std_logic_vector(5 downto 0);
         driftSD2_index                    :   IN    std_logic_vector(5 downto 0);
         error_stick                       :   IN    std_logic;
-        error                             :   OUT   std_logic_vector(10 DOWNTO 0);
+        error                             :   OUT   std_logic_vector(11 DOWNTO 0);
         outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         outimag                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
         powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
@@ -165,6 +165,7 @@ architecture architecture_cal_average of cal_average is
     SIGNAL sum_im                         : signed(64 DOWNTO 0);
     SIGNAL valid_in                       : std_logic;
     SIGNAL valid_out                      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL SD1_shifted2                   : signed(31 DOWNTO 0);
     
     SIGNAL valid_in_kar_squared           : std_logic;
     SIGNAL valid_out_kar_squared          : std_logic_vector(1 DOWNTO 0);
@@ -182,7 +183,7 @@ architecture architecture_cal_average of cal_average is
     SIGNAL sum2_im_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
     
     SIGNAL cplx_slice                     : integer range 0 to 33;
-    SIGNAL sum1_slice                     : integer range 0 to 32;
+    SIGNAL sum1_slice                     : integer range 0 to 33;
     SIGNAL sum2_slice                     : integer range 0 to 36;
     SIGNAL powertop_slice                 : integer range 0 to 33;
     SIGNAL powerbot_slice                 : integer range 0 to 33;
@@ -193,13 +194,13 @@ architecture architecture_cal_average of cal_average is
     SIGNAL cplx_in_re                     : signed(31 DOWNTO 0);
     SIGNAL cplx_in_im                     : signed(31 DOWNTO 0);
     
-    SIGNAL drift_SD1                      : signed(63 DOWNTO 0);
+    SIGNAL drift_SD1                      : signed(64 DOWNTO 0);
     SIGNAL drift_SD_s                     : signed(31 DOWNTO 0);
     
     SIGNAL error_stick_s                  : std_logic;
-    SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
+    SIGNAL error_s                        : std_logic_vector(7 DOWNTO 0);
     
-    signal SD1_shifted1_dummy      : signed(63 DOWNTO 0);
+    signal SD1_shifted1_dummy      : signed(64 DOWNTO 0);
     signal SD1_shifted2_dummy      : signed(31 DOWNTO 0);
     
     signal SD2_shifted1_dummy      : signed(64 DOWNTO 0);
@@ -538,7 +539,7 @@ begin
         variable result68_shifted2: signed(67 DOWNTO 0) := (others=>'0');
         
         variable SD1_shifted1      : signed(63 DOWNTO 0) := (others=>'0');
-        variable SD1_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
+        --variable SD1_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
         
         variable SD2_shifted1      : signed(64 DOWNTO 0) := (others=>'0');
         variable SD2_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
@@ -932,25 +933,33 @@ begin
                     multiplicand2_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand2_im <= std_logic_vector(-sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
+
+                    driftSD1_slice <= to_integer(unsigned(driftSD1_index));
                     
                     state <= S_MULTIPLY_WAIT_4;
                     
                 when S_MULTIPLY_WAIT_4 =>
                     valid_in <= '0';
                     if (valid_out = "1111") then
-                        drift_SD1 <= signed(product_re_re) - signed(product_im_im);
+                        drift_SD1 <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         --drift_SD1 <= resize(signed(product_re_re), 65) - resize(signed(product_im_im), 65);
                         state <= S_BEGIN_MULTIPLY_5;
                     end if;
                     
-                when S_BEGIN_MULTIPLY_5 =>                    
+                when S_BEGIN_MULTIPLY_5 =>
+                    SD1_shifted1 := shift_right(drift_SD1, driftSD1_slice);
+                    SD1_shifted2 <= resize(SD1_shifted1, 32);
+
+                    test65_slice_proc(drift_SD1, driftSD1_slice, 4, error_s);
+                    SD1_shifted1_dummy <= SD1_shifted1;
+                    SD1_shifted2_dummy <= SD1_shifted2;
+
                     multiplicand1_re <= std_logic_vector(sum1_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand1_im <= std_logic_vector(sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand2_re <= std_logic_vector(sum1_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand2_im <= std_logic_vector(-sum1_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     valid_in <= '1';
-                    
-                    driftSD1_slice <= to_integer(unsigned(driftSD1_index));
+
                     driftSD2_slice <= to_integer(unsigned(driftSD2_index));
                     
                     state <= S_MULTIPLY_WAIT_5;
@@ -963,18 +972,17 @@ begin
                     end if;
                     
                 when S_BEGIN_MULTIPLY_6 =>
-                    SD1_shifted1 := shift_right(drift_SD1, driftSD1_slice);
-                    SD1_shifted1_dummy <= SD1_shifted1;
-                    SD1_shifted2 := resize(SD1_shifted1, 32);
-                    SD1_shifted2_dummy <= SD1_shifted2;
-                    
                     SD2_shifted1 := shift_left(sum_re, driftSD2_slice);
                     SD2_shifted1_dummy <= SD2_shifted1;
                     SD2_shifted2 := resize(SD2_shifted1, 32);
                     SD2_shifted2_dummy <= SD2_shifted2;
-                    
+                    test65_slice_proc(sum_re, driftSD2_slice, 5, error_s);
                     
                     drift_SD_s <= SD1_shifted2 + SD2_shifted2;
+
+                    if ((SD1_shifted2(31 DOWNTO 30) = "10" and SD2_shifted2(31 DOWNTO 30) = "10") or (SD1_shifted2(31 DOWNTO 30) = "01" and SD2_shifted2(31 DOWNTO 30) = "01")) then
+                        error_s(6) <= '1';
+                    end if;
                 
                     multiplicand1_re <= std_logic_vector(sum0_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand1_im <= std_logic_vector(sum0_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
@@ -994,15 +1002,10 @@ begin
                     powertop_slice <= to_integer(unsigned(powertop_index));
                     
                 when S_BEGIN_MULTIPLY_7 =>
-                    --result66_shifted := shift_right(drift_SD_s, driftSD_slice);
                     result65_shifted2 := shift_right(sum_re, powertop_slice);
                     
-                    --drift_SD <= std_logic_vector(result66_shifted(31 DOWNTO 0));
                     drift_SD <= std_logic_vector(drift_SD_s);
                     powertop <= std_logic_vector(result65_shifted2(31 DOWNTO 0));
-                    
-                    --test66_slice_proc(drift_SD_s, driftSD_slice, 4, error_s);                    
-                    --test65_slice_proc(sum_re, powertop_slice, 5, error_s);
                 
                     multiplicand1_re <= std_logic_vector(sum0alt_re_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
                     multiplicand1_im <= std_logic_vector(sum0alt_im_new(ACCUMULATOR_BASE+Nac1_s DOWNTO ACCUMULATOR_BASE-31+Nac1_s));
@@ -1024,7 +1027,7 @@ begin
                     result65_shifted := shift_right(sum_re, powerbot_slice);
                     powerbot <= std_logic_vector(result65_shifted(31 DOWNTO 0));
                     
-                    test65_slice_proc(sum_re, powerbot_slice, 6, error_s);
+                    test65_slice_proc(sum_re, powerbot_slice, 7, error_s);
                     
                     average_ready    <= '1';
                     if (kar_readyout_data_empty = '1') then

@@ -22,6 +22,9 @@ use IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.ALL;
 
 entity cal_process is
+  generic(
+    MAX_ACCUMULATE_LOG2 : integer := 10
+  );
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
         outreal1                          :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
@@ -53,6 +56,15 @@ entity cal_process is
         drift_in                          :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En43
         update_drift                      :   IN    std_logic;
         error_stick                       :   IN    std_logic;
+        
+        default_drift                     :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+        have_lock_value                   :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+        have_lock_radian                  :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+        lower_guard_value                 :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+        upper_guard_value                 :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+        power_ratio                       :   IN    std_logic_vector(1 DOWNTO 0);
+        Nac2_setting                      :   IN    std_logic_vector(3 DOWNTO 0);
+        antenna_enable                    :   IN    std_logic_vector(3 DOWNTO 0);
         
         error                             :   OUT   std_logic_vector(6 DOWNTO 0);
         drift_out                         :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En43
@@ -101,33 +113,34 @@ architecture architecture_cal_process of cal_process is
     SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
     
     -- Todo, I think we only need to go to 35
-    SIGNAL sig1_re_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig1_im_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig2_re_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig2_im_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig3_re_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig3_im_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig4_re_write_data             : signed(35 DOWNTO 0);
-    SIGNAL sig4_im_write_data             : signed(35 DOWNTO 0);
+    SIGNAL sig1_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
     
-    SIGNAL sig1_re_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig1_im_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig2_re_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig2_im_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig3_re_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig3_im_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig4_re_read_data              : signed(35 DOWNTO 0);
-    SIGNAL sig4_im_read_data              : signed(35 DOWNTO 0);
+    SIGNAL sig1_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
     
-    SIGNAL foutreal1_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutimag1_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutreal2_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutimag2_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutreal3_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutimag3_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutreal4_s                    : signed(35 DOWNTO 0);
-    SIGNAL foutimag4_s                    : signed(35 DOWNTO 0);
-    signal Nac2                           : integer range 0 to 9;
+    SIGNAL foutreal1_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag1_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal2_s                    : signed(32 + MAX_ACCUMULATE_LOG2;
+    SIGNAL foutimag2_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal3_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag3_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal4_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag4_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    signal Nac2                           : integer range 0 to (2**10) + 1;
+    signal Nac2_limit                     : integer range 0 to (2**10) + 1;
     
     signal numerator_s                    : std_logic_vector(31 downto 0);
     signal denominator_s                  : std_logic_vector(31 downto 0);
@@ -140,34 +153,20 @@ architecture architecture_cal_process of cal_process is
     signal SDX                            : signed(42 DOWNTO 0);
     signal delta_drift                    : signed(31 downto 0);
     SIGNAL drift_s                        : signed(31 DOWNTO 0);
-    
-    -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I will leave out the pi because of angle fixed point representation
-    -- phase_drift_per_ppm = 0.000004
-    -- alpha_to_pdrift = 16*phase_drift_per_ppm;
-    -- alpha_to_pdrift = 0.000064
-    
-    -- 0.05*alpha_to_pdrift = 0.0000032 * pi = 1.0053E-5
-    -- 0.05*alpha_to_pdrift = binary(00.000000000000000010101000101010) aka
-    -- 1/(2**17) + 1/(2**19) + 1/(2**21) + 1/(2**25) + 1/(2**27) + 1/(2**29) = 1.0053E-5
-    -- So this can be compared cleanly to the ratio which is not in radian mode
-    
-    -- 0.05*alpha_to_pdrift_radian = 0.0000032
-    -- 0.05*alpha_to_pdrift_radian = binary(00.000000000000000000110101101100) aka
-    -- 1/(2**19) + 1/(2**20) + 1/(2**22) + 1/(2**24) + 1/(2**25) + 1/(2**27) + 1/(2**28) = 0.000003200024...
-    -- So this can be added cleanly to the phase output which has the same fixed point representation
-    
-    -- 1.2*alpha_to_pdrift = 0.0000768
-    -- 1.2*alpha_to_pdrift = binary(00.000000000000010100001000011111) aka
-    -- 1/(2**14) + 1/(2**16) + 1/(2**21) + 1/(2**26) + 1/(2**27) + 1/(2**28) + 1/(2**29) + 1/(2**30) = 0.00007679965...
-    -- So this can be compared directly to the phase output which has the same fixed point representation
-    -- -1.2*alpha_to_pdrift = binary(11.111111111111101011110111100001)
-    
-    CONSTANT k_0_05_alpha                : signed(31 DOWNTO 0) := "00000000000000000010101000101010";
-    CONSTANT k_0_05_alpha_radian         : signed(31 DOWNTO 0) := "00000000000000000000110101101100";
-    CONSTANT k_1_2_alpha                 : signed(31 DOWNTO 0) := "00000000000000010100001000011111";
-    --CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "10000000000000010100001000011111";
-    CONSTANT k_negative_1_2_alpha        : signed(31 DOWNTO 0) := "11111111111111101011110111100001";
-    CONSTANT k_pi                        : signed(31 DOWNTO 0) := "01100100100001111110110101010001";
+
+    signal have_lock_value_s              : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal have_lock_radian_s             : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal lower_guard_value_s            : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal upper_guard_value_s            : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal power_ratio_s                  : integer range 0 to 3;
+    signal Nac2_setting_s                 : integer range 0 to 10;
+    signal antenna_enable_s               : std_logic_vector(3 DOWNTO 0);
+
+    signal Nac2_max                       : unsigned(MAX_ACCUMULATE_LOG2-1 DOWNTO 0);
+
+    constant ONE_U                        : unsigned(MAX_ACCUMULATE_LOG2-1 downto 0) := to_unsigned(1, MAX_ACCUMULATE_LOG2);
+    constant K_PI                         : signed(31 DOWNTO 0) := "01100100100001111110110101010001";
+    constant BASE_POWER_SHIFT             : integer range 0 to 3 := 2;
     
     type state_type is (S_IDLE,
         S_PWR_1,
@@ -193,9 +192,9 @@ architecture architecture_cal_process of cal_process is
         CLK                               :   IN    std_logic;
         R_ADDR                            :   IN    std_logic_vector(8 downto 0);
         W_ADDR                            :   IN    std_logic_vector(8 downto 0);
-        W_DATA                            :   IN    signed(35 downto 0);
+        W_DATA                            :   IN    signed(32 + MAX_ACCUMULATE_LOG2 downto 0);
         W_EN                              :   IN    std_logic;
-        R_DATA                            :   OUT   signed(35 downto 0)
+        R_DATA                            :   OUT   signed(32 + MAX_ACCUMULATE_LOG2 downto 0)
         );
     end component;
     
@@ -307,14 +306,14 @@ begin
         r_o    => remainder_s
     );
     error       <= error_s;
-    foutreal1   <= std_logic_vector(foutreal1_s(35 DOWNTO 4));
-    foutimag1   <= std_logic_vector(foutimag1_s(35 DOWNTO 4));
-    foutreal2   <= std_logic_vector(foutreal2_s(35 DOWNTO 4));
-    foutimag2   <= std_logic_vector(foutimag2_s(35 DOWNTO 4));
-    foutreal3   <= std_logic_vector(foutreal3_s(35 DOWNTO 4));
-    foutimag3   <= std_logic_vector(foutimag3_s(35 DOWNTO 4));
-    foutreal4   <= std_logic_vector(foutreal4_s(35 DOWNTO 4));
-    foutimag4   <= std_logic_vector(foutimag4_s(35 DOWNTO 4));
+    foutreal1   <= std_logic_vector(foutreal1_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag1   <= std_logic_vector(foutimag1_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal2   <= std_logic_vector(foutreal2_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag2   <= std_logic_vector(foutimag2_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal3   <= std_logic_vector(foutreal3_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag3   <= std_logic_vector(foutimag3_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal4   <= std_logic_vector(foutreal4_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag4   <= std_logic_vector(foutimag4_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
     
     process (clk)
         variable div_result_neg : signed(31 DOWNTO 0) := (others=>'0');
@@ -353,19 +352,21 @@ begin
                 write_address          <= (others=>'0');
                 write_en               <= '0';
                 Nac2                   <= 0;
+                Nac2_limit             <= 0;
                 fout_ready             <= '0';
-                --drift_s                <= (others=>'0');
-                --drift_out              <= (others=>'0');
-                --drift_s                <= x"000002C8";
-                --drift_out              <= x"000002C8";
-                drift_s                <= x"00005088";
-                drift_out              <= x"00005088";
-                --Was -0.0000192
-                --drift_out              <= "11111111111111111010111101111000";
-                -- Was 5.3E-8
-                --drift_out              <= "00000000000000000000000000111001";
+                drift_s                <= default_drift;
+                drift_out              <= default_drift;
                 have_lock_out          <= '0';
                 new_phase_rdy          <= '0';
+
+                have_lock_value_s    <= (others=>'0');
+                have_lock_radian_s   <= (others=>'0');
+                lower_guard_value_s  <= (others=>'0');
+                upper_guard_value_s  <= (others=>'0');
+                power_ratio_s        <= 0;
+                Nac2_setting_s       <= 0;
+                Nac2_max             <= (others=>'0');
+                antenna_enable_s     <= (others=>'0');
                 
                 sig1_re_write_data     <= (others=>'0');
                 sig1_im_write_data     <= (others=>'0');
@@ -398,6 +399,9 @@ begin
                 write_en <= '0';
                 fout_ready <= '0';
                 new_phase_rdy <= '0';
+                Nac2_setting_s       <= to_integer(unsigned(Nac2_setting));
+                Nac2_max             <= shift_left(ONE_U, Nac2_setting_s);
+                Nac2_limit           <= to_integer(Nac2_max - 1);
                 
                 if (readyout = '1') then
                     FD1 <= FD1 + signed(drift_FD1);
@@ -434,7 +438,7 @@ begin
                             sig3_im_write_data     <= resize(signed(outimag3), sig3_im_write_data'length);
                             sig4_re_write_data     <= resize(signed(outreal4), sig4_re_write_data'length);
                             sig4_im_write_data     <= resize(signed(outimag4), sig4_im_write_data'length);
-                        elsif (Nac2 < 9) then
+                        elsif (Nac2 < Nac2_limit) then
                             sig1_re_write_data     <= sig1_re_read_data + signed(outreal1);
                             sig1_im_write_data     <= sig1_im_read_data + signed(outimag1);
                             sig2_re_write_data     <= sig2_re_read_data + signed(outreal2);
@@ -444,15 +448,6 @@ begin
                             sig4_re_write_data     <= sig4_re_read_data + signed(outreal4);
                             sig4_im_write_data     <= sig4_im_read_data + signed(outimag4);
                         else
-                            sig1_re_write_data     <= (others=>'0');
-                            sig1_im_write_data     <= (others=>'0');
-                            sig2_re_write_data     <= (others=>'0');
-                            sig2_im_write_data     <= (others=>'0');
-                            sig3_re_write_data     <= (others=>'0');
-                            sig3_im_write_data     <= (others=>'0');
-                            sig4_re_write_data     <= (others=>'0');
-                            sig4_im_write_data     <= (others=>'0');
-                            
                             foutreal1_s            <= sig1_re_read_data + signed(outreal1);
                             foutimag1_s            <= sig1_im_read_data + signed(outimag1);
                             foutreal2_s            <= sig2_re_read_data + signed(outreal2);
@@ -461,8 +456,16 @@ begin
                             foutimag3_s            <= sig3_im_read_data + signed(outimag3);
                             foutreal4_s            <= sig4_re_read_data + signed(outreal4);
                             foutimag4_s            <= sig4_im_read_data + signed(outimag4);
-        
                             fout_ready             <= '1';
+
+                            sig1_re_write_data     <= (others=>'0');
+                            sig1_im_write_data     <= (others=>'0');
+                            sig2_re_write_data     <= (others=>'0');
+                            sig2_im_write_data     <= (others=>'0');
+                            sig3_re_write_data     <= (others=>'0');
+                            sig3_im_write_data     <= (others=>'0');
+                            sig4_re_write_data     <= (others=>'0');
+                            sig4_im_write_data     <= (others=>'0');
                         end if;
                     else
                         error_s(0) <= '1';
@@ -483,26 +486,33 @@ begin
                     SDX <= (others=>'0');
                     fraction_num     <= 30;
                     valid_in_s <= '0';
+
+                    have_lock_value_s    <= have_lock_value;
+                    have_lock_radian_s   <= have_lock_radian;
+                    lower_guard_value_s  <= lower_guard_value;
+                    upper_guard_value_s  <= upper_guard_value;
+                    power_ratio_s        <= to_integer(unsigned(power_ratio));
+                    antenna_enable_s     <= antenna_enable;
                 when S_PWR_1 =>
-                    if (shift_right(top1, 4) > bot1) then
+                    if ((shift_right(top1, BASE_POWER_SHIFT + power_ratio_s) > bot1) and (antenna_enable_s(0) = '1')) then
                         FDX <= FDX + FD1;
                         SDX <= SDX + SD1;
                     end if;
                     state <= S_PWR_2;
                 when S_PWR_2 =>
-                    if (shift_right(top2, 4) > bot2) then
+                    if ((shift_right(top2, BASE_POWER_SHIFT + power_ratio_s) > bot2) and (antenna_enable_s(1) = '1')) then
                         FDX <= FDX + FD2;
                         SDX <= SDX + SD2;
                     end if;
                     state <= S_PWR_3;
                 when S_PWR_3 =>
-                    if (shift_right(top3, 4) > bot3) then
+                    if ((shift_right(top3, BASE_POWER_SHIFT + power_ratio_s) > bot3) and (antenna_enable_s(2) = '1')) then
                         FDX <= FDX + FD3;
                         SDX <= SDX + SD3;
                     end if;
                     state <= S_PWR_4;
                 when S_PWR_4 =>
-                    if (shift_right(top4, 4) > bot4) then
+                    if ((shift_right(top4, BASE_POWER_SHIFT + power_ratio_s) > bot4) and (antenna_enable_s(3) = '1')) then
                         FDX <= FDX + FD4;
                         SDX <= SDX + SD4;
                     end if;
@@ -569,11 +579,11 @@ begin
                     valid_in_s <= '0';
                     state <= S_CHECK_LOCK;
                 when S_CHECK_LOCK =>
-                    if ((SDX < 0) and (abs(delta_drift) < k_0_05_alpha)) then
+                    if ((SDX < 0) and (abs(delta_drift) < have_lock_value_s)) then
                         have_lock_out <= '1';
                         state <= S_DIV_PREP_2;
                     else
-                        delta_drift <= k_0_05_alpha_radian;
+                        delta_drift <= have_lock_radian_s;
                         state <= S_ADD_DRIFT;
                     end if;
                 when S_DIV_PREP_2 =>
@@ -584,7 +594,7 @@ begin
                         delta_neg <= '0';
                         numerator_s <= std_logic_vector(delta_drift);
                     end if;
-                    denominator_s <= std_logic_vector(k_pi);
+                    denominator_s <= std_logic_vector(K_PI);
                     fraction_num     <= 30;
                     valid_in_s <= '1';
                     state <= S_DIVIDE_3;
@@ -634,10 +644,10 @@ begin
                     drift_s <= drift_s + delta_drift;
                     state <= S_CORRECT_DRIFT;
                 when S_CORRECT_DRIFT =>
-                    if (drift_s > k_1_2_alpha) then
-                        drift_s <= k_negative_1_2_alpha;
-                    elsif (drift_s < k_negative_1_2_alpha) then
-                        drift_s <= k_1_2_alpha;
+                    if (drift_s > upper_guard_value_s) then
+                        drift_s <= upper_guard_value_s;
+                    elsif (drift_s < lower_guard_value_s) then
+                        drift_s <= lower_guard_value_s;
                     end if;
                     state <= S_OUTPUT_NEW_DRIFT;
                 when S_OUTPUT_NEW_DRIFT =>
@@ -663,7 +673,7 @@ begin
                     
                     drift_out <= std_logic_vector(drift_s);
                     new_phase_rdy          <= '1';
-                    if (Nac2 /= 9) then
+                    if (Nac2 /= Nac2_limit) then
                         Nac2 <= Nac2 + 1;
                     else
                         Nac2 <= 0;

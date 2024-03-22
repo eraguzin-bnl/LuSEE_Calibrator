@@ -95,6 +95,15 @@ architecture behavioral of calibration_tb is
     signal foutimag4_s                       : std_logic_vector(31 DOWNTO 0);
     signal fout_ready_s                      : std_logic;
     signal new_phase_rdy_s                   : std_logic;
+
+    signal default_drift                     : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal have_lock_value                   : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal have_lock_radian                  : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal lower_guard_value                 : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal upper_guard_value                 : std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
+    signal power_ratio                       : std_logic_vector(1 DOWNTO 0);
+    signal Nac2                              : std_logic_vector(3 DOWNTO 0);
+    signal antenna_enable                    : std_logic_vector(3 DOWNTO 0);
     
 begin
 
@@ -112,6 +121,41 @@ begin
             driftSD1_index   <= std_logic_vector(to_unsigned(26, driftSD1_index'length));
             driftSD2_index   <= std_logic_vector(to_unsigned(2, driftSD2_index'length));
             Nac1_s           <= "10";
+
+            -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I will leave out the pi because of angle fixed point representation
+            -- phase_drift_per_ppm = 0.000004
+            -- alpha_to_pdrift = 16*phase_drift_per_ppm;
+            -- alpha_to_pdrift = 0.000064
+
+            --have_lock_value
+            -- 0.05*alpha_to_pdrift = 0.0000032 * pi = 1.0053E-5
+            -- 0.05*alpha_to_pdrift = binary(00.000000000000000010101000101010) aka
+            -- 1/(2**17) + 1/(2**19) + 1/(2**21) + 1/(2**25) + 1/(2**27) + 1/(2**29) = 1.0053E-5
+            -- So this can be compared cleanly to the ratio which is not in radian mode
+
+            --have_lock_radian
+            -- 0.05*alpha_to_pdrift_radian = 0.0000032
+            -- 0.05*alpha_to_pdrift_radian = binary(00.000000000000000000110101101100) aka
+            -- 1/(2**19) + 1/(2**20) + 1/(2**22) + 1/(2**24) + 1/(2**25) + 1/(2**27) + 1/(2**28) = 0.000003200024...
+            -- So this can be added cleanly to the phase output which has the same fixed point representation
+
+            --upper and lower guard
+            -- 1.2*alpha_to_pdrift = 0.0000768
+            -- 1.2*alpha_to_pdrift = binary(00.000000000000010100001000011111) aka
+            -- 1/(2**14) + 1/(2**16) + 1/(2**21) + 1/(2**26) + 1/(2**27) + 1/(2**28) + 1/(2**29) + 1/(2**30) = 0.00007679965...
+            -- So this can be compared directly to the phase output which has the same fixed point representation
+            -- -1.2*alpha_to_pdrift = binary(11.111111111111101011110111100001)
+            have_lock_value  <= "00000000000000000010101000101010";
+            have_lock_radian <= "00000000000000000000110101101100";
+            lower_guard_value <= "11111111111111101011110111100001";
+            upper_guard_value <= "01100100100001111110110101010001";
+
+            --default_drift     <= x"000002C8";
+            default_drift     <= x"00005088";
+
+            power_ratio       <= "01"; --0 is 4, 1 is 8, 2 is 16, 3 is 32
+            Nac2              <= x"4"; --2^x where x is this value
+            antenna_enable    <= "1111";
             -- Assert Reset
             SYSRESET <= '1';
             wait for ( SYSCLK_PERIOD * 10 );
@@ -342,6 +386,15 @@ begin
             drift_in => cal_drift_out,
             update_drift => update_drift,
             error_stick => '1',
+
+            default_drift   => default_drift,
+            have_lock_value => have_lock_value,
+            have_lock_radian  => have_lock_radian,
+            lower_guard_value  => lower_guard_value,
+            upper_guard_value  => upper_guard_value,
+            power_ratio        => power_ratio,
+            Nac2_setting       => Nac2,
+            antenna_enable    => antenna_enable,
             
             error => error_process,
             drift_out => cal_drift_out,

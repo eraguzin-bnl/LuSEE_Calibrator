@@ -885,8 +885,8 @@ SIZE="3232"
 ENDFILE
 VALUE "<project>/hdl/cal_process.vhd,hdl"
 STATE="utd"
-TIME="1709307983"
-SIZE="32979"
+TIME="1711131006"
+SIZE="33622"
 ENDFILE
 VALUE "<project>/hdl/cal_process_fixpt.vhd,hdl"
 STATE="utd"
@@ -933,11 +933,6 @@ STATE="utd"
 TIME="1706825099"
 SIZE="1691"
 ENDFILE
-VALUE "<project>/simulation/calibration_tb_presynth_simulation.log,log"
-STATE="utd"
-TIME="1711048800"
-SIZE="185968"
-ENDFILE
 VALUE "<project>/simulation/cal_average_instance_C1_fixpt_presynth_simulation.log,log"
 STATE="utd"
 TIME="1704997000"
@@ -960,7 +955,7 @@ SIZE="52410"
 ENDFILE
 VALUE "<project>/simulation/run.do,do"
 STATE="utd"
-TIME="1711047046"
+TIME="1711118375"
 SIZE="8493"
 ENDFILE
 VALUE "<project>/simulation/testbench_presynth_simulation.log,log"
@@ -1192,8 +1187,6 @@ ENDLIST
 ENDLIST
 LIST "cal_top::work"
 FILE "<project>/hdl/cal_top.vhd,hdl"
-LIST UserCustomizedFileList
-ENDLIST 
 LIST AssociatedStimulus
 VALUE "<project>/stimulus/calibration_tb.vhd,tb_hdl"
 ENDLIST
@@ -1960,8 +1953,6 @@ VALUE "<project>/hdl/cal_phaser.vhd,hdl"
 ENDFILELIST
 ENDLIST
 ENDLIST
-LIST "cal_top"
-ENDLIST
 LIST "cal_phaser_alt_fixpt"
 LIST "ideSIMULATION"
 USE_LIST=TRUE
@@ -2042,8 +2033,9 @@ LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 HDL;hdl/cal_average.vhd;0
 HDL;hdl/cal_top.vhd;0
+HDL;hdl/cal_process.vhd;0
 HDL;stimulus/calibration_tb.vhd;0
-ACTIVEVIEW;stimulus/calibration_tb.vhd
+ACTIVEVIEW;hdl/cal_process.vhd
 ENDLIST
 LIST ModuleSubBlockList
 LIST "cal_average::work","hdl/cal_average.vhd","FALSE","FALSE"

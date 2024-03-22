@@ -181,6 +181,15 @@ begin
             drift_in => cal_drift_out,
             update_drift => update_drift,
             error_stick => '1',
+
+            default_drift   => x"00005088",
+            have_lock_value => "00000000000000000010101000101010",
+            have_lock_radian  => "00000000000000000000110101101100",
+            lower_guard_value  => "11111111111111101011110111100001",
+            upper_guard_value  => "01100100100001111110110101010001",
+            power_ratio        => "01",
+            Nac2_setting       => x"4",
+            antenna_enable    => "1111",
             
             error => error_process,
             drift_out => cal_drift_out,
