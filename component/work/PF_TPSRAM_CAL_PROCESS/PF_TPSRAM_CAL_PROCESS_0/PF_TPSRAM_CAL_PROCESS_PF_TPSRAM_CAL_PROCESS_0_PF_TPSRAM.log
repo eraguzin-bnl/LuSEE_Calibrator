@@ -21,9 +21,9 @@ Write Clock Edge                : Rising
 A_REN Polarity                  : None
 B_REN Polarity                  : None
 Write Depth                     : 512
-Write Width                     : 36
+Write Width                     : 42
 Read Depth                      : 512
-Read Width                      : 36
+Read Width                      : 42
 Portname DataIn                 : W_DATA
 Portname DataOut                : R_DATA
 Portname WClock                 : W_CLK
@@ -75,6 +75,6 @@ Cascade Configuration:
      Write Port configuration   : 512x40
      Read Port configuration    : 512x40
      Number of blocks depth wise: 1
-     Number of blocks width wise: 1
+     Number of blocks width wise: 2
 
 Wrote Verilog netlist to /home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator/component/work/PF_TPSRAM_CAL_PROCESS/PF_TPSRAM_CAL_PROCESS_0//PF_TPSRAM_CAL_PROCESS_PF_TPSRAM_CAL_PROCESS_0_PF_TPSRAM.v.

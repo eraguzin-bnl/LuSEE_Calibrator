@@ -76,7 +76,7 @@ architecture behavioral of calibration_tb is
     signal driftFD_index                       : std_logic_vector(5 downto 0);
     signal driftSD1_index                      : std_logic_vector(5 downto 0);
     signal driftSD2_index                      : std_logic_vector(5 downto 0);
-    signal error_s                             : std_logic_vector(10 DOWNTO 0);
+    signal error_s                             : std_logic_vector(11 DOWNTO 0);
     
     SIGNAL readyin_gated                    : std_logic;
     SIGNAL readyin_gated_s                  : std_logic;
@@ -120,7 +120,7 @@ begin
             driftFD_index    <= std_logic_vector(to_unsigned(30, driftFD_index'length));
             driftSD1_index   <= std_logic_vector(to_unsigned(26, driftSD1_index'length));
             driftSD2_index   <= std_logic_vector(to_unsigned(2, driftSD2_index'length));
-            Nac1_s           <= "10";
+            Nac1_s           <= "10"; --0 is 32, 1 is 64, 2 is 128
 
             -- phase_drift_per_ppm = 50e3*4096/102.4e6 *(1/1e6)*2*pi; I will leave out the pi because of angle fixed point representation
             -- phase_drift_per_ppm = 0.000004
@@ -154,7 +154,7 @@ begin
             default_drift     <= x"00005088";
 
             power_ratio       <= "01"; --0 is 4, 1 is 8, 2 is 16, 3 is 32
-            Nac2              <= x"4"; --2^x where x is this value
+            Nac2              <= x"3"; --2^x where x is this value
             antenna_enable    <= "1111";
             -- Assert Reset
             SYSRESET <= '1';

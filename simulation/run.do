@@ -1,5 +1,5 @@
 quietly set ACTELLIBNAME PolarFire
-quietly set PROJECT_DIR "/home/eraguzin/nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
+quietly set PROJECT_DIR "/home/eraguzin/Nextcloud/LuSEE/Libero/calibrator/LuSEE_Calibrator"
 
 if {[file exists presynth/_info]} {
    echo "INFO: Simulation library presynth already exists"

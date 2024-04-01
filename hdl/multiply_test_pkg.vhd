@@ -25,29 +25,29 @@ package MultiplyTestPkg is
     procedure test64_slice_proc (
         signal data         : in std_logic_vector(63 downto 0);
         signal slice        : in integer range 0 to 32;
-        error_index         : in integer range 0 to 6;
-        signal error_out    : out std_logic_vector(6 downto 0)
+        error_index         : in integer range 0 to 7;
+        signal error_out    : out std_logic_vector(7 downto 0)
         );
         
     procedure test65_slice_proc (
         signal data         : in signed(64 downto 0);
         signal slice        : in integer range 0 to 33;
-        error_index         : in integer range 0 to 6;
-        signal error_out    : out std_logic_vector(6 downto 0)
+        error_index         : in integer range 0 to 7;
+        signal error_out    : out std_logic_vector(7 downto 0)
         );
         
     procedure test66_slice_proc (
         signal data         : in signed(65 downto 0);
         signal slice        : in integer range 0 to 34;
-        error_index         : in integer range 0 to 6;
-        signal error_out    : out std_logic_vector(6 downto 0)
+        error_index         : in integer range 0 to 7;
+        signal error_out    : out std_logic_vector(7 downto 0)
         );
         
     procedure test68_slice_proc (
         signal data         : in std_logic_vector(67 downto 0);
         signal slice        : in integer range 0 to 36;
-        error_index         : in integer range 0 to 6;
-        signal error_out    : out std_logic_vector(6 downto 0)
+        error_index         : in integer range 0 to 7;
+        signal error_out    : out std_logic_vector(7 downto 0)
         );
 end package MultiplyTestPkg;
 
@@ -55,8 +55,8 @@ package body MultiplyTestPkg is
     procedure test64_slice_proc (
             signal data            : in std_logic_vector(63 downto 0);
             signal slice           : in integer range 0 to 32;
-            error_index            : in integer range 0 to 6;
-            signal error_out       : out std_logic_vector(6 downto 0)
+            error_index            : in integer range 0 to 7;
+            signal error_out       : out std_logic_vector(7 downto 0)
             )
         is
             variable test64_slice  : signed(63 DOWNTO 0) := (others=>'0');
@@ -90,8 +90,8 @@ package body MultiplyTestPkg is
     procedure test65_slice_proc (
             signal data            : in signed(64 downto 0);
             signal slice           : in integer range 0 to 33;
-            error_index            : in integer range 0 to 6;
-            signal error_out       : out std_logic_vector(6 downto 0)
+            error_index            : in integer range 0 to 7;
+            signal error_out       : out std_logic_vector(7 downto 0)
             )
         is
             variable test65_slice  : signed(64 DOWNTO 0) := (others=>'0');
@@ -124,8 +124,8 @@ package body MultiplyTestPkg is
     procedure test66_slice_proc (
             signal data            : in signed(65 downto 0);
             signal slice           : in integer range 0 to 34;
-            error_index            : in integer range 0 to 6;
-            signal error_out       : out std_logic_vector(6 downto 0)
+            error_index            : in integer range 0 to 7;
+            signal error_out       : out std_logic_vector(7 downto 0)
             )
         is
             variable test66_slice  : signed(65 DOWNTO 0) := (others=>'0');
@@ -158,8 +158,8 @@ package body MultiplyTestPkg is
     procedure test68_slice_proc (
             signal data            : in std_logic_vector(67 downto 0);
             signal slice           : in integer range 0 to 36;
-            error_index            : in integer range 0 to 6;
-            signal error_out       : out std_logic_vector(6 downto 0)
+            error_index            : in integer range 0 to 7;
+            signal error_out       : out std_logic_vector(7 downto 0)
             )
         is
             variable test68_slice  : signed(67 DOWNTO 0) := (others=>'0');

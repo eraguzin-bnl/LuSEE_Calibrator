@@ -43,7 +43,7 @@ generic(
         cal_drift                         :   IN    std_logic_vector(31 DOWNTO 0);  -- The value to shift the cordic input by for 32/64/128 cycles
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
         new_phase_rdy                     :   IN    std_logic;
-        calbin                            :   OUT   std_logic_vector(8 DOWNTO 0);  -- Output of which bin's values are going out
+        calbin                            :   OUT   std_logic_vector(8 DOWNTO 0);   -- Output of which bin's values are going out
         phase_cor_re                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Real part of complex phase result
         phase_cor_im                      :   OUT   std_logic_vector(31 DOWNTO 0);  -- Imaginary part of complex phase result
         kar_out                           :   OUT   std_logic_vector(17 DOWNTO 0);  -- Calculation based on bin and cycle
@@ -74,7 +74,7 @@ architecture architecture_cal_phaser of cal_phaser is
     CONSTANT ONE_U                         : unsigned(7 DOWNTO 0) := x"01";
     SIGNAL Nac1_setting_s                  : integer range 0 to 2;
     SIGNAL Nac1_max                        : unsigned(7 DOWNTO 0);
-    signal Nac1_limit                      : integer range 0 to 128;
+    signal Nac1_limit                      : integer range 0 to 255;
     
     SIGNAL cordic_counter                  : integer range 0 to Nac_max := 0;
     SIGNAL cal_drift_s                     : signed(31 DOWNTO 0);
@@ -85,7 +85,6 @@ architecture architecture_cal_phaser of cal_phaser is
     SIGNAL cordic_cos                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL cordic_sin                      : std_logic_vector(31 DOWNTO 0);
     SIGNAL phase_s                         : signed(31 DOWNTO 0);
-    SIGNAL negative_phase_s                : signed(31 DOWNTO 0);
     
     SIGNAL fifo_bin_we                     : std_logic;
     SIGNAL fifo_bin_re                     : std_logic;
@@ -149,7 +148,7 @@ architecture architecture_cal_phaser of cal_phaser is
         S_ACT_ON_RESULT2);
     signal state: state_type;
     
-    -- This state machine calculates the cos and sin values for 64 cycles off the bat given the cal_drift
+    -- This state machine calculates the cos and sin values for 32/64/128 cycles off the bat given the cal_drift
     type state_type2 is (S_CORDIC_IDLE,
         S_CORDIC_WAIT_FOR_DRIFT,
         S_CORDIC_INPUT,
@@ -203,7 +202,7 @@ begin
     --Custom made 32 x 32 bit pipelined multipliers
     --Inputs to this block just go straight in
     --Valid out high only when o_m is valid
-    --Algorithm calls for us to multiply different values on first cycle vs other 63, so that's the reason for "multiplicand"
+    --Algorithm calls for us to multiply different values on first cycle vs other ones, so that's the reason for "multiplicand" signal
     --We are multiplying 2 complex numbers, so that's 4 different multiplications
     --Real of first * real of second
     mult_re_re : entity work.Multiply_generic32
@@ -297,7 +296,7 @@ begin
         );
         
     --After the Cordic state machine gets a new cal_drift value and knows that it's the first of 64 cycles, it immediately just calculates the
-    --phase value for all 64 cycles and puts it in these FIFOs. The first state machine requests them as it begins each new cycle and then has to
+    --phase value for all 32/64/128 cycles and puts it in these FIFOs. The first state machine requests them as it begins each new cycle and then has to
     --work through 512 bins with that value
     cos_fifo : CORDICFIFO
     PORT MAP( 
@@ -338,10 +337,6 @@ begin
         RFD          => cordic_request_for_data
         );
         
-    --The algorithm calls for the negative phase value to be inputted into the cordic. Because the phase has an extra bit and I need to do an operation
-    --This is the easiest way to have the complement available the cycle after phase_s is calculated
-    negative_phase_s <= -phase_s;
-        
     process (clk) begin
         if (rising_edge(clk)) then
             if (reset = '1') then
@@ -373,7 +368,7 @@ begin
                 multiplicand_im       <= (others=>'0');
                 sum_re                <= (others=>'0');
                 sum_im                <= (others=>'0');
-                Nac1_setting_s        <= 1;
+                Nac1_setting_s        <= 1; -- Default to 64 cycles. Needs to be in reset because Cordic starts immediately
                 Nac1_max              <= (others=>'0');
                 Nac1_limit            <= 0;
                 Nac                   <= to_unsigned(0,Nac'length);
@@ -399,10 +394,10 @@ begin
                 state                 <= S_IDLE;
                 state2                <= S_CORDIC_IDLE;
             else
-                -- Do Nac calculation for how many times to run Cordic and when to consider this set of cycles done
+                -- Do Nac calculation to determine how many times to run Cordic and when to consider the set of cycles done
                 Nac1_setting_s       <= to_integer(unsigned(Nac1));
                 Nac1_max             <= shift_left(ONE_U, NAC_BASE_SHIFT + Nac1_setting_s);
-                Nac1_limit           <= Nac1_max - 1;
+                Nac1_limit           <= to_integer(Nac1_max - 1);
                 -- This section will just put any incoming bin of 2, 6, 10, 14, into the FIFO for processing
                 -- And throw an error if it ever fills up
                 fifo_bin_we <= '0';
@@ -422,7 +417,7 @@ begin
                     
                 case state is
                 when S_IDLE =>
-                    -- Outputs of the entire block need to be zeroed when not being written
+                    -- Flag outputs of the entire block should be zeroed when not being written
                     readycal <= '0';
                     readyout <= '0';
                     kar_out <= (others=> '0');
@@ -439,7 +434,7 @@ begin
                                 fifo_bin_re <= '1';
                                 first_time <= '0';
                             else
-                                -- We use the bin number for further calculations
+                                -- We need to use the bin number for further calculations
                                 calbin_out <= unsigned('0' & fifo_bin_out);
                                 fifo_bin_re <= '0';
                                 
@@ -469,7 +464,7 @@ begin
                             end if;
                         end if;
                     else
-                        -- Want to make sure we are not skipping too fast through FIFO without checking
+                        -- Want to make sure we are not trying to read an empty FIFO
                         fifo_bin_re <= '0';
                     end if;
                 when S_WAIT_FOR_FIFO_OUT =>
@@ -534,9 +529,8 @@ begin
                     state <= S_ACT_ON_RESULT1;
                 when S_ACT_ON_RESULT1 =>
                     -- Multiplication is done!
-                    -- Because we are multplying complex numbers, the real/imaginary additions have to be done like below
-                    -- Because we're adding 64 bit numbers, I resize them to 65 bits to account for the overflow bit
-                    -- Resizing a signed value takes into account the signed bit
+                    -- Because we are multiplying complex numbers, the real/imaginary additions have to be done like below
+                    -- Because of the constraints on these values, they can't overflow
                     if (valid_out = "1111") then
                         sum_re <= signed(product_re_re) - signed(product_im_im);
                         sum_im <= signed(product_re_im) + signed(product_im_re);
@@ -547,8 +541,7 @@ begin
                     end if;
                 when S_ACT_ON_RESULT2 =>
                     -- Now we have our real and imaginary results for the phase multiplication
-                    -- But these are 65 bit numbers and the outputs are 32 bit
-                    -- Also, because of the way the phase values are represented out of the cordic,
+                    -- Because of the way the phase values are represented out of the cordic,
                     -- There was an implied decimal point between bit 30 and 29, and we were doing fixed point multiplication
                     -- So we really need to shift left 5 times so that the fixed point representation lines up
                     -- Using "shift_left" would have required more variables, since the result needs to be 65 bits before we convert it
@@ -604,11 +597,11 @@ begin
                 end case;
                 
                 -- This state machine operates independently from the first
-                -- When a new cycle of 64 starts, this state machine uses the initial cal_drift value and phase
-                -- Run through the calculation of all 64 cordic outputs that will be used for the next 64 cycles of 512 bins
+                -- When a new cycle of 32/64/128 starts, this state machine uses the initial cal_drift value and phase
+                -- Run through the calculation of all the cordic outputs that will be used for the next 64 cycles of 512 bins
                 case state2 is
                 when S_CORDIC_IDLE =>
-                    -- The cal drift that we use for 64 cycles is the input into this block when reset is lifted
+                    -- The cal drift that we use for the cycles is the input into this block when reset is lifted
                     -- Todo: See if I need to wait a certain amount of cycles after reset to start doing this?
                     --cal_drift_s <= resize(signed(cal_drift), cal_drift_s'length);
                     cordic_valid_in <= '0';
@@ -624,7 +617,7 @@ begin
                 -- And negative phase is the instantaneous negation of it
                 -- The phase is a signed value 1 bit larger than 32 to take into account addition from cal drift before the 2 pi adjust          
                 -- So it's inputted like this
-                    cordic_in <= std_logic_vector(negative_phase_s);
+                    cordic_in <= std_logic_vector(-phase_s);
                     
                     -- Make sure the Cordic block is ready to start calculating with this angle
                     if (cordic_request_for_data = '1') then

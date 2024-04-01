@@ -51,7 +51,7 @@ entity cal_process is
         powerbot4                         :   IN    std_logic_vector(31 DOWNTO 0);  -- ufix32_En21
         drift_FD4                         :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En7
         drift_SD4                         :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_E8
-        calbin                            :   IN    std_logic_vector(8 DOWNTO 0);  -- ufix10
+        calbin                            :   IN    std_logic_vector(8 DOWNTO 0);   -- ufix10
         readyout                          :   IN    std_logic;
         drift_in                          :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En43
         update_drift                      :   IN    std_logic;
@@ -113,32 +113,32 @@ architecture architecture_cal_process of cal_process is
     SIGNAL error_s                        : std_logic_vector(6 DOWNTO 0);
     
     -- Todo, I think we only need to go to 35
-    SIGNAL sig1_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig1_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig2_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig2_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig3_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig3_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig4_re_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig4_im_write_data             : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_re_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_im_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_re_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_im_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_re_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_im_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_re_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_im_write_data             : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
     
-    SIGNAL sig1_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig1_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig2_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig2_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig3_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig3_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig4_re_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL sig4_im_read_data              : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_re_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig1_im_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_re_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig2_im_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_re_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig3_im_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_re_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL sig4_im_read_data              : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
     
-    SIGNAL foutreal1_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutimag1_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutreal2_s                    : signed(32 + MAX_ACCUMULATE_LOG2;
-    SIGNAL foutimag2_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutreal3_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutimag3_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutreal4_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
-    SIGNAL foutimag4_s                    : signed(32 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal1_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag1_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal2_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag2_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal3_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag3_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutreal4_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
+    SIGNAL foutimag4_s                    : signed(31 + MAX_ACCUMULATE_LOG2 DOWNTO 0);
     signal Nac2                           : integer range 0 to (2**10) + 1;
     signal Nac2_limit                     : integer range 0 to (2**10) + 1;
     
@@ -306,14 +306,14 @@ begin
         r_o    => remainder_s
     );
     error       <= error_s;
-    foutreal1   <= std_logic_vector(foutreal1_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutimag1   <= std_logic_vector(foutimag1_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutreal2   <= std_logic_vector(foutreal2_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutimag2   <= std_logic_vector(foutimag2_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutreal3   <= std_logic_vector(foutreal3_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutimag3   <= std_logic_vector(foutimag3_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutreal4   <= std_logic_vector(foutreal4_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
-    foutimag4   <= std_logic_vector(foutimag4_s(32 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal1   <= std_logic_vector(foutreal1_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag1   <= std_logic_vector(foutimag1_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal2   <= std_logic_vector(foutreal2_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag2   <= std_logic_vector(foutimag2_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal3   <= std_logic_vector(foutreal3_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag3   <= std_logic_vector(foutimag3_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutreal4   <= std_logic_vector(foutreal4_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
+    foutimag4   <= std_logic_vector(foutimag4_s(31 + Nac2_setting_s DOWNTO Nac2_setting_s));
     
     process (clk)
         variable div_result_neg : signed(31 DOWNTO 0) := (others=>'0');
@@ -354,7 +354,7 @@ begin
                 Nac2                   <= 0;
                 Nac2_limit             <= 0;
                 fout_ready             <= '0';
-                drift_s                <= default_drift;
+                drift_s                <= signed(default_drift);
                 drift_out              <= default_drift;
                 have_lock_out          <= '0';
                 new_phase_rdy          <= '0';
@@ -579,11 +579,11 @@ begin
                     valid_in_s <= '0';
                     state <= S_CHECK_LOCK;
                 when S_CHECK_LOCK =>
-                    if ((SDX < 0) and (abs(delta_drift) < have_lock_value_s)) then
+                    if ((SDX < 0) and (abs(delta_drift) < signed(have_lock_value_s))) then
                         have_lock_out <= '1';
                         state <= S_DIV_PREP_2;
                     else
-                        delta_drift <= have_lock_radian_s;
+                        delta_drift <= signed(have_lock_radian_s);
                         state <= S_ADD_DRIFT;
                     end if;
                 when S_DIV_PREP_2 =>
@@ -644,10 +644,10 @@ begin
                     drift_s <= drift_s + delta_drift;
                     state <= S_CORRECT_DRIFT;
                 when S_CORRECT_DRIFT =>
-                    if (drift_s > upper_guard_value_s) then
-                        drift_s <= upper_guard_value_s;
-                    elsif (drift_s < lower_guard_value_s) then
-                        drift_s <= lower_guard_value_s;
+                    if (drift_s > signed(upper_guard_value_s)) then
+                        drift_s <= signed(upper_guard_value_s);
+                    elsif (drift_s < signed(lower_guard_value_s)) then
+                        drift_s <= signed(lower_guard_value_s);
                     end if;
                     state <= S_OUTPUT_NEW_DRIFT;
                 when S_OUTPUT_NEW_DRIFT =>

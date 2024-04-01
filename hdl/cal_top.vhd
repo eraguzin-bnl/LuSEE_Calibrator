@@ -65,7 +65,7 @@ architecture architecture_cal_top of cal_top is
     signal powerbot_index                      : std_logic_vector(5 downto 0);
     signal driftFD_index                       : std_logic_vector(5 downto 0);
     signal driftSD_index                       : std_logic_vector(5 downto 0);
-    signal error_s                             : std_logic_vector(10 DOWNTO 0);
+    signal error_s                             : std_logic_vector(11 DOWNTO 0);
     
     signal cal_drift_out                         : std_logic_vector(31 DOWNTO 0);
     signal error_process                       : std_logic_vector(6 DOWNTO 0);

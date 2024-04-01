@@ -1,18 +1,52 @@
 --------------------------------------------------------------------------------
--- Company: <Name>
+-- Company: Brookhaven National Laboratory
 --
 -- File: cal_average.vhd
--- File history:
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
 --
 -- Description: 
 --
--- <Description here>
+-- This is the second block of the LuSEE Calibrator. It takes in both the actual data from the notch averager with its bins,
+-- as well as the stream of 512 calibration bins from the Phaser, along with each's phase value and index value
+-- This block uses FIFOs to store all these and align them so that the relevant calculations can be made for each of the 512 calibration bins:
 --
--- Targeted device: <Family::PolarFire> <Die::MPF300TS> <Package::FCG1152>
--- Author: <Name>
+-- cplx_in = complex(real_in, imag_in);
+-- cplx_in = cplx_in*phase_cor;
+-- sum0(calbin) = sum0(calbin) + cplx_in;
+-- sum0alt(calbin) = sum0alt(calbin) + cplx_in*tick;
+-- sum1(calbin) = sum1(calbin) + cplx_in*complex(0,kar);
+-- sum2(calbin) = sum2(calbin) + cplx_in*complex(-kar*kar,0);
+--
+-- These are all complex multiplications, so we do the real/imaginary processing again
+-- And because our products go above 32 bits, we also have dynamically selectable bit slices
+-- Where we can choose how much to shift the result down to fit into the 32 bit standard value size
+-- This is done independently for each operation, since the dynamic range can change during use
+-- If we miss any bits, this will output an error
+--
+-- This block doesn't care if the Nac is set to 32/64/128, because it's the previous Phaser block 
+-- that will send a "readyout" signal when enough values have been calculated and accumulated
+-- So the FIFOs and signals are big enough to account for the worst case largest values
+-- The "ACCUMULATOR_BASE" is the slice size for an Nac of 32. So each additional increase of Nac
+-- multiplies the averages by 2 with the shifting this generic allows
+--
+-- When it moves onto the next stage, the later state machines get run, where the accumulations are summed and averaged
+-- And other parameters are calculated with more complex multiplications:
+--
+-- outreal = real(csum0);
+-- outimag = imag(csum0);
+-- drift_FD = real(csum1*conj(csum0));
+-- drift_SD = real(csum2*conj(csum0) + csum1*conj(csum1));
+-- powertop = real(csum0*conj(csum0));
+-- powerbot = real(csum0alt*conj(csum0alt));
+--
+-- As before, settings are available for sliding the bit slices and aligning the values. The addition operation is actually critical
+-- since both terms need to have the same fixed point position of the decimal to make sense. A detailed explanation on the bit
+-- representations for all these operations is here:
+-- https://docs.google.com/document/d/1j1BpxA1HZ0g0dKb2WQrU_U5UYvrOX7eJ6SPmg9MIlb8/edit#heading=h.pdlqss3k6yip
+--
+-- Once the 32/64/128 cycles have been run, this block outputs the 512 values for those final parameters for each calbin
+-- and those all get piped into the Process block
+--
+-- Author: Eric Raguzin
 --
 --------------------------------------------------------------------------------
 
@@ -29,18 +63,18 @@ entity cal_average is
   );
   PORT( clk                               :   IN    std_logic;
         reset                             :   IN    std_logic;
-        Nac1                              :   IN    std_logic_vector(1 DOWNTO 0);
-        bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047
+        Nac1                              :   IN    std_logic_vector(1 DOWNTO 0);   -- Number of averages, 0 - 32, 1 - 64, 2 - 128
+        bin_in                            :   IN    std_logic_vector(11 DOWNTO 0);  -- Just a stream of literally 0 through 2047 for data
         readyin                           :   IN    std_logic;                      -- From the notch filter showing that bins are coming in
-        real_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        imag_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        calbin_in                         :   IN    std_logic_vector(8 DOWNTO 0);  -- ufix10
-        phase_cor_re                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        phase_cor_im                      :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En30
-        kar                               :   IN    std_logic_vector(17 DOWNTO 0);  -- ufix16
-        readyout                          :   IN    std_logic;
-        readycal                          :   IN    std_logic;
-        cplx_index                        :   IN    std_logic_vector(5 downto 0);
+        real_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- Notch filter real data
+        imag_in                           :   IN    std_logic_vector(31 DOWNTO 0);  -- Notch filter imaginary data
+        calbin_in                         :   IN    std_logic_vector(8 DOWNTO 0);   -- Phaser calibration bins
+        phase_cor_re                      :   IN    std_logic_vector(31 DOWNTO 0);  -- Phaser phase data, real
+        phase_cor_im                      :   IN    std_logic_vector(31 DOWNTO 0);  -- Phaser phase data, imaginary
+        kar                               :   IN    std_logic_vector(17 DOWNTO 0);  -- Phase index value for weighting the calculation
+        readyout                          :   IN    std_logic;                      -- From phaser that a new cycle is coming in
+        readycal                          :   IN    std_logic;                      -- From phaser that the 32/64/128 cycles are up
+        cplx_index                        :   IN    std_logic_vector(5 downto 0);   
         sum1_index                        :   IN    std_logic_vector(5 downto 0);
         sum2_index                        :   IN    std_logic_vector(5 downto 0);
         powertop_index                    :   IN    std_logic_vector(5 downto 0);
@@ -50,13 +84,13 @@ entity cal_average is
         driftSD2_index                    :   IN    std_logic_vector(5 downto 0);
         error_stick                       :   IN    std_logic;
         error                             :   OUT   std_logic_vector(11 DOWNTO 0);
-        outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
-        outimag                           :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En24
-        powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En18
-        powerbot                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- ufix32_En33
-        drift_FD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En5
-        drift_SD                          :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_E11
-        calbin_out                        :   OUT   std_logic_vector(8 DOWNTO 0);  -- ufix10
+        outreal                           :   OUT   std_logic_vector(31 DOWNTO 0);
+        outimag                           :   OUT   std_logic_vector(31 DOWNTO 0);
+        powertop                          :   OUT   std_logic_vector(31 DOWNTO 0);
+        powerbot                          :   OUT   std_logic_vector(31 DOWNTO 0);
+        drift_FD                          :   OUT   std_logic_vector(31 DOWNTO 0);
+        drift_SD                          :   OUT   std_logic_vector(31 DOWNTO 0);
+        calbin_out                        :   OUT   std_logic_vector(8 DOWNTO 0);
         average_ready                     :   OUT   std_logic;
         update_drift                      :   OUT   std_logic
 );
@@ -183,7 +217,7 @@ architecture architecture_cal_average of cal_average is
     SIGNAL sum2_im_new                    : signed(ACCUMULATOR_BASE+2 DOWNTO 0);
     
     SIGNAL cplx_slice                     : integer range 0 to 33;
-    SIGNAL sum1_slice                     : integer range 0 to 33;
+    SIGNAL sum1_slice                     : integer range 0 to 32;
     SIGNAL sum2_slice                     : integer range 0 to 36;
     SIGNAL powertop_slice                 : integer range 0 to 33;
     SIGNAL powerbot_slice                 : integer range 0 to 33;
@@ -538,7 +572,7 @@ begin
         variable result68_shifted : signed(67 DOWNTO 0) := (others=>'0');
         variable result68_shifted2: signed(67 DOWNTO 0) := (others=>'0');
         
-        variable SD1_shifted1      : signed(63 DOWNTO 0) := (others=>'0');
+        variable SD1_shifted1      : signed(64 DOWNTO 0) := (others=>'0');
         --variable SD1_shifted2      : signed(31 DOWNTO 0) := (others=>'0');
         
         variable SD2_shifted1      : signed(64 DOWNTO 0) := (others=>'0');

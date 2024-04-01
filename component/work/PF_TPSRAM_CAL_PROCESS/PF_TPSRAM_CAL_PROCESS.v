@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Wed Feb 28 16:12:31 2024
-// Version: 2022.3 2022.3.0.8
+// Created by SmartDesign Tue Mar 26 10:28:14 2024
+// Version: 2024.1 2024.1.0.3
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -43,7 +43,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_TPSRAM:1.1.108} -component
 "RE_POLARITY:2"  \
 "RESET_PN:R_DATA_ARST_N"  \
 "RESET_POLARITY:2"  \
-"RWIDTH:36"  \
+"RWIDTH:42"  \
 "SII_LOCK:0"  \
 "WADDRESS_PN:W_ADDR"  \
 "WCLK_EDGE:RISE"  \
@@ -51,7 +51,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_TPSRAM:1.1.108} -component
 "WDEPTH:512"  \
 "WE_PN:W_EN"  \
 "WE_POLARITY:1"  \
-"WWIDTH:36"   }
+"WWIDTH:42"   }
 # Exporting Component Description of PF_TPSRAM_CAL_PROCESS to TCL done
 */
 
@@ -73,22 +73,22 @@ module PF_TPSRAM_CAL_PROCESS(
 input         CLK;
 input  [8:0]  R_ADDR;
 input  [8:0]  W_ADDR;
-input  [35:0] W_DATA;
+input  [41:0] W_DATA;
 input         W_EN;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
-output [35:0] R_DATA;
+output [41:0] R_DATA;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
 wire          CLK;
 wire   [8:0]  R_ADDR;
-wire   [35:0] R_DATA_net_0;
+wire   [41:0] R_DATA_net_0;
 wire   [8:0]  W_ADDR;
-wire   [35:0] W_DATA;
+wire   [41:0] W_DATA;
 wire          W_EN;
-wire   [35:0] R_DATA_net_1;
+wire   [41:0] R_DATA_net_1;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
@@ -101,7 +101,7 @@ assign GND_net    = 1'b0;
 // Top level output port assignments
 //--------------------------------------------------------------------
 assign R_DATA_net_1 = R_DATA_net_0;
-assign R_DATA[35:0] = R_DATA_net_1;
+assign R_DATA[41:0] = R_DATA_net_1;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
